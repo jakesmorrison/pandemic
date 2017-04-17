@@ -10,7 +10,6 @@ branca==0.1.1
 bz2file==0.98
 channels==1.1.2
 click==6.7
-clyent==1.2.2
 constantly==15.1.0
 cycler==0.10.0
 Cython==0.25.2
