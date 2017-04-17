@@ -3,7 +3,7 @@
 from pandemic.settings import *
 
 DEBUG = False
-ALLOWED_HOSTS = ['www.onemoretravelblog.net','onemoretravelblog.com', '192.241.228.71']
+ALLOWED_HOSTS = ['www.onemoretravelblog.com','onemoretravelblog.com', '192.241.228.71']
 
 DATABASES = {
     'default': {
