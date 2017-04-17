@@ -1,0 +1,345 @@
+{% extends "game/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Login{% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'game/css/d3-geomap.css' %}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static 'game/css/game_style.css' %}" type="text/css" media="screen" />
+{% endblock %}
+
+{% block sidebar %}
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-2">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li id="initial_user">
+                   <div style="color: #999999;" class="centered" id="users_here"></div>
+                </li>
+                <li>
+                    <a class="centered">Tokens Remaining</a>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div style="margin-right: 0px; margin-left: -5px;" class="row">
+                                <div class="col-lg-4">
+                                    <div><a class="centered plusminus" name="blue" onclick="increment(name)">+</a></div>
+                                    <div style="background-color: blue" id="blueTokens" class="circle">{{blueTokens|safe}}</div>
+                                    <div><a class="centered plusminus" name="blue" onclick="decrement(name)">-</a></div>
+                                    <div><a class="centered plusminus" name="black" onclick="increment(name)">+</a></div>
+                                    <div style="background-color: black" id="blackTokens" class="circle">{{blackTokens|safe}}</div>
+                                    <div><a class="centered plusminus" name="black" onclick="decrement(name)">-</a></div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <br>
+                                    <div><a class="centered plusminus" name="purple" onclick="increment(name)">+</a></div>
+                                    <div style="background-color: purple" id="purpleTokens" class="circle">{{purpleTokens|safe}}</div>
+                                    <div><a class="centered plusminus" name="purple" onclick="decrement(name)">-</a></div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div><a class="centered plusminus" name="red" onclick="increment(name)">+</a></div>
+                                    <div style="background-color: red" id="redTokens" class="circle">{{redTokens|safe}}</div>
+                                    <div><a class="centered plusminus" name="red" onclick="decrement(name)">-</a></div>
+                                    <div><a class="centered plusminus" name="yellow" onclick="increment(name)">+</a></div>
+                                    <div style="background-color: yellow" id="yellowTokens" class="circle">{{yellowTokens|safe}}</div>
+                                    <div><a class="centered plusminus" name="yellow" onclick="decrement(name)">-</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <a class="centered">Infection Rate</a>
+                                    <div><a class="centered plusminus" name="infectionRate" onclick="increment_other(name)">+</a></div>
+                                    <div style="background-color: grey; margin:auto;" id="infectionRate" class="centered circle">{{infectionRate|safe}}</div>
+                                    <div><a class="centered plusminus" name="infectionRate" onclick="decrement_other(name)">-</a></div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <a class="centered">Outbreaks</a>
+                                    <div><a class="centered plusminus" name="outbreaks" onclick="increment_other(name)">+</a></div>
+                                    <div style="background-color: grey; margin:auto;" id="outbreaks" class="centered circle">{{outbreaks|safe}}</div>
+                                    <div><a class="centered plusminus" name="outbreaks" onclick="decrement_other(name)">-</a></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <a class="centered">Cures</a>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div style="margin-right: 0px; margin-left: -5px;" class="row">
+                                <div class="col-lg-4">
+                                    <div id="blueCure" class="square" name="blueCure" onclick="change_cure(id)">Blue</div>
+                                    <br>
+                                    <div id="blackCure" class="square" name="blackCure" onclick="change_cure(id)">Black</div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <br>
+                                    <div id="purpleCure" class="square" name="purpleCure" onclick="change_cure(id)">Purple</div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div id="redCure" class="square" name="redCure" onclick="change_cure(id)">Red</div>
+                                    <br>
+                                    <div id="yellowCure" class="square" name="yellowCure" onclick="change_cure(id)">Yellow</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                <li id="startgame" class="centered">
+                    <button type="button" class="btn btn-success" onclick="start_game()">Start Game</button>
+                </li>
+                <br>
+                <li id="user_location_hide" style="display: none;" class="centered">
+                      <label for="currentlocation"><a class='centered'>Player Location</a></label>
+                      <select class="form-control" id="currentlocation">
+                      </select>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+    </div>
+    <div class="col-lg-10">
+      <h3></h3>
+      <ul class="nav nav-pills nav-justified">
+        <li id="board_pill" class="active"><a>Game Board -- {{roomId|safe}}</a></li>
+        <li id="card_pill" ><a >Cards</a></li>
+      </ul>
+    </div>
+</div>
+
+<div id="game_board" class="row">
+    <!--<div style="padding-top:70px;" class="col-lg-12 col-lg-offset-1">-->
+        <!--<div id="myCanvas" class="row">-->
+            <!--<div style="position: relative; text-align:center;" class="col-lg-12 col-lg-offset-0">-->
+                <div style="margin-left: 135px; margin-top: 30px;" id="container"></div>
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <div id="infection_status">
+
+        <table id="infection_table" class="stripe row-border order-column" cellspacing="0" width="100%">
+            <thead id="header_table">
+                <tr>
+                    <th>City</th>
+                    <th><i style="color:blue" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:black" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:red" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:yellow" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:purple" class="fa fa-square" aria-hidden="true"></i></th>
+                </tr>
+            </thead>
+            <tbody id="body_table">
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th>City</th>
+                    <th><i style="color:blue" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:black" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:red" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:yellow" class="fa fa-square" aria-hidden="true"></i></th>
+                    <th><i style="color:purple" class="fa fa-square" aria-hidden="true"></i></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+</div>
+
+<div id="cards" class="row">
+    <div class="col-lg-12 col-lg-offset-1">
+        <br>
+        <div class="row">
+            <div class="centered col-lg-3">
+                <h2>Action Cards</h2>
+                <div class="rectangle2">
+                    <div id="actioncards"></div>
+                </div>
+            </div>
+            <div class="centered col-lg-3">
+                <h2>Action Discard</h2>
+                <div class="rectangle2" id="actiondiscards"></div>
+            </div>
+            <div class="centered col-lg-3">
+                <h2>Infection Cards</h2>
+                <div class="rectangle2">
+                    <div id="infectioncards"></div>
+                </div>
+            </div>
+            <div class="centered col-lg-3">
+                <h2>Infection Discard</h2>
+                <div class="rectangle2 centered" id="infectiondiscards"></div>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <br>
+        <div class="row">
+            <div class="centered col-lg-4">
+                <h2>Role Card</h2>
+                <div id="roles" class="roles"></div>
+                <br>
+                <textarea style="margin-left: 15px;" class="form-control" rows="6" id="notes" readonly></textarea>
+                <input style="margin-left: 15px;" type="text" class="form-control" id="input">
+            </div>
+            <div class="centered col-lg-8">
+                <h2>{{ request.user.username }} Cards</h2>
+                <div id="playercards1" class="col-lg-6">
+                </div>
+                <div id="playercards2" class="col-lg-6">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="pop_up">
+    <h4 ><a id="city_pop"></a>
+        <span></span><button style="" type="button" class="close_pop btn btn-default" onclick="close_pop()">x</button></span>
+    </h4>
+    <div class="checkbox"><label><input type="checkbox" id="research_center" value=""><a>Research Center</a></label></div>
+    <button type="button" class="btn btn-default" onclick="set_current_location()">Set Current Location</button>
+    <div class="row">
+        <div class="col-lg-4">
+            <div><a class="centered plusminus" name="blue" onclick="increment_infection(name)">+</a></div>
+            <i style="color:blue" class="fa fa-square" aria-hidden="true"><span id="infectionBlockBlue" style="color:white"></span></i>
+            <div><a class="centered plusminus" name="blue" onclick="decrement_infection(name)">-</a></div>
+            <div><a class="centered plusminus" name="black" onclick="increment_infection(name)">+</a></div>
+            <i style="color:black" class="fa fa-square" aria-hidden="true"><span id="infectionBlockBlack" style="color:white"></span></i>
+            <div><a class="centered plusminus" name="black" onclick="decrement_infection(name)">-</a></div>
+        </div>
+        <div class="col-lg-4">
+            <br>
+            <div><a class="centered plusminus" name="purple" onclick="increment_infection(name)">+</a></div>
+            <i style="color:purple" class="fa fa-square fa" aria-hidden="true"><span id="infectionBlockPurple" style="color:white"></span></i>
+            <div><a class="centered plusminus" name="purple" onclick="decrement_infection(name)">-</a></div>
+        </div>
+        <div class="col-lg-4">
+            <div><a class="centered plusminus" name="red" onclick="increment_infection(name)">+</a></div>
+            <i style="color:red" class="fa fa-square" aria-hidden="true"><span id="infectionBlockRed" style="color:white"></i>
+            <div><a class="centered plusminus" name="red" onclick="decrement_infection(name)">-</a></div>
+            <div><a class="centered plusminus" name="yellow" onclick="increment_infection(name)">+</a></div>
+            <i style="color:yellow" class="fa fa-square" aria-hidden="true"><span id="infectionBlockYellow" style="color:white"></span></i>
+            <div><a class="centered plusminus" name="yellow" onclick="decrement_infection(name)">-</a></div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block script %}
+<!--<script src="//d3js.org/d3.v3.min.js"></script>-->
+<!--<script src="//d3js.org/topojson.v1.min.js"></script>-->
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/4.2.3/d3.min.js"></script>-->
+<!--<script src="{% static 'game/js/d3.geomap.dependencies.min.js' %}"></script>-->
+<!--<script src="{% static 'game/js/d3.geomap.min.js' %}"></script>-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/proj4js/2.3.6/proj4.js"></script>
+<script src="https://code.highcharts.com/maps/highmaps.js"></script>
+<script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+<script src="http://code.highcharts.com/mapdata/custom/world.js"></script>
+
+
+<script src="{% static 'game/js/gameboard_layout.js' %}"></script>
+<script src="{% static 'game/js/gameboard_cards.js' %}"></script>
+<script src="{% static 'game/js/gameboard_map.js' %}"></script>
+<script src="{% static 'game/js/gameboard_map_highcharts.js' %}"></script>
+
+
+<script type= text/javascript>
+var roomId = {{roomId | safe}};
+var username = '{{ request.user.username }}';
+var gameBoard = "{% url 'game:gameboard' %}";
+var dealCards = "{% url 'game:dealcards' %}";
+var getCards = "{% url 'game:getcards' %}";
+var discardAction = "{% url 'game:discardaction' %}";
+var getNewCard = "{% url 'game:getnewcard' %}";
+var infectionPlayTop = "{% url 'game:infectionplaytop' %}";
+var infectionPlayBottom = "{% url 'game:infectionplaybottom' %}";
+var incrementColor = "{% url 'game:incrementcolor' %}";
+var decrementColor = "{% url 'game:decrementcolor' %}";
+var incrementOther = "{% url 'game:incrementother' %}";
+var decrementOther = "{% url 'game:decrementother' %}";
+var changeCure = "{% url 'game:changecure' %}";
+var reshuffleInfectionDeck = "{% url 'game:reshuffleinfectiondeck' %}";
+var removeRole = "{% url 'game:removerole' %}";
+var saveNotes = "{% url 'game:savenotes' %}";
+var pickupDiscard = "{% url 'game:pickupdiscard' %}";
+var getInfectionMap = "{% url 'game:getinfectionmap' %}";
+var lat_long = {{ mapData|safe }};
+var connection = {{ connectionData|safe }};
+var incrementInfection = "{% url 'game:incrementinfection' %}";
+var decrementInfection = "{% url 'game:decrementinfection' %}";
+var toggleResearch = "{% url 'game:toggleresearch' %}";
+var setLocation = "{% url 'game:setlocation' %}";
+
+$( document ).ready(function() {
+    <!--my_map("{% static 'game/json/countries.json' %}","{% static 'game/csv/lat_long.csv' %}");-->
+    highcharts_map(lat_long, connection);
+
+
+});
+
+function close_pop(){
+    $("#pop_up").hide();
+}
+
+<!--Creating Channel-->
+var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
+var ws_path = ws_scheme + '://' + window.location.host + "/stream/";
+console.log("Connecting to " + ws_path);
+socket = new WebSocket(ws_path);
+
+<!--Handling Messages From Server-->
+socket.onmessage = function(message) {
+    console.log("Got websocket message " + message.data);
+    var data = JSON.parse(message.data);
+    if(data["command"] === "add-users"){
+        console.log("Adding User")
+        $('#users_here').html("["+data["users"]+"]")
+        get_cards_from_db("false");
+    }
+    else if(data["command"] === "dealcards"){
+        console.log("Adding cards to each players hand");
+        get_cards_from_db("false");
+        $("#startgame").html("");
+        $("#initial_user").html("");
+        $("#user_location_hide").show();
+
+    }
+    else if(data["command"]==="getcards"){
+        get_cards_from_db("false");
+    }
+}
+
+<!--Joining Game-->
+socket.onopen = function() {
+    console.log("Join Game");
+    socket.send(JSON.stringify({
+        "command": "join",
+        "roomId": roomId,
+        "user": '{{ request.user.username }}',
+        "message": "hello"
+    }));
+};
+
+
+socket.onclose = function () {
+    console.log("Disconnected from chat socket");
+}
+if (socket.readyState == WebSocket.OPEN) socket.onopen();
+
+</script>
+
+{% endblock %}
+

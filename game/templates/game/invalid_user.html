@@ -1,0 +1,51 @@
+{% extends "game/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Login{% endblock %}
+{% block css %} <link rel="stylesheet" href="{% static 'game/css/login_style.css' %}" type="text/css" media="screen" /> {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-12 col-lg-offset-0">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4">
+                    <h2 style="text-align: center;">Login </h2>
+                    <p style="color:red;text-align: center;"> Invalid Login. Retype or contact Jake.</p>
+            </div>
+        </div>
+
+        <form method="post" action="{% url 'game:game.views.lobby' %}">
+        {% csrf_token %}
+          <div class="container">
+
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <!--<label><b>Username</b></label>-->
+                    <input id="user" type="text" placeholder="Enter Username" name="uname" required>
+                </div>
+            </div>
+
+          <div class="row">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <!--<label><b>Password</b></label>-->
+                    <input id="pass" type="password" placeholder="Enter Password" name="psw" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <button type="submit">Login</button>
+                </div>
+            </div>
+
+          </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block script %}
+{% endblock %}
+
+

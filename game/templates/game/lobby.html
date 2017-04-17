@@ -1,0 +1,140 @@
+{% extends "game/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Login{% endblock %}
+{% block css %} <link rel="stylesheet" href="{% static 'game/css/game_style.css' %}" type="text/css" media="screen" /> {% endblock %}
+
+{% block content %}
+<div class="mainblock row">
+    <div class="col-lg-12 col-lg-offset-0">
+        <div class="row">
+            <div class="col-lg-12 col-lg-offset-0">
+                <h1 class="centered">Lobby <span><button type="button" class="btn btn-success" id="createGame" onclick="create_game()">Create Game</button></span></h1>
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th class="centered">roomId</th>
+                        <th class="centered">Created By</th>
+                        <th class="centered">Role Cards</th>
+                        <th class="centered">Pandemic Cards</th>
+                        <th class="centered">Mutation</th>
+                        <th class="centered">Join</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {% load game_extras %}
+                    {% for room in roomInfo %}
+                        <tr>
+                        <form method="post" action="{% url 'game:game.views.gameboard' %}">
+                            {% csrf_token %}
+                            <div class="row">
+                                <td class="centered"><input class="centered fake-input-box" type="text" value="{{ room|get_item:room.roomId }}" name="roomId" readonly></td>
+                                <td class="centered"><input class="centered fake-input-box" type="text" value="{{ room|get_item:room.createdBy }}" name="createdBy" readonly></td>
+                                <td class="centered"><input class="centered fake-input-box" type="text" value="{{ room|get_item:room.numberOfRoleCards }}" name="numrolecards" readonly></td>
+                                <td class="centered"><input class="centered fake-input-box" type="text" value="{{ room|get_item:room.numberOfPandemicCards }}" name="numpandemiccards" readonly></td>
+                                <td class="centered"><input class="centered fake-input-box" type="text" value="{{ room|get_item:room.mutation }}" name="mutation" readonly></td>
+                                <td class="centered"><button class="btn btn-primary" type="submit">Join Game</button></td>
+                            </div>
+                        </form>
+                        </tr>
+                    {% empty %}
+                        <!--<p class="empty">No chat rooms defined. Maybe make some in the <a href="{% url 'admin:index' %}">admin</a>?</p>-->
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div>
+        <form method="post" action="{% url 'game:game.views.gameboard' %}">
+            {% csrf_token %}
+            <div class="popup col-lg-8 col-lg-offset-0">
+                <h1 class="creategame centered">Create Game</h1>
+                <div class="row">
+                    <div class="col-lg-3 col-lg-offset-3">
+                        <label for="roomId">Room</label>
+                        <br>
+                        <input id="roomId" class=" " type="text" value="{{ roomId|safe }}" name="roomId" readonly>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="numrolecards">Roll Cards</label>
+                            <select class="form-control" id="numrolecards" name="numrolecards">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                            </select>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-lg-3 col-lg-offset-3">
+                        <label>Mutation</label>
+                        <br>
+                        <label class="radio-inline"><input type="radio" name="mutation" checked="True">True<label>
+                        <label style="padding-left: 40px;" class="radio-inline"><input type="radio" name="mutation">False</label>
+                    </div>
+                    <div class="col-lg-3">
+                        <label for="numpandemiccards">Pandemic Cards</label>
+                         <select class="form-control" id="numpandemiccards" name="numpandemiccards">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                                <option>6</option>
+                                <option>7</option>
+                                <option>8</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="row">
+                    <div style="margin-top: 20px;" class="col-lg-2 col-lg-offset-5">
+                        <button class="btn btn-primary" type="submit">Join Game</button>
+                    </div>
+                    <input style="display:none" id="new" type="text" value="new" name="new" readonly>
+                    <input style="display:none" id="createdBy" type="text" value="{{user|safe}}" name="createdBy" readonly>
+                </div>
+            </div>
+        </form>
+        <button style="position: absolute;top: 10%;right: 3%;" type="button" class="btn btn-primary" id="close_pop_up" onclick="close_pop_up()">X</button>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+
+<script type= text/javascript>
+
+    function create_game(){
+        $(".mainblock").hide();
+        $("#close_pop_up").show();
+        $(".popup").show();
+        $("html").addClass("backtran");
+        $("html").css("background-color","rgb(25, 26, 29)");
+        $("label").css("color","white");
+        $(".creategame").css("color","white");
+    }
+
+    function close_pop_up(){
+        $(".popup").hide();
+        $("#close_pop_up").hide();
+        $(".mainblock").show();
+        $("html").removeClass("backtran");
+        $("html").css("background-color","white");
+        $("label").css("color","black");
+    }
+
+    $( document ).ready(function() {
+        $(".popup").hide();
+        $("#close_pop_up").hide();
+
+    });
+
+</script>
+
+{% endblock %}

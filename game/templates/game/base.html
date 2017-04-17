@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <meta charset="UTF-8">
+    <!--CSS-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href=" {% static 'game/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'game/css/fixedColumns.dataTables.min.css' %}" rel="stylesheet">
+
+    {% block css %}{% endblock %}
+    <style>
+    * {
+        font-family: 'Varela Round', sans-serif;
+    }
+    </style>
+</head>
+
+<body>
+    <script src="https://code.jquery.com/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src=" {% static 'game/js/datatables.min.js' %}" rel="stylesheet"></script>
+    <script src=" {% static 'game/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+
+
+        <!--<div class="container-fluid">-->
+            <!--&lt;!&ndash; Brand and toggle get grouped for better mobile display &ndash;&gt;-->
+            <!--<div class="navbar-header">-->
+                <!--<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">-->
+                    <!--<span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>-->
+                <!--</button>-->
+                <!--<a class="navbar-brand page-scroll" href="#page-top">Pandemic</a>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash; Collect the nav links, forms, and other content for toggling &ndash;&gt;-->
+            <!--<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">-->
+                <!--<ul class="nav navbar-nav navbar-right">-->
+                    <!--{% block nav_options %}-->
+                    <!--{% endblock %}-->
+                    <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a class="page-scroll" href="#about">About</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a class="page-scroll" href="#services">Services</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a class="page-scroll" href="#portfolio">Portfolio</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a class="page-scroll" href="#contact">Contact</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--</ul>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.navbar-collapse &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.container-fluid &ndash;&gt;-->
+    <!--</nav>-->
+
+
+
+    <div class="intro container wrapper">
+        {% block sidebar %}
+        {% endblock %}
+        {% block content %}
+        {% endblock %}
+    </div>
+
+
+{% block script %}
+{% endblock %}
+
+</body>
+</html>

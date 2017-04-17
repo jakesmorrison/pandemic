@@ -1,0 +1,54 @@
+
+{% load staticfiles %}
+
+<html>
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <!--CSS-->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{% static 'game/css/login_style.css' %}" type="text/css" media="screen" />
+</head>
+
+<body>
+<div class="intro container">
+
+    <div class="intro row">
+        <div class="col-lg-12 col-lg-offset-0">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-4">
+                    <h2 style="text-align: center;">Login</h2>
+                </div>
+            </div>
+
+            <form method="post" action="{% url 'game:game.views.lobby' %}">
+            {% csrf_token %}
+              <div class="container">
+
+                <div class="row">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <!--<label><b>Username</b></label>-->
+                        <input style="color:black" id="user" type="text" placeholder="Enter Username" name="uname" required>
+                    </div>
+                </div>
+
+              <div class="row">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <!--<label><b>Password</b></label>-->
+                        <input style="color:black" id="pass" type="password" placeholder="Enter Password" name="psw" required>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 col-lg-offset-4">
+                        <button type="submit">Login</button>
+                    </div>
+                </div>
+
+              </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,49 @@
+city,country,color,lat,long
+Milan,Italy,blue,40.4667971,12.1904984
+Montreal,Canada,blue,46.4972159,-77.6103641
+Paris,France,blue,48.8566101,2.3514992
+Chicago,United States,blue,45.8755546,-95.6244211
+Atlanta,United States,blue,33.7490987,-90.3901848
+St. Petersburg,Russia,blue,59.9387318,30.3162286
+Madrid,Spain,blue,38.4167047,-10.7035824
+Washington,United States,blue,35.8949549,-72.0366455
+San Francisco,United States,blue,42.7792808,-125.4192362
+London,United Kingdom,blue,51.5073219,-12.1276473
+Essen,Germany,blue,58.457087,10.011429
+New York,United States,blue,45.7305991,-65.9865811
+Osaka,Japan,red,24.704365,137.501887
+Manila,Philippines,red,14.5906216,120.9799696
+Jakarta,Indonesia,red,-6.1753941,106.827183
+Ho Chi Minh City,Vietnam,red,2.7758439,115.7017555
+Sydney,Australia,red,-33.8548156,151.2164539
+Shanghai,China,red,31.2253441,111.4888922
+Beijing,China,red,39.9059631,110.391248
+Bangkok,Thailand,red,13.7538929,100.8160803
+Tokyo,Japan,red,34.2255804,139.2947745
+Hong Kong,China,red,22.2793278,112.1628131
+Taipei,Taiwan,red,25.0375167,126.5637
+Seoul,South Korea,red,37.5666791,126.9782914
+Chennai,India,black,13.0801721,80.2838331
+Algiers,Algeria,black,28.0000272,2.9999825
+Karachi,Pakistan,black,30.8667795,60.0311286
+Moscow,Russia,black,50.7506828,42.6174976
+Mumbai,India,black,18.9321862,72.8308337
+Baghdad,Iraq,black,33.3024248,44.3787992
+Riyadh,Saudi Arabia,black,24.6319692,46.7150648
+Kolkata,India,black,22.5677459,88.3476023
+Delhi,India,black,28.6517178,77.2219388
+Cairo,Egypt,black,30.0488185,31.2436663
+Tehran,Iran,black,40.7006177,57.401375
+Istanbul,Turkey,black,41.0096334,28.9651646
+Miami,United States,yellow,25.7742658,-80.1936588
+Kinshasa,Congo,yellow,-4.3217054,15.3125974
+Buenos Aires,Argentina,yellow,-34.6075797,-58.4375796
+Mexico City,Mexico,yellow,19.4326009,-99.1333415
+Lagos,Nigeria,yellow,6.4550575,3.3941795
+Johannesburg,South Africa,yellow,-26.2049999,28.049722
+Bogota,Colombia,yellow,4.5980478,-74.0760866
+Los Angeles,United States,yellow,34.054935,-118.2444759
+Santiago,Chile,yellow,-33.4377967,-70.650445
+Lima,Peru,yellow,-12.0621064,-77.0365255
+Khartoum,Sudan,yellow,15.593325,32.53565
+Sao Paulo,Brazil,yellow,-23.5506506,-46.6333823
