@@ -6,6 +6,7 @@ from .models import Room, Game
 from .management import methods
 from .management import config as cfg
 import json
+from django.contrib.auth.models import User
 
 # Create your views here.
 
