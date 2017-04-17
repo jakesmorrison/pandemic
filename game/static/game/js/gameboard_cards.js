@@ -68,7 +68,7 @@ function get_cards_from_db(socketCall) {
         roles = msg["roles"];
         $("#roles").html("")
         for (i = 0; i < roles.length; i++) {
-          $("#roles").append("<h4><a style='cursor: pointer;' id=" + roles[i]["name"] + " onclick='remove_role(id)' title='" + roles[i]["description"].replace(new RegExp("-", "g"), "\n") + "'>" + roles[i]["name"] + "</a></h4>")
+          $("#roles").append("<h4><a style='cursor: pointer;' id=" + roles[i]["name"].replace(" ","_") + " onclick='remove_role(id)' title='" + roles[i]["description"].replace(new RegExp("-", "g"), "\n") + "'>" + roles[i]["name"] + "</a></h4>")
         }
 
         //Action Deck
@@ -323,8 +323,8 @@ function reshuffle_infection_deck() {
 }
 
 function remove_role(role) {
-  console.log("Remove Role");
   url = removeRole;
+  console.log(role)
   data = {
     'roomId': roomId,
     'user': username,

@@ -203,7 +203,7 @@ def reshuffleinfectiondeck(request):
 def removerole(request):
     params = request.GET
     pd = methods.Pandemic()
-    pd.removerole(roomId = params["roomId"], user = params["user"],role = params["role"])
+    pd.removerole(roomId = params["roomId"], user = params["user"],role = params["role"].replace("_"," "))
     context = {}
     return JsonResponse(json.loads(json.dumps(context)))
 
@@ -240,7 +240,7 @@ def incrementinfection(request):
 def decrementinfection(request):
     params = request.GET
     pd = methods.Pandemic()
-    pd.increment_infection(roomId = params["roomId"], user = params["user"], city=params["city"], color=params["color"], order=params["order"])
+    pd.decrement_infection(roomId = params["roomId"], user = params["user"], city=params["city"], color=params["color"], order=params["order"])
     context = {}
     return JsonResponse(json.loads(json.dumps(context)))
 
