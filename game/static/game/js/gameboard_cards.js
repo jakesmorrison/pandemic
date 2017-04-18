@@ -1,23 +1,23 @@
-//function start_game(e) {
-//  console.log("Deal Cards");
-//  url = dealCards;
-//  data = {
-//    'roomId': roomId,
-//    'users': $('#users_here').text()
-//  };
-//  $.ajax({
-//    type: "GET",
-//    url: url,
-//    data: data,
-//    success: function(msg) {
-//      socket.send(JSON.stringify({
-//        "command": "dealcards",
-//        "roomId": roomId,
-//        "user": username
-//      }));
-//    }
-//  });
-//}
+function start_game(e) {
+  console.log("Deal Cards");
+  url = dealCards;
+  data = {
+    'roomId': roomId,
+    'users': $('#users_here').text()
+  };
+  $.ajax({
+    type: "GET",
+    url: url,
+    data: data,
+    success: function(msg) {
+      socket.send(JSON.stringify({
+        "command": "dealcards",
+        "roomId": roomId,
+        "user": username
+      }));
+    }
+  });
+}
 
 function discard(obj, city) {
   console.log("Discard Action");
