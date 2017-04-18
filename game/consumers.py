@@ -41,7 +41,6 @@ def ws_receive(message):
     elif command == "updateinfectionmap": update_infection_map(pd, user, roomId, command)
     elif command == "updatecurrentlocation": update_current_location(pd, user, roomId, command)
 
-
 def join_game(pd,user,roomId,command):
     roomObj = Room.objects.get(roomId=roomId)
     gameStarted = False
@@ -67,12 +66,11 @@ def join_game(pd,user,roomId,command):
 def update_all(pd,user,roomId,command):
     context = {
         "command": "updateall",
+        "user": user,
         "roomId": roomId,
         'tokens': pd.gettokens(user=user, roomId=roomId),
         'actionCards': pd.getactioncards(user=user, roomId=roomId),
         'actionDiscards':pd.getactiondiscards(user=user, roomId=roomId),
-        'playerCards': pd.getcards(user=user, roomId=roomId),
-        'roles': pd.getrolecards(user=user, roomId=roomId),
         'infectionCards': pd.getinfectioncards(roomId=roomId, user=user),
         'infectionDiscards': pd.getinfectiondiscards(roomId=roomId, user=user),
         'userLocation': pd.get_location(roomId=roomId),

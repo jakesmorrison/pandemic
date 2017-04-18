@@ -27,4 +27,6 @@ urlpatterns = [
     url(r'decrementinfection/', views.decrementinfection, name='decrementinfection'),
     url(r'toggleresearch/', views.toggleresearch, name='toggleresearch'),
     url(r'setlocation/', views.setlocation, name='setlocation'),
+    url(r'getplayercards/', views.getplayercards, name='getplayercards'),
+
 ]

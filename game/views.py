@@ -79,6 +79,16 @@ def gameboard(request):
     }
     return render(request, "game/gameboard.html", context)
 
+def getplayercards(request):
+    params = request.GET
+    pd = methods.Pandemic()
+    context = {
+        'cards':pd.getcards(roomId=params["roomId"],user=params["user"]),
+        'roles': pd.getrolecards(roomId=params["roomId"], user=params["user"])
+    }
+    return JsonResponse(json.loads(json.dumps(context)))
+
+
 def dealcards(request):
     params = request.GET
     pd = methods.Pandemic()

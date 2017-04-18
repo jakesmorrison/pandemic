@@ -282,6 +282,7 @@ var incrementInfection = "{% url 'game:incrementinfection' %}";
 var decrementInfection = "{% url 'game:decrementinfection' %}";
 var toggleResearch = "{% url 'game:toggleresearch' %}";
 var setLocation = "{% url 'game:setlocation' %}";
+var getPlayerCards = "{% url 'game:getplayercards' %}";
 
 $( document ).ready(function() {
     highcharts_map(lat_long, connection);
@@ -296,22 +297,18 @@ socket = new WebSocket(ws_path);
 
 <!--Handling Messages From Server-->
 socket.onmessage = function(message) {
-    console.log("Got websocket message");
     var data = JSON.parse(message.data);
+    console.log("Got websocket message: "+data["command"]);
 
     if(data["command"] === "join"){
         console.log("Adding User")
         $('#users_here').html("["+data["users"]+"]")
     }
-    else if(data["command"] === "dealcards"){
-        console.log("Adding cards to each players hand");
-        update_all(data)
-    }
-    else if(data["command"]==="updateall"){update_all(data)}
+    else if(data["command"]==="updateall"){update_all(data);}
     else if(data["command"]==="updatetokens"){get_and_update_tokens(data["tokens"])}
     else if(data["command"]==="updateactioncards"){
         get_and_update_action_cards(data["actionCards"], data["actionDiscards"]);
-        get_player_cards(data["playerCards"],data["roles"]);
+        get_player_cards();
     }
     else if(data["command"]==="updateinfectioncards"){get_and_update_infection_cards(data["infectionCards"], data["infectionDiscards"])}
     else if(data["command"]==="updatecures"){update_cures(data["cures"])}

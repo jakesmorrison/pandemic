@@ -1,9 +1,8 @@
 function update_all(data){
-
     update_user_location(data['userLocation']);
     get_and_update_tokens(data["tokens"]);
     get_and_update_action_cards(data["actionCards"], data["actionDiscards"]);
-    get_player_cards(data["playerCards"],data["roles"]);
+    get_player_cards();
     get_and_update_infection_cards(data["infectionCards"], data["infectionDiscards"]);
     update_cures(data["cures"]);
     update_infection_table(data["infectionMap"])
@@ -31,24 +30,40 @@ function get_and_update_action_cards(actionCards, actionDiscards){
     }
 }
 
-function get_player_cards(cards, roles){
-    $("#playercards1").html("");
-    $("#playercards2").html("")
-    for (i = 0; i < cards.length; i++) {
-      if (typeof cards[i]["city"] === 'undefined'){
-      }
-      else if (i%2 === 0) {
-        $("#playercards1").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
-      } else {
-        $("#playercards2").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
-      }
-    }
+function get_player_cards(){
+    url = getPlayerCards;
+    city = $('#city_pop').text();
+    data = {
+        'roomId': roomId,
+        'city': city,
+        'user': username
+    };
+    $.ajax({
+        type: "GET",
+        url: url,
+        data: data,
+        success: function(msg) {
+            cards = msg["cards"];
+            roles = msg["roles"]
+            $("#playercards1").html("");
+            $("#playercards2").html("")
+            for (i = 0; i < cards.length; i++) {
+              if (typeof cards[i]["city"] === 'undefined'){
+              }
+              else if (i%2 === 0) {
+                $("#playercards1").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
+              } else {
+                $("#playercards2").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
+              }
+            }
 
-    //Role Cards
-    $("#roles").html("")
-    for (i = 0; i < roles.length; i++) {
-      $("#roles").append("<h4><a style='cursor: pointer;' id=" + roles[i]["name"].replace(" ","_") + " onclick='remove_role(id)' title='" + roles[i]["description"].replace(new RegExp("-", "g"), "\n") + "'>" + roles[i]["name"] + "</a></h4>")
-    }
+            //Role Cards
+            $("#roles").html("")
+            for (i = 0; i < roles.length; i++) {
+              $("#roles").append("<h4><a style='cursor: pointer;' id=" + roles[i]["name"].replace(" ","_") + " onclick='remove_role(id)' title='" + roles[i]["description"].replace(new RegExp("-", "g"), "\n") + "'>" + roles[i]["name"] + "</a></h4>")
+            }
+        }
+    });
 }
 
 function get_and_update_infection_cards(infectionCards, infectionDiscards){
