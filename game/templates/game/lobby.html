@@ -3,7 +3,10 @@
 {% load staticfiles %}
 
 {% block title %}Login{% endblock %}
-{% block css %} <link rel="stylesheet" href="{% static 'game/css/game_style.css' %}" type="text/css" media="screen" /> {% endblock %}
+{% block css %}
+<link rel="stylesheet" href="{% static 'game/css/game_style.css' %}" type="text/css" media="screen" />
+<link rel="stylesheet" href="{% static 'game/css/lobby_style.css' %}" type="text/css" media="screen" />
+{% endblock %}
 
 {% block content %}
 <div class="mainblock row">
