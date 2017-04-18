@@ -254,6 +254,7 @@
 <script src="{% static 'game/js/gameboard_cards.js' %}"></script>
 <script src="{% static 'game/js/gameboard_map.js' %}"></script>
 <script src="{% static 'game/js/gameboard_map_highcharts.js' %}"></script>
+<script src="{% static 'game/js/onmessage.js' %}"></script>
 
 
 <script type= text/javascript>
@@ -261,7 +262,6 @@ var roomId = {{roomId | safe}};
 var username = '{{ request.user.username }}';
 var gameBoard = "{% url 'game:gameboard' %}";
 var dealCards = "{% url 'game:dealcards' %}";
-var getCards = "{% url 'game:getcards' %}";
 var discardAction = "{% url 'game:discardaction' %}";
 var getNewCard = "{% url 'game:getnewcard' %}";
 var infectionPlayTop = "{% url 'game:infectionplaytop' %}";
@@ -284,15 +284,9 @@ var toggleResearch = "{% url 'game:toggleresearch' %}";
 var setLocation = "{% url 'game:setlocation' %}";
 
 $( document ).ready(function() {
-    <!--my_map("{% static 'game/json/countries.json' %}","{% static 'game/csv/lat_long.csv' %}");-->
     highcharts_map(lat_long, connection);
-
-
 });
 
-function close_pop(){
-    $("#pop_up").hide();
-}
 
 <!--Creating Channel-->
 var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
@@ -302,25 +296,29 @@ socket = new WebSocket(ws_path);
 
 <!--Handling Messages From Server-->
 socket.onmessage = function(message) {
-    console.log("Got websocket message " + message.data);
+    console.log("Got websocket message");
     var data = JSON.parse(message.data);
-    if(data["command"] === "add-users"){
+
+    if(data["command"] === "join"){
         console.log("Adding User")
         $('#users_here').html("["+data["users"]+"]")
-        get_cards_from_db("false");
     }
     else if(data["command"] === "dealcards"){
         console.log("Adding cards to each players hand");
-        get_cards_from_db("false");
-        $("#startgame").html("");
-        $("#initial_user").html("");
-        $("#user_location_hide").show();
-
+        update_all(data)
     }
-    else if(data["command"]==="getcards"){
-        get_cards_from_db("false");
+    else if(data["command"]==="updateall"){update_all(data)}
+    else if(data["command"]==="updatetokens"){get_and_update_tokens(data["tokens"])}
+    else if(data["command"]==="updateactioncards"){
+        get_and_update_action_cards(data["actionCards"], data["actionDiscards"]);
+        get_player_cards(data["playerCards"],data["roles"]);
     }
+    else if(data["command"]==="updateinfectioncards"){get_and_update_infection_cards(data["infectionCards"], data["infectionDiscards"])}
+    else if(data["command"]==="updatecures"){update_cures(data["cures"])}
+    else if(data["command"]==="updateinfectionmap"){update_infection_table(data["infectionMap"])}
+    else if(data["command"]==="updatecurrentlocation"){update_user_location(data['userLocation'])}
 }
+
 
 <!--Joining Game-->
 socket.onopen = function() {
@@ -329,7 +327,6 @@ socket.onopen = function() {
         "command": "join",
         "roomId": roomId,
         "user": '{{ request.user.username }}',
-        "message": "hello"
     }));
 };
 

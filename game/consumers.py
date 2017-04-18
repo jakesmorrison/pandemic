@@ -25,62 +25,120 @@ def ws_connect(message):
 # This doesn't need @channel_session_user as the next consumer will have that,
 # and we preserve message.reply_channel (which that's based on)
 def ws_receive(message):
-    pd = methods.Pandemic()
-
     payload = json.loads(message['text'])
-    print(payload)
+    command = payload["command"]
+
+    pd = methods.Pandemic()
     user = payload["user"]
     roomId = payload["roomId"]
-    command = payload["command"]
-    message= payload["message"]
 
+    if command == "join": join_game(pd,user,roomId,command)
+    elif command == "dealcards": update_all(pd,user,roomId,command)
+    elif command == "updatetokens": update_tokens(pd,user,roomId,command)
+    elif command == "updateactioncards": update_action_cards(pd,user,roomId,command)
+    elif command == "updateinfectioncards": update_infection_cards(pd, user, roomId, command)
+    elif command == "updatecures": update_cure(pd, user, roomId, command)
+    elif command == "updateinfectionmap": update_infection_map(pd, user, roomId, command)
+    elif command == "updatecurrentlocation": update_current_location(pd, user, roomId, command)
+
+
+def join_game(pd,user,roomId,command):
     roomObj = Room.objects.get(roomId=roomId)
-    if command == "join":
-        userNames = pd.create_update_game(roomObj = roomObj, user = user)
-        context = {
-            "command":"add-users",
-            "users": userNames
-        }
-        context = json.dumps(context)
-        Group("game").send({
-                "text": context,
-            })
-    elif command == "dealcards":
-        context = {
-            "command": "dealcards",
-            "roomId": roomId,
-        }
-        context = json.dumps(context)
-        Group("game").send({
-                "text": context,
-            })
+    gameStarted = False
+    if Game.objects.filter(roomId=roomObj).exists():
+        gameObj = Game.objects.get(roomId=roomObj)
+        if gameObj.gameStarted == True:
+            gameStarted = True
 
-    elif command == "getcards":
+    if gameStarted == False:
+        userNames = pd.create_update_game(roomObj=roomObj, user=user)
         context = {
-            "command": "getcards",
+            "command": command,
             "roomId": roomId,
+            "users": userNames,
         }
         context = json.dumps(context)
         Group("game").send({
             "text": context,
         })
+    else:
+        update_all(pd,user,roomId,command)
 
-        # payload['reply_channel'] = message.content['reply_channel']
-    # print(payload)
-    # Channel("chat.receive").send(payload)
+def update_all(pd,user,roomId,command):
+    context = {
+        "command": "updateall",
+        "roomId": roomId,
+        'tokens': pd.gettokens(user=user, roomId=roomId),
+        'actionCards': pd.getactioncards(user=user, roomId=roomId),
+        'actionDiscards':pd.getactiondiscards(user=user, roomId=roomId),
+        'playerCards': pd.getcards(user=user, roomId=roomId),
+        'roles': pd.getrolecards(user=user, roomId=roomId),
+        'infectionCards': pd.getinfectioncards(roomId=roomId, user=user),
+        'infectionDiscards': pd.getinfectiondiscards(roomId=roomId, user=user),
+        'userLocation': pd.get_location(roomId=roomId),
+        'infectionMap': pd.get_infection(roomId=roomId, user=user),
+        'cures': pd.getcures(user = user, roomId = roomId),
+    }
+    context = json.dumps(context)
+    Group("game").send({
+        "text": context,
+    })
 
+
+def update_tokens(pd,user,roomId,command):
+    context ={
+        'command': command,
+        'tokens': pd.gettokens(user=user, roomId=roomId),
+    }
+    context = json.dumps(context)
+    Group("game").send({ "text": context})
+
+def update_action_cards(pd,user,roomId,command):
+    context ={
+        'command': command,
+        'actionCards': pd.getactioncards(user=user, roomId=roomId),
+        'actionDiscards':pd.getactiondiscards(user=user, roomId=roomId),
+        'playerCards': pd.getcards(user=user, roomId=roomId),
+        'roles': pd.getrolecards(user=user, roomId=roomId)
+    }
+    context = json.dumps(context)
+    Group("game").send({ "text": context})
+
+def update_infection_cards(pd,user,roomId,command):
+    context ={
+        'command': command,
+        'infectionCards': pd.getinfectioncards(roomId=roomId, user=user),
+        'infectionDiscards': pd.getinfectiondiscards(roomId=roomId, user=user),
+    }
+    context = json.dumps(context)
+    Group("game").send({ "text": context})
+
+
+def update_cure(pd,user,roomId,command):
+    context ={
+        'command': command,
+        'cures': pd.getcures(user = user, roomId = roomId)
+    }
+    context = json.dumps(context)
+    Group("game").send({ "text": context})
+
+def update_infection_map(pd,user,roomId,command):
+    context ={
+        'command': command,
+        'infectionMap': pd.get_infection(roomId=roomId, user=user)
+    }
+    context = json.dumps(context)
+    Group("game").send({ "text": context})
+
+def update_current_location(pd,user,roomId,command):
+    context = {
+        "command": command,
+        'userLocation': pd.get_location(roomId=roomId),
+    }
+    context = json.dumps(context)
+    Group("game").send({"text": context})
 
 @channel_session_user
 def ws_disconnect(message):
     Group("game").discard(message.reply_channel)
-# for room_id in message.channel_session.get("rooms", set()):
-    #     try:
-    #         room = Room.objects.get(pk=room_id)
-    #         # Removes us from the room's send group. If this doesn't get run,
-    #         # we'll get removed once our first reply message expires.
-    #         room.websocket_group.discard(message.reply_channel)
-    #     except Room.DoesNotExist:
-    #         pass
-
-
 

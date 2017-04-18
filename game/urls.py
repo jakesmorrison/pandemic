@@ -9,7 +9,6 @@ urlpatterns = [
     url(r'lobby/', views.lobby, name='lobby'),
     url(r'gameboard/', views.gameboard, name='gameboard'),
     url(r'dealcards/', views.dealcards, name='dealcards'),
-    url(r'getcards/', views.getcards, name='getcards'),
     url(r'discardaction/', views.discardaction, name='discardaction'),
     url(r'getnewcard/', views.getnewcard, name='getnewcard'),
     url(r'infectionplaytop/', views.infectionplaytop, name='infectionplaytop'),

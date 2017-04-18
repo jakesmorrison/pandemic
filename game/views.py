@@ -86,47 +86,6 @@ def dealcards(request):
     context = {}
     return JsonResponse(json.loads(json.dumps(context)))
 
-def getcards(request):
-    params = request.GET
-    pd = methods.Pandemic()
-    roomObj = Room.objects.get(roomId=params["roomId"])
-    currentGame = Game.objects.get(roomId=roomObj)
-
-    if currentGame.gameStarted == True:
-        cards = pd.getcards(roomId=params["roomId"],user=params["user"])
-        roles = pd.getrolecards(roomId=params["roomId"],user=params["user"])
-        actionCards = pd.getactioncards(roomId=params["roomId"],user=params["user"])
-        actionDiscards = pd.getactiondiscards(roomId=params["roomId"],user=params["user"])
-        infectionCards = pd.getinfectioncards(roomId=params["roomId"],user=params["user"])
-        infectionDiscards = pd.getinfectiondiscards(roomId=params["roomId"],user=params["user"])
-        tokens = pd.gettokens(roomId=params["roomId"],user=params["user"])
-        cures = pd.getcures(roomId=params["roomId"],user=params["user"])
-        notes = pd.getnotes(roomId=params["roomId"],user=params["user"])
-        infectionMap = pd.get_infection(roomId=params["roomId"],user=params["user"])
-        currentLocation = pd.get_location(roomId=params["roomId"])
-
-        context = {
-            'gameStarted' : True,
-            "cards": cards,
-            "roles": roles,
-            "actionCards":actionCards,
-            "actionDiscards":actionDiscards[::-1],
-            "infectionCards": infectionCards,
-            "infectionDiscards": infectionDiscards,
-            "tokens": tokens,
-            "cures": cures,
-            "notes": notes,
-            "infectionMap": infectionMap,
-            "currentLocation": currentLocation
-        }
-        return JsonResponse(json.loads(json.dumps(context)))
-    else:
-        context = {
-            'gameStarted': False
-        }
-        return JsonResponse(json.loads(json.dumps(context)))
-
-
 def discardaction(request):
     params = request.GET
     pd = methods.Pandemic()
@@ -211,7 +170,7 @@ def savenotes(request):
     params = request.GET
     pd = methods.Pandemic()
     pd.savenotes(roomId = params["roomId"], user = params["user"], note=params["note"])
-    context = {}
+    context = {"notes":pd.getnotes(roomId=params["roomId"],user=params["user"])}
     return JsonResponse(json.loads(json.dumps(context)))
 
 def pickupdiscard(request):

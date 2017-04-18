@@ -261,7 +261,6 @@ class Pandemic(object):
         currentGame.save()
 
     def removerole(self, user, roomId ,role):
-        print(role)
         roomObj = Room.objects.get(roomId=roomId)
         p = Player.objects.get(roomId=roomObj,playerName=user)
         rollCards = p.rollCards

@@ -113,7 +113,11 @@ function increment_infection(color){
         url: url,
         data: data,
         success: function(msg) {
-          get_cards_from_db("true");
+          socket.send(JSON.stringify({
+            "command": "updateinfectionmap",
+            "roomId": roomId,
+            "user": username,
+          }));
           color = color.charAt(0).toUpperCase() + color.slice(1)
           $('#infectionBlock'+color).html(parseInt($('#infectionBlock'+color).text())+1);
         }
@@ -138,7 +142,11 @@ function decrement_infection(color){
         url: url,
         data: data,
         success: function(msg) {
-          get_cards_from_db("true");
+          socket.send(JSON.stringify({
+            "command": "updateinfectionmap",
+            "roomId": roomId,
+            "user": username,
+          }));
           color = color.charAt(0).toUpperCase() + color.slice(1)
           $('#infectionBlock'+color).html(parseInt($('#infectionBlock'+color).text())-1);
         }
@@ -157,7 +165,11 @@ $('#research_center').change(function() {
         url: url,
         data: data,
         success: function(msg) {
-          get_cards_from_db("true");
+            socket.send(JSON.stringify({
+                "command": "updateinfectionmap",
+                "roomId": roomId,
+                "user": username,
+              }));
         }
     });
 })
@@ -175,10 +187,11 @@ function set_current_location(){
         url: url,
         data: data,
         success: function(msg) {
-          get_cards_from_db("true");
+          socket.send(JSON.stringify({
+            "command": "updatecurrentlocation",
+            "roomId": roomId,
+            "user": username,
+          }));
         }
     });
-
-
-
 }

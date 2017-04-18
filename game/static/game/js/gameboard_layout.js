@@ -16,3 +16,7 @@ $("#menu-toggle").click(function(e) {
     e.preventDefault();
     $("#wrapper").toggleClass("toggled");
 });
+
+function close_pop(){
+    $("#pop_up").hide();
+}
