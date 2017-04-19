@@ -7,6 +7,8 @@ from .management import methods
 from .management import config as cfg
 import json
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+
 
 # Create your views here.
 
@@ -28,7 +30,7 @@ def log(request):
     user = authenticate(username=username, password=password)
     if user is not None:
         login(request, user)
-        return index(request)
+        return HttpResponseRedirect("/")
     else:
         context = {}
         return render(request, "game/invalid_user.html", context)
@@ -41,7 +43,7 @@ def signup(request):
     user.save()
     user = authenticate(username=username, password=password)
     login(request, user)
-    return index(request)
+    return HttpResponseRedirect("/")
 
 def lobby(request):
     username = request.POST['uname']
@@ -55,7 +57,7 @@ def lobby(request):
         return render(request, "game/invalid_user.html", context)
 
 
-def gameboard(request):
+def gameboard(request,rId):
     pd = methods.Pandemic()
     params = request.POST
     if "new" in params:

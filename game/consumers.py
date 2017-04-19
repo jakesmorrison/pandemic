@@ -14,10 +14,9 @@ from .management import methods
 # websocket.connect or http.request messages) to the channel session (available
 # in all consumers with the same reply_channel, so all three here)
 @channel_session_user_from_http
-def ws_connect(message):
+def ws_connect(message,rId):
     message.reply_channel.send({'accept': True})
-    # Add them to the right group
-    Group("game").add(message.reply_channel)
+    Group("game"+str(rId)).add(message.reply_channel)
 
 
 # Unpacks the JSON in the received WebSocket frame and puts it onto a channel
@@ -57,7 +56,7 @@ def join_game(pd,user,roomId,command):
             "users": userNames,
         }
         context = json.dumps(context)
-        Group("game").send({
+        Group("game"+str(roomId)).send({
             "text": context,
         })
     else:
@@ -78,7 +77,7 @@ def update_all(pd,user,roomId,command):
         'cures': pd.getcures(user = user, roomId = roomId),
     }
     context = json.dumps(context)
-    Group("game").send({
+    Group("game"+str(roomId)).send({
         "text": context,
     })
 
@@ -89,7 +88,7 @@ def update_tokens(pd,user,roomId,command):
         'tokens': pd.gettokens(user=user, roomId=roomId),
     }
     context = json.dumps(context)
-    Group("game").send({ "text": context})
+    Group("game"+str(roomId)).send({ "text": context})
 
 def update_action_cards(pd,user,roomId,command):
     context ={
@@ -100,7 +99,7 @@ def update_action_cards(pd,user,roomId,command):
         'roles': pd.getrolecards(user=user, roomId=roomId)
     }
     context = json.dumps(context)
-    Group("game").send({ "text": context})
+    Group("game"+str(roomId)).send({ "text": context})
 
 def update_infection_cards(pd,user,roomId,command):
     context ={
@@ -109,7 +108,7 @@ def update_infection_cards(pd,user,roomId,command):
         'infectionDiscards': pd.getinfectiondiscards(roomId=roomId, user=user),
     }
     context = json.dumps(context)
-    Group("game").send({ "text": context})
+    Group("game"+str(roomId)).send({ "text": context})
 
 
 def update_cure(pd,user,roomId,command):
@@ -118,7 +117,7 @@ def update_cure(pd,user,roomId,command):
         'cures': pd.getcures(user = user, roomId = roomId)
     }
     context = json.dumps(context)
-    Group("game").send({ "text": context})
+    Group("game"+str(roomId)).send({ "text": context})
 
 def update_infection_map(pd,user,roomId,command):
     context ={
@@ -126,7 +125,7 @@ def update_infection_map(pd,user,roomId,command):
         'infectionMap': pd.get_infection(roomId=roomId, user=user)
     }
     context = json.dumps(context)
-    Group("game").send({ "text": context})
+    Group("game"+str(roomId)).send({ "text": context})
 
 def update_current_location(pd,user,roomId,command):
     context = {
@@ -134,9 +133,9 @@ def update_current_location(pd,user,roomId,command):
         'userLocation': pd.get_location(roomId=roomId),
     }
     context = json.dumps(context)
-    Group("game").send({"text": context})
+    Group("game"+str(roomId)).send({"text": context})
 
 @channel_session_user
 def ws_disconnect(message):
-    Group("game").discard(message.reply_channel)
+    Group("game"+str(roomId)).discard(message.reply_channel)
 

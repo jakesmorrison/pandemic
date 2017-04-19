@@ -29,7 +29,7 @@
                     {% load game_extras %}
                     {% for room in roomInfo %}
                         <tr>
-                        <form method="post" action="{% url 'game:game.views.gameboard' %}">
+                         <form method="post" action="gameboard/{{ room|get_item:room.roomId }}/">
                             {% csrf_token %}
                             <div class="row">
                                 <td class="centered"><input class="centered fake-input-box" type="text" value="{{ room|get_item:room.roomId }}" name="roomId" readonly></td>
@@ -53,7 +53,7 @@
 
 <div class="row">
     <div>
-        <form method="post" action="{% url 'game:game.views.gameboard' %}">
+        <form method="post" action="{% url 'game:game.views.gameboard' rId=roomId %}">
             {% csrf_token %}
             <div class="popup col-lg-8 col-lg-offset-0">
                 <h1 class="creategame centered">Create Game</h1>
@@ -113,30 +113,34 @@
 
 <script type= text/javascript>
 
-    function create_game(){
-        $(".mainblock").hide();
-        $("#close_pop_up").show();
-        $(".popup").show();
-        $("html").addClass("backtran");
-        $("html").css("background-color","rgb(25, 26, 29)");
-        $("label").css("color","white");
-        $(".creategame").css("color","white");
-    }
+var roomId = parseInt({{ roomId|safe }});
+var roomInfo = ("{{roomInfo|safe}}");
 
-    function close_pop_up(){
-        $(".popup").hide();
-        $("#close_pop_up").hide();
-        $(".mainblock").show();
-        $("html").removeClass("backtran");
-        $("html").css("background-color","white");
-        $("label").css("color","black");
-    }
+function create_game(){
+    $(".mainblock").hide();
+    $("#close_pop_up").show();
+    $(".popup").show();
+    $("html").addClass("backtran");
+    $("html").css("background-color","rgb(25, 26, 29)");
+    $("label").css("color","white");
+    $(".creategame").css("color","white");
+}
 
-    $( document ).ready(function() {
-        $(".popup").hide();
-        $("#close_pop_up").hide();
+function close_pop_up(){
+    $(".popup").hide();
+    $("#close_pop_up").hide();
+    $(".mainblock").show();
+    $("html").removeClass("backtran");
+    $("html").css("background-color","white");
+    $("label").css("color","black");
+}
 
-    });
+$( document ).ready(function() {
+    $(".popup").hide();
+    $("#close_pop_up").hide();
+});
+
+
 
 </script>
 

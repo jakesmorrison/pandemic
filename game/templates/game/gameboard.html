@@ -260,7 +260,7 @@
 <script type= text/javascript>
 var roomId = {{roomId | safe}};
 var username = '{{ request.user.username }}';
-var gameBoard = "{% url 'game:gameboard' %}";
+var gameBoard = "{% url 'game:gameboard' rId=roomId %}";
 var dealCards = "{% url 'game:dealcards' %}";
 var discardAction = "{% url 'game:discardaction' %}";
 var getNewCard = "{% url 'game:getnewcard' %}";
@@ -291,7 +291,8 @@ $( document ).ready(function() {
 
 <!--Creating Channel-->
 var ws_scheme = window.location.protocol == "https:" ? "wss" : "ws";
-var ws_path = ws_scheme + '://' + window.location.host + "/stream/";
+console.log(window.location.pathname);
+var ws_path = ws_scheme + '://' + window.location.host + window.location.pathname + "stream/";
 console.log("Connecting to " + ws_path);
 socket = new WebSocket(ws_path);
 
