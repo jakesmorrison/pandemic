@@ -48,12 +48,21 @@ function get_player_cards(){
             $("#playercards1").html("");
             $("#playercards2").html("")
             for (i = 0; i < cards.length; i++) {
-              if (typeof cards[i]["city"] === 'undefined'){
+              if (i%2 === 0) {
+                if (cards[i]["city"] === 'Pandemic!' || cards[i]["city"] === 'Mutation' || cards[i]["city"] === 'Event'){
+                    $("#playercards1").append("<h4><a title='"+cards[i]['description']+"' style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + "</a></h4>")
+                }
+                else{
+                    $("#playercards1").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
+                }
               }
-              else if (i%2 === 0) {
-                $("#playercards1").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
-              } else {
-                $("#playercards2").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
+              else {
+                if (cards[i]["city"] === 'Pandemic!' || cards[i]["city"] === 'Mutation' || cards[i]["city"] === 'Event'){
+                    $("#playercards2").append("<h4><a title='"+cards[i]['description']+"' style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + "</a></h4>")
+                }
+                else{
+                    $("#playercards2").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
+                }
               }
             }
 

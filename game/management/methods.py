@@ -82,8 +82,8 @@ class Pandemic(object):
         currentGame.save()
 
     def shuffle_action_cards(self, actionDeck, numPandemic):
+        actionDeck = actionDeck+cfg.Config.mutation
         random.shuffle(actionDeck)
-
         numCards = int(len(actionDeck) / numPandemic)
         new_deck_counts = [numCards] * numPandemic
         # getting number of cards per sub deck.
@@ -93,8 +93,11 @@ class Pandemic(object):
         first = 0
         last = new_deck_counts[0]
         new_deck  = []
-        for x in new_deck_counts:
-            pan_sub = actionDeck[first:last]+[cfg.Config.pandemic]
+        pand_cards = cfg.Config.virulent_strain
+        event_cards = cfg.Config.events
+        random.shuffle(pand_cards)
+        for n,x in enumerate(new_deck_counts):
+            pan_sub = actionDeck[first:last]+[pand_cards[n]]+[event_cards[n]]
             random.shuffle(pan_sub)
             new_deck = new_deck + pan_sub
             first = last
@@ -205,8 +208,12 @@ class Pandemic(object):
     def gettokens(self,user,roomId):
         roomObj = Room.objects.get(roomId=roomId)
         currentGame = Game.objects.get(roomId=roomObj)
+        try:
+            infectionToken = cfg.Config.infectionRate[currentGame.infectionRate]
+        except:
+            infectionToken = cfg.Config.infectionRate[-1]
         return {"blueTokens":currentGame.blueTokens,"blackTokens":currentGame.blackTokens,"redTokens":currentGame.redTokens,
-                "yellowTokens":currentGame.yellowTokens,"purpleTokens":currentGame.purpleTokens,"infectionRate":currentGame.infectionRate,
+                "yellowTokens":currentGame.yellowTokens,"purpleTokens":currentGame.purpleTokens,"infectionRate":infectionToken,
                "outbreaks":currentGame.outbreaks}
 
 
@@ -346,8 +353,8 @@ class Pandemic(object):
 
         new_list = []
         for x in currentGame.mapInfection:
-            new_list.append([x['city'], x['blue'], x['black'], x['red'], x['yellow'], x['purple']])
-        new_list
+            mySum = x['blue']+x['black']+x['red']+x['yellow']+x['purple']
+            new_list.append([x['city'], mySum, x['blue'], x['black'], x['red'], x['yellow'], x['purple']])
         return new_list
 
     def get_infection_city(self, user, roomId, city):
@@ -371,13 +378,6 @@ class Pandemic(object):
                 elif x == y["city"]:
                     new_list.append(y)
                     break
-        # for y in currentGame.mapInfection:
-        #     if y["city"] == city:
-        #         infectedCity =  y
-        #         infectedCity[color] = infectedCity[color] + 1
-        #         new_list.append(infectedCity)
-        #     else:
-        #         new_list.append(y)
         currentGame.mapInfection = new_list
         currentGame.save()
 

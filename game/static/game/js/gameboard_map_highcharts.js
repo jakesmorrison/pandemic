@@ -11,7 +11,7 @@ function highcharts_map(data, connection){
         width: width,
         height: height,
         backgroundColor: '#d2d2d2',
-        marginTop: 0,
+        marginTop: 0
         },
         mapNavigation: {
             enabled: false

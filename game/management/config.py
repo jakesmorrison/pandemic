@@ -142,11 +142,53 @@ class Config(object):
 
     maxCubes = 24
 
-    {"city": "Milan", "country": "Italy", "population": 5232000, "color": "blue", "type": "Type 1",
-     "connectionCities": ["Essen", "Paris", "Istanbul"]},
-
     pandemic = {'city':'Pandemic!','Country':'','color':'','type':'',"connectionCities":[],'increase':'Move the infection rate marker forward 1 space',
                 'infect':'Draw the bottom card from the Infection Deck and put 3 cubes on that city. Discard the card.',
                 'intensify': 'Shuffle the cards in the Infection Discard and put them on top of the Infection Deck.'}
 
+    virulent_strain = [
+        {'city':'Pandemic!','Country':'','color':'','type':'',"connectionCities":[],
+         'description':"To leave a city with Virulant Strain disease cubes, a player must first, on that turn, Treat at least 1 Virulent Strain cube in that city."},
+        {'city': 'Pandemic!', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "During Infections, when a Virulent Strain city is drawn, place 2 Virulent Strain disease cubes if the city has no Virulent Strain cubes."},
+        {'city': 'Pandemic!', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Move the outbreaks marker forward 2 spaces when a Virulent outbreak occurs."},
+        {'city': 'Pandemic!', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Before doing this cards Intensify step, if the Virulent Strain is eradicated but at least 1 Virulent Strain card is in the Infection Discard Pile: flip the cure back and place 1 cube on each Virulent Strain city in the discard pile."},
+        {'city': 'Pandemic!', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "If the Virulent Strain has not been cured you need 1 more Virulent Strain City card to Discover a Cure for it."},
+        {'city': 'Pandemic!', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Before doing this cards Intensify step, place 1 Virulent Strain cube on each city with exactly 1 of these cubes."},
+        {'city': 'Pandemic!', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "During Infections, draw 1 more card than the Infection Rate if at least 1 infectin card drawn was a Virulent Strain."},
+        {'city': 'Pandemic!', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Before doing this cards Intensify step, remove 4 Virulent Strain diesease cubes from the supply box. If fewer than 4, remove all."}
+    ]
 
+    mutation =[
+        {'city':'Mutation','Country':'','color':'','type':'',"connectionCities":[],
+        'description':"If the Purple Disease is not eradicated, draw the card from the bottom of the Infection Deck. Place 3 Purple cubes on that city. Discard."},
+        {'city': 'Mutation', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+        'description': "If the Purple Disease is not eradicated, draw the card from the bottom of the Infection Deck. Place 3 Purple cubes on that city. Discard."},
+        {'city': 'Mutation', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+        'description': "If the Purple Disease is not eradicated, draw the card from the bottom of the Infection Deck. Place 3 Purple cubes on that city. Discard."}
+    ]
+
+    events = [
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Remove 2 cubes from the board."},
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Select one player. This player may draw one city from the Player Discard pile. Discard if over hand limit."},
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Take two extra actions this turn."},
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Move one player anywhere on the board."},
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "This turn, remove 1 dieses cube from each city the player drives/ferries to. "},
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "Play immediately after a Discover a Cure Action to remove 1-5 cubes of the cured diesease. Must come from connected cities."},
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "May spend actions to move any one player."},
+        {'city': 'Event', 'Country': '', 'color': '', 'type': '', "connectionCities": [],
+         'description': "The infection rate is 1 until the players next turn."}
+    ]

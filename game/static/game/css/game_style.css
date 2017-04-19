@@ -119,6 +119,7 @@ background-color:#d2d2d2;
     -o-transition: all 0.5s ease;
     transition: all 0.5s ease;
     border-radius: 0px 7px 7px 0px;
+    overflow-x: hidden;
 }
 
 
@@ -256,7 +257,7 @@ text-align:center;
     width: 250px;
     height: 250px;
     border-radius: 10px;
-    border: 3px solid black;
+    border: 5px solid black;
     margin: auto;
     background-color:#404040;
     display:none;
@@ -265,9 +266,7 @@ text-align:center;
 
 .close_pop{
     float: right;
-    padding: 0px;
-    margin-top: -5px;
-    padding-right: 5px;
+    display: inline-block;
 }
 
 .current_location_text {

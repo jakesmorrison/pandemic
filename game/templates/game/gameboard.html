@@ -2,7 +2,7 @@
 
 {% load staticfiles %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Game Time!{% endblock %}
 {% block css %}
 <link rel="stylesheet" href="{% static 'game/css/d3-geomap.css' %}" type="text/css" media="screen" />
 <link rel="stylesheet" href="{% static 'game/css/game_style.css' %}" type="text/css" media="screen" />
@@ -121,7 +121,7 @@
     <!--<div style="padding-top:70px;" class="col-lg-12 col-lg-offset-1">-->
         <!--<div id="myCanvas" class="row">-->
             <!--<div style="position: relative; text-align:center;" class="col-lg-12 col-lg-offset-0">-->
-                <div style="margin-left: 135px; margin-top: 30px;" id="container"></div>
+                <div style="margin-left: 135px; margin-top: 15px;" id="container"></div>
             <!--</div>-->
         <!--</div>-->
     <!--</div>-->
@@ -131,6 +131,7 @@
             <thead id="header_table">
                 <tr>
                     <th>City</th>
+                    <th>∑</th>
                     <th><i style="color:blue" class="fa fa-square" aria-hidden="true"></i></th>
                     <th><i style="color:black" class="fa fa-square" aria-hidden="true"></i></th>
                     <th><i style="color:red" class="fa fa-square" aria-hidden="true"></i></th>
@@ -143,6 +144,7 @@
             <tfoot>
                 <tr>
                     <th>City</th>
+                    <th>∑</th>
                     <th><i style="color:blue" class="fa fa-square" aria-hidden="true"></i></th>
                     <th><i style="color:black" class="fa fa-square" aria-hidden="true"></i></th>
                     <th><i style="color:red" class="fa fa-square" aria-hidden="true"></i></th>
@@ -202,9 +204,8 @@
 </div>
 
 <div id="pop_up">
-    <h4 ><a id="city_pop"></a>
-        <span></span><button style="" type="button" class="close_pop btn btn-default" onclick="close_pop()">x</button></span>
-    </h4>
+    <button style="" type="button" class="close_pop btn btn-default" onclick="close_pop()">x</button>
+    <h4 ><a id="city_pop"></a></h4>
     <div class="checkbox"><label><input type="checkbox" id="research_center" value=""><a>Research Center</a></label></div>
     <button type="button" class="btn btn-default" onclick="set_current_location()">Set Current Location</button>
     <div class="row">
