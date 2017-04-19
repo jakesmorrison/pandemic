@@ -170,3 +170,19 @@ text-align:center;
         background-color:white;
     }
 }
+
+@media screen and (max-width: 519px) and (min-width: 200px) {
+    #infection_status{
+    position: absolute;
+    bottom: 0%;
+    left: 0%;
+    width: 100%;
+    height: 350px;
+    border-radius: 10px;
+    border: 3px solid black;
+    margin: auto;
+    overflow-y: auto;
+    overflow-x: auto;
+    background-color: white;
+    }
+}
