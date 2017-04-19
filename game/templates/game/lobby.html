@@ -9,11 +9,13 @@
 {% endblock %}
 
 {% block content %}
+<div class="intro container wrapper">
 <div class="mainblock row">
     <div class="col-lg-12 col-lg-offset-0">
         <div class="row">
             <div class="col-lg-12 col-lg-offset-0">
                 <h1 class="centered">Lobby <span><button type="button" class="btn btn-success" id="createGame" onclick="create_game()">Create Game</button></span></h1>
+                <div style="overflow-x:auto;" data-spy="scroll">
                 <table class="table">
                     <thead>
                       <tr>
@@ -46,6 +48,7 @@
                     {% endfor %}
                     </tbody>
                 </table>
+                </div>
             </div>
         </div>
     </div>
@@ -106,6 +109,7 @@
         </form>
         <button style="position: absolute;top: 10%;right: 3%;" type="button" class="btn btn-primary" id="close_pop_up" onclick="close_pop_up()">X</button>
     </div>
+</div>
 </div>
 {% endblock %}
 

@@ -50,7 +50,7 @@ function get_player_cards(){
             for (i = 0; i < cards.length; i++) {
               if (i%2 === 0) {
                 if (cards[i]["city"] === 'Pandemic!' || cards[i]["city"] === 'Mutation' || cards[i]["city"] === 'Event'){
-                    $("#playercards1").append("<h4><a title='"+cards[i]['description']+"' style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + "</a></h4>")
+                    $("#playercards1").append("<h4><a data-toggle='tooltip' data-placement='bottom' title='"+cards[i]['description']+"' style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + "</a></h4>")
                 }
                 else{
                     $("#playercards1").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
@@ -58,7 +58,7 @@ function get_player_cards(){
               }
               else {
                 if (cards[i]["city"] === 'Pandemic!' || cards[i]["city"] === 'Mutation' || cards[i]["city"] === 'Event'){
-                    $("#playercards2").append("<h4><a title='"+cards[i]['description']+"' style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + "</a></h4>")
+                    $("#playercards2").append("<h4><a data-toggle='tooltip' data-placement='bottom' title='"+cards[i]['description']+"' style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + "</a></h4>")
                 }
                 else{
                     $("#playercards2").append("<h4><a style='cursor: pointer; color:" + cards[i]['color'] + "' id='" + cards[i]["city"] + "' onclick='discard(this,id)'>" + cards[i]["city"] + ", " + cards[i]["country"] + ", " + cards[i]["population"] + "</a></h4>")
@@ -69,7 +69,7 @@ function get_player_cards(){
             //Role Cards
             $("#roles").html("")
             for (i = 0; i < roles.length; i++) {
-              $("#roles").append("<h4><a style='cursor: pointer;' id=" + roles[i]["name"].replace(" ","_") + " onclick='remove_role(id)' title='" + roles[i]["description"].replace(new RegExp("-", "g"), "\n") + "'>" + roles[i]["name"] + "</a></h4>")
+              $("#roles").append("<h4><a style='cursor: pointer;' id=" + roles[i]["name"].replace(" ","_") + " onclick='remove_role(id)' data-toggle='tooltip' data-placement='bottom' title='" + roles[i]["description"].replace(new RegExp("-", "g"), "\n") + "'>" + roles[i]["name"] + "</a></h4>")
             }
         }
     });

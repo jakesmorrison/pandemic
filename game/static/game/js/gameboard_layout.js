@@ -20,3 +20,7 @@ $("#menu-toggle").click(function(e) {
 function close_pop(){
     $("#pop_up").hide();
 }
+
+function hide_table(){
+    $("#infection_status").toggleClass("toggled");
+}
