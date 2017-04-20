@@ -58,15 +58,15 @@
     <div>
         <form method="post" action="{% url 'game:game.views.gameboard' rId=roomId %}">
             {% csrf_token %}
-            <div class="popup col-lg-8 col-lg-offset-0">
+            <div class="popup col-lg-8 col-lg-offset-0 col-xs-8">
                 <h1 class="creategame centered">Create Game</h1>
                 <div class="row">
-                    <div class="col-lg-3 col-lg-offset-3">
+                    <div class="col-lg-3 col-lg-offset-3 col-xs-3 col-xs-offset-3">
                         <label for="roomId">Room</label>
                         <br>
                         <input id="roomId" class=" " type="text" value="{{ roomId|safe }}" name="roomId" readonly>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-xs-3">
                         <label for="numrolecards">Roll Cards</label>
                             <select class="form-control" id="numrolecards" name="numrolecards">
                                 <option>1</option>
@@ -78,13 +78,13 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-lg-3 col-lg-offset-3">
+                    <div class="col-lg-3 col-lg-offset-3 col-xs-3 col-xs-offset-3">
                         <label>Mutation</label>
                         <br>
                         <label class="radio-inline"><input type="radio" name="mutation" checked="True">True<label>
                         <label style="padding-left: 40px;" class="radio-inline"><input type="radio" name="mutation">False</label>
                     </div>
-                    <div class="col-lg-3">
+                    <div class="col-lg-3 col-xs-3">
                         <label for="numpandemiccards">Pandemic Cards</label>
                          <select class="form-control" id="numpandemiccards" name="numpandemiccards">
                                 <option>1</option>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div style="margin-top: 20px;" class="col-lg-2 col-lg-offset-5">
+                    <div style="margin-top: 20px;" class="col-lg-2 col-lg-offset-5 col-xs-2 col-xs-offset-5">
                         <button class="btn btn-primary" type="submit">Join Game</button>
                     </div>
                     <input style="display:none" id="new" type="text" value="new" name="new" readonly>
