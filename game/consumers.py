@@ -136,6 +136,6 @@ def update_current_location(pd,user,roomId,command):
     Group("game"+str(roomId)).send({"text": context})
 
 @channel_session_user
-def ws_disconnect(message):
-    Group("game"+str(roomId)).discard(message.reply_channel)
+def ws_disconnect(message, rId):
+    Group("game"+str(rId)).discard(message.reply_channel)
 
