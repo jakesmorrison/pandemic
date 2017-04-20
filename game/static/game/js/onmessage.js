@@ -134,7 +134,7 @@ function update_infection_table(infectionMap){
             bPaginate:      true,
             bProcess:       true,
             bScrollInfinite:false,
-
+            sScrollx: "100%",
         });
     }
     else{
