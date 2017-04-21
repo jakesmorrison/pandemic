@@ -239,7 +239,7 @@ function increment_other(indicator) {
 function decrement_other(indicator) {
   console.log("Decrement Other");
   url = decrementOther;
-  $('infectionRate').toggleClass( "circle_toggle" );
+  $('#infectionRate').toggleClass( "circle_toggle" );
   data = {
     'roomId': roomId,
     'user': username,
