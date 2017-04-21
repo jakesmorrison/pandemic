@@ -122,7 +122,8 @@ def update_cure(pd,user,roomId,command):
 def update_infection_map(pd,user,roomId,command):
     context ={
         'command': command,
-        'infectionMap': pd.get_infection(roomId=roomId, user=user)
+        'infectionMap': pd.get_infection(roomId=roomId, user=user),
+        'tokens': pd.gettokens(user=user, roomId=roomId),
     }
     context = json.dumps(context)
     Group("game"+str(roomId)).send({ "text": context})
