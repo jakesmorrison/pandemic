@@ -134,14 +134,14 @@ class Config(object):
 
     infectedCites = [{"city":x["city"],"country":x["country"],"color":x["color"],"type":"Type 2"}for x in cities]
 
-    outbreaks = 1
-    maxOutbreaks = 10
+    outbreaks = 0
+    maxOutbreaks = 8
 
-    infectionRate = [2,2,2,3,3,4,4]
+    infectionRate = ["2a","2b","2c","3a","3b","4a","4b"]
 
     maxCubes = 24
 
-    pandemic = {'city':'Pandemic!','Country':'','color':'','type':'',"connectionCities":[],'increase':'Move the infection rate marker forward 1 space',
+    pandemic = {'city':'Epidemic!','Country':'','color':'','type':'',"connectionCities":[],'increase':'Move the infection rate marker forward 1 space',
                 'infect':'Draw the bottom card from the Infection Deck and put 3 cubes on that city. Discard the card.',
                 'intensify': 'Shuffle the cards in the Infection Discard and put them on top of the Infection Deck.'}
 

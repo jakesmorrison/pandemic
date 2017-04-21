@@ -99,6 +99,16 @@ function update_user_location(userLocation){
     }
 }
 
+function update_research_station(researchStationList){
+    $('#researchList').html("")
+    for (i = 0; i < researchStationList.length; i++) {
+        if(i===0){
+            $('#researchList').append("<option selected>"+researchStationList[i]+"</option>")
+        }
+        $('#researchList').append("<option>"+researchStationList[i]+"</option>")
+    }
+}
+
 function update_cures(cures){
     for (var k in cures) {
       if (cures.hasOwnProperty(k)) {

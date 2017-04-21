@@ -194,10 +194,45 @@ class Pandemic(object):
 
         discards =[topCard]+currentGame.infectionDiscards
         currentGame.infectionDiscards = discards
-        currentGame.save()
-
         currentGame.infectionCards.pop(0)
         currentGame.save()
+
+        # city = topCard["city"]
+        # color = topCard["color"]
+        # self.add_infection_tokens(city,color,currentGame)
+
+    # def add_infection_tokens(self,city,color,currentGame):
+    #     infectionMap = currentGame.mapInfection
+    #     for n,x in enumerate(infectionMap):
+    #         print(x)
+    #         if x["city"] == city:
+    #             print(x)
+    #             otherColor = x[color]
+    #             purpleColor = x["purple"]
+    #             if (otherColor + 1) == 4:
+    #                 print("outbreak")
+    #                 cityCards = CityCards.objects.get(city=city)
+    #                 print(cityCards.connectionCities)
+    #             else:
+    #                 x[color] = x[color] +1
+    #                 if color == "blue":currentGame.blueTokens = currentGame.blueTokens - 1
+    #                 elif color == "black":currentGame.blackTokens = currentGame.blackTokens - 1
+    #                 elif color == "red":currentGame.redTokens = currentGame.redTokens - 1
+    #                 elif color == "yellow":currentGame.yellowTokens = currentGame.yellowTokens - 1
+    #
+    #             if purpleColor >0:
+    #                 if (purpleColor + 1) == 4:
+    #                     #outbreak
+    #                     pass
+    #                 else:
+    #                     x["purple"] = x["purple"] + 1
+    #                     currentGame.purpleTokens = currentGame.purpleTokens - 1
+    #
+    #         infectionMap[n]=x
+    #         break
+    #     currentGame.mapInfection = infectionMap
+    #     currentGame.save()
+
 
 
     def infectionplaybottom(self,user,roomId):

@@ -35,7 +35,7 @@ def ws_receive(message):
     elif command == "dealcards": update_all(pd,user,roomId,command)
     elif command == "updatetokens": update_tokens(pd,user,roomId,command)
     elif command == "updateactioncards": update_action_cards(pd,user,roomId,command)
-    elif command == "updateinfectioncards": update_infection_cards(pd, user, roomId, command)
+    elif command == "updateinfectioncards": update_all(pd, user, roomId, command)
     elif command == "updatecures": update_cure(pd, user, roomId, command)
     elif command == "updateinfectionmap": update_infection_map(pd, user, roomId, command)
     elif command == "updatecurrentlocation": update_current_location(pd, user, roomId, command)
