@@ -93,7 +93,7 @@ class Pandemic(object):
                     mapDict[n] = foo
                     break
 
-        currentGame.infectionCards = infectionDiscardList
+        currentGame.infectionCards = infectionCardsList
         currentGame.infectionDiscards = infectionDiscardList
         currentGame.mapInfection = mapDict
         currentGame.blueTokens = currentGame.blueTokens - discardColors["blue"]
