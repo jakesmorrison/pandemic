@@ -22,7 +22,7 @@ function get_and_update_tokens(tokens){
 
 function get_and_update_action_cards(actionCards, actionDiscards){
     $("#actioncards").html("")
-    $("#actioncards").append("<button type='button' style='height: 219px;width: 100%; background-color: #383838; border-color: #383838; color: #d0d0d0;' class='btn btn-success' id='getNewCard' onclick='get_new_card()'>Get New Card <br>" + actionCards.length + "</button>")
+    $("#actioncards").append("<button type='button' style='overflow-y: hidden;height: 219px;width: 100%; background-color: #383838; border-color: #383838; color: #d0d0d0;' class='btn btn-success' id='getNewCard' onclick='get_new_card()'>Get New Card <br>" + actionCards.length + "</button>")
 
     $("#actiondiscards").html("");
     for (i = 0; i < actionDiscards.length; i++) {
@@ -77,9 +77,9 @@ function get_player_cards(){
 
 function get_and_update_infection_cards(infectionCards, infectionDiscards){
     $("#infectioncards").html("")
-    $("#infectioncards").append("<button type='button' style='width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionTop' onclick='infection_play_top()'>Top</button>")
-    $("#infectioncards").append("<button type='button' style='width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionBottom' onclick='infection_play_bottom()'>Bottom</button>")
-    $("#infectioncards").append("<button type='button' style='width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='reshuffleinfectiondeck' onclick='reshuffle_infection_deck()'>Reshuffle</button>")
+    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionTop' onclick='infection_play_top()'>Top</button>")
+    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionBottom' onclick='infection_play_bottom()'>Bottom</button>")
+    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='reshuffleinfectiondeck' onclick='reshuffle_infection_deck()'>Reshuffle</button>")
 
     $("#infectiondiscards").html("");
     for (i = 0; i < infectionDiscards.length; i++) {
@@ -134,7 +134,6 @@ function update_infection_table(infectionMap){
             bPaginate:      true,
             bProcess:       true,
             bScrollInfinite:false,
-            sScrollx: "100%",
         });
     }
     else{

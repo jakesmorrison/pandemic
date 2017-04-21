@@ -169,53 +169,54 @@ function reshuffle_infection_deck() {
   });
 }
 
-function increment(color) {
-  console.log("Increment Color");
-  url = incrementColor;
-  data = {
-    'roomId': roomId,
-    'user': username,
-    'color': color
-  };
-  $.ajax({
-    type: "GET",
-    url: url,
-    data: data,
-    success: function(msg) {
-      socket.send(JSON.stringify({
-        "command": "updatetokens",
-        "roomId": roomId,
-        "user": username,
-      }));
-    }
-  });
-}
+//function increment(color) {
+//  console.log("Increment Color");
+//  url = incrementColor;
+//  data = {
+//    'roomId': roomId,
+//    'user': username,
+//    'color': color
+//  };
+//  $.ajax({
+//    type: "GET",
+//    url: url,
+//    data: data,
+//    success: function(msg) {
+//      socket.send(JSON.stringify({
+//        "command": "updatetokens",
+//        "roomId": roomId,
+//        "user": username,
+//      }));
+//    }
+//  });
+//}
 
-function decrement(color) {
-  console.log("Decrement Color");
-  url = decrementColor;
-  data = {
-    'roomId': roomId,
-    'user': username,
-    'color': color
-  };
-  $.ajax({
-    type: "GET",
-    url: url,
-    data: data,
-    success: function(msg) {
-        socket.send(JSON.stringify({
-            "command": "updatetokens",
-            "roomId": roomId,
-            "user": username,
-         }));
-    }
-  });
-}
+//function decrement(color) {
+//  console.log("Decrement Color");
+//  url = decrementColor;
+//  data = {
+//    'roomId': roomId,
+//    'user': username,
+//    'color': color
+//  };
+//  $.ajax({
+//    type: "GET",
+//    url: url,
+//    data: data,
+//    success: function(msg) {
+//        socket.send(JSON.stringify({
+//            "command": "updatetokens",
+//            "roomId": roomId,
+//            "user": username,
+//         }));
+//    }
+//  });
+//}
 
 function increment_other(indicator) {
   console.log("Increment Other");
   url = incrementOther;
+  $('#infectionRate').toggleClass( "circle_toggle" );
   data = {
     'roomId': roomId,
     'user': username,
@@ -238,6 +239,7 @@ function increment_other(indicator) {
 function decrement_other(indicator) {
   console.log("Decrement Other");
   url = decrementOther;
+  $('infectionRate').toggleClass( "circle_toggle" );
   data = {
     'roomId': roomId,
     'user': username,

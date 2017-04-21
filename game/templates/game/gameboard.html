@@ -29,26 +29,26 @@
               <div class="col-lg-12 col-xs-12">
                  <div style="margin-right: 0px; margin-left: -5px;" class="row">
                     <div class="col-lg-4 col-xs-4">
-                       <div><a class="centered plusminus" name="blue" onclick="increment(name)">+</a></div>
+                       <!--<div><a class="centered plusminus" name="blue" onclick="increment(name)">+</a></div>-->
                        <div style="background-color: blue" id="blueTokens" class="circle">{{blueTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="blue" onclick="decrement(name)">-</a></div>
-                       <div><a class="centered plusminus" name="black" onclick="increment(name)">+</a></div>
-                       <div style="background-color: black" id="blackTokens" class="circle">{{blackTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="black" onclick="decrement(name)">-</a></div>
+                       <!--<div><a class="centered plusminus" name="blue" onclick="decrement(name)">-</a></div>-->
+                       <!--<div><a class="centered plusminus" name="black" onclick="increment(name)">+</a></div>-->
+                       <div style="background-color: black; margin-top: 20px; margin-bottom: 20px;" id="blackTokens" class="circle">{{blackTokens|safe}}</div>
+                       <!--<div><a class="centered plusminus" name="black" onclick="decrement(name)">-</a></div>-->
                     </div>
                     <div class="col-lg-4 col-xs-4">
                        <br>
-                       <div><a class="centered plusminus" name="purple" onclick="increment(name)">+</a></div>
+                       <!--<div><a class="centered plusminus" name="purple" onclick="increment(name)">+</a></div>-->
                        <div style="background-color: purple" id="purpleTokens" class="circle">{{purpleTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="purple" onclick="decrement(name)">-</a></div>
+                       <!--<div><a class="centered plusminus" name="purple" onclick="decrement(name)">-</a></div>-->
                     </div>
                     <div class="col-lg-4 col-xs-4">
-                       <div><a class="centered plusminus" name="red" onclick="increment(name)">+</a></div>
+                       <!--<div><a class="centered plusminus" name="red" onclick="increment(name)">+</a></div>-->
                        <div style="background-color: red" id="redTokens" class="circle">{{redTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="red" onclick="decrement(name)">-</a></div>
-                       <div><a class="centered plusminus" name="yellow" onclick="increment(name)">+</a></div>
-                       <div style="background-color: yellow" id="yellowTokens" class="circle">{{yellowTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="yellow" onclick="decrement(name)">-</a></div>
+                       <!--<div><a class="centered plusminus" name="red" onclick="decrement(name)">-</a></div>-->
+                       <!--<div><a class="centered plusminus" name="yellow" onclick="increment(name)">+</a></div>-->
+                       <div style="background-color: yellow; margin-top: 20px; margin-bottom: 20px;" id="yellowTokens" class="circle">{{yellowTokens|safe}}</div>
+                       <!--<div><a class="centered plusminus" name="yellow" onclick="decrement(name)">-</a></div>-->
                     </div>
                  </div>
               </div>
@@ -61,7 +61,7 @@
                     <div class="col-lg-6 col-xs-6">
                        <a class="centered">Infection Rate</a>
                        <div><a class="centered plusminus" name="infectionRate" onclick="increment_other(name)">+</a></div>
-                       <div style="background-color: grey; margin:auto;" id="infectionRate" class="centered circle">{{infectionRate|safe}}</div>
+                       <div style="margin:auto;" id="infectionRate" class="circleInfect">{{infectionRate|safe}}</div>
                        <div><a class="centered plusminus" name="infectionRate" onclick="decrement_other(name)">-</a></div>
                     </div>
                     <div class="col-lg-6 col-xs-6">
@@ -127,7 +127,7 @@
 
                 <div class="col-lg-12">
                     <div id="game_board" class="row">
-                       <div style="margin-top: 15px;" id="container"></div>
+                       <div style="margin-top: 0px;" id="container"></div>
                        <div id="infection_status">
                           <table id="infection_table" class="stripe row-border order-column" cellspacing="0" width="100%">
                              <thead id="header_table">
@@ -323,7 +323,10 @@ socket.onmessage = function(message) {
     }
     else if(data["command"]==="updateinfectioncards"){get_and_update_infection_cards(data["infectionCards"], data["infectionDiscards"])}
     else if(data["command"]==="updatecures"){update_cures(data["cures"])}
-    else if(data["command"]==="updateinfectionmap"){update_infection_table(data["infectionMap"])}
+    else if(data["command"]==="updateinfectionmap"){
+      update_infection_table(data["infectionMap"]);
+      get_and_update_tokens(data["tokens"]);
+      }
     else if(data["command"]==="updatecurrentlocation"){update_user_location(data['userLocation'])}
 }
 
