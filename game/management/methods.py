@@ -64,21 +64,44 @@ class Pandemic(object):
             actionCards = actionCards[4:]
             rollCards = rollCards[roomObj.numberOfRoleCards:]
 
-
         currentGame.actionCards = actionCards
-        currentGame.save()
-
         actionCards = self.shuffle_action_cards(list(currentGame.actionCards), roomObj.numberOfPandemicCards)
         currentGame.actionCards = actionCards
-        currentGame.save()
-
         currentGame.infectionCards = infectonCards
-        currentGame.save()
-
         currentGame.rollCards = rollCards
+        currentGame.gameStarted = "True"
         currentGame.save()
 
-        currentGame.gameStarted = "True"
+        infectionCardsList = currentGame.infectionCards
+        infectionDiscardList = currentGame.infectionDiscards
+
+        mapDict = currentGame.mapInfection
+        actions = [2,3,3,1,2,2,0,1,1]
+        discardColors = {"blue":0,"black":0,"red":0,"yellow":0}
+        for m,x in enumerate(actions):
+            card = infectionCardsList.pop(0)
+            infectionDiscardList = [card]+infectionDiscardList
+            city = card["city"]
+            color = card["color"]
+            for n,y in enumerate(mapDict):
+                if y["city"] == city:
+                    discardColors[color] = discardColors[color]+x
+                    foo = y
+                    if m%3 == 0:
+                        foo["purple"] = foo["purple"] + 1
+                    foo[color] = foo[color] + x
+                    mapDict[n] = foo
+                    break
+
+        currentGame.infectionCards = infectionDiscardList
+        currentGame.infectionDiscards = infectionDiscardList
+        currentGame.mapInfection = mapDict
+        currentGame.blueTokens = currentGame.blueTokens - discardColors["blue"]
+        currentGame.blackTokens = currentGame.blackTokens - discardColors["black"]
+        currentGame.redTokens = currentGame.redTokens - discardColors["red"]
+        currentGame.yellowTokens = currentGame.yellowTokens - discardColors["yellow"]
+        currentGame.purpleTokens = currentGame.purpleTokens -3
+
         currentGame.save()
 
     def shuffle_action_cards(self, actionDeck, numPandemic):
@@ -381,6 +404,13 @@ class Pandemic(object):
         currentGame.mapInfection = new_list
         currentGame.save()
 
+        if color == "blue": currentGame.blueTokens = currentGame.blueTokens-1
+        elif color == "black": currentGame.blackTokens = currentGame.blackTokens-1
+        elif color == "red": currentGame.redTokens = currentGame.redTokens-1
+        elif color == "yellow": currentGame.yellowTokens = currentGame.yellowTokens-1
+        elif color == "purple": currentGame.purpleTokens = currentGame.purpleTokens-1
+        currentGame.save()
+
     def decrement_infection(self, user, roomId, city, color, order):
         roomObj = Room.objects.get(roomId=roomId)
         currentGame = Game.objects.get(roomId=roomObj)
@@ -397,6 +427,14 @@ class Pandemic(object):
                     break
         currentGame.mapInfection = new_list
         currentGame.save()
+
+        if color == "blue": currentGame.blueTokens = currentGame.blueTokens+1
+        elif color == "black": currentGame.blackTokens = currentGame.blackTokens+1
+        elif color == "red": currentGame.redTokens = currentGame.redTokens+1
+        elif color == "yellow": currentGame.yellowTokens = currentGame.yellowTokens+1
+        elif color == "purple": currentGame.purpleTokens = currentGame.purpleTokens+1
+        currentGame.save()
+
 
 
     def get_location(self,roomId):
