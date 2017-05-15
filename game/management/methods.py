@@ -146,7 +146,7 @@ class Pandemic(object):
     def getactiondiscards(self,user,roomId):
         roomObj = Room.objects.get(roomId=roomId)
         currentGame = Game.objects.get(roomId=roomObj)
-        return currentGame.actionDiscards
+        return currentGame.actionDiscards[::-1]
 
 
     def discardaction(self,user,roomId,city):

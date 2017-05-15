@@ -65,6 +65,12 @@ function pickup_discard(city) {
 
 function get_new_card() {
   console.log("Get New Action Card");
+
+  $("#actioncards").addClass("cardSpin");
+  setTimeout(function(){
+    $("#actioncards").removeClass("cardSpin");
+  },1000);
+
   url = getNewCard;
   data = {
     'roomId': roomId,
@@ -108,6 +114,12 @@ function remove_role(role) {
 
 function infection_play_top() {
   console.log("Play Top Infection Card")
+
+  $("#playInfectionTop").addClass("cardSpin");
+  setTimeout(function(){
+    $("#playInfectionTop").removeClass("cardSpin");
+  },1000);
+
   url = infectionPlayTop;
   data = {
     'roomId': roomId,
@@ -129,6 +141,13 @@ function infection_play_top() {
 
 function infection_play_bottom() {
   console.log("Play Bottom Infection Card")
+
+    $("#playInfectionBottom").addClass("cardSpin");
+  setTimeout(function(){
+    $("#playInfectionBottom").removeClass("cardSpin");
+  },1000);
+
+
   url = infectionPlayBottom;
   data = {
     'roomId': roomId,
@@ -150,6 +169,12 @@ function infection_play_bottom() {
 
 function reshuffle_infection_deck() {
   console.log("Reshuffle Infection Deck");
+
+  $("#reshuffleinfectiondeck").addClass("cardSpin");
+  setTimeout(function(){
+    $("#reshuffleinfectiondeck").removeClass("cardSpin");
+  },1000);
+
   url = reshuffleInfectionDeck;
   data = {
     'roomId': roomId,

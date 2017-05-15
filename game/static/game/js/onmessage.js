@@ -76,15 +76,17 @@ function get_player_cards(){
 }
 
 function get_and_update_infection_cards(infectionCards, infectionDiscards){
-    $("#infectioncards").html("")
-    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionTop' onclick='infection_play_top()'>Top</button>")
-    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionBottom' onclick='infection_play_bottom()'>Bottom</button>")
-    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='reshuffleinfectiondeck' onclick='reshuffle_infection_deck()'>Reshuffle</button>")
+//    $("#infectioncards").html("")
+//    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionTop' onclick='infection_play_top()'>Top</button>")
+//    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionBottom' onclick='infection_play_bottom()'>Bottom</button>")
+//    $("#infectioncards").append("<button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='reshuffleinfectiondeck' onclick='reshuffle_infection_deck()'>Reshuffle</button>")
 
     $("#infectiondiscards").html("");
     for (i = 0; i < infectionDiscards.length; i++) {
       $("#infectiondiscards").append("<h4><a style='cursor: pointer; color:" + infectionDiscards[i]['color'] + "'>" + infectionDiscards[i]["city"] + "</a></h4>")
     }
+
+
 }
 
 function update_user_location(userLocation){
@@ -113,13 +115,24 @@ function update_cures(cures){
     for (var k in cures) {
       if (cures.hasOwnProperty(k)) {
         if (cures[k] === true) {
-          $("#" + k).css("background-color", k.replace("Cure", ""));
+          //$("#" + k).css("background-color", k.replace("Cure", ""));
+          if(k.replace("Cure", "") === "red"){$("#" + k).removeClass("redUnCure"); $("#" + k).addClass("redCure");}
+          else if(k.replace("Cure", "") === "blue"){$("#" + k).removeClass("blueUnCure"); $("#" + k).addClass("blueCure");}
+          else if(k.replace("Cure", "") === "black"){$("#" + k).removeClass("blackUnCure"); $("#" + k).addClass("blackCure");}
+          else if(k.replace("Cure", "") === "yellow"){$("#" + k).removeClass("yellowUnCure"); $("#" + k).addClass("yellowCure");}
+          else if(k.replace("Cure", "") === "purple"){$("#" + k).removeClass("purpleUnCure"); $("#" + k).addClass("purpleCure");}
         } else {
-          $("#" + k).css("background-color", "grey");
+          if(k.replace("Cure", "") === "red"){$("#" + k).removeClass("redCure"); $("#" + k).addClass("redUnCure");}
+          else if(k.replace("Cure", "") === "blue"){$("#" + k).removeClass("blueCure"); $("#" + k).addClass("blueUnCure");}
+          else if(k.replace("Cure", "") === "black"){$("#" + k).removeClass("blackCure"); $("#" + k).addClass("blackUnCure");}
+          else if(k.replace("Cure", "") === "yellow"){$("#" + k).removeClass("yellowCure"); $("#" + k).addClass("yellowUnCure");}
+          else if(k.replace("Cure", "") === "purple"){$("#" + k).removeClass("purpleCure"); $("#" + k).addClass("purpleUnCure");}
+          //$("#" + k).css("background-color", "grey");
         }
       }
     }
 }
+
 
 function update_infection_table(infectionMap){
     var data = infectionMap;
@@ -151,3 +164,7 @@ function update_infection_table(infectionMap){
         table.clear().rows.add(data).draw();
     }
 }
+
+columnDefs:[
+    { orderSequence:["desc","asc"], targets:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]} ,
+]

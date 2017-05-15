@@ -1,15 +1,15 @@
 $("#card_pill").click(function(){
     $("#board_pill").removeClass("active");
     $("#card_pill").addClass("active");
-    $('#game_board').hide();
-    $('#cards').show();
+    $('#game_board').fadeOut(100);
+    $('#cards').fadeIn(500);
 });
 
 $("#board_pill").click(function(){
     $("#card_pill").removeClass("active");
     $("#board_pill").addClass("active");
-    $('#cards').hide();
-    $('#game_board').show();
+    $('#cards').fadeOut(100);
+    $('#game_board').fadeIn(500);
 });
 
 $("#menu-toggle").click(function(e) {

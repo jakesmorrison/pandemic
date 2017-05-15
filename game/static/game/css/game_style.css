@@ -191,3 +191,164 @@ text-align:center;
     color: #fff;
     /* background: rgba(255,255,255,0.2); */
 }
+
+
+/* Animations */
+.cardSpin{
+    position:absolute
+    animation: spin 1s normal ease;
+    -webkit-animation: spin 1s normal ease;
+
+}
+
+@keyframes{
+    0%{transform:rotateY(0deg);}
+    100%{transform:rotateY(360deg);}
+}
+
+@-webkit-keyframes  rotate {
+    0% { -webkit-transform: rotateY(0deg);}
+  100% { -webkit-transform: rotateY(360deg);}
+}
+
+.redCure{
+    animation: grey-red 1s ease forwards;
+    -webkit-animation: grey-red 1s ease forwards;
+
+}
+
+.redUnCure{
+    animation: red-grey 1s ease forwards;
+    -webkit-animation: red-grey 1s ease forwards;
+
+}
+
+@keyframes red-grey{
+    0%{background-color: red;}
+    100%{background-color: grey;}
+}
+
+@-webkit-keyframes  red-grey {
+    0%{background-color: red;}
+    100%{background-color: grey;}
+}
+
+@keyframes grey-red{
+    0%{background-color: grey;}
+    100%{background-color: red;}
+}
+
+@-webkit-keyframes  grey-red {
+    0%{background-color: grey;}
+    100%{background-color: red;}
+}
+
+.blueCure{
+    animation: grey-blue 1s ease forwards;
+    -webkit-animation: grey-blue 1s ease forwards;
+
+}
+
+.blueUnCure{
+    animation: blue-grey 1s ease forwards;
+    -webkit-animation: blue-grey 1s ease forwards;
+
+}
+
+@keyframes blue-grey{
+    0%{background-color: blue;}
+    100%{background-color: grey;}
+}
+
+@-webkit-keyframes  blue-grey {
+    0%{background-color: blue;}
+    100%{background-color: grey;}
+}
+
+@keyframes grey-blue{
+    0%{background-color: grey;}
+    100%{background-color: blue;}
+}
+
+@-webkit-keyframes  grey-blue {
+    0%{background-color: grey;}
+    100%{background-color: blue;}
+}
+
+.yellowCure{
+    animation: grey-yellow 1s ease forwards;
+    -webkit-animation: grey-yellow 1s ease forwards;
+
+}
+.yellowUnCure{
+    animation: yellow-grey 1s ease forwards;
+    -webkit-animation: yellow-grey 1s ease forwards;
+}
+@keyframes yellow-grey{
+    0%{background-color: yellow;}
+    100%{background-color: grey;}
+}
+@-webkit-keyframes  yellow-grey {
+    0%{background-color: yellow;}
+    100%{background-color: grey;}
+}
+@keyframes grey-yellow{
+    0%{background-color: grey;}
+    100%{background-color: yellow;}
+}
+@-webkit-keyframes  grey-yellow {
+    0%{background-color: grey;}
+    100%{background-color: yellow;}
+}
+
+.blackCure{
+    animation: grey-black 1s ease forwards;
+    -webkit-animation: grey-black 1s ease forwards;
+
+}
+.blackUnCure{
+    animation: black-grey 1s ease forwards;
+    -webkit-animation: black-grey 1s ease forwards;
+}
+@keyframes black-grey{
+    0%{background-color: black;}
+    100%{background-color: grey;}
+}
+@-webkit-keyframes  black-grey {
+    0%{background-color: black;}
+    100%{background-color: grey;}
+}
+@keyframes grey-black{
+    0%{background-color: grey;}
+    100%{background-color: black;}
+}
+@-webkit-keyframes  grey-black {
+    0%{background-color: grey;}
+    100%{background-color: black;}
+}
+
+.purpleCure{
+    animation: grey-purple 1s ease forwards;
+    -webkit-animation: grey-purple 1s ease forwards;
+
+}
+.purpleUnCure{
+    animation: purple-grey 1s ease forwards;
+    -webkit-animation: purple-grey 1s ease forwards;
+}
+@keyframes purple-grey{
+    0%{background-color: purple;}
+    100%{background-color: grey;}
+}
+@-webkit-keyframes  purple-grey {
+    0%{background-color: purple;}
+    100%{background-color: grey;}
+}
+@keyframes grey-purple{
+    0%{background-color: grey;}
+    100%{background-color: purple;}
+}
+@-webkit-keyframes  grey-purple {
+    0%{background-color: grey;}
+    100%{background-color: purple;}
+}
