@@ -157,6 +157,9 @@ function update_infection_table(infectionMap){
             bPaginate:      true,
             bProcess:       true,
             bScrollInfinite:false,
+            columnDefs:[
+                { orderSequence:["desc","asc"], targets:[0,1,2,3,4,5,6]}
+            ]
         });
     }
     else{
@@ -165,6 +168,4 @@ function update_infection_table(infectionMap){
     }
 }
 
-columnDefs:[
-    { orderSequence:["desc","asc"], targets:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]} ,
-]
+
