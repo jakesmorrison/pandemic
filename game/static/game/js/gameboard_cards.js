@@ -314,24 +314,31 @@ function save_notes() {
 }
 
 function change_cure(cureName) {
-  console.log("Toggle Cure");
-  url = changeCure;
-  data = {
-    'roomId': roomId,
-    'user': username,
-    'cureName': cureName
-  };
-  $.ajax({
-    type: "GET",
-    url: url,
-    data: data,
-    success: function(msg) {
-      socket.send(JSON.stringify({
-            "command": "updatecures",
-            "roomId": roomId,
-            "user": username,
-         }));
+  if($("#"+cureName).hasClass(cureName)){
+      $("#"+cureName).removeClass(cureName);
+      $("#"+cureName).addClass(cureName+"Erad");
+  }
+  else{
+     $("#"+cureName).removeClass(cureName+"Erad");
+      console.log("Toggle Cure");
+      url = changeCure;
+      data = {
+        'roomId': roomId,
+        'user': username,
+        'cureName': cureName
+      };
+      $.ajax({
+        type: "GET",
+        url: url,
+        data: data,
+        success: function(msg) {
+          socket.send(JSON.stringify({
+                "command": "updatecures",
+                "roomId": roomId,
+                "user": username,
+             }));
+        }
+      });
     }
-  });
 }
 

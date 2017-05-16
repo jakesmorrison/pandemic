@@ -23,32 +23,36 @@
         <li id="initial_user">
            <div style="color: #999999;" class="centered" id="users_here"></div>
         </li>
+       <li id="user_location_hide" style="display: none;" class="centered">
+           <label for="currentlocation"><a class='centered'>Player Location</a></label>
+           <select class="form-control" id="currentlocation"></select>
+        </li>
         <li>
            <a class="centered">Tokens Remaining</a>
            <div class="row">
               <div class="col-lg-12 col-xs-12">
                  <div style="margin-right: 0px; margin-left: -5px;" class="row">
                     <div class="col-lg-4 col-xs-4">
-                       <div><a class="centered plusminus" name="blue" onclick="increment(name)">+</a></div>
-                       <div style="background-color: blue; margin-top: -5px; margin-bottom: -5px;" id="blueTokens" class="circle">{{blueTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="blue" onclick="decrement(name)">-</a></div>
-                       <div><a class="centered plusminus" name="black" onclick="increment(name)">+</a></div>
-                       <div style="background-color: black; margin-top: -5px; margin-bottom: -5px;" id="blackTokens" class="circle">{{blackTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="black" onclick="decrement(name)">-</a></div>
+                       <div class="centered"><i class="centered plusminus fa fa-plus-circle" onclick="increment('blue')"></i></div>
+                       <div style="margin-top: -5px; margin-bottom: -5px;" id="blueTokens" class="circle blueCounter">{{blueTokens|safe}}</div>
+                       <div class="centered"><i class="centered plusminus minus fa fa-minus-circle" onclick="decrement('blue')"></i></div>
+                       <div class="centered"><i class="centered plusminus fa fa-plus-circle" onclick="increment('black')"></i></div>
+                       <div style="margin-top: -5px; margin-bottom: -5px;" id="blackTokens" class="circle blackCounter">{{blackTokens|safe}}</div>
+                       <div class="centered"><i class="centered plusminus minus fa fa-minus-circle" onclick="decrement('black')"></i></div>
                     </div>
                     <div class="col-lg-4 col-xs-4">
                        <br>
-                       <div><a class="centered plusminus" name="purple" onclick="increment(name)">+</a></div>
-                       <div style="background-color: purple; margin-top: -5px; margin-bottom: -5px;" id="purpleTokens" class="circle">{{purpleTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="purple" onclick="decrement(name)">-</a></div>
+                       <div class="centered"><i class="centered plusminus fa fa-plus-circle" onclick="increment('purple')"></i></div>
+                       <div style="margin-top: -5px; margin-bottom: -5px;" id="purpleTokens" class="circle purpleCounter">{{purpleTokens|safe}}</div>
+                       <div class="centered"><i class="centered plusminus minus fa fa-minus-circle" onclick="decrement('purple')"></i></div>
                     </div>
                     <div class="col-lg-4 col-xs-4">
-                       <div><a class="centered plusminus" name="red" onclick="increment(name)">+</a></div>
-                       <div style="background-color: red; margin-top: -5px; margin-bottom: -5px;" id="redTokens" class="circle">{{redTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="red" onclick="decrement(name)">-</a></div>
-                       <div><a class="centered plusminus" name="yellow" onclick="increment(name)">+</a></div>
-                       <div style="background-color: yellow; margin-top: -5px; margin-bottom: -5px;" id="yellowTokens" class="circle">{{yellowTokens|safe}}</div>
-                       <div><a class="centered plusminus" name="yellow" onclick="decrement(name)">-</a></div>
+                       <div class="centered"><i class="centered plusminus fa fa-plus-circle" onclick="increment('red')"></i></div>
+                       <div style="margin-top: -5px; margin-bottom: -5px;" id="redTokens" class="circle redCounter">{{redTokens|safe}}</div>
+                       <div class="centered"><i class="centered plusminus minus fa fa-minus-circle" onclick="decrement('red')"></i></div>
+                       <div class="centered"><i class="centered plusminus fa fa-plus-circle" onclick="increment('yellow')"></i></div>
+                       <div style="margin-top: -5px; margin-bottom: -5px;" id="yellowTokens" class="circle yellowCounter">{{yellowTokens|safe}}</div>
+                       <div class="centered"><i class="centered plusminus minus fa fa-minus-circle" onclick="decrement('yellow')"></i></div>
                     </div>
                  </div>
               </div>
@@ -60,15 +64,15 @@
                  <div class="row">
                     <div class="col-lg-6 col-xs-6">
                        <a class="centered">Infection Rate</a>
-                       <div><a class="centered plusminus" name="infectionRate" onclick="increment_other(name)">+</a></div>
+                       <div class="centered"><i style="margin-right: 0px;" class="centered plusminus fa fa-plus-circle" onclick="increment_other('infectionRate')"></i></div>
                        <div style="margin:auto;" id="infectionRate" class="circle">{{infectionRate|safe}}</div>
-                       <div><a class="centered plusminus" name="infectionRate" onclick="decrement_other(name)">-</a></div>
+                       <div class="centered"><i style="margin-right: 0px;" class="centered plusminus minus fa fa-minus-circle" onclick="decrement_other('infectionRate')"></i></div>
                     </div>
                     <div class="col-lg-6 col-xs-6">
                        <a class="centered">Outbreaks</a>
-                       <div><a class="centered plusminus" name="outbreaks" onclick="increment_other(name)">+</a></div>
+                       <div class="centered"><i style="margin-right: 0px;" class="centered plusminus fa fa-plus-circle" onclick="increment_other('outbreaks')"></i></div>
                        <div style="background-color: grey; margin:auto;" id="outbreaks" class="circle">{{outbreaks|safe}}</div>
-                       <div><a class="centered plusminus" name="outbreaks" onclick="decrement_other(name)">-</a></div>
+                       <div class="centered"><i style="margin-right: 0px;" class="centered plusminus minus fa fa-minus-circle" onclick="decrement_other('outbreaks')"></i></div>
                     </div>
                  </div>
               </div>
@@ -80,32 +84,31 @@
               <div class="col-lg-12 col-xs-12">
                  <div style="margin-right: 0px; margin-left: -5px;" class="row">
                     <div class="col-lg-4 col-xs-4">
-                       <div id="blueCure" class="square" name="blueCure" onclick="change_cure(id)">Blue</div>
+                       <div id="blueCure" class="square" name="blueCure" onclick="change_cure(id)"></div>
                        <br>
-                       <div id="blackCure" class="square" name="blackCure" onclick="change_cure(id)">Black</div>
+                       <div id="blackCure" class="square" name="blackCure" onclick="change_cure(id)"></div>
                     </div>
                     <div class="col-lg-4 col-xs-4">
                        <br>
-                       <div id="purpleCure" class="square" name="purpleCure" onclick="change_cure(id)">Purple</div>
+                       <div id="purpleCure" class="square" name="purpleCure" onclick="change_cure(id)"></div>
                     </div>
                     <div class="col-lg-4 col-xs-4">
-                       <div id="redCure" class="square" name="redCure" onclick="change_cure(id)">Red</div>
+                       <div id="redCure" class="square" name="redCure" onclick="change_cure(id)"></div>
                        <br>
-                       <div id="yellowCure" class="square" name="yellowCure" onclick="change_cure(id)">Yellow</div>
+                       <div id="yellowCure" class="square" name="yellowCure" onclick="change_cure(id)"></div>
                     </div>
                  </div>
               </div>
            </div>
         </li>
+          <li style="margin-top: 10px;">
+           <button style="background-color: #337ab7; width: 100%;" type="button" class="btn btn-info" onclick="hide_table()">Toggle Table</button>
+        </li>
         <li id="startgame" class="centered">
            <button type="button" class="btn btn-success" onclick="start_game()">Start Game</button>
         </li>
         <br>
-        <li id="user_location_hide" style="display: none;" class="centered">
-           <button style="background-color: #337ab7; width: 100%;" type="button" class="btn btn-info" onclick="hide_table()">Toggle Table</button>
-           <label for="currentlocation"><a class='centered'>Player Location</a></label>
-           <select class="form-control" id="currentlocation"></select>
-        </li>
+
      </ul>
 
 
@@ -224,24 +227,24 @@
    <div class="row">
       <div class="col-lg-4 col-xs-4">
          <div><a class="centered plusminus" name="blue" onclick="increment_infection(name)">+</a></div>
-         <i style="color:blue" class="fa fa-square" aria-hidden="true"><span id="infectionBlockBlue" style="color:white"></span></i>
+         <i style="color:blue" class="fa fa-square" aria-hidden="true"><span id="infectionBlockBlue" style="color:white; padding-left: 5px;"></span></i>
          <div><a class="centered plusminus" name="blue" onclick="decrement_infection(name)">-</a></div>
          <div><a class="centered plusminus" name="black" onclick="increment_infection(name)">+</a></div>
-         <i style="color:black" class="fa fa-square" aria-hidden="true"><span id="infectionBlockBlack" style="color:white"></span></i>
+         <i style="color:black" class="fa fa-square" aria-hidden="true"><span id="infectionBlockBlack" style="color:white; padding-left: 5px;"></span></i>
          <div><a class="centered plusminus" name="black" onclick="decrement_infection(name)">-</a></div>
       </div>
       <div class="col-lg-4 col-xs-4">
          <br>
          <div><a class="centered plusminus" name="purple" onclick="increment_infection(name)">+</a></div>
-         <i style="color:purple" class="fa fa-square fa" aria-hidden="true"><span id="infectionBlockPurple" style="color:white"></span></i>
+         <i style="color:purple" class="fa fa-square fa" aria-hidden="true"><span id="infectionBlockPurple" style="color:white; padding-left: 5px;"></span></i>
          <div><a class="centered plusminus" name="purple" onclick="decrement_infection(name)">-</a></div>
       </div>
       <div class="col-lg-4 col-xs-4">
          <div><a class="centered plusminus" name="red" onclick="increment_infection(name)">+</a></div>
-         <i style="color:red" class="fa fa-square" aria-hidden="true"><span id="infectionBlockRed" style="color:white"></i>
+         <i style="color:red" class="fa fa-square" aria-hidden="true"><span id="infectionBlockRed" style="color:white; padding-left: 5px;"></i>
          <div><a class="centered plusminus" name="red" onclick="decrement_infection(name)">-</a></div>
          <div><a class="centered plusminus" name="yellow" onclick="increment_infection(name)">+</a></div>
-         <i style="color:yellow" class="fa fa-square" aria-hidden="true"><span id="infectionBlockYellow" style="color:white"></span></i>
+         <i style="color:yellow" class="fa fa-square" aria-hidden="true"><span id="infectionBlockYellow" style="color:white; padding-left: 5px;"></span></i>
          <div><a class="centered plusminus" name="yellow" onclick="decrement_infection(name)">-</a></div>
       </div>
    </div>
