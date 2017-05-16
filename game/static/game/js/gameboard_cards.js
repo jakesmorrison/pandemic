@@ -342,3 +342,4 @@ function change_cure(cureName) {
     }
 }
 
+

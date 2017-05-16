@@ -111,6 +111,7 @@ function update_research_station(researchStationList){
     }
 }
 
+
 function update_cures(cures){
     for (var k in cures) {
       if (cures.hasOwnProperty(k)) {
