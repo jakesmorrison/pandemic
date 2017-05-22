@@ -55,6 +55,7 @@
     text-decoration: none;
     /*color: #999999;*/
     font-size: 16px;
+    cursor: default;
 }
 
 .sidebar-nav li a:hover {

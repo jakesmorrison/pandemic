@@ -36,7 +36,7 @@ function highcharts_map(data, connection){
                 marker: {
                     enabled: true,
                     symbol: 'circle',
-                    radius: 7
+                    radius: 9
                 },
                 point: {
                     events: {

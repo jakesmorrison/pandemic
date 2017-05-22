@@ -453,4 +453,6 @@ text-align:center;
     background: radial-gradient(purple, gray);
 }
 
-
+.deck_labels{
+    cursor: default;
+}

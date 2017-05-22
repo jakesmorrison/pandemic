@@ -102,7 +102,7 @@
            </div>
         </li>
           <li style="margin-top: 10px;">
-           <button style="background-color: #337ab7; width: 100%;" type="button" class="btn btn-info" onclick="hide_table()">Toggle Table</button>
+           <button style="background-color: #337ab7; width: 70%; margin-left: 15%;" type="button" class="btn btn-info" onclick="hide_table()">Toggle Table</button>
         </li>
         <li id="startgame" class="centered">
            <button type="button" class="btn btn-success" onclick="start_game()">Start Game</button>
@@ -120,8 +120,8 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="nav nav-pills nav-justified">
-                         <li id="board_pill" class="active"><a>Game Board -- {{roomId|safe}}</a></li>
-                         <li id="card_pill" ><a >Cards</a></li>
+                         <li style="cursor: pointer;" id="board_pill" class="active"><a>Game Board -- {{roomId|safe}}</a></li>
+                         <li style="cursor: pointer;" id="card_pill" ><a >Cards</a></li>
                     </ul>
                 </div>
             </div>
@@ -130,6 +130,7 @@
                 <div class="col-lg-12">
                     <div id="game_board" class="row">
                        <div style="margin-top: 0px;" id="container"></div>
+                       <div id="draggable">
                        <div id="infection_status">
                           <table id="infection_table" class="stripe row-border order-column" cellspacing="0" width="100%">
                              <thead id="header_table">
@@ -158,6 +159,7 @@
                              </tfoot>
                           </table>
                        </div>
+                          </div>
                     </div>
                 </div>
 
@@ -166,17 +168,17 @@
                       <br>
                       <div class="row">
                          <div class="centered col-lg-3 col-xs-3">
-                            <h2>Action Cards</h2>
+                            <h2 class="deck_labels">Action Cards</h2>
                             <div class="rectangle2">
                                <div id="actioncards"></div>
                             </div>
                          </div>
                          <div class="centered col-lg-3 col-xs-3">
-                            <h2>Action Discard</h2>
+                            <h2 class="deck_labels">Action Discard</h2>
                             <div class="rectangle2" id="actiondiscards"></div>
                          </div>
                          <div class="centered col-lg-3 col-xs-3">
-                            <h2>Infection Cards</h2>
+                            <h2 class="deck_labels">Infection Cards</h2>
                             <div class="rectangle2">
                                <div id="infectioncards">
                                   <button type='button' style='overflow-y: hidden; width: 100%; height:73px; background-color: #383838;border-color: #b1b1b1;border-width: 5px;' class='btn btn-success' id='playInfectionTop' onclick='infection_play_top()'>Top</button>
@@ -186,7 +188,7 @@
                             </div>
                          </div>
                          <div class="centered col-lg-3 col-xs-3">
-                            <h2>Infection Discard</h2>
+                            <h2 class="deck_labels">Infection Discard</h2>
                             <div class="rectangle2 centered" id="infectiondiscards"></div>
                          </div>
                       </div>
@@ -195,14 +197,14 @@
                       <br>
                       <div class="row">
                          <div class="centered col-lg-4 col-xs-4">
-                            <h2>Role Card</h2>
+                            <h2 class="deck_labels">Role Card</h2>
                             <div id="roles" class="roles"></div>
                             <br>
                             <textarea style="margin-left: 15px;" class="form-control" rows="6" id="notes" readonly></textarea>
                             <input style="margin-left: 15px;" type="text" class="form-control" id="input">
                          </div>
                          <div class="centered col-lg-8 col-xs-8">
-                            <h2>{{ request.user.username }} Cards</h2>
+                            <h2 class="deck_labels">{{ request.user.username }} Cards</h2>
                             <div id="playercards1" class="col-lg-6 col-xs-6">
                             </div>
                             <div id="playercards2" class="col-lg-6 col-xs-6">
@@ -221,7 +223,7 @@
 
 <div id="pop_up">
    <button style="" type="button" class="close_pop btn btn-default" onclick="close_pop()">x</button>
-   <h4 ><a id="city_pop"></a></h4>
+   <h4 style="margin-left: 24px;"><a id="city_pop"></a></h4>
    <div class="checkbox"><label><input type="checkbox" id="research_center" value=""><a>Research Center</a></label></div>
    <button type="button" class="btn btn-default" onclick="set_current_location()">Set Current Location</button>
    <div class="row">
@@ -264,6 +266,7 @@
 <script src="https://code.highcharts.com/maps/highmaps.js"></script>
 <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
 <script src="http://code.highcharts.com/mapdata/custom/world.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 
 <script src="{% static 'game/js/gameboard_layout.js' %}"></script>
@@ -352,6 +355,12 @@ socket.onclose = function () {
     console.log("Disconnected from chat socket");
 }
 if (socket.readyState == WebSocket.OPEN) socket.onopen();
+
+
+
+$( function() {
+    $( "#draggable" ).draggable();
+  } );
 
 </script>
 
