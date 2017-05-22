@@ -60,15 +60,19 @@ def lobby(request):
 def gameboard(request,rId):
     pd = methods.Pandemic()
     params = request.POST
+
     if "new" in params:
         pd.add_room(roomId = params["roomId"], createdBy = params["createdBy"],mutation = params["mutation"],
                     numberOfPandemicCards = params["numpandemiccards"],numberOfRoleCards = params["numrolecards"])
-    mapData = pd.get_lat_long()
+        room_id = params["roomId"]
+    else:
+        room_id = str(request).split("/")[2]
 
+    mapData = pd.get_lat_long()
     connectionData = pd.connect_cities()
 
     context = {
-        "roomId": params["roomId"],
+        "roomId": room_id,
         "blueTokens":cfg.Config.maxCubes,
         "blackTokens": cfg.Config.maxCubes,
         "redTokens": cfg.Config.maxCubes,
