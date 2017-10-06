@@ -159,3 +159,4 @@ class Book_Methods():
         yl = a + b*xl
         yh = a + b*xh
         return [[xl, yl], [xh, yh]]
+

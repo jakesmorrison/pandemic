@@ -9,7 +9,6 @@ from collections import Counter
 import os
 from pandemic.settings import BASE_DIR
 
-
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('title')
