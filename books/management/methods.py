@@ -2,7 +2,7 @@ from . import config as cfg
 import random
 import os
 import codecs
-from jakobmorrison.settings import BASE_DIR
+from pandemic.settings import BASE_DIR
 import multiprocessing
 import nltk
 from gensim.models import word2vec as w2v

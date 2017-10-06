@@ -7,7 +7,7 @@ import numpy as np
 import json
 from collections import Counter
 import os
-from jakobmorrison.settings import BASE_DIR
+from pandemic.settings import BASE_DIR
 
 
 class Command(BaseCommand):
