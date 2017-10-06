@@ -15,7 +15,7 @@ import os
 from collections import OrderedDict
 
 from .management import config as cfg
-from jakobmorrison.settings import BASE_DIR
+from pandemic.settings import BASE_DIR
 
 vector_path = os.path.join(BASE_DIR, 'books/static/books/vector/')
 nltk_path = os.path.join(BASE_DIR, 'books/static/books/nltk/')
