@@ -7,7 +7,7 @@ ALLOWED_HOSTS = ['www.onemoretravelblog.com','onemoretravelblog.com', '192.241.2
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.db.sqlite3',
         'NAME': "/root/database/db_pandemic.sqlite3",
     }
 }

@@ -1,0 +1,24 @@
+.table {
+    color: black;
+    background-color: white;
+    max-width: none;
+}
+
+.table-hover>tbody>tr:hover {
+    background-color: white;
+    color: #black;
+    font-weight: 700;
+}
+
+.row {
+margin-left: 0 !important;
+margin-right: 0 !important;
+}
+
+.table th, .table td {
+text-align: center !important;
+}
+
+.selectize-input input{
+    display:none;
+}

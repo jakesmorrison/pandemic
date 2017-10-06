@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'channels',
     'game.apps.GameConfig',
     'finance.apps.FinanceConfig',
+    'softball.apps.SoftballConfig',
+
 ]
 
 MIDDLEWARE_CLASSES = [

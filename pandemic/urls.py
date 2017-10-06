@@ -24,4 +24,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('game.urls')),
     url(r'^finance/', include('finance.urls')),
+    url(r'^softball/', include('softball.urls')),
 ]

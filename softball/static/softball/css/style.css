@@ -1,0 +1,128 @@
+.img-circle {
+    border-radius: 50% !important;
+    border-color: black !important;
+    border-style: solid;
+    border-width: 1px !important;
+}
+
+.background {
+    position: relative;
+    width: 100%;
+    min-height: auto;
+    overflow-y: hidden;
+    background: url(../img/bg-pattern1.png), #7b4397;
+    background: url(../img/bg-pattern1.png), -webkit-linear-gradient(to left, #7b4397, #dc2430);
+    background: url(../img/bg-pattern1.png), linear-gradient(to left, #000000, #5400b1);
+    color: #fff;
+    overflow-y:auto;
+
+}
+
+.btn-jake{
+    border-radius:50%;
+}
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+    color: #fff;
+    background-color: #00b3db;
+    border-color: #285e8e; /*set the color you want here*/
+}
+
+.footer-jake{
+    text-align: center;
+    margin-top: 10px;
+}
+
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.table-hover>tbody>tr:hover {
+    background-color: black;
+}
+
+td.highest {background-color:rgba(0, 255, 20, 0.56)}
+td.lowest {background-color:red;}
+td.lowest_pos {background-color:rgba(0, 255, 20, 0.56)}
+
+.setting-min-width{
+    width: 120px !important;
+}
+
+.mylabel{
+    font-family: 'Lora', 'Times New Roman', serif;
+    font-size: 20px;
+    color: #666666;;
+    font-weight: normal;
+    font-size: 1.0em;
+}
+
+.form-control{
+    border-width:0px;
+    border:0;
+    -webkit-box-shadow: none;
+    font-size: 20px;
+    color: #555;
+    font-weight: bold;
+}
+
+.form-control:focus{
+    border-color: #cccccc;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.title-style{
+   color: #9d9d9d;
+}
+
+.footer-jake{
+   color: #9d9d9d;
+}
+
+.dataTables_scroll td {
+  overflow: auto; /* this is what fixes the expansion */
+  text-overflow: ellipsis; /* not supported in all browsers, but I accepted the tradeoff */
+  white-space: nowrap;
+}
+
+
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 0px;
+    padding-left: 0px;
+}
+
+.unica-font{
+    font-family: 'Unica One', cursive;
+    font-size: 160%;
+}
+
+.schedule{
+    text-align:left;
+}
+
+@media (min-width: 768px) {
+    .schedule{
+        text-align:left;
+        margin-left: 120px;
+    }
+
+}
+
+@media (max-width: 500px) {
+    .unica-font{
+        font-family: 'Unica One', cursive;
+        font-size: 130%;
+    }
+}
+
+.dropdown-menu li:hover {
+    cursor: pointer;
+}
+
+@media screen and (max-width: 1220px) {
+    #pie_chart {
+        display: none !important;
+    }
+}
