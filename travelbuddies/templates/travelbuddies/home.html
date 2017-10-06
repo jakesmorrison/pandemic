@@ -1,0 +1,59 @@
+{%extends "travelbuddies/base.html" %}
+
+{% load staticfiles %}
+
+{% block title %}Home{% endblock %}
+
+{% block container %}
+<div class="custom_container col-lg-12">
+    <div class="row">
+        <h1>Sticky footer</h1>
+    </div>
+</div>
+{% endblock %}
+
+{% block sidebar %}
+<div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+        <li class="sidebar-brand">
+            <a href="#">
+                Friends
+            </a>
+        </li>
+    </ul>
+</div>
+{% endblock %}
+
+{% block footer %}
+<nav class="navbar navbar-default navbar-fixed-bottom" role="navigation">
+      <div class="col-lg-12 col-xs-12">
+          <div class="row">
+              <div class="menu-button"><a id="menu-toggle" href="""> <i class="fa fa-bars fa-2x menu_icon" aria-hidden="true"></i> </a></div>
+              <divs class="col-xs-3"><h1 class="icons-text"><i class="fa fa-home" aria-hidden="true"></i></h1><p class="icon_label">Home</p></divs>
+              <divs class="col-xs-3"><h1 class="icons-text"><i class="fa fa-plane" aria-hidden="true"></i></h1><p class="icon_label">Trips</p></divs>
+              <divs class="col-xs-3"><h1 class="icons-text"><i class="fa fa-picture-o" aria-hidden="true"></i></h1><p class="icon_label">Photos</p></divs>
+              <divs class="col-xs-3"><h1 class="icons-text"><i class="fa fa-map-o" aria-hidden="true"></i></h1><p class="icon_label">Map</p></divs>
+      </div>
+</nav>
+
+{% endblock %}
+
+{% block javascript %}
+<script>
+
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+        $(".custom_container").toggleClass("toggled");
+
+    });
+
+</script>
+{% endblock %}
+
+
+nav bar
+
+
+#9ea9b9
+#a0a8a9

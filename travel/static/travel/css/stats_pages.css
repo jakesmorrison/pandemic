@@ -1,0 +1,44 @@
+.my_data_col{
+    height:100%;
+    position:relative;
+    display: table;
+}
+
+@media screen and (max-width: 1200px) {
+    .my_row {
+        top: 50%;
+        margin-top: 50%;
+    }
+}
+
+.vert-center{
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 90%;
+  opacity: 0;
+  transition: .5s ease;
+  background-color: rgba(0, 140, 186, 0.63);
+  cursor: none;
+  margin: auto;
+  right: 5%;
+}
+
+.country:hover .overlay {
+  opacity: 1;
+}
+
+.text {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+}

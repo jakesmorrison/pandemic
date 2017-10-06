@@ -25,4 +25,18 @@ urlpatterns = [
     url(r'', include('game.urls')),
     url(r'^finance/', include('finance.urls')),
     url(r'^softball/', include('softball.urls')),
+    url(r'^resume/', include('resume.urls')),
+    url(r'^map/', include('map.urls')),
+    url(r'^books/', include('books.urls')),
+    url(r'^definitions/', include('definitions.urls')),
+    url(r'^travel/', include('travel.urls')),
+    url(r'^heartbeat/', include('heartbeat.urls')),
+    url(r'^loveletter/', include('loveletter.urls')),
+    url(r'^justpooped/', include('poo.urls')),
+    url(r'^travelbuddies/', include('travelbuddies.urls')),
+    url(r'^asiatrip/', include('asia.urls')),
+    url(r'^customdesign/', include('customdesign.urls')),
+    url(r'^workout/', include('workout.urls')),
+    url(r'^home/', include('homepage.urls')),
+
 ]

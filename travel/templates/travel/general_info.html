@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load staticfiles %}
+    <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'travel/css/stats_home.css' %}" rel="stylesheet">
+    <link href=" {% static 'travel/css/stats_pages.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC" rel="stylesheet">
+
+    <title>General</title>
+</head>
+<body>
+
+
+<div class="container">
+    <div style="background-color: #ff5f5f" class="row">
+        <div class="col-lg-2 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h1 class="centered myfont">Total Days Traveled</h1>
+            <br>
+                <h1 class="centered myfont" style="font-size: 1000%;">{{day_traveled|safe}}</h1>
+            </div>
+        </div>
+       <div class="col-lg-2 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h1 class="centered myfont">Days Traveled With...</h1>
+                <h3 class="centered myfont"><img height="30" width="30" src=" {% static 'travel/img/solo.png' %}">: {{traveling_with.Solo}}</h3>
+                <h3 class="centered myfont"><img height="40" width="40" src=" {% static 'travel/img/gf.png' %}">: {{traveling_with.Joie}}</h3>
+                <h3 class="centered myfont"><img height="30" width="30" src=" {% static 'travel/img/mother.png' %}">: {{traveling_with.Mom }}</h3>
+                <h3 class="centered myfont"><img height="30" width="30" src=" {% static 'travel/img/random.png' %}">: {{traveling_with.Other}}</h3>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h3 class="centered myfont"><b>9</b> Countries Visited</h3>
+                <div class="row">
+                    <div class="col-xs-4 country centered">
+                        <img class="image" height="80px" width="80px" src=" {% static 'travel/img/spain.png' %}">
+                        <div class="overlay">
+                             <p class="text centered">Spain</p>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 country centered"><img height="80" width="80" src=" {% static 'travel/img/france.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">France</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 country centered"><img height="80" width="80" src=" {% static 'travel/img/portugal.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">Portugal</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-xs-4 country centered">
+                        <img height="80" width="80" src=" {% static 'travel/img/hungary.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">Hungary</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 country centered"><img height="80" width="80" src=" {% static 'travel/img/romania.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">Romania</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 country centered"><img height="80" width="80" src=" {% static 'travel/img/greece.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">Greece</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-xs-4 country centered"><img height="80" width="80" src=" {% static 'travel/img/turkey.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">Turkey</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 country centered"><img height="80" width="80" src=" {% static 'travel/img/albania.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">Albania</div>
+                        </div>
+                    </div>
+                    <div class="col-xs-4 country centered"><img height="80" width="80" src=" {% static 'travel/img/italy.png' %}">
+                        <div class="overlay">
+                             <div class="text centered">Italy</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h3 class="centered myfont">Stay Duration by Country</h3>
+                <div id="countries" style="min-width: 300px; height: 300px; max-width: 600px; margin: 0 auto"></div>
+            </div>
+        </div>
+    </div>
+    <div style="background-color: #ff5f5f" class="row">
+        <div class="col-lg-6 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h3 class="centered myfont">Cities Visited</h3>
+                <div id="cities"></div>
+            </div>
+        </div>
+        <div class="col-lg-6 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h3 class="centered myfont">Cities Visited</h3>
+                <div id="city_area"></div>
+            </div>
+        </div>
+    </div>
+    <!--<div style="background-color: #ff5f5f" class="row">-->
+        <!--<div class="col-lg-12 col-xs-12 my_data_col">-->
+            <!--<div class="vert-center">-->
+                <!--<h3 class="centered myfont">Points Used</h3>-->
+                <!--<div id=""></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+</div>
+
+
+{% load staticfiles %}
+<script src=" {% static 'heartbeat/js/jquery-2.1.1.js' %}" ></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" ></script>
+<script src=" {% static 'softball/js/highcharts.js' %}" ></script>
+<script src=" {% static 'travel/js/jquery.scrollify.min.js' %}" ></script>
+<script src=" {% static 'travel/js/flatdark.js' %}" ></script>
+<script src=" {% static 'travel/js/imp_scrollify.js' %}" ></script>
+
+
+<script>
+Highcharts.chart('cities', {
+    chart: {
+        type: 'column',
+        borderWidth: 0,
+        backgroundColor: null,
+        style: {
+            fontFamily: "'Patrick Hand SC', cursive"
+        }
+    },
+    title: {
+        text: ''
+    },
+     credits: {
+        enabled: false
+    },
+    xAxis: {
+        categories: {{city_list|safe}},
+        crosshair: true,
+        lineColor: '#000',
+        tickColor: '#000',
+        labels: {
+         style: {
+            color: '#333',
+            fontSize:'16px',
+            fontFamily: "'Patrick Hand SC', cursive"
+         }
+        }
+    },
+    yAxis: {
+        min: 0,
+        lineColor: '#000',
+        tickColor: '#000',
+        title: {
+            text: '# Of Days',
+            style: {
+            fontSize:'18px',
+            color: '#333'
+            }
+        },
+        gridLineColor: 'black',
+        labels: {
+         style: {
+            color: '#333',
+            fontSize:'18px',
+            fontFamily: "'Patrick Hand SC', cursive"
+         }
+        }
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: '# Days',
+        data: {{city_day_count|safe}},
+        color: "rgba(0, 0, 0, 0.75)",
+        showInLegend:false
+
+    }]
+});
+
+Highcharts.chart('countries', {
+    chart: {
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false,
+        type: 'pie',
+        backgroundColor: null,
+        style: {
+            fontFamily: "'Patrick Hand SC', cursive"
+        }
+    },
+    title: {
+        text: ''
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>{point.y}</b> <br> Percent: <b>{point.percentage:.1f}%</b>'
+    },
+    plotOptions: {
+        pie: {
+            allowPointSelect: true,
+            cursor: 'pointer',
+            dataLabels: {
+                enabled: false
+            },
+            showInLegend: true
+        }
+        },
+    credits: {
+        enabled: false
+    },
+    series: [{
+        name: 'Days',
+        colorByPoint: true,
+        data: {{country_pie|safe}}
+    }]
+});
+
+Highcharts.chart('city_area', {
+  chart: {
+    type: 'area',
+    borderWidth: 0,
+    backgroundColor: null,
+    style: {
+        fontFamily: "'Patrick Hand SC', cursive"
+    }
+  },
+  credits: {
+    enabled: false
+  },
+  title: {
+    text: ''
+  },
+  xAxis: {
+    type: 'datetime',
+    labels: {
+     style: {
+        color: '#333',
+        fontSize:'16px',
+        fontFamily: "'Patrick Hand SC', cursive"
+     }
+    }
+  },
+  yAxis: {
+    max: 100,
+    title: {
+      text: ''
+    },
+    gridLineColor: 'black',
+    gridLineWidth: 0,
+    minorGridLineWidth: 0,
+    labels: {
+      formatter: function() {
+        return '';
+      },
+      style: {
+        color: '#333',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+    }
+  },
+  plotOptions: {
+    area: {
+      marker: {
+        enabled: false
+      }
+    }
+  },
+  tooltip: {
+    pointFormat: 'City: {series.name}'
+  },
+  series: {{city_date|safe}}
+});
+
+</script>
+
+</body>
+</html>

@@ -41,7 +41,20 @@ INSTALLED_APPS = [
     'game.apps.GameConfig',
     'finance.apps.FinanceConfig',
     'softball.apps.SoftballConfig',
-
+    'homepage.apps.HomepageConfig',
+    'resume.apps.ResumeConfig',
+    'map.apps.MapConfig',
+    'books.apps.BooksConfig',
+    'definitions.apps.DefinitionsConfig',
+    'travel.apps.TravelConfig',
+    'heartbeat.apps.HeartbeatConfig',
+    'loveletter.apps.LoveletterConfig',
+    'poo.apps.PooConfig',
+    'travelbuddies.apps.TravelbuddiesConfig',
+    'asia.apps.AsiaConfig',
+    'customdesign.apps.CustomdesignConfig',
+    'workout.apps.WorkoutConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [

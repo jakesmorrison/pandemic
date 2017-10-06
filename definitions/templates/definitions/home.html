@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Vocab Builder</title>
+
+    <!-- CSS -->
+    {% load staticfiles %}
+    <link href=" {% static 'definitions/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'definitions/css/notecard.css' %}" rel="stylesheet">
+    <link href=" {% static 'definitions/font-awesome/css/font-awesome.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="intro-header">
+    <div class="container round-border vertical-center">
+        <div style="overflow-y:scroll;" class="col-lg-10 col-lg-offset-1 col-xs-12 col-xs-offset-0">
+            <h1 class="centered" style="">{{word|safe}} <button style="margin-top: -3px;" type="button" onclick="refresh()" class="btn btn-primary text-center">Next</button></h1>
+            <h3>{{ type|safe }}</h3>
+            {% for x in definition %}
+            <ul>
+              <li class="definition">{{x|safe}}</li>
+            </ul>
+            {% endfor %}
+            <h4>{{id_count|safe}}/{{dictionary_count|safe}}</h4>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+<!-- /.intro-header -->
+
+<div class="navbar navbar-fixed-bottom" role="navigation">
+    <div class="col-lg-2 col-lg-offset-4 col-xs-6 col-xs-offset-2 pagination-centered">
+        <form class="form-inline">
+            <input class="submit-word form-control" type="text" value="" id="word-input">
+        </form>
+    </div>
+    <div class="col-lg-2 col-lg-offset-0 col-xs-2 pagination-centered">
+        <button type="button" onclick="sendWord()" class="btn btn-primary">Submit</button>
+    </div>
+</div>
+
+
+<!-- jQuery -->
+{% load staticfiles %}
+<script src=" {% static 'definitions/js/jquery.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'definitions/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+
+<script>
+function sendWord(){
+    var word = $('#word-input').val();
+    url_base = "{% url 'definitions:add_to_db' %}";
+    params = {'word': word};
+    url = url_base + "?" + $.param( params );
+    $.getJSON(url, function(data) {
+    });
+}
+function refresh(){
+    location.reload();
+}
+</script>
+
+</body>
+</html>

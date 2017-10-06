@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {% load staticfiles %}
+    <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'travel/css/stats_home.css' %}" rel="stylesheet">
+    <link href=" {% static 'travel/css/stats_pages.css' %}" rel="stylesheet">
+    <link href=" {% static 'travel/css/stats_sleep.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Patrick+Hand+SC" rel="stylesheet">
+
+    <title>Sleep</title>
+</head>
+<body>
+
+
+<div style="background-color: #6b6bf5" class="container">
+    <div style="background-color: #6b6bf5" class="row">
+        <div class="col-lg-6 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h2 class="centered myfont">Wake/Bed Time vs. Date</h2>
+                <div id="sleep_date"></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h2 class="centered myfont">Wake Time</h2>
+                <div id="wake_radial"></div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h2 class="centered myfont">Bed Time</h2>
+                <div id="sleep_radial"></div>
+            </div>
+        </div>
+    </div>
+
+    <div style="background-color: #6b6bf5" class="row">
+        <div class="col-lg-6 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <table style="width:100%">
+                    <tr>
+                        <th><h2 class="centered myfont housing_cost">Total Accommodation Cost by City </h2></th>
+                        <th><button style="font-size: 10px;margin-top: -5px;" type="button" class="btn btn-primary toggle_button" id="toggle_data">Toggle Data</button></th>
+                    </tr>
+                </table>
+                <div id="housing"></div>
+            </div>
+        </div>
+        <div class="col-lg-2 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h2 class="centered myfont">Accommodation </h2>
+
+                <h3 class="centered myfont">Average Cost by Person</h3>
+                <table style="width:100%">
+                  <tr>
+                      <th class="centered"><img height="30" width="30" src=" {% static 'travel/img/solo.png' %}"></th>
+                      <th><h3 class="centered myfont">${{average_cost_solo|safe}}</h3></th>
+                  </tr>
+                  <tr>
+                      <th class="centered"><img height="40" width="40" src=" {% static 'travel/img/gf.png' %}"></th>
+                      <th><h3 class="centered myfont">${{average_cost_joie|safe}}</h3></th>
+                  </tr>
+                  <tr>
+                      <th class="centered"><img height="30" width="30" src=" {% static 'travel/img/mother.png' %}"></th>
+                      <th><h3 class="centered myfont">${{average_cost_mom|safe}}</h3></th>
+                  </tr>
+                </table>
+                <h3 class="centered myfont">Total Cost: ${{total_cost|safe}}</h3>
+            </div>
+        </div>
+        <div class="col-lg-4 col-xs-12 my_data_col">
+            <div class="vert-center">
+                <h2 class="centered myfont">Accommodation Cost by Country</h2>
+                <div id="box_plot"></div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% load staticfiles %}
+<script src=" {% static 'heartbeat/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src=" {% static 'travel/js/jquery.scrollify.min.js' %}" ></script>
+<!--<script src=" {% static 'travel/js/flatdark.js' %}" ></script>-->
+<script src=" {% static 'travel/js/imp_scrollify.js' %}" ></script>
+
+<script>
+
+Highcharts.chart('wake_radial', {
+    chart: {
+        polar: true,
+        borderWidth: 0,
+        backgroundColor: null,
+        zoomType: 'xy'
+    },
+    title: {
+        text: ''
+    },
+    pane: {
+        startAngle: 0,
+        endAngle: 360
+    },
+    xAxis: {
+        tickInterval: 1,
+        min: 0,
+        max: 12,
+        labels: {
+            formatter: function () {
+                return this.value + '';
+            },
+            style: {
+                color: '#333',
+                fontSize:'20px',
+                fontFamily: "'Patrick Hand SC', cursive"
+             }
+        }
+    },
+    yAxis: {
+        min: 0,
+        gridLineColor: 'white',
+        labels: {
+         style: {
+            color: '#333',
+            fontFamily: "'Patrick Hand SC', cursive"
+         }
+        }
+
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0,
+            groupPadding: 0
+        }
+    },
+    legend: {enabled: false},
+    exporting: { enabled: false },
+    credits: {enabled: false},
+    series: {{radial_wake|safe}}
+});
+
+Highcharts.chart('sleep_radial', {
+    chart: {
+        polar: true,
+        borderWidth: 0,
+        backgroundColor: null
+    },
+    title: {
+        text: ''
+    },
+    pane: {
+        startAngle: 0,
+        endAngle: 360
+    },
+    xAxis: {
+        tickInterval: 1,
+        min: 0,
+        max: 12,
+        labels: {
+            formatter: function () {
+                return this.value + '';
+            },
+            style: {
+                color: '#333',
+                fontSize:'20px',
+                fontFamily: "'Patrick Hand SC', cursive"
+             }
+        }
+    },
+    yAxis: {
+        min: 0,
+        gridLineColor: 'white',
+        labels: {
+         style: {
+            color: '#333',
+            fontFamily: "'Patrick Hand SC', cursive"
+         }
+        }
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0,
+            groupPadding: 0
+        }
+    },
+    legend: {enabled: false},
+    exporting: { enabled: false },
+    credits: {enabled: false},
+    series: {{radial_sleep|safe}}
+});
+
+Highcharts.chart('sleep_date', {
+    chart: {
+        borderWidth: 0,
+        backgroundColor: null
+    },
+    title: {
+        text: ''
+    },
+        plotOptions: {
+        series: {
+            marker: {
+                enabled: false
+            }
+        }
+    },
+
+    xAxis: {
+        type: 'datetime',
+        dateTimeLabelFormats: {
+            day: '%e of %b'
+        },
+        labels:{
+        style: {
+                color: '#333',
+                fontSize:'18px',
+                fontFamily: "'Patrick Hand SC', cursive"
+         }
+        }
+    },
+    tooltip: {
+            split: true,
+            formatter: function () {
+                var s = [Highcharts.dateFormat('%d.%m.%Y', this.x)];
+                $.each(this.points, function(i, point) {
+                    var time = point.y;
+                    var hours1=parseInt(time.toString().split(".")[0]);
+                    var mins1=parseInt(time.toString().split(".")[1]);
+                    if(isNaN(mins1)){mins1=0;}
+                    if(hours1<=0){hours1=hours1+12;}
+                    if(mins1.toString().length === 1){s.push(hours1 + ':0' + mins1);}
+                    else{s.push(hours1 + ':' + mins1);}
+
+                });
+                return s;
+            }
+    },
+    legend: {
+        enabled:false
+    },
+    yAxis: [{
+        tickInterval: 1,
+        max: 12,
+        min: 3,
+        title: {
+            text: 'Wake Time (hh:mm)',
+            style: {
+                color: '#333',
+                fontSize:'18px',
+                fontFamily: "'Patrick Hand SC', cursive"
+             }
+        },
+        labels: {
+            align: 'right',
+            x: -3,
+            formatter: function () {
+                var time = this.value;
+                var hours1=parseInt(time.toString().split(".")[0]);
+                var mins1=parseInt(time.toString().split(".")[1]);
+                if(isNaN(mins1)){mins1=0;}
+                return hours1 + ':0' + mins1;
+            },
+             style: {
+                color: '#333',
+                fontSize:'15px',
+                fontFamily: "'Patrick Hand SC', cursive"
+             }
+        },
+        height: '35%',
+        lineWidth: 2
+    },
+    {
+        tickInterval: 1,
+        max: 4,
+        min: -4,
+        title: {
+            text: 'Sleep Time (hh:mm)',
+            style: {
+                color: '#333',
+                fontSize:'18px',
+                fontFamily: "'Patrick Hand SC', cursive"
+             }
+
+        },
+        labels: {
+            align: 'right',
+            x: -3,
+            formatter: function () {
+                var time = this.value;
+                var hours1=parseInt(time.toString().split(".")[0]);
+                var mins1=parseInt(time.toString().split(".")[1]);
+                if(isNaN(mins1)){mins1=0;}
+                if(hours1<=0){hours1=hours1+12;}
+                return hours1 + ':0' + mins1;
+            },
+            style: {
+                color: '#333',
+                fontSize:'15px',
+                fontFamily: "'Patrick Hand SC', cursive"
+             }
+        },
+        top: '50%',
+        height: '35%',
+        offset: 0,
+        lineWidth: 2
+    }],
+    exporting: { enabled: false },
+    credits: {enabled: false},
+    series: [{
+        data: {{wake|safe}},
+        pointStart: Date.UTC(2017, 5, 20),
+        pointInterval: 24 * 3600 * 1000,
+        lineWidth: 5,
+        color: "magenta",
+        name: "Wake Time",
+        type: 'spline'
+    },
+    {
+        data: {{sleep|safe}},
+        pointStart: Date.UTC(2017, 5, 20),
+        pointInterval: 24 * 3600 * 1000,
+        yAxis: 1,
+        lineWidth: 5,
+        color: "cyan",
+        name: "Bed Time",
+        type: 'spline'
+    }]
+});
+
+my_points = {{city_list|safe}}
+
+var housing = Highcharts.chart('housing', {
+
+  chart: {
+    type: 'bubble',
+    plotBorderWidth: 1,
+    zoomType: 'xy',
+    borderWidth: 0,
+    backgroundColor: null
+  },
+
+   legend: {
+        enabled:false
+    },
+
+    exporting: { enabled: false },
+    credits: {enabled: false},
+
+  title: {
+    text: ''
+  },
+
+  xAxis: {
+  categories: {{city_list|safe}},
+  gridLineWidth: 1,
+  title: {
+      text: '',
+      style: {
+        color: '#333',
+        fontSize:'20px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+    },
+   labels: {
+      style: {
+        color: '#333',
+        fontSize:'16px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+      }
+  },
+
+  yAxis: {
+    startOnTick: false,
+    endOnTick: false,
+    title: {
+      text: 'Total Cost ($)',
+      style: {
+        color: '#333',
+        fontSize:'20px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+    },
+    labels: {
+      format: '${value}',
+      style: {
+        color: '#333',
+        fontSize:'15px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+    },
+    maxPadding: 0.2
+    //plotLines: [
+    //{
+    //  color: 'red',
+    //  dashStyle: 'dot',
+    //  width: 2,
+    //  value: 50,
+    //  label: {
+    //    align: 'right',
+    //    style: {
+    //      fontStyle: 'italic'
+    //    },
+    //    text: 'Average Hotel',
+    //    x: -10
+    //  },
+    //  zIndex: 3
+    //},
+    //]
+  },
+
+  tooltip: {
+    useHTML: true,
+    headerFormat: '<table>',
+    pointFormat: '<tr><th colspan="2"><h3>{point.city}</h3></th></tr>' +
+    	'<tr><th>Type:</th><td>{point.name}</td></tr>' +
+      '<tr><th>Nights:</th><td>{point.z}</td></tr>' +
+      '<tr><th>Total Cost:</th><td>${point.y}</td></tr>' +
+      '<tr><th>Average Cost:</th><td>${point.avg}</td></tr>',
+    footerFormat: '</table>',
+    followPointer: true
+  },
+
+  plotOptions: {
+    series: {
+      dataLabels: {
+        enabled: false,
+        format: '{point.name}'
+      }
+    }
+  },
+
+  series: [{
+    data: {{acc_data|safe}}
+  }]
+});
+
+var toggle_housing_cost = "total";
+$('#toggle_data').click(function () {
+
+   if (toggle_housing_cost === "total"){
+        $('.housing_cost').html("Average Accommodation Cost by City");
+        toggle_housing_cost = "avg"
+        housing.series[0].setData({{acc_data_avg|safe}});
+        housing.tooltip.options.formatter = function() {
+            console.log(this.point)
+            return '<table> <tr><th colspan="2"><h3>'+this.point.city+'</h3></th></tr><tr><th>Type:</th><td>'+this.point.name+'</td></tr><tr><th>Nights:</th><td>'+this.point.nights+'</td></tr><tr><th>Total Cost:</th><td>$'+this.point.total+'</td></tr><tr><th>Average Cost:</th><td> $'+this.point.avg+'</td></tr></table>';
+        }
+        console.log(housing.xAxis[0])
+        housing.yAxis[0].setTitle({ text: "Average Cost ($)" });
+   }
+   else{
+        $('.housing_cost').html("Total Accommodation Cost by City");
+        toggle_housing_cost = "total"
+        housing.series[0].setData({{acc_data|safe}});
+        housing.tooltip.options.formatter = function() {
+            return '<table> <tr><th colspan="2"><h3>'+this.point.city+'</h3></th></tr><tr><th>Type:</th><td>'+this.point.name+'</td></tr><tr><th>Nights:</th><td>'+this.point.nights+'</td></tr><tr><th>Total Cost:</th><td>$'+this.point.total+'</td></tr><tr><th>Average Cost:</th><td> $'+this.point.avg+'</td></tr></table>';
+        }
+        housing.yAxis[0].setTitle({ text: "Total Cost ($)" });
+   }
+
+});
+
+
+Highcharts.chart('box_plot', {
+
+  chart: {
+    type: 'boxplot',
+    borderWidth: 0,
+    backgroundColor: null,
+    zoomType: 'xy'
+  },
+
+  title: {
+    text: ''
+  },
+
+  legend: {
+    enabled: false
+  },
+  exporting: {
+    enabled: false
+  },
+  credits: {
+    enabled: false
+  },
+
+
+  xAxis: {
+    categories: {{country_list|safe}},
+    title: {
+      text: 'Country',
+      style: {
+        color: '#333',
+        fontSize:'15px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+
+    },
+    labels: {
+      style: {
+        color: '#333',
+        fontSize:'15px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+    }
+  },
+
+  yAxis: {
+    title: {
+      text: 'Observations',
+      style: {
+        color: '#333',
+        fontSize:'15px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      },
+    },
+    labels: {
+      style: {
+        color: '#333',
+        fontSize:'15px',
+        fontFamily: "'Patrick Hand SC', cursive"
+      }
+    }
+  },
+
+  series: [{
+    name: 'Observations',
+    data: {{box_data|safe}},
+            lineWidth: 3,
+        color: "black",
+        fillColor: "transparent",
+
+    tooltip: {
+      headerFormat: '<em>{point.key}</em><br/>'
+    }
+  }]
+});
+
+
+</script>
+
+</body>
+</html>
