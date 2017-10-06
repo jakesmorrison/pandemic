@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'channels',
     'game.apps.GameConfig',
+    'finance.apps.FinanceConfig',
 ]
 
 MIDDLEWARE_CLASSES = [

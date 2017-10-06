@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Investment Analyzer</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/bootstrap_slider.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/round_slider.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/style.css' %}" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <h1 class="centered">Investment Analyzer</h1>
+        <br>
+        <div class="col-lg-10 col-lg-offset-1 col-xs-12"><div id="my_chart"></div></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-0 col-xs-12 centered">
+            <div id="years" class="centered"></div>
+        </div>
+        <div class="col-lg-2 col-lg-offset-0 col-xs-12 centered">
+            <div id="inflation" class="centered"></div>
+        </div>
+
+        <div class="col-lg-2 col-lg-offset-0 col-xs-12 centered">
+            <div id="seed_money_1" class="centered"></div>
+        </div>
+        <div class="col-lg-2 col-xs-12 centered">
+            <div id="cont_1" class="centered"></div>
+       </div>
+
+        <div class="col-lg-2 col-lg-offset-0 col-xs-12 centered">
+            <div id="yearly_return_1" class="centered"></div>
+        </div>
+        <div class="col-lg-2 col-xs-12 centered">
+            <div id="fee_1" class="centered"></div>
+       </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6 col-xs-12">
+            <div class="row">
+                <div id="total_1" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
+                <div id="total_1_no_fee" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
+                <div id="percent_1_no_fee" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+</div>
+
+<!-- jQuery -->
+{% load staticfiles %}
+<!--<script src=" {% static 'books/js/jquery.min.js' %}" rel="stylesheet"></script>-->
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap_slider.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/round_slider.js' %}" rel="stylesheet"></script>
+<script src="{% static 'finance/js/highcharts.js' %}"></script>
+
+<script>
+
+
+var chart = Highcharts.chart('my_chart', {
+    chart: {
+        type: 'area'
+    },
+    title: {
+        text: ''
+    },
+    legend: {enabled: true},
+    exporting: { enabled: false },
+    credits: {enabled: false},
+    xAxis: {
+        allowDecimals: false,
+        labels: {
+            formatter: function () {
+                return this.value; // clean, unformatted number for year
+            }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Money ($)'
+        },
+        labels: {
+            formatter: function () {
+                val = this.value;
+                return '$'+val.toLocaleString();
+            }
+        }
+    },
+    tooltip: {
+        pointFormat: '{series.name}: <b>${point.y:,.0f}</b>'
+    },
+    plotOptions: {
+        area: {
+            pointStart: 1,
+            marker: {
+                enabled: false,
+                symbol: 'circle',
+                radius: 2,
+                states: {
+                    hover: {
+                        enabled: true
+                    }
+                }
+            }
+        }
+    },
+    series: [{
+        name: 'Portfolio',
+        data: []
+    }]
+});
+
+
+var seed_money_1 = 0;
+var years = 0;
+var yearly_return_1 = 0;
+var cont_1 = 0;
+var fee_1 = 0;
+var inflation = 0;
+
+
+function update_data(){
+    var data_1 = []
+    var data_1_no_fee = []
+    return_1 = 1 + ((yearly_return_1-fee_1-inflation)/100)/12;
+    return_1_no_fee = 1 + ((yearly_return_1-inflation)/100)/12
+
+    for(x=0; x<years; x++){
+        if(x==0){
+            data_1.push(seed_money_1);
+            data_1_no_fee.push(seed_money_1);
+        }
+        else{
+            data_1.push((data_1[x-1]+cont_1)*Math.pow((return_1), 12));
+            data_1_no_fee.push((data_1_no_fee[x-1]+cont_1)*Math.pow((return_1_no_fee), 12));
+        }
+    }
+    total_1 = parseInt(data_1[years-1]);
+    total_1_no_fee = parseInt(data_1_no_fee[years-1]);
+
+
+    $("#total_1").html("<h5>Total: $"+total_1.toLocaleString()+"</h5>")
+    $("#total_1_no_fee").html("<h5>Amount Lost to Fees: $"+(total_1_no_fee -total_1).toLocaleString()+"</h5>")
+    $("#percent_1_no_fee").html("<h5>Percent Lost to Fees: "+(100-100*(total_1/total_1_no_fee)).toLocaleString()+"%</h5>")
+
+    chart.series[0].update({
+            data: data_1
+    });
+}
+
+$("#years").roundSlider({
+    handleShape: "square",
+    radius: 100,
+    value: 40,
+    max: 50,
+    step: 1,
+    circleShape: "half-left",
+    sliderType: "min-range",
+    handleSize: "+10",
+    keyboardAction: false,
+    editableTooltip: false,
+    mouseScrollAction: false,
+    width: 10,
+    showTooltip: true,
+    tooltipFormat: "years_tooltip",
+    drag: "years_event"
+});
+
+function years_tooltip(args) {
+    return "Years: " + args.value;
+}
+
+function years_event(e) {
+    years = e.value;
+    update_data();
+}
+
+
+$("#inflation").roundSlider({
+    handleShape: "square",
+    radius: 100,
+    value: 1,
+    max: 5,
+    step: .01,
+    circleShape: "half-right",
+    sliderType: "min-range",
+    handleSize: "+10",
+    keyboardAction: false,
+    editableTooltip: false,
+    mouseScrollAction: false,
+    width: 10,
+    showTooltip: true,
+    tooltipFormat: "inflation_tooltip",
+    drag: "inflation_event"
+
+});
+
+function inflation_tooltip(args) {
+    return "Inflation: " + args.value+"%";
+}
+
+function inflation_event(e) {
+    inflation = e.value;
+    update_data();
+}
+
+
+$("#seed_money_1").roundSlider({
+    handleShape: "square",
+    radius: 100,
+    value: 70000,
+    max: 100000,
+    step: 500,
+    circleShape: "half-left",
+    sliderType: "min-range",
+    handleSize: "+10",
+    keyboardAction: false,
+    editableTooltip: false,
+    mouseScrollAction: false,
+    width: 10,
+    showTooltip: true,
+    tooltipFormat: "seed_money_tooltip",
+    drag: "seed_money_event"
+
+});
+
+function seed_money_tooltip(args) {
+    return "Initial: $" + args.value+"";
+
+}
+
+function seed_money_event(e) {
+    seed_value_1 = e.value;
+    update_data();
+}
+
+$("#cont_1").roundSlider({
+    handleShape: "square",
+    radius: 100,
+    value: 15000,
+    max: 50000,
+    step: 1000,
+    circleShape: "half-right",
+    sliderType: "min-range",
+    handleSize: "+10",
+    keyboardAction: false,
+    editableTooltip: false,
+    mouseScrollAction: false,
+    width: 10,
+    showTooltip: true,
+    tooltipFormat: "cont_tooltip",
+    drag: "cont_event"
+
+});
+
+function cont_tooltip(args) {
+    return "Contribution: $" + args.value;
+}
+
+function cont_event(e) {
+    cont_1 = e.value;
+    update_data();
+}
+
+$("#yearly_return_1").roundSlider({
+    handleShape: "square",
+    radius: 100,
+    value: 8,
+    max: 20,
+    step: .5,
+    circleShape: "half-left",
+    sliderType: "min-range",
+    handleSize: "+10",
+    keyboardAction: false,
+    editableTooltip: false,
+    mouseScrollAction: false,
+    width: 10,
+    showTooltip: true,
+    tooltipFormat: "yearly_return_tooltip",
+    drag: "yearly_return_event"
+
+});
+
+function yearly_return_tooltip(args) {
+    return "Yearly Return: " + args.value+ "%";
+}
+
+function yearly_return_event(e) {
+    yearly_return_1 = e.value;
+    update_data();
+}
+
+$("#fee_1").roundSlider({
+    handleShape: "square",
+    radius: 100,
+    value: 1,
+    max: 5,
+    step: .01,
+    circleShape: "half-right",
+    sliderType: "min-range",
+    handleSize: "+10",
+    keyboardAction: false,
+    editableTooltip: false,
+    mouseScrollAction: false,
+    width: 10,
+    showTooltip: true,
+    tooltipFormat: "fee_tooltip",
+    drag: "fee_event"
+
+});
+
+function fee_tooltip(args) {
+    return "Fee: " + args.value+"%";
+}
+
+function fee_event(e) {
+    fee_1 = e.value;
+    update_data();
+}
+
+
+$( document ).ready(function() {
+    $(".rs-seperator").css("display","none")
+    years = $("#years").data("roundSlider").getValue();
+    seed_money_1 = $("#seed_money_1").data("roundSlider").getValue();
+    yearly_return_1 = $("#yearly_return_1").data("roundSlider").getValue();
+    cont_1 = $("#cont_1").data("roundSlider").getValue();
+    fee_1 = $("#fee_1").data("roundSlider").getValue();
+    inflation = $("#inflation").data("roundSlider").getValue();
+    update_data();
+});
+
+</script>
+
+
+</body>
+</html>

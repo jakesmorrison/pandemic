@@ -23,4 +23,5 @@ urlpatterns = [
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
     url(r'', include('game.urls')),
+    url(r'^finance/', include('finance.urls')),
 ]
