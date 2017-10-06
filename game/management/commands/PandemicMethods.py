@@ -9,7 +9,11 @@ from django.templatetags.static import static
 cfg = cfg.Config
 class Command(BaseCommand):
     def handle(self, **options):
-        self.quick_fix()
+        self.add_cities()
+        self.infection_cities()
+        self.add_roles()
+        self.add_map_coords()
+
     def add_cities(self):
         for x in cfg.cities:
             cc = CityCards(city=x["city"],country=x["country"],population=x["population"],color=x["color"],type=x["type"],connectionCities=x["connectionCities"])
