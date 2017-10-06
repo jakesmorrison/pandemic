@@ -22,7 +22,7 @@ urlpatterns = [
     url(r'^login/$', auth_views.login, name='login'),
     url(r'^logout/$', auth_views.logout, name='logout'),
     url(r'^admin/', admin.site.urls),
-    url(r'^pandemic$', include('game.urls')),
+    url(r'^pandemic/', include('game.urls')),
     url(r'^finance/', include('finance.urls')),
     url(r'^softball/', include('softball.urls')),
     url(r'^resume/', include('resume.urls')),
