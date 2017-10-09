@@ -47,9 +47,7 @@ def home(request):
 
     html_table = df_display.to_html(index=False, classes='table table-striped table-bordered table-hover table-responsive'  )
     for n in book_names:
-        print(n)
         html_table = html_table.replace(n , "<a class=\"mylink\" href=\"#\">"+n+"</a>", 1)
-        print(html_table)
 
 
     lookup = df_lookup[df_lookup["Title"] == book_names[len(book_names)-1]]
@@ -76,6 +74,7 @@ def quick_chart(request):
     for x in db_books.values():
         df_temp = pd.DataFrame.from_dict(dict(x.items()), orient='index')
         df = df.append(df_temp.T, ignore_index=True)
+
     lookup = df[df["Title"] == book]
     lookup = lookup["Lookup"].tolist()[0]
 
@@ -85,6 +84,7 @@ def quick_chart(request):
 
     # Getting specific book details
     df_book = df[df["Title"] == book]
+
 
     # Need to un json dumps the data
     words = json.loads(df_book["Unique_Word_list"].tolist()[0])
@@ -203,7 +203,6 @@ def vector_chart(request):
     return JsonResponse(json.loads(json.dumps(context)))
 
 def all_book_vector_chart(request):
-    print("test")
     # Creating vector plot
     from nltk.corpus import wordnet as wn
     import nltk

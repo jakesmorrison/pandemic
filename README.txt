@@ -2,3 +2,17 @@
 
 1) redis-server
 2) python manage.py runserver
+
+## Books
+python manage.py book_to_db "The Passage" "Justin Cronin" "thepassage" "Fiction" "Post-Apocalyptic" "2016-10-05" "2016-12-18" 
+python manage.py book_to_db "1984" "George Orwell" "1984" "Fiction" "Dystopian" "2016-11-19" "2016-11-25" 
+python manage.py book_to_db "A Short History Of Nearly Everything" "Bill Bryson" "ashorthistoryofnearlyeverything" "Non-Fiction" "Science" "2016-12-19" "2017-01-02" 
+python manage.py book_to_db "Foundation" "Isaac Asimov" "foundation" "Fiction" "Science Fiction" "2017-01-29" "2017-02-05" 
+python manage.py book_to_db "The Sun Also Rises" "Ernest Hemingway" "thesunalsorises" "Fiction" "Classics" "2017-02-07" "2017-02-17" 
+python manage.py book_to_db "The Hitchhikers Guide to the Galaxy" "Douglas Adams" "the_hitchhikers_guide_to_the_galaxy" "Fiction" "Science Fiction" "2017-02-17" "2017-02-19" 
+python manage.py book_to_db "The Road" "Cormac McCarthy" "theroad" "Fiction" "Post-Apocalyptic" "2017-03-7" "2017-03-19" 
+python manage.py book_to_db "Being Mortal" "Atul Gawande" "beingmortal" "Non-Fiction" "Medicine" "2017-03-10" "2017-03-19" 
+python manage.py book_to_db "East Of Eden" "John Steinbeck" "eastofeden" "Fiction" "Classics" "2017-04-01" "2017-04-25" 
+python manage.py book_to_db "Foundation and Empire" "Isaac Asimov" "foundationandempire" "Fiction" "Science Fiction" "2017-04-28" "2017-05-05" 
+python manage.py book_to_db "American Gods" "Neil Gaiman" "americangods" "Fiction" "Fantasy" "2017-05-27" "2017-07-25" 
+python manage.py book_to_db "The Handmaid's Tale" "Margaret Atwood" "thehandmaidstale" "Fiction" "Dystopian" "2017-06-20" "2017-07-20" 

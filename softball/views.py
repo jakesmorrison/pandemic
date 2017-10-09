@@ -218,7 +218,6 @@ def player_dash(request):
     bands.append({"from": start, "to": start + counter, "color": season_color[color_counter]})
 
     df = df[df["OPS"]>0]
-    print(df)
 
     player_game_stat_data = [{"name":name,"data":df["OPS"].tolist()}]
     player_game_stat_cat = [str(x) for x in df["Date"].tolist()]
