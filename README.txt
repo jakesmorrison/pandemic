@@ -15,4 +15,8 @@ python manage.py book_to_db "Being Mortal" "Atul Gawande" "beingmortal" "Non-Fic
 python manage.py book_to_db "East Of Eden" "John Steinbeck" "eastofeden" "Fiction" "Classics" "2017-04-01" "2017-04-25" 
 python manage.py book_to_db "Foundation and Empire" "Isaac Asimov" "foundationandempire" "Fiction" "Science Fiction" "2017-04-28" "2017-05-05" 
 python manage.py book_to_db "American Gods" "Neil Gaiman" "americangods" "Fiction" "Fantasy" "2017-05-27" "2017-07-25" 
-python manage.py book_to_db "The Handmaid's Tale" "Margaret Atwood" "thehandmaidstale" "Fiction" "Dystopian" "2017-06-20" "2017-07-20" 
+python manage.py book_to_db "The Handmaid's Tale" "Margaret Atwood" "thehandmaidstale" "Fiction" "Dystopian" "2017-06-20" "2017-07-20"
+
+#Softball
+python manage.py csv_to_db /root/pandemic/softball/static/softball/csv/last_game.csv
+
