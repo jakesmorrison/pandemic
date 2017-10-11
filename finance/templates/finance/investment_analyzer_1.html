@@ -14,55 +14,63 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 
-
 </head>
 <body>
 
 <div class="container">
+    <div class="row" >
+        <div class="col-lg-1 col-lg-offset-2 col-xs-12">
+            <button class="btn" style="position:absolute; background: transparent; border-color: transparent;" onclick="minimize()">
+                <i class="fa fa-window-minimize fa-2" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="col-lg-7 col-lg-offset-0 col-xs-12" style="border-style: solid;">
+            <p class="text-area" style="">Test <br> teast<br></p>
+        </div>
+    </div>
+    <br>
+    <br>
     <div class="row">
-        <h1 class="centered">Investment Analyzer</h1>
-        <br>
         <div class="col-lg-10 col-lg-offset-1 col-xs-12"><div id="my_chart"></div></div>
     </div>
     <div class="row">
-        <div class="col-lg-2 col-lg-offset-2 col-xs-12 centered">
-            <h5 id="years_value"></h5>
-            <input id="years" data-slider-id='years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="40"/>
-        </div>
-
-        <div class="col-lg-4 col-lg-offset-0 col-xs-12 centered">
-            <h5 id="with_years_value">Years to Withdraw</h5>
-            <input id="with_years" data-slider-id='years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="20"/>
-        </div>
-
-        <div class="col-lg-2 col-lg-offset-0 col-xs-12 centered">
-            <h5 id="inflation_value">Inflation</h5>
-            <input id="inflation" data-slider-id='inflation' type="text" data-slider-min="0" data-slider-max="5" data-slider-step=".01" data-slider-value="1"/>
-        </div>
-
     </div>
     <div class="row">
         <div class="col-lg-6 col-xs-12">
-            <h1 class="centered">Portfolio 1</h1>
+            <h1 class="centered">Pre Retirement</h1>
+
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
-                    <h5 id="seed_value_1"></h5>
-                    <input id="seed_1" data-slider-id='seed_1' type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="1000" data-slider-value="70000"/>
+                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                    <h5 id="years_value"></h5>
+                    <input id="years" data-slider-id='years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="40"/>
                 </div>
-                <div class="col-lg-6 col-xs-12 centered">
+
+                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                    <h5 id="seed_value_1"></h5>
+                    <input id="seed_1" data-slider-id='seed_1' type="text" data-slider-min="0" data-slider-max="500000" data-slider-step="2000" data-slider-value="70000"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="cont_1_value"></h5>
                     <input id="cont_1" data-slider-id='cont_1' type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="100" data-slider-value="15000"/>
                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="yearly_return_value_1"></h5>
                     <input id="yearly_return_1" data-slider-id='yearly_return_1' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".1" data-slider-value="6"/>
                 </div>
-                <div class="col-lg-6 col-xs-12 centered">
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="fee_1_value"></h5>
                     <input id="fee_1" data-slider-id='fee_1' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".02"/>
                </div>
+                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                    <h5 id="inflation_value">Inflation</h5>
+                    <input id="inflation" data-slider-id='inflation' type="text" data-slider-min="0" data-slider-max="5" data-slider-step=".01" data-slider-value="1"/>
+                </div>
             </div>
             <br>
             <div class="row">
@@ -73,19 +81,24 @@
         </div>
 
         <div class="col-lg-6 col-xs-12">
-            <h1 class="centered">Portfolio 1</h1>
+            <h1 class="centered">Post Retirement</h1>
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                    <h5 id="with_years_value">Years to Withdraw</h5>
+                    <input id="with_years" data-slider-id='years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="20"/>
+                </div>
+                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="withdraw_rate_value"></h5>
                     <input id="withdraw_rate" data-slider-id='withdraw_rate' type="text" data-slider-min="0" data-slider-max="500000" data-slider-step="1000" data-slider-value="75000"/>
                 </div>
-                <div class="col-lg-6 col-xs-12 centered">
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="yearly_return_value_2"></h5>
                     <input id="yearly_return_2" data-slider-id='yearly_return_2' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".01" data-slider-value="3"/>
                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 col-xs-12 centered">
+
+                <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="fee_2_value"></h5>
                     <input id="fee_2" data-slider-id='fee_2' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".02"/>
                </div>
@@ -166,10 +179,13 @@ var chart = Highcharts.chart('my_chart', {
     },
     series: [{
         name: 'Pre Retirement',
+        color: '#008000',
         data: []
     },
     {
         name: 'Post Retirement',
+        color: '#00cd00',
+        negativeColor: '#ff5f5f',
         data: []
     }]
 });
@@ -242,14 +258,14 @@ function setup_sliders(){
     $('#seed_1').slider({
         formatter: function(value) {
             seed_money_1 = value;
-            $("#seed_value_1").text("Starting Investment: $"+value.toLocaleString());
+            $("#seed_value_1").text("Initial Investment: $"+value.toLocaleString());
             return '$' + value.toLocaleString();
         }
     });
     $('#years').slider({
         formatter: function(value) {
             years = value;
-            $("#years_value").text("Years Till Retirement: "+value.toLocaleString());
+            $("#years_value").text("Working Years: "+value.toLocaleString());
             return '' + value.toLocaleString();
         }
     });
@@ -354,6 +370,10 @@ $("#withdraw_rate").on("slide", function(slideEvt) {
 	withdraw_rate = slideEvt.value;
     update_data();
 });
+
+function minimize(){
+    $(".text-area").css("display", "none");
+}
 </script>
 
 
