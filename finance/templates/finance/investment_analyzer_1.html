@@ -65,7 +65,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="fee_1_value"></h5>
-                    <input id="fee_1" data-slider-id='fee_1' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".02"/>
+                    <input id="fee_1" data-slider-id='fee_1' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".06"/>
                </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="inflation_value">Inflation</h5>
@@ -100,9 +100,22 @@
 
                 <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="fee_2_value"></h5>
-                    <input id="fee_2" data-slider-id='fee_2' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".02"/>
+                    <input id="fee_2" data-slider-id='fee_2' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".06"/>
                </div>
             </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-xs-6 centered">
+                    <h5 id="roth_trad_value"></h5>
+                    <input id="roth_trad" data-slider-id='roth_trad' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+               </div>
+
+                <div class="col-lg-6 col-xs-6 centered">
+                    <h5 id="tax_value"></h5>
+                    <input id="tax" data-slider-id='tax' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="15"/>
+               </div>
+            </div>
+
             <br>
             <div class="row">
                 <div id="total_1" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
@@ -201,6 +214,8 @@ var inflation = 0;
 var with_years = 0;
 var withdraw_rate = 0;
 var max_value = 0;
+var roth_trad = 0;
+var tax = 0;
 
 $( document ).ready(function() {
     setup_sliders();
@@ -243,13 +258,20 @@ function update_data(){
 
     for(x=0; x<with_years; x++){
         if(x==0){
-           withdrawl_data[x] =([years-1,parseInt(max_value)]);
+            roth = withdraw_rate*(1-roth_trad/100);
+            trad = withdraw_rate*(roth_trad/100) + withdraw_rate*(roth_trad/100)*(tax/100);
+            my_with_rate = roth + trad;
+            console.log(my_with_rate)
+            withdrawl_data[x] =([years-1,(parseInt(max_value)-my_with_rate)*Math.pow((return_2), 12)]);
         }
         else{
-            withdrawl_data[x] =[years+x-1, (withdrawl_data[x-1][1]-withdraw_rate)*Math.pow((return_2), 12)];
-
+            roth = withdraw_rate*(1-roth_trad/100);
+            trad = withdraw_rate*(roth_trad/100) + withdraw_rate*(roth_trad/100)*(tax/100);
+            my_with_rate = roth + trad;
+            withdrawl_data[x] =[years+x-1, (withdrawl_data[x-1][1]-my_with_rate)*Math.pow((return_2), 12)];
         }
     }
+    console.log(withdrawl_data)
     chart.series[1].update({
             data: withdrawl_data
     });
@@ -328,6 +350,23 @@ function setup_sliders(){
             return '' + value.toLocaleString()+'%';
         }
     });
+
+    $('#roth_trad').slider({
+        formatter: function(value) {
+            roth_trad = value;
+            $("#roth_trad_value").text("Roth/Traditional Ratio: "+value.toLocaleString() + '%');
+            return '' + value.toLocaleString()+'%';
+        }
+    });
+
+   $('#tax').slider({
+        formatter: function(value) {
+            tax = value;
+            $("#tax_value").text("Tax Rate: "+value.toLocaleString() + '%');
+            return '' + value.toLocaleString()+'%';
+        }
+    });
+
     update_data();
 }
 $("#seed_1").on("slide", function(slideEvt) {
@@ -370,6 +409,16 @@ $("#withdraw_rate").on("slide", function(slideEvt) {
 	withdraw_rate = slideEvt.value;
     update_data();
 });
+$("#roth_trad").on("slide", function(slideEvt) {
+	roth_trad = slideEvt.value;
+    update_data();
+});
+
+$("#tax").on("slide", function(slideEvt) {
+	tax = slideEvt.value;
+    update_data();
+});
+
 
 function minimize(){
     $(".text-area").css("display", "none");
