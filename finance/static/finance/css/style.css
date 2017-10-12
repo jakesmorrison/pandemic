@@ -59,3 +59,11 @@
     width: 150px;
     height: 20px;
 }
+
+.slider-selection {
+    background: #63d497;
+}
+
+.slider-handle.round {
+    border-radius: 0%;
+}

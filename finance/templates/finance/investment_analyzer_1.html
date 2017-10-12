@@ -18,17 +18,18 @@
 <body>
 
 <div class="container">
-    <div class="row" >
-        <div class="col-lg-1 col-lg-offset-2 col-xs-12">
-            <button class="btn" style="position:absolute; background: transparent; border-color: transparent;" onclick="minimize()">
-                <i class="fa fa-window-minimize fa-2" aria-hidden="true"></i>
-            </button>
-        </div>
-        <div class="col-lg-7 col-lg-offset-0 col-xs-12" style="border-style: solid;">
-            <p class="text-area" style="">Test <br> teast<br></p>
-        </div>
-    </div>
+    <!--<div class="row" >-->
+        <!--<div class="col-lg-1 col-lg-offset-2 col-xs-12">-->
+            <!--<button class="btn my_text" style="position:absolute; background: transparent; border-color: transparent;" onclick="minimize()">-->
+                <!--<i class="fa fa-window-minimize fa-2" aria-hidden="true"></i>-->
+            <!--</button>-->
+        <!--</div>-->
+        <!--<div class="col-lg-7 col-lg-offset-0 col-xs-12" style="border-style: solid;">-->
+            <!--<p class="text-area" style="">Test <br> teast<br></p>-->
+        <!--</div>-->
+    <!--</div>-->
     <br>
+    <h2 class="centered">Retirement Analyzer</h2>
     <br>
     <div class="row">
         <div class="col-lg-10 col-lg-offset-1 col-xs-12"><div id="my_chart"></div></div>
@@ -65,7 +66,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="fee_1_value"></h5>
-                    <input id="fee_1" data-slider-id='fee_1' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".06"/>
+                    <input id="fee_1" data-slider-id='fee_1' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
                </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="inflation_value">Inflation</h5>
@@ -89,7 +90,7 @@
                 </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="withdraw_rate_value"></h5>
-                    <input id="withdraw_rate" data-slider-id='withdraw_rate' type="text" data-slider-min="0" data-slider-max="500000" data-slider-step="1000" data-slider-value="75000"/>
+                    <input id="withdraw_rate" data-slider-id='withdraw_rate' type="text" data-slider-min="0" data-slider-max="250000" data-slider-step="1000" data-slider-value="75000"/>
                 </div>
             </div>
             <div class="row">
@@ -100,7 +101,7 @@
 
                 <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="fee_2_value"></h5>
-                    <input id="fee_2" data-slider-id='fee_2' type="text" data-slider-min="0" data-slider-max="3" data-slider-step=".01" data-slider-value=".06"/>
+                    <input id="fee_2" data-slider-id='fee_2' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
                </div>
             </div>
 
@@ -144,7 +145,8 @@
 current_year = (new Date()).getFullYear();
 var chart = Highcharts.chart('my_chart', {
     chart: {
-        type: 'area'
+        type: 'area',
+        zoomType: 'xy'
     },
     title: {
         text: ''
@@ -166,14 +168,16 @@ var chart = Highcharts.chart('my_chart', {
         },
         labels: {
             formatter: function () {
-                val = this.value;
+                val = numberWithCommas(this.value);
                 return '$'+val.toLocaleString();
             }
         }
     },
     tooltip: {
         formatter: function () {
-            return 'Amount: $' + Math.round(this.y)
+            val = numberWithCommas(Math.round(this.y));
+            year = 2017+parseInt(this.x)
+            return 'Year: '+year+'<br> Amount: $' + val ;
         }
     },
     plotOptions: {
@@ -261,7 +265,6 @@ function update_data(){
             roth = withdraw_rate*(1-roth_trad/100);
             trad = withdraw_rate*(roth_trad/100) + withdraw_rate*(roth_trad/100)*(tax/100);
             my_with_rate = roth + trad;
-            console.log(my_with_rate)
             withdrawl_data[x] =([years-1,(parseInt(max_value)-my_with_rate)*Math.pow((return_2), 12)]);
         }
         else{
@@ -271,7 +274,6 @@ function update_data(){
             withdrawl_data[x] =[years+x-1, (withdrawl_data[x-1][1]-my_with_rate)*Math.pow((return_2), 12)];
         }
     }
-    console.log(withdrawl_data)
     chart.series[1].update({
             data: withdrawl_data
     });
@@ -422,6 +424,12 @@ $("#tax").on("slide", function(slideEvt) {
 
 function minimize(){
     $(".text-area").css("display", "none");
+    $(".my_text").html()
+    $(".my_text").html("<i class='a fa-plus fa-2' aria-hidden='true'></i>")
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 </script>
 
