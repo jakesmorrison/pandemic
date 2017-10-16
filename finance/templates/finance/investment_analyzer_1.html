@@ -55,11 +55,11 @@
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="cont_1_value"></h5>
-                    <input id="cont_1" data-slider-id='cont_1' type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="100" data-slider-value="15000"/>
+                    <input id="cont_1" data-slider-id='cont_1' type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="500" data-slider-value="15000"/>
                </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="yearly_return_value_1"></h5>
-                    <input id="yearly_return_1" data-slider-id='yearly_return_1' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".1" data-slider-value="6"/>
+                    <input id="yearly_return_1" data-slider-id='yearly_return_1' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="6"/>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
                     <h5 id="inflation_value">Inflation</h5>
-                    <input id="inflation" data-slider-id='inflation' type="text" data-slider-min="0" data-slider-max="5" data-slider-step=".01" data-slider-value="1"/>
+                    <input id="inflation" data-slider-id='inflation' type="text" data-slider-min="0" data-slider-max="5" data-slider-step=".5" data-slider-value="1"/>
                 </div>
             </div>
             <br>
@@ -96,7 +96,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="yearly_return_value_2"></h5>
-                    <input id="yearly_return_2" data-slider-id='yearly_return_2' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".01" data-slider-value="3"/>
+                    <input id="yearly_return_2" data-slider-id='yearly_return_2' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="3"/>
                </div>
 
                 <div class="col-lg-6 col-xs-6 centered">
@@ -108,7 +108,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xs-6 centered">
                     <h5 id="roth_trad_value"></h5>
-                    <input id="roth_trad" data-slider-id='roth_trad' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="50"/>
+                    <input id="roth_trad" data-slider-id='roth_trad' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/>
                </div>
 
                 <div class="col-lg-6 col-xs-6 centered">
@@ -140,73 +140,10 @@
 <script src=" {% static 'finance/js/bootstrap_slider.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'finance/js/round_slider.js' %}" rel="stylesheet"></script>
 <script src="{% static 'finance/js/highcharts.js' %}"></script>
+<script src="{% static 'finance/js/pre_post_retire.js' %}"></script>
 
 <script>
-current_year = (new Date()).getFullYear();
-var chart = Highcharts.chart('my_chart', {
-    chart: {
-        type: 'area',
-        zoomType: 'xy'
-    },
-    title: {
-        text: ''
-    },
-    legend: {enabled: true},
-    exporting: { enabled: false },
-    credits: {enabled: false},
-    xAxis: {
-        allowDecimals: false,
-        labels: {
-            formatter: function () {
-                return current_year+this.value; // clean, unformatted number for year
-            }
-        }
-    },
-    yAxis: {
-        title: {
-            text: 'Money ($)'
-        },
-        labels: {
-            formatter: function () {
-                val = numberWithCommas(this.value);
-                return '$'+val.toLocaleString();
-            }
-        }
-    },
-    tooltip: {
-        formatter: function () {
-            val = numberWithCommas(Math.round(this.y));
-            year = 2017+parseInt(this.x)
-            return 'Year: '+year+'<br> Amount: $' + val ;
-        }
-    },
-    plotOptions: {
-        area: {
-            marker: {
-                enabled: false,
-                symbol: 'circle',
-                radius: 2,
-                states: {
-                    hover: {
-                        enabled: false
-                    }
-                }
-            }
-        }
-    },
-    series: [{
-        name: 'Pre Retirement',
-        color: '#008000',
-        data: []
-    },
-    {
-        name: 'Post Retirement',
-        color: '#00cd00',
-        negativeColor: '#ff5f5f',
-        data: []
-    }]
-});
-
+var current_year = (new Date()).getFullYear();
 var seed_money_1 = 0;
 var years = 0;
 var yearly_return_1 = 0;
@@ -232,14 +169,10 @@ function update_data(){
     return_1_no_fee = 1 + ((yearly_return_1-inflation)/100)/12
     for(x=0; x<years; x++){
         if(x==0){
-            //data_1.push(seed_money*return_1);
-            //data_2.push(seed_money*return_2);
             data_1.push(seed_money_1);
             data_1_no_fee.push(seed_money_1);
         }
         else{
-            //data_1.push((data_1[x-1]+cont_1)*return_1);
-            //data_2.push((data_2[x-1]+cont_2)*return_2);
             data_1.push((data_1[x-1]+cont_1)*Math.pow((return_1), 12));
             data_1_no_fee.push((data_1_no_fee[x-1]+cont_1)*Math.pow((return_1_no_fee), 12));
         }
@@ -356,7 +289,7 @@ function setup_sliders(){
     $('#roth_trad').slider({
         formatter: function(value) {
             roth_trad = value;
-            $("#roth_trad_value").text("Roth/Traditional Ratio: "+value.toLocaleString() + '%');
+            $("#roth_trad_value").text("% Traditional: "+value.toLocaleString() + '%');
             return '' + value.toLocaleString()+'%';
         }
     });
