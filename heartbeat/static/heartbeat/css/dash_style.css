@@ -1,47 +1,67 @@
+/* General */
+/*--------------------------------------*/
+.centered{
+    text-align:center;
+}
+
+html, body {
+  height: 100%;
+  background: #515f70;
+}
+
+.container{
+}
+
+/*--------------------------------------*/
+
+
+
+/* TEXT */
+/*--------------------------------------*/
+.myfont{
+
+}
 
 .nvdimm_write_text{
-    display: inline-block;
-    float: left;
-    width:50%;
 }
 
 .nvdimm_write_value{
-    display: inline-block;
-    float: left;
-    width:50%;
-    margin-top: 70px;
+    margin-top: 50px;
     font-size: 20px;
     color: #adb8c4;
 }
 
 .nvme_write_text{
-    display: inline-block;
-    float: left;
-    width:50%;
 }
 
 .nvme_write_value{
-    display: inline-block;
-    float: left;
-    width:50%;
-    margin-top: 70px;
+    margin-top: 50px;
     font-size: 20px;
     color: #adb8c4;
-}
-
-.centered{
-    text-align:center;
 }
 
 .myheadings{
     color: #adb8c4;
 }
+.nvdimm_latency_value{
+    display: inline-block;
+    float: left;
+    width:25%;
+    margin-top: 70px;
+    font-size: 20px;
+    color: #adb8c4;
+}
+
+
+/*--------------------------------------*/
+/* Objects */
+/*--------------------------------------*/
 
 .square1{
     background: rgba(46, 144, 218, 0.75);
     border: 5px solid #2e90da;
     width: 150px;
-    height: 70px;
+    height: 90px;
     margin: 0;
     border-radius: 50%;
     animation-name: pulse1;
@@ -51,7 +71,7 @@
     animation-direction: normal;
     animation-timing-function: ease-in;
     animation-fill-mode: alternate;
-
+    position: relative;
 }
 
 @keyframes pulse1 {
@@ -70,7 +90,7 @@
     background: rgba(154, 202, 61, 0.75);
     border: 5px solid #9aca3d;
     width: 150px;
-    height: 70px;
+    height: 90px;
     margin: 0;
     border-radius: 50%;
     animation-name: pulse2;
@@ -80,6 +100,7 @@
     animation-direction: normal;
     animation-timing-function: ease-in;
     animation-fill-mode: alternate;
+    position: relative;
 }
 
 @keyframes pulse2 {
@@ -93,20 +114,4 @@
     background-color: rgba(154, 202, 61, 0.75);
   }
 }
-
-html,
-body {
-  height: 100%;
-}
-pulse
-A rhythmical throbbing of the arteries as blood is propelled through them, typically as felt in the wrists or neck.
-
-
-.nvdimm_latency_value{
-    display: inline-block;
-    float: left;
-    width:25%;
-    margin-top: 70px;
-    font-size: 20px;
-    color: #adb8c4;
-}
+/*--------------------------------------*/
