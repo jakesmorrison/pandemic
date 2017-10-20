@@ -1,0 +1,112 @@
+
+.nvdimm_write_text{
+    display: inline-block;
+    float: left;
+    width:50%;
+}
+
+.nvdimm_write_value{
+    display: inline-block;
+    float: left;
+    width:50%;
+    margin-top: 70px;
+    font-size: 20px;
+    color: #adb8c4;
+}
+
+.nvme_write_text{
+    display: inline-block;
+    float: left;
+    width:50%;
+}
+
+.nvme_write_value{
+    display: inline-block;
+    float: left;
+    width:50%;
+    margin-top: 70px;
+    font-size: 20px;
+    color: #adb8c4;
+}
+
+.centered{
+    text-align:center;
+}
+
+.myheadings{
+    color: #adb8c4;
+}
+
+.square1{
+    background: rgba(46, 144, 218, 0.75);
+    border: 5px solid #2e90da;
+    width: 150px;
+    height: 70px;
+    margin: 0;
+    border-radius: 50%;
+    animation-name: pulse1;
+    animation-duration: 1s;
+    animation-delay: 0ms;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-timing-function: ease-in;
+    animation-fill-mode: alternate;
+
+}
+
+@keyframes pulse1 {
+  0% {
+    background-color: rgba(46, 144, 218, 0.75);
+  }
+  50% {
+    background-color: rgba(46, 144, 218, 0.25);
+  }
+  100% {
+    background-color: rgba(46, 144, 218, 0.75);
+  }
+}
+
+.square2{
+    background: rgba(154, 202, 61, 0.75);
+    border: 5px solid #9aca3d;
+    width: 150px;
+    height: 70px;
+    margin: 0;
+    border-radius: 50%;
+    animation-name: pulse2;
+    animation-duration: 5s;
+    animation-delay: 0ms;
+    animation-iteration-count: infinite;
+    animation-direction: normal;
+    animation-timing-function: ease-in;
+    animation-fill-mode: alternate;
+}
+
+@keyframes pulse2 {
+  0% {
+    background-color: rgba(154, 202, 61, 0.75);
+  }
+  50% {
+    background-color: rgba(154, 202, 61, .25);
+  }
+  100% {
+    background-color: rgba(154, 202, 61, 0.75);
+  }
+}
+
+html,
+body {
+  height: 100%;
+}
+pulse
+A rhythmical throbbing of the arteries as blood is propelled through them, typically as felt in the wrists or neck.
+
+
+.nvdimm_latency_value{
+    display: inline-block;
+    float: left;
+    width:25%;
+    margin-top: 70px;
+    font-size: 20px;
+    color: #adb8c4;
+}

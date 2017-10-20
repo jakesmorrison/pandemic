@@ -27,13 +27,25 @@ def demo_dashboard(request):
 
 counter = 0
 import random
+import subprocess
 def get_data(request):
     global counter
     counter = counter+1
-    #int(time.time())*1000
+
+    sudo_password = 'BrettFavre13'
+
+    # p = subprocess.Popen("sudo dd if=/dev/zero bs=512k of=tstfile count=1024 2>&1 | awk '/sec/ {print $1 / $5 / 1048576}'", shell=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    # my_line = ""
+    # for line in p.stdout.readlines():
+    #     my_line=line
+    # my_line = float(str(my_line).replace("b","").replace("\'","").replace("n","").replace("\\",""))
+    # print(my_line)
+
+
     context={
-        'arr': [counter,random.randint(70,80)],
-        'arr2': [counter, random.randint(40, 50)]
+        #'arr': [counter,my_line],
+        'arr': [counter, random.randint(740, 800)],
+        'arr2': [counter, random.randint(400, 700)],
 
     }
     return JsonResponse(json.loads(json.dumps(context)))

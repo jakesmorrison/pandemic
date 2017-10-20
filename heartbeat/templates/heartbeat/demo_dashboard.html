@@ -6,22 +6,90 @@
 
     {% load staticfiles %}
     <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'heartbeat/css/dash_style.css' %}" rel="stylesheet">
 
 </head>
-<body>
-
+<body style="height:100%; background: #515f70;">
 
 <div class="container">
+    <!--<div class="row">-->
+        <!--<div class="col-xs-1 col-xs-offset-1 centered">-->
+            <!--<img src="{% static 'heartbeat/img/dell_icon.png' %}" alt="dell" style="width:50px;height:50px; margin-top:20px;">-->
+        <!--</div>-->
+        <!--<div class="col-xs-1 centered">-->
+            <!--<img src="{% static 'heartbeat/img/enmotus_icon.png' %}" alt="enmotus" style="width:50px;height:50px; margin-top:20px;">-->
+        <!--</div>-->
+        <!--<div class="col-xs-6 centered">-->
+            <!--<h1>Super Computer Conference</h1>-->
+        <!--</div>-->
+        <!--<div class="col-xs-2 centered">-->
+            <!--<img src="{% static 'heartbeat/img/micron_icon.png' %}" alt="micron" style="width:150px;height:100px; margin-top: -10px;">-->
+        <!--</div>-->
+    <!--</div>-->
+
     <div class="row">
-        <div class="col-xs-12" style="text-align:center;">
-            <h2>Some Title</h2>
+        <div class="col-xs-2 centered">
+            <h3 class="myheadings">Write Latency</h3>
+            <p class="myheadings"><i>Lower is better</i></p>
+        </div>
+        <div class="col-xs-4 col-xs-offset-3 centered">
+            <h3 class="myheadings">Write Bandwidth</h3>
+            <p class="myheadings"><i>Higher is better</i></p>
         </div>
     </div>
+
+    <br>
+
     <div class="row">
-        <div class="col-xs-12 ">
-            <div id="container" style="width: 1000px; height: 400px; margin: 0 auto"></div>
+        <div class="col-xs-2">
+            <div class="row">
+                <div class="col-xs-12">
+                        <h5 class="centered" style="color: #adb8c4; font-weight:bold;">NVDIMM</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="square1 centered"><p class="centered" style="color: #adb8c4; font-weight:bold; font-size: 25px;">22µs</p></div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                        <h5 class="centered" style="color: #adb8c4; font-weight:bold;">NVME</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="square2 centered"><p class="centered" style="color: #adb8c4; font-weight:bold; font-size: 25px;">267µs</p></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-7">
+            <div id="container" style="width: 100%; height: 250px; margin: 0 auto;"></div>
+        </div>
+        <div class="col-xs-3" style="margin-top: 25px;">
+            <div style="width: 100%; height: 75px; margin: 0 auto; margin-top: -40px;">
+                <h5 class="centered" style="margin-bottom: -25px; color: #adb8c4; font-weight:bold;">NVDIMM</h5>
+                <table style="width:100%" class="">
+                    <tr>
+                        <th class="nvdimm_write_value centered"></th>
+                        <th class="nvdimm_write_text centered"><div id="pie_nvdimm_write" style="width: 150px; height: 150px; margin: 0 auto"></div></th>
+                    </tr>
+                </table>
+            </div>
+            <div style="width: 100%; height: 75px; margin: 0 auto; margin-top: 50px;">
+                <h5 class="centered" style="margin-bottom: -25px; color: #adb8c4; font-weight:bold;">NVME</h5>
+                <table style="width:100%" class="">
+                    <tr>
+                        <th class="nvme_write_value centered"></th>
+                        <th class="nvme_write_text centered"><div id="pie_nvme_write" style="width: 150px; height: 150px; margin: 0 auto"></div></th>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
+
 </div>
 
 
@@ -33,6 +101,7 @@
 
 <script>
 var chart; // global
+var pie_nvdimm_write;
 
 /**
  * Request data from the server, add it to the graph and set a timeout
@@ -47,7 +116,24 @@ function requestData() {
             var series = chart.series[0], shift = series.data.length > 40;
             chart.series[0].addPoint(msg.arr, false, shift);
             chart.series[1].addPoint(msg.arr2, false, shift);
+
+            max = 1000;
+            nvdimm_write_value = (msg.arr[1]/max)*100
+            nvme_write_value = (msg.arr2[1]/max)*100
+
+            pie_nvdimm_write.series[0].data[0].update(nvdimm_write_value);
+            pie_nvdimm_write.series[0].data[1].update(100-nvdimm_write_value);
+            //pie_nvdimm_write.setTitle({text: msg.arr[1]+" MBps"});
+
+            pie_nvme_write.series[0].data[0].update(nvme_write_value);
+            pie_nvme_write.series[0].data[1].update(100-nvme_write_value);
+            //pie_nvme_write.setTitle({text: msg.arr2[1]+" MBps"});
+
+
             chart.redraw()
+
+            $(".nvdimm_write_value").html(msg.arr[1]+" MBps")
+            $(".nvme_write_value").html(msg.arr2[1]+" MBps")
 
             //if (arr.length<20){
             //    arr.push(msg.arr)
@@ -64,8 +150,11 @@ function requestData() {
 }
 
 $(document).ready(function() {
+
     chart = new Highcharts.Chart({
         chart: {
+            borderWidth: 0,
+            backgroundColor: null,
             renderTo: 'container',
             defaultSeriesType: 'areaspline',
             events: {
@@ -86,20 +175,37 @@ $(document).ready(function() {
                enabled: false
            },
            minorTickLength: 0,
-           tickLength: 0
-
+           tickLength: 0,
+           lineWidth: 0,
+           minorGridLineWidth: 0,
+           lineColor: 'transparent'
         },
         yAxis: {
-            minPadding: 0.2,
-            maxPadding: 0.2,
+            max: 1000,
+            min: 300,
             title: {
-                text: 'Value',
+                text: '',
                 margin: 0
+            },
+            labels: {
+            formatter: function () {
+                val = this.value;
+                return ''+val.toLocaleString()+' MBps';
+            },
+            style: {
+                color: '#adb8c4',
+                fontSize:'16px'
             }
+            },
+           minorTickLength: 0,
+           tickLength: 0,
+           lineWidth: 0,
+           minorGridLineWidth: 0,
+           lineColor: 'transparent'
         },
         plotOptions: {
             areaspline: {
-                fillOpacity: 0.5,
+                fillOpacity: 0.75,
                 lineWidth: 5,
                 marker: {
                     enabled: false
@@ -114,19 +220,115 @@ $(document).ready(function() {
                     }
                 }
             }
-
         },
         series: [{
             name: 'NVDIMM',
-            data: []
+            data: [],
+            color: '#2e90da',
         },
         {
-            name: 'NAND',
-            data: []
+            name: 'NVME',
+            data: [],
+            color: '#9aca3d',
         }]
     });
+
+pie_nvdimm_write = Highcharts.chart('pie_nvdimm_write', {
+    chart: {
+        borderWidth: 0,
+        backgroundColor: null,
+    },
+    title: {
+        text: '',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 40,
+        style: {
+            color: 'gray',
+            fontSize:'16px'
+        },
+        floating: true,
+        y: 50
+    },
+    exporting: { enabled: false },
+    credits: {enabled: false},
+    tooltip: { enabled: false },
+    plotOptions: {
+        pie: {
+            colors: ["#2e90da", "rgba(0, 0, 0, 0)"],
+            dataLabels: {
+                enabled: false,
+            },
+            startAngle: -105,
+            endAngle: 105,
+            center: ['50%', '75%'],
+        }
+    },
+    series: [{
+        type: 'pie',
+        innerSize: '50%',
+        data: [
+            ['Firefox',   75],
+            ['Opera',     25],
+            {
+                y: 0.2,
+                dataLabels: {
+                    enabled: false
+                }
+            }
+        ]
+    }]
 });
 
+pie_nvme_write = Highcharts.chart('pie_nvme_write', {
+    chart: {
+        borderWidth: 0,
+        backgroundColor: null
+    },
+    title: {
+        text: '',
+        align: 'center',
+        verticalAlign: 'middle',
+        y: 40,
+        style: {
+            color: 'gray',
+            fontSize:'16px'
+        },
+        floating: true,
+        y: 50
+    },
+    exporting: { enabled: false },
+    credits: {enabled: false},
+    tooltip: { enabled: false },
+    plotOptions: {
+        pie: {
+           colors: ["#9aca3d", "rgba(0, 0, 0, 0)"],
+            dataLabels: {
+                enabled: false,
+            },
+            startAngle: -105,
+            endAngle: 105,
+            center: ['50%', '75%']
+        }
+    },
+    series: [{
+        type: 'pie',
+        innerSize: '50%',
+        data: [
+            ['Firefox',   75],
+            ['Opera',     25],
+            {
+                y: 0.2,
+                dataLabels: {
+                    enabled: false
+                }
+            }
+        ]
+    }]
+});
+
+
+});
 
 
 </script>
