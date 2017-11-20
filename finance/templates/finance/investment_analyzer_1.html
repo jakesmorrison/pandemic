@@ -26,11 +26,11 @@
         <div class="col-lg-10 col-lg-offset-1 col-xs-12"><div id="my_chart"></div></div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-lg-offset-2 col-xs-6 centered">
+        <div class="col-lg-4 col-lg-offset-2 col-xs-12 centered">
             <h5 class="" id="age_value"></h5>
-            <input id="age" data-slider-id='age' type="text" data-slider-min="18" data-slider-max="65" data-slider-step="1" data-slider-value="27"/>
+            <input class="hidden-sm" id="age" data-slider-id='age' type="text" data-slider-min="18" data-slider-max="65" data-slider-step="1" data-slider-value="27"/>
         </div>
-        <div class="col-lg-4 col-lg-offset-0 col-xs-6 centered">
+        <div class="col-lg-4 col-lg-offset-0 col-xs-12 centered">
             <div>
                 <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="inflation_help" onclick="show_help_info(this,add_class)" ></i>
                 <h5 class="my-inline-text" id="inflation_value"></h5>
@@ -42,7 +42,7 @@
         <div class="col-lg-6 col-xs-12">
             <h1 class="centered">Pre Retirement</h1>
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
                     <div>
                         <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="working_years_help" onclick="show_help_info(this,add_class)" ></i>
                         <h5 class="my-inline-text" id="working_years_value"></h5>
@@ -50,7 +50,7 @@
                     <input id="working_years" data-slider-id='working_years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="30"/>
                 </div>
 
-                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
                     <div>
                         <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="initial_investment_help" onclick="show_help_info(this,add_class)" ></i>
                         <h5 class="my-inline-text" id="initial_investment_value"></h5>
@@ -59,7 +59,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
                     <div>
                         <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_contribution_help" onclick="show_help_info(this,add_class)" ></i>
                         <h5 class="my-inline-text" id="yearly_contribution_value"></h5>
@@ -67,7 +67,7 @@
 
                     <input id="yearly_contribution" data-slider-id='yearly_contribution' type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="500" data-slider-value="20000"/>
                </div>
-                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
                     <div>
                         <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_return_pre_help" onclick="show_help_info(this,add_class)" ></i>
                         <h5 class="my-inline-text" id="yearly_return_pre_value"></h5>
@@ -77,7 +77,7 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6 col-xs-6 centered">
+                <div class="col-lg-6 col-xs-12 centered">
                     <div>
                         <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_fee_pre_help" onclick="show_help_info(this,add_class)" ></i>
                         <h5 class="my-inline-text" id="yearly_fee_pre_value"></h5>
@@ -97,34 +97,34 @@
         <div class="col-lg-6 col-xs-12">
             <h1 class="centered">Post Retirement</h1>
             <div class="row">
-                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
                     <h5 id="withdrawl_years_value">Years to Withdraw</h5>
                     <input id="withdrawl_years" data-slider-id='withdrawl_years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="20"/>
                 </div>
-                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
+                <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
                     <h5 id="withdrawl_rate_value"></h5>
                     <input id="withdrawl_rate" data-slider-id='withdrawl_rate' type="text" data-slider-min="0" data-slider-max="250000" data-slider-step="1000" data-slider-value="75000"/>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-xs-6 centered">
+                <div class="col-lg-6 col-xs-12 centered">
                     <h5 id="yearly_return_post_value"></h5>
                     <input id="yearly_return_post" data-slider-id='yearly_return_post' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="3"/>
                </div>
 
-                <div class="col-lg-6 col-xs-6 centered">
+                <div class="col-lg-6 col-xs-12 centered">
                     <h5 id="yearly_fee_post_value"></h5>
                     <input id="yearly_fee_post" data-slider-id='yearly_fee_post' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
                </div>
             </div>
 
             <div class="row">
-                <div class="col-lg-6 col-xs-6 centered">
+                <div class="col-lg-6 col-xs-12 centered">
                     <h5 id="roth_trad_value"></h5>
                     <input id="roth_trad" data-slider-id='roth_trad' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/>
                </div>
 
-                <div class="col-lg-6 col-xs-6 centered">
+                <div class="col-lg-6 col-xs-12 centered">
                     <h5 id="tax_value"></h5>
                     <input id="tax" data-slider-id='tax' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="15"/>
                </div>
