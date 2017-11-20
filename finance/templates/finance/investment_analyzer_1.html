@@ -26,11 +26,11 @@
         <div class="col-lg-10 col-lg-offset-1 col-xs-12"><div id="my_chart"></div></div>
     </div>
     <div class="row">
-        <div class="col-lg-4 col-lg-offset-2 col-xs-12 centered">
+        <div class="col-lg-2 col-lg-offset-4 col-xs-6 centered">
             <h5 class="" id="age_value"></h5>
             <input class="hidden-sm" id="age" data-slider-id='age' type="text" data-slider-min="18" data-slider-max="65" data-slider-step="1" data-slider-value="27"/>
         </div>
-        <div class="col-lg-4 col-lg-offset-0 col-xs-12 centered">
+        <div class="col-lg-2 col-lg-offset-0 col-xs-6 centered">
             <div>
                 <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="inflation_help" onclick="show_help_info(this,add_class)" ></i>
                 <h5 class="my-inline-text" id="inflation_value"></h5>
@@ -416,7 +416,7 @@ function numberWithCommas(x) {
 }
 
 help_info ={
-            'inflation_help':'The rate at which goods and services increase and consequently reduce the purchasing power of a currecny.',
+            'inflation_help':'The rate at which goods and services increase and consequently reduce the purchasing power of a currency.',
             'working_years_help':'The amount of years you want to work until you retire.',
             'initial_investment_help': 'The amount of money you currently have invested in the market (401K, IRA, Money Market).',
             'yearly_contribution_help': 'The amount of money you plan to invest each year.',
@@ -450,7 +450,7 @@ function add_class(id_name, obj, position){
     $(".hover_box").html("<p>"+help_info[id_name]+"</p>")
 
     box_top = parseInt(position.top) - parseInt($(".hover_box").css("height"));
-    box_left = parseInt(position.left)
+    box_left = parseInt(position.left)/4
 
     $(".hover_box").css("top",box_top)
     $(".hover_box").css("left",box_left)
