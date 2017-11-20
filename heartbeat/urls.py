@@ -8,5 +8,6 @@ urlpatterns = [
     url(r'^withdraw_analyzer$', views.withdraw_analyzer, name='withdraw_analyzer'),
     url(r'^demo_dashboard$', views.demo_dashboard, name='demo_dashboard'),
     url(r'^get_data$', views.get_data, name='get_data'),
+    url(r'^gary1', views.gary1, name='gary1'),
 
 ]

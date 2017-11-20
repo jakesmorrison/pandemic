@@ -1,0 +1,63 @@
+.container{
+    width:100%;
+}
+
+.background_color{
+    background:white;
+}
+
+.centered{
+    text-align:center;
+}
+
+.cutout{
+    border: 15px solid white;
+    background: #5fffaf;
+    border-radius: 15px;
+}
+
+.issuer_hist{
+    position: absolute;
+    width: 90%;
+    height:75%;
+    margin-top: 4%
+}
+
+.cum_spline{
+    position: absolute;
+    width: 90%;
+    height:75%;
+    margin-top: 4%
+}
+
+.myfont{
+    color: #565656;
+}
+.icon-color{
+    color: #565656;
+}
+
+.myheader{
+    margin-bottom: 2px;
+}
+
+.toggledata{
+    position:absolute;
+    top:0;
+    right:0;
+    margin-top: 3px;
+    margin-right: 3px;
+}
+
+.subheading{
+    font-style: italic;
+    font-size: 11px;
+}
+
+.circle{
+    display:inline;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: green;
+}

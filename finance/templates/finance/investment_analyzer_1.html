@@ -10,6 +10,7 @@
     <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href=" {% static 'finance/css/bootstrap_slider.css' %}" rel="stylesheet">
     <link href=" {% static 'finance/css/round_slider.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/font-awesome.css' %}" rel="stylesheet">
     <link href=" {% static 'finance/css/style.css' %}" rel="stylesheet">
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,16 +19,6 @@
 <body>
 
 <div class="container">
-    <!--<div class="row" >-->
-        <!--<div class="col-lg-1 col-lg-offset-2 col-xs-12">-->
-            <!--<button class="btn my_text" style="position:absolute; background: transparent; border-color: transparent;" onclick="minimize()">-->
-                <!--<i class="fa fa-window-minimize fa-2" aria-hidden="true"></i>-->
-            <!--</button>-->
-        <!--</div>-->
-        <!--<div class="col-lg-7 col-lg-offset-0 col-xs-12" style="border-style: solid;">-->
-            <!--<p class="text-area" style="">Test <br> teast<br></p>-->
-        <!--</div>-->
-    <!--</div>-->
     <br>
     <h2 class="centered">Retirement Analyzer</h2>
     <br>
@@ -35,49 +26,71 @@
         <div class="col-lg-10 col-lg-offset-1 col-xs-12"><div id="my_chart"></div></div>
     </div>
     <div class="row">
+        <div class="col-lg-4 col-lg-offset-2 col-xs-6 centered">
+            <h5 class="" id="age_value"></h5>
+            <input id="age" data-slider-id='age' type="text" data-slider-min="18" data-slider-max="65" data-slider-step="1" data-slider-value="27"/>
+        </div>
+        <div class="col-lg-4 col-lg-offset-0 col-xs-6 centered">
+            <div>
+                <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="inflation_help" onclick="show_help_info(this,add_class)" ></i>
+                <h5 class="my-inline-text" id="inflation_value"></h5>
+            </div>
+            <input id="inflation" data-slider-id='inflation' type="text" data-slider-min="0" data-slider-max="5" data-slider-step=".5" data-slider-value="2"/>
+        </div>
     </div>
     <div class="row">
         <div class="col-lg-6 col-xs-12">
             <h1 class="centered">Pre Retirement</h1>
-
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
-                    <h5 id="years_value"></h5>
-                    <input id="years" data-slider-id='years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="40"/>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="working_years_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="working_years_value"></h5>
+                    </div>
+                    <input id="working_years" data-slider-id='working_years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="30"/>
                 </div>
 
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
-                    <h5 id="seed_value_1"></h5>
-                    <input id="seed_1" data-slider-id='seed_1' type="text" data-slider-min="0" data-slider-max="500000" data-slider-step="2000" data-slider-value="70000"/>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="initial_investment_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="initial_investment_value"></h5>
+                    </div>
+                    <input id="initial_investment" data-slider-id='initial_investment' type="text" data-slider-min="0" data-slider-max="500000" data-slider-step="2000" data-slider-value="70000"/>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
-                    <h5 id="cont_1_value"></h5>
-                    <input id="cont_1" data-slider-id='cont_1' type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="500" data-slider-value="15000"/>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_contribution_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="yearly_contribution_value"></h5>
+                    </div>
+
+                    <input id="yearly_contribution" data-slider-id='yearly_contribution' type="text" data-slider-min="0" data-slider-max="100000" data-slider-step="500" data-slider-value="20000"/>
                </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
-                    <h5 id="yearly_return_value_1"></h5>
-                    <input id="yearly_return_1" data-slider-id='yearly_return_1' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="6"/>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_return_pre_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="yearly_return_pre_value"></h5>
+                    </div>
+                    <input id="yearly_return_pre" data-slider-id='yearly_return_pre' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="6"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-6 col-xs-6 centered">
-                    <h5 id="fee_1_value"></h5>
-                    <input id="fee_1" data-slider-id='fee_1' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_fee_pre_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="yearly_fee_pre_value"></h5>
+                    </div>
+
+                    <input id="yearly_fee_pre" data-slider-id='yearly_fee_pre' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
                </div>
-                <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
-                    <h5 id="inflation_value">Inflation</h5>
-                    <input id="inflation" data-slider-id='inflation' type="text" data-slider-min="0" data-slider-max="5" data-slider-step=".5" data-slider-value="1"/>
-                </div>
             </div>
             <br>
             <div class="row">
-                <div id="total_1" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
-                <div id="total_1_no_fee" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
-                <div id="percent_1_no_fee" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
+                <div id="retirement_total" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
+                <div id="retirement_total_no_fee" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
+                <div id="ratio_fee_nofee" class="col-lg-6 col-lg-offset-3 col-xs-12 centered"></div>
             </div>
         </div>
 
@@ -85,23 +98,23 @@
             <h1 class="centered">Post Retirement</h1>
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
-                    <h5 id="with_years_value">Years to Withdraw</h5>
-                    <input id="with_years" data-slider-id='years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="20"/>
+                    <h5 id="withdrawl_years_value">Years to Withdraw</h5>
+                    <input id="withdrawl_years" data-slider-id='withdrawl_years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="20"/>
                 </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-6 centered">
-                    <h5 id="withdraw_rate_value"></h5>
-                    <input id="withdraw_rate" data-slider-id='withdraw_rate' type="text" data-slider-min="0" data-slider-max="250000" data-slider-step="1000" data-slider-value="75000"/>
+                    <h5 id="withdrawl_rate_value"></h5>
+                    <input id="withdrawl_rate" data-slider-id='withdrawl_rate' type="text" data-slider-min="0" data-slider-max="250000" data-slider-step="1000" data-slider-value="75000"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6 col-xs-6 centered">
-                    <h5 id="yearly_return_value_2"></h5>
-                    <input id="yearly_return_2" data-slider-id='yearly_return_2' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="3"/>
+                    <h5 id="yearly_return_post_value"></h5>
+                    <input id="yearly_return_post" data-slider-id='yearly_return_post' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="3"/>
                </div>
 
                 <div class="col-lg-6 col-xs-6 centered">
-                    <h5 id="fee_2_value"></h5>
-                    <input id="fee_2" data-slider-id='fee_2' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
+                    <h5 id="yearly_fee_post_value"></h5>
+                    <input id="yearly_fee_post" data-slider-id='yearly_fee_post' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
                </div>
             </div>
 
@@ -144,16 +157,23 @@
 
 <script>
 var current_year = (new Date()).getFullYear();
-var seed_money_1 = 0;
-var years = 0;
-var yearly_return_1 = 0;
-var yearly_return_2 = 0;
-var cont_1 = 0;
-var fee_1 = 0;
-var fee_2 = 0;
+var age = 0;
+
+var working_years = 0;
+var initial_investment = 0;
+
+var yearly_contribution = 0
+var yearly_return_pre = 0;
+
+var yearly_fee_pre = 0;
 var inflation = 0;
-var with_years = 0;
-var withdraw_rate = 0;
+
+withdrawl_years = 0;
+withdrawl_rate = 0;
+
+var yearly_return_post = 0;
+var yearly_fee_post = 0;
+
 var max_value = 0;
 var roth_trad = 0;
 var tax = 0;
@@ -163,119 +183,62 @@ $( document ).ready(function() {
 });
 
 function update_data(){
-    var data_1 = []
-    var data_1_no_fee = []
-    return_1 = 1 + ((yearly_return_1-fee_1-inflation)/100)/12;
-    return_1_no_fee = 1 + ((yearly_return_1-inflation)/100)/12
-    for(x=0; x<years; x++){
+    var pre_retirement = [];
+    var pre_retirement_no_fee = [];
+    effective_return_percent = 1 + ((yearly_return_pre-yearly_fee_pre-inflation)/100)/12;
+    effective_return_percent_no_fee = 1 + ((yearly_return_pre-inflation)/100)/12;
+    for(x=0; x<working_years; x++){
         if(x==0){
-            data_1.push(seed_money_1);
-            data_1_no_fee.push(seed_money_1);
+            pre_retirement.push(initial_investment);
+            pre_retirement_no_fee.push(initial_investment);
         }
         else{
-            data_1.push((data_1[x-1]+cont_1)*Math.pow((return_1), 12));
-            data_1_no_fee.push((data_1_no_fee[x-1]+cont_1)*Math.pow((return_1_no_fee), 12));
+            pre_retirement.push((pre_retirement[x-1]+yearly_contribution)*Math.pow((effective_return_percent), 12));
+            pre_retirement_no_fee.push((pre_retirement_no_fee[x-1]+yearly_contribution)*Math.pow((effective_return_percent_no_fee), 12));
         }
     }
-    total_1 = parseInt(data_1[years-1]);
-    total_1_no_fee = parseInt(data_1_no_fee[years-1]);
-    $("#total_1").html("<h5>Total: $"+total_1.toLocaleString()+"</h5>")
-    $("#total_1_no_fee").html("<h5>Amount Lost to Fees: $"+(total_1_no_fee -total_1).toLocaleString()+"</h5>")
-    $("#percent_1_no_fee").html("<h5>Percent Lost to Fees: "+(100-100*(total_1/total_1_no_fee)).toLocaleString()+"%</h5>")
+    retirement_total = parseInt(pre_retirement[working_years-1]);
+    retirement_total_no_fee = parseInt(pre_retirement_no_fee[working_years-1]);
+
+    $("#retirement_total").html("<h5>Total: $"+retirement_total.toLocaleString()+"</h5>")
+    $("#retirement_total_no_fee").html("<h5>Amount Lost to Fees: $"+(retirement_total_no_fee-retirement_total).toLocaleString()+"</h5>")
+    $("#ratio_fee_nofee").html("<h5>Percent Lost to Fees: "+(100-100*(retirement_total/retirement_total_no_fee)).toLocaleString()+"%</h5>")
 
     chart.series[0].update({
-            data: data_1
+            data: pre_retirement
     });
 
-    max_value =data_1.slice(-1)[0];
-
+    max_value =pre_retirement.slice(-1)[0];
     withdrawl_data = [];
 
-    return_2 = 1 + ((yearly_return_2-fee_2-inflation)/100)/12;
+    effective_return_percent_withdrawl = 1 + ((yearly_return_post-yearly_fee_post-inflation)/100)/12;
 
-    for(x=0; x<with_years; x++){
+    for(x=0; x<withdrawl_years; x++){
         if(x==0){
-            roth = withdraw_rate*(1-roth_trad/100);
-            trad = withdraw_rate*(roth_trad/100) + withdraw_rate*(roth_trad/100)*(tax/100);
+            roth = withdrawl_rate*(1-roth_trad/100);
+            trad = withdrawl_rate*(roth_trad/100) + withdrawl_rate*(roth_trad/100)*(tax/100);
             my_with_rate = roth + trad;
-            withdrawl_data[x] =([years-1,(parseInt(max_value)-my_with_rate)*Math.pow((return_2), 12)]);
+            withdrawl_data[x] =([working_years-1,(parseInt(max_value)-my_with_rate)*Math.pow((effective_return_percent_withdrawl), 12)]);
         }
         else{
-            roth = withdraw_rate*(1-roth_trad/100);
-            trad = withdraw_rate*(roth_trad/100) + withdraw_rate*(roth_trad/100)*(tax/100);
+            roth = withdrawl_rate*(1-roth_trad/100);
+            trad = withdrawl_rate*(roth_trad/100) + withdrawl_rate*(roth_trad/100)*(tax/100);
             my_with_rate = roth + trad;
-            withdrawl_data[x] =[years+x-1, (withdrawl_data[x-1][1]-my_with_rate)*Math.pow((return_2), 12)];
+            withdrawl_data[x] =[working_years+x-1, (withdrawl_data[x-1][1]-my_with_rate)*Math.pow((effective_return_percent_withdrawl), 12)];
         }
     }
     chart.series[1].update({
             data: withdrawl_data
     });
 }
+
 function setup_sliders(){
-    $('#seed_1').slider({
+    //Other
+    $('#age').slider({
         formatter: function(value) {
-            seed_money_1 = value;
-            $("#seed_value_1").text("Initial Investment: $"+value.toLocaleString());
-            return '$' + value.toLocaleString();
-        }
-    });
-    $('#years').slider({
-        formatter: function(value) {
-            years = value;
-            $("#years_value").text("Working Years: "+value.toLocaleString());
-            return '' + value.toLocaleString();
-        }
-    });
-
-    $('#with_years').slider({
-        formatter: function(value) {
-            with_years = value;
-            $("#with_years_value").text("Years to Withdraw: "+value.toLocaleString());
-            return '' + value.toLocaleString();
-        }
-    });
-    $('#yearly_return_1').slider({
-        formatter: function(value) {
-            yearly_return_1 = value;
-            $("#yearly_return_value_1").text("Yearly Return: "+value.toLocaleString() +"%");
-            return '' + value.toLocaleString() + "%";
-        }
-    });
-    $('#yearly_return_2').slider({
-        formatter: function(value) {
-            yearly_return_2 = value;
-            $("#yearly_return_value_2").text("Yearly Return: "+value.toLocaleString() +"%");
-            return '' + value.toLocaleString() + "%";
-        }
-    });
-
-    $('#cont_1').slider({
-        formatter: function(value) {
-            cont_1 = value;
-            $("#cont_1_value").text("Yearly Contribution: $"+value.toLocaleString());
-            return '$' + value.toLocaleString();
-        }
-    });
-    $('#fee_1').slider({
-        formatter: function(value) {
-            fee_1 = value;
-            $("#fee_1_value").text("Yearly Fee: "+value.toLocaleString()+"%");
-            return '' + value.toLocaleString() +'%';
-        }
-    });
-    $('#fee_2').slider({
-        formatter: function(value) {
-            fee_2 = value;
-            $("#fee_2_value").text("Yearly Fee: "+value.toLocaleString()+"%");
-            return '' + value.toLocaleString() +'%';
-        }
-    });
-
-    $('#withdraw_rate').slider({
-        formatter: function(value) {
-            withdraw_rate = value;
-            $("#withdraw_rate_value").text("Yearly Withdraw: $"+value.toLocaleString()+"");
-            return '$' + value.toLocaleString() +'';
+            age = value;
+            $("#age_value").text("Current Age: "+value.toLocaleString()+"");
+            return '' + value.toLocaleString() +'';
         }
     });
     $('#inflation').slider({
@@ -285,6 +248,77 @@ function setup_sliders(){
             return '' + value.toLocaleString()+'%';
         }
     });
+
+    // Pre Retirement
+    $('#working_years').slider({
+        formatter: function(value) {
+            working_years = value;
+            $("#working_years_value").text("Working Years: "+value.toLocaleString());
+            return '' + value.toLocaleString();
+        }
+    });
+    $('#initial_investment').slider({
+        formatter: function(value) {
+            initial_investment = value;
+            $("#initial_investment_value").text("Initial Investment: $"+value.toLocaleString());
+            return '$' + value.toLocaleString();
+        }
+    });
+    $('#yearly_contribution').slider({
+        formatter: function(value) {
+            yearly_contribution = value;
+            $("#yearly_contribution_value").text("Yearly Contribution: $"+value.toLocaleString());
+            return '$' + value.toLocaleString();
+        }
+    });
+    $('#yearly_return_pre').slider({
+        formatter: function(value) {
+            yearly_return_pre = value;
+            $("#yearly_return_pre_value").text("Yearly Return: "+value.toLocaleString() +"%");
+            return '' + value.toLocaleString() + "%";
+        }
+    });
+    $('#yearly_fee_pre').slider({
+        formatter: function(value) {
+            yearly_fee_pre = value;
+            $("#yearly_fee_pre_value").text("Yearly Fee: "+value.toLocaleString()+"%");
+            return '' + value.toLocaleString() +'%';
+        }
+    });
+
+
+    //Post Retirement
+    $('#withdrawl_years').slider({
+        formatter: function(value) {
+            withdrawl_years = value;
+            $("#withdrawl_years_value").text("Years to Withdraw: "+value.toLocaleString());
+            return '' + value.toLocaleString();
+        }
+    });
+    $('#withdrawl_rate').slider({
+        formatter: function(value) {
+            withdrawl_rate = value;
+            $("#withdrawl_rate_value").text("Yearly Withdraw: $"+value.toLocaleString()+"");
+            return '$' + value.toLocaleString() +'';
+        }
+    });
+
+    $('#yearly_return_post').slider({
+        formatter: function(value) {
+            yearly_return_post = value;
+            $("#yearly_return_post_value").text("Yearly Return: "+value.toLocaleString() +"%");
+            return '' + value.toLocaleString() + "%";
+        }
+    });
+
+    $('#yearly_fee_post').slider({
+        formatter: function(value) {
+            yearly_fee_post = value;
+            $("#yearly_fee_post_value").text("Yearly Fee: "+value.toLocaleString()+"%");
+            return '' + value.toLocaleString() +'%';
+        }
+    });
+
 
     $('#roth_trad').slider({
         formatter: function(value) {
@@ -304,46 +338,62 @@ function setup_sliders(){
 
     update_data();
 }
-$("#seed_1").on("slide", function(slideEvt) {
-	seed_money_1 = slideEvt.value;
-    update_data();
-});
-$("#years").on("slide", function(slideEvt) {
-	years = slideEvt.value;
-    update_data();
-});
-$("#with_years").on("slide", function(slideEvt) {
-	with_years = slideEvt.value;
-    update_data();
-});
-$("#yearly_return_1").on("slide", function(slideEvt) {
-	yearly_return_1 = slideEvt.value;
-    update_data();
-});
-$("#yearly_return_2").on("slide", function(slideEvt) {
-	yearly_return_2 = slideEvt.value;
-    update_data();
-});
-$("#cont_1").on("slide", function(slideEvt) {
-	cont_1 = slideEvt.value;
-    update_data();
-});
-$("#fee_1").on("slide", function(slideEvt) {
-	fee_1 = slideEvt.value;
-    update_data();
-});
-$("#fee_2").on("slide", function(slideEvt) {
-	fee_2 = slideEvt.value;
+
+//Other
+$("#age").on("slide", function(slideEvt) {
+	age = slideEvt.value;
     update_data();
 });
 $("#inflation").on("slide", function(slideEvt) {
 	inflation = slideEvt.value;
     update_data();
 });
-$("#withdraw_rate").on("slide", function(slideEvt) {
-	withdraw_rate = slideEvt.value;
+
+
+// Pre Retirement
+$("#working_years").on("slide", function(slideEvt) {
+	working_years = slideEvt.value;
     update_data();
 });
+$("#initial_investment").on("slide", function(slideEvt) {
+	initial_investment = slideEvt.value;
+    update_data();
+});
+
+$("#yearly_contribution").on("slide", function(slideEvt) {
+	yearly_contribution = slideEvt.value;
+    update_data();
+});
+
+$("#yearly_return_pre").on("slide", function(slideEvt) {
+	yearly_return_pre = slideEvt.value;
+    update_data();
+});
+$("#yearly_fee_pre").on("slide", function(slideEvt) {
+	yearly_fee_pre = slideEvt.value;
+    update_data();
+});
+
+
+//Post retirement
+$("#withdrawl_years").on("slide", function(slideEvt) {
+	withdrawl_years = slideEvt.value;
+    update_data();
+});
+$("#withdrawl_rate").on("slide", function(slideEvt) {
+	withdrawl_rate = slideEvt.value;
+    update_data();
+});
+$("#yearly_return_post").on("slide", function(slideEvt) {
+	yearly_return_post = slideEvt.value;
+    update_data();
+});
+$("#yearly_fee_post").on("slide", function(slideEvt) {
+	yearly_fee_post = slideEvt.value;
+    update_data();
+});
+
+
 $("#roth_trad").on("slide", function(slideEvt) {
 	roth_trad = slideEvt.value;
     update_data();
@@ -364,6 +414,48 @@ function minimize(){
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
+
+help_info ={
+            'inflation_help':'The rate at which goods and services increase and consequently reduce the purchasing power of a currecny.',
+            'working_years_help':'The amount of years you want to work until you retire.',
+            'initial_investment_help': 'The amount of money you currently have invested in the market (401K, IRA, Money Market).',
+            'yearly_contribution_help': 'The amount of money you plan to invest each year.',
+
+            'yearly_return_pre_help': 'The average annual rate of return you expect to have over the course of your working years.',
+            'yearly_fee_pre_help': 'The average annual rate you pay in fees to mutual funds, index funds, and investment firms.',
+            'yearly_contribution_help': 'The amount of money you plan to invest each year.',
+            'yearly_contribution_help': 'The amount of money you plan to invest each year.',
+            'yearly_contribution_help': 'The amount of money you plan to invest each year.',
+
+            }
+
+function show_help_info(obj,callback){
+    var class_obj = $("#"+obj.getAttribute('id'));
+
+    if( $("#hover_box").hasClass("hover_box") === true){
+         $(".hover_box").remove()
+    }
+
+    else{
+        $(".hover_box").remove()
+        position = class_obj.position()
+        if (typeof callback == "function"){
+            callback(obj.getAttribute('id'), class_obj, position);
+        }
+    }
+}
+
+function add_class(id_name, obj, position){
+    obj.parent().append("<div id='hover_box' class='hover_box'></div>")
+    $(".hover_box").html("<p>"+help_info[id_name]+"</p>")
+
+    box_top = parseInt(position.top) - parseInt($(".hover_box").css("height"));
+    box_left = parseInt(position.left)
+
+    $(".hover_box").css("top",box_top)
+    $(".hover_box").css("left",box_left)
+}
+
 </script>
 
 

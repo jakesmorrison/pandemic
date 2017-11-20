@@ -13,7 +13,9 @@ var chart = Highcharts.chart('my_chart', {
         allowDecimals: false,
         labels: {
             formatter: function () {
-                return current_year+this.value; // clean, unformatted number for year
+                y = current_year+parseInt(this.value)
+                a = parseInt(age)+parseInt(this.value)
+                return a +"<br>"+y; // clean, unformatted number for year
             }
         }
     },
@@ -31,8 +33,9 @@ var chart = Highcharts.chart('my_chart', {
     tooltip: {
         formatter: function () {
             val = numberWithCommas(Math.round(this.y));
-            year = 2017+parseInt(this.x)
-            return 'Year: '+year+'<br> Amount: $' + val ;
+            year = current_year+parseInt(this.x)
+            a = parseInt(age)+parseInt(this.x)
+            return 'Age: '+a+'<br> Year: '+year+'<br> Amount: $' + val ;
         }
     },
     plotOptions: {

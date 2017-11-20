@@ -1,0 +1,30 @@
+Status,NameOnCard,Issuer,Card,IssueDate,CloseDate,Line,AnnualFee,MinSpend,Bonus
+Open,Jake,Synchrony,Amazon Store Card,8/10/2012,1/1/1990,2500,0,0,0
+Close,Jake,Chase,Chase Sapphire Preferred,2/26/2014,2/22/2015,12000,99,4000,45000
+Close,Jake,Barclay,Barclay Arrival,3/26/2014,3/20/2015,5000,89,3000,40000
+Close,Jake,Chase,United Milage Plus ,5/7/2014,5/7/2015,5000,89,3000,55000
+Close,Jake,Chase,SW Premier,5/20/2014,5/20/2016,5000,99,2000,50000
+Close,Jake,Chase,SW Plus,6/20/2014,6/20/2016,5000,69,2000,50000
+Close,Jake,Chase,Chase Ink Bold,10/4/2014,11/03/2017,5000,95,5000,70000
+Close,Jake,Barclay,US Airways,10/23/2014,11/03/2017,7500,89,1000,40000
+Close,Jake,Amex,Amex Gold Biz Rewards,1/6/2015,1/10/2016,0,175,5000,75000
+Close,Jake,US Bank,Club Carlson,2/12/2015,2/12/2017,10000,75,3000,85000
+Close,Jake,Barclay,Barclay Arrival,4/27/2015,4/30/2016,5000,89,3000,40000
+Open,Jake,Discover,Discover IT,9/12/2015,1/1/1990,4000,0,0,5000
+Close,Jake,Citi,AAdvantage Platinum,1/30/2016,1/30/2016,13500,99,3000,60000
+Open,Jake,Chase,IHG,2/6/2016,1/1/1990,8000,49,1000,80000
+Open,Jake,Chase,Hyatt,2/7/2016,1/1/1990,8000,75,1000,5000
+Close,Jake,Chase,United Milage Business,3/3/2016,3/3/2016,5000,95,3000,50000
+Open,Jake,Amex,SPG AMEX Personal,3/4/2016,1/1/1990,16000,95,3000,35000
+Close,Jake,Amex,SPG AMEX Business,3/9/2016,3/1/2017,6000,95,5000,35000
+Open,KM,Chase,Chase Ink Plus,4/1/2016,1/1/1990,2500,95,5000,70000
+Open,Jake,Amex,Premier Rewards Gold,4/30/2016,4/15/2017,0,195,2000,50000
+Open,Jake,Citi,Prestige,5/1/2016,5/2/2017,13000,350,3000,50000
+Open,Jake,Amex,Platinum,5/9/2016,1/1/1990,12000,450,3000,100000
+Open,Jake,BOA,Alaskan Airlines,6/20/2016,6/22/2017,8000,75,1000,30000
+Open,Sue,Chase,Chase Sapphire Reserve,8/24/2016,5/1/2017,21300,450,4000,100000
+Open,Randy,Chase,Chase Sapphire Reserve,9/10/2016,1/1/1990,20900,450,4000,100000
+Open,KM,Chase,Chase Ink Preffered,5/5/2017,1/1/1990,26000,95,5000,80000
+Open,Sue,Chase,SW Premier,6/26/2017,1/1/1990,0,99,2000,60000
+Open,Sue,Chase,SW Plus,6/26/2017,1/1/1990,0,69,2000,60000
+Open,Jake,Amex,Charles Schwab Platinum,10/9/2017,1/1/1990,0,550,5000,60000

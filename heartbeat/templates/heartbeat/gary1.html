@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page 1</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href=" {% static 'heartbeat/css/gary.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <h2 class="centered myfont myheading">Micron: Beginning to End</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-5 col-lg-offset-1" style="height: 500px; border-style: solid; margin-right: 10px; border-color: #dcdcdc;">
+            <h3 class="myfont mysubheading">Keyword Spec Search</h3>
+            <p class="myfont mypara">Easily and quickly search for a spec. Click it to get more information like </p>
+            <form>
+              <input id="tags" type="text" name="search" placeholder="Search..">
+            </form>
+            <button type="button" class="btn btn-success" style="margin-top: 10px;">Go</button>
+        </div>
+        <div class="col-lg-5 col-lg-offset-0" style="height: 500px; border-style: solid; margin-left: 10px; border-color: #dcdcdc;">
+            <h3 class="myfont mysubheading">Feature Spec Search</h3>
+            <p class="myfont mypara">Find a spec based on the feature it corresponds to. </p>
+
+            <div class="row" style="margin-left: 10px;">
+                <div class="myfont mypara features" onclick="selectedFeature('Power_Up')" style="width: 100px; height: 25px; border-style: solid; border-color: #dcdcdc; cursor: pointer; margin-top:5px; margin-bottom:5px;"><p class="centered">Power Up</p></div>
+                <ul class="Power_Up" style="display:none;">
+                    <li>Power Up
+                        <ul>
+                            <li><p>Spec 1</p></li>
+                            <li><p>Spec 1</p></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div class="row" style="margin-left: 10px;">
+                <div class="myfont mypara features" onclick="selectedFeature('Init')" style="width: 100px; height: 25px; border-style: solid; border-color: #dcdcdc; cursor: pointer; margin-top:5px; margin-bottom:5px;"><p class="centered">Init</p></div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{% load staticfiles %}
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.js"></script>
+<script type="text/javascript" src="https://code.highcharts.com/highcharts.js"></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+
+  $(function() {
+    var availableTags = [
+      "tCK",
+      "Input Clock",
+      "tRC",
+      "Row Cycle Time",
+      "VIH",
+      "Differential Input Logic High",
+    ];
+    $("#tags").autocomplete({
+      source: availableTags
+    });
+  });
+
+  function selectedFeature(myVar){
+    console.log(myVar)
+    $(".features").hide();
+    $("."+myVar).show();
+  }
+
+
+</script>
+</body>
+</html>

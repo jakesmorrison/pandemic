@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Page 1</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'creditcard/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'creditcard/css/jquery-ui.css' %}" rel="stylesheet">
+    <link href=" {% static 'creditcard/css/font.css' %}" rel="stylesheet">
+    <!--<link href=" {% static 'creditcard/css/font-awesome.css' %}" rel="stylesheet">-->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href=" {% static 'creditcard/css/style.css' %}" rel="stylesheet">
+
+</head>
+<body class="background_color">
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-3 col-sm-6 top cutout" style="">
+            <h4 id="" class="myfont myheader">Bonus Points Accumulated</h4>
+            <p class="subheading">Feb 2014 - Oct 2017</p>
+            <div class="centered">
+                <i class="fa fa-gift fa-2x centered icon-color" aria-hidden="true"></i>
+                <h2 style="display:inline; margin-left:10px;" class="myfont myheader centered">{{points_accum|safe}}</h2>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-6 top cutout" >
+            <h4 id="" class="myfont myheader">Points Redeemed</h4>
+            <p class="subheading">Feb 2014 - Oct 2017</p>
+            <div class="centered">
+                <i class="fa fa-plane fa-2x centered icon-color" aria-hidden="true"></i>
+                <h2 style="display:inline; margin-left:10px;" class="myfont myheader centered">{{point_cost|safe}}</h2>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-sm-6 top cutout" style="">
+            <h4 id="" class="myfont myheader">Cash Value</h4>
+            <p class="subheading">Feb 2014 - Oct 2017</p>
+            <div class="centered">
+                <i class="fa fa-money fa-2x centered icon-color" aria-hidden="true"></i>
+                <h2 style="display:inline; margin-left:10px;" class="myfont myheader centered">{{dollar_cost|safe}}</h2>
+            </div>
+
+        </div>
+        <div class="col-lg-3 col-sm-6 top cutout" >
+            <h4 id="" class="myfont myheader">Total Credit Cards</h4>
+            <p class="subheading">Feb 2014 - Oct 2017</p>
+            <div class="centered">
+                <i class="fa fa-credit-card fa-2x centered icon-color" aria-hidden="true"></i>
+                <h2 style="display:inline; margin-left:10px;" class="myfont myheader centered">{{total_cards|safe}}</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 col-sm-12 middle cutout" style="">
+            <div class="row">
+                <div class="col-sm-12 middle" style="">
+                    <h3 id="point_date_toggle_title" class="myfont myheader">Cumulative</h3>
+                    <button type="button" class="btn btn-default toggledata" id="point_date_toggle_button" onclick="point_date_toggle()">Individual</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 middle" style="">
+                    <div id="cum_spline" class="cum_spline"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-4 col-sm-12 middle cutout" >
+            <h3 id="point_cardnum_toggle_title" class="myfont myheader">Total Points</h3>
+            <button type="button" class="btn btn-default toggledata" id="point_cardnum_toggle_button" onclick="point_cardnum_toggle()">Total Cards</button>
+            <div id="issuer_hist" class="issuer_hist" style="display:none;"></div>
+            <div id="point_hist" class="issuer_hist"></div>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-8 col-sm-12 bottom cutout" style="">
+
+        </div>
+        <div class="col-lg-4 col-sm-12 bottom cutout" style="">
+
+        </div>
+    </div>
+
+</div>
+
+
+
+{% load staticfiles %}
+<script src=" {% static 'creditcard/js/jquery-1.10.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'creditcard/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'creditcard/js/jquery-ui.js' %}" rel="stylesheet"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/highcharts-3d.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script src=" {% static 'creditcard/js/issuer_hist.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'creditcard/js/cum_spline.js' %}" rel="stylesheet"></script>
+
+
+<script>
+var issuer_point_chart;
+var cat_issuer = {{cat_issuer|safe}};
+var data_issuer = {{data_issuer|safe}};
+var data_issuer_points = {{data_issuer_points|safe}};
+var cum_points_data = {{cum_points_data|safe}};
+
+$(document).ready(function() {
+    setHeight();
+    issuer_chart = draw_issuer_hist(cat_issuer,data_issuer,issuer_hist,"Total Cards","",1);
+    point_chart = draw_issuer_hist(cat_issuer,data_issuer_points,point_hist, "Points from Bonus","M",1000000);
+    console.log(cum_points_data)
+    cum_spline = draw_cum_spline(cum_points_data, 'cum_spline');
+});
+
+function setHeight() {
+    windowHeight = $(window).innerHeight();
+    $('.top').css('height', windowHeight/5);
+    $('.middle').css('height', windowHeight/2.5);
+    $('.bottom').css('height', windowHeight/2.5);
+};
+
+function point_cardnum_toggle(){
+    if ($("#point_cardnum_toggle_title").text() === "Total Points"){
+        $("#point_cardnum_toggle_title").text("Total Cards");
+        $("#point_cardnum_toggle_button").text("Total Points");
+        $("#issuer_hist").fadeIn();
+        $("#point_hist").hide();
+    }
+    else if ($("#point_cardnum_toggle_title").text() === "Total Cards"){
+        $("#point_cardnum_toggle_title").text("Total Points");
+        $("#point_cardnum_toggle_button").text("Total Cards");
+        $("#issuer_hist").hide();
+        $("#point_hist").fadeIn();
+    }
+}
+
+function point_date_toggle(){
+    if ($("#point_date_toggle_title").text() === "Cumulative"){
+        $("#point_date_toggle_title").text("Individual");
+        $("#point_date_toggle_button").text("Cumulative");
+    }
+    else if ($("#point_date_toggle_title").text() === "Individual"){
+        $("#point_date_toggle_title").text("Cumulative");
+        $("#point_date_toggle_button").text("Individual");
+    }
+}
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+
+</script>
+
+</body>
+</html>

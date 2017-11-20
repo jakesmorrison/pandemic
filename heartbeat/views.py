@@ -25,6 +25,13 @@ def demo_dashboard(request):
     }
     return render(request,"heartbeat/demo_dashboard.html",context)
 
+
+def gary1(request):
+    context={
+    }
+    return render(request,"heartbeat/gary1.html",context)
+
+
 counter = 0
 import random
 import subprocess
