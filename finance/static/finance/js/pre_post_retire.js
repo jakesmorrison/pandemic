@@ -1,7 +1,7 @@
 var chart = Highcharts.chart('my_chart', {
     chart: {
         type: 'area',
-        zoomType: 'xy'
+        zoomType: 'x'
     },
     title: {
         text: ''
@@ -11,11 +11,14 @@ var chart = Highcharts.chart('my_chart', {
     credits: {enabled: false},
     xAxis: {
         allowDecimals: false,
+        title: {
+            text: 'Year'
+        },
         labels: {
             formatter: function () {
                 y = current_year+parseInt(this.value)
                 a = parseInt(age)+parseInt(this.value)
-                return a +"<br>"+y; // clean, unformatted number for year
+                return y; // clean, unformatted number for year
             }
         }
     },
@@ -50,7 +53,7 @@ var chart = Highcharts.chart('my_chart', {
                     }
                 }
             }
-        }
+        },
     },
     series: [{
         name: 'Pre Retirement',

@@ -77,12 +77,11 @@
             </div>
 
             <div class="row">
-                <div class="col-lg-6 col-xs-12 centered">
+                <div class="col-lg-6 col-lg-offset-3 col-xs-12 centered">
                     <div>
                         <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_fee_pre_help" onclick="show_help_info(this,add_class)" ></i>
                         <h5 class="my-inline-text" id="yearly_fee_pre_value"></h5>
                     </div>
-
                     <input id="yearly_fee_pre" data-slider-id='yearly_fee_pre' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
                </div>
             </div>
@@ -98,34 +97,52 @@
             <h1 class="centered">Post Retirement</h1>
             <div class="row">
                 <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
-                    <h5 id="withdrawl_years_value">Years to Withdraw</h5>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="withdrawl_years_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="withdrawl_years_value"></h5>
+                    </div>
                     <input id="withdrawl_years" data-slider-id='withdrawl_years' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="20"/>
                 </div>
                 <div class="col-lg-6 col-lg-offset-0 col-xs-12 centered">
-                    <h5 id="withdrawl_rate_value"></h5>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="withdrawl_rate_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="withdrawl_rate_value"></h5>
+                    </div>
                     <input id="withdrawl_rate" data-slider-id='withdrawl_rate' type="text" data-slider-min="0" data-slider-max="250000" data-slider-step="1000" data-slider-value="75000"/>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-6 col-xs-12 centered">
-                    <h5 id="yearly_return_post_value"></h5>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_return_post_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="yearly_return_post_value"></h5>
+                    </div>
                     <input id="yearly_return_post" data-slider-id='yearly_return_post' type="text" data-slider-min="0" data-slider-max="20" data-slider-step=".5" data-slider-value="3"/>
                </div>
 
                 <div class="col-lg-6 col-xs-12 centered">
-                    <h5 id="yearly_fee_post_value"></h5>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="yearly_fee_post_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="yearly_fee_post_value"></h5>
+                    </div>
                     <input id="yearly_fee_post" data-slider-id='yearly_fee_post' type="text" data-slider-min="0" data-slider-max="2" data-slider-step=".01" data-slider-value=".06"/>
                </div>
             </div>
 
             <div class="row">
                 <div class="col-lg-6 col-xs-12 centered">
-                    <h5 id="roth_trad_value"></h5>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="roth_trad_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="roth_trad_value"></h5>
+                    </div>
                     <input id="roth_trad" data-slider-id='roth_trad' type="text" data-slider-min="0" data-slider-max="100" data-slider-step="5" data-slider-value="50"/>
                </div>
 
                 <div class="col-lg-6 col-xs-12 centered">
-                    <h5 id="tax_value"></h5>
+                    <div>
+                        <i class="fa fa-question-circle my-inline-text" aria-hidden="true" id="tax_help" onclick="show_help_info(this,add_class)" ></i>
+                        <h5 class="my-inline-text" id="tax_value"></h5>
+                    </div>
                     <input id="tax" data-slider-id='tax' type="text" data-slider-min="0" data-slider-max="50" data-slider-step="1" data-slider-value="15"/>
                </div>
             </div>
@@ -420,12 +437,14 @@ help_info ={
             'working_years_help':'The amount of years you want to work until you retire.',
             'initial_investment_help': 'The amount of money you currently have invested in the market (401K, IRA, Money Market).',
             'yearly_contribution_help': 'The amount of money you plan to invest each year.',
-
             'yearly_return_pre_help': 'The average annual rate of return you expect to have over the course of your working years.',
-            'yearly_fee_pre_help': 'The average annual rate you pay in fees to mutual funds, index funds, and investment firms.',
-            'yearly_contribution_help': 'The amount of money you plan to invest each year.',
-            'yearly_contribution_help': 'The amount of money you plan to invest each year.',
-            'yearly_contribution_help': 'The amount of money you plan to invest each year.',
+            'yearly_fee_pre_help': 'This is the fee you pay mutual funds, index funds or any other type of investment firms.',
+            'withdrawl_years_value': 'The total number of years you plan to live after retirement.',
+            'withdrawl_rate_help': 'The amount of money you want per year in retirement.',
+            'yearly_return_post_help': 'The return rate of your investments after retirement.',
+            'yearly_fee_post_help': 'Assuming you invest in something once you retire, this is the expense fees you pay.',
+            'roth_trad_help': 'How much of your portfolio is a traditional, tax defered investment account.',
+            'tax_help': 'Tax amount that will only be applied to traditional, tax deferent investment accounts.',
 
             }
 
@@ -447,7 +466,7 @@ function show_help_info(obj,callback){
 
 function add_class(id_name, obj, position){
     obj.parent().append("<div id='hover_box' class='hover_box'></div>")
-    $(".hover_box").html("<p>"+help_info[id_name]+"</p>")
+    $(".hover_box").html("<p class='hover_text'>"+help_info[id_name]+"</p>")
 
     box_top = parseInt(position.top) - parseInt($(".hover_box").css("height"));
     box_left = parseInt(position.left)/4
@@ -455,6 +474,8 @@ function add_class(id_name, obj, position){
     $(".hover_box").css("top",box_top)
     $(".hover_box").css("left",box_left)
 }
+
+
 
 </script>
 
