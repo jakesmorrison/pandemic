@@ -17,3 +17,8 @@ def retirement_withdrawl(request):
     context={
     }
     return render(request,"finance/retirement_withdrawl.html",context)
+
+def sankey(request):
+    context={
+    }
+    return render(request,"finance/sankey.html",context)

@@ -1,0 +1,34 @@
+source,target,value,c
+Pre Tax Income: 100%,Taxes: 27%,1648,#ff5f5f
+Taxes: 27%,Federal: 14%,865,#ff5f5f
+Taxes: 27%,State: 5%,334,#ff5f5f
+Taxes: 27%,Medicare: 1%,85,#ff5f5f
+Taxes: 27%,Social Security: 6%,364,#ff5f5f
+Pre Tax Income: 100%,Post Tax Income: 65%,3924,#5fafff
+Pre Tax Income: 100%,Pre Tax Investments: 8%,503,#5fff5f
+Pre Tax Investments: 8%,Investments: 35%,503,#5fff5f
+Post Tax Income: 65%,Investments: 35%,1607,#5fff5f
+Investments: 35%,HSA: 3%,200,#5fff5f
+Investments: 35%,Traditional 401k: 5%,303,#5fff5f
+Investments: 35%,Roth 401k: 10%,607,#5fff5f
+Investments: 35%,Savings: 10%,600,#5fff5f
+Investments: 35%,Brokerage: 7%,400,#5fff5f
+Post Tax Income: 65%,Rent: 16%,1000,#5fafff
+Post Tax Income: 65%,Car: 11%,666,#5fafff
+Car: 11%,Car Payment: 8%,484,#5fafff
+Car: 11%,Insurance: 1.5%,82,#5fafff
+Car: 11%, Gas: 1.5%, 100,#5fafff
+Post Tax Income: 65%,Utilities: 1.5%,100,#5fafff
+Utilities: 1.5%,Gas: .2%,15,#5fafff
+Utilities: 1.5%,Power: .5%,35,#5fafff
+Utilities: 1.5%,Internet: .8%,50,#5fafff
+Post Tax Income: 65%,Other: 7%,439,#5fafff
+Post Tax Income: 65%,Entertainment: .6%,37,#5fafff
+Entertainment: .6%, Amazon Prime: .13%, 8,#5fafff
+Entertainment: .6%, Server: .075%, 5,#5fafff
+Entertainment: .6%, MoviePass: .15%, 10,#5fafff
+Entertainment: .6%, Spotify: .15%, 10,#5fafff
+Entertainment: .6%, VPN: .065%, 4,#5fafff
+Post Tax Income: 65%,Dog: 1.2%,75,#5fafff
+Dog: 1.2%, Dog Food: .8%, 50,#5fafff
+Dog: 1.2%, Dog Treat: .4%, 25,#5fafff
