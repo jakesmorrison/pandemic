@@ -17,3 +17,7 @@
 .link:hover {
   stroke-opacity: .5;
 }
+
+html {
+    height: 100%;
+}

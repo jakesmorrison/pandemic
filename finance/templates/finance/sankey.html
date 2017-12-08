@@ -6,12 +6,23 @@
 
     {% load staticfiles %}
     <link href=" {% static 'finance/css/sankey_style.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
 
 </head>
 <body>
 
-<p id="chart">
+<div class="container">
+    <h2 id="mytitle" class="centered">Sankey Chart</h2>
+    <div class="row">
+        <div class="col-xs-12" id="mydiv" style="height: 100%">
+            <div id="chart"></div>
+        </div>
+    </div>
+</div>
 
+
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
 <script src="http://d3js.org/d3.v3.min.js"></script>
 <script src=" {% static 'finance/js/sankey.js' %}" rel="stylesheet"></script>
 
@@ -19,9 +30,10 @@
 
 var units = "$";
 
+
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 1200 - margin.left - margin.right,
-    height = 700 - margin.top - margin.bottom;
+    width = $('#mydiv').width(),
+    height = $(document).height() - $('#mytitle').height()- margin.top - margin.bottom-50;
 
 var formatNumber = d3.format(",.0f"),    // zero decimal places
     format = function(d) { return "" + units + formatNumber(d); },
