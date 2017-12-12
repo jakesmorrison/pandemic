@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12" style="text-align:center">
+            <h2>JMORRISON TOP Accumulation and Usage</h2>
+            <div id="top_chart" style=""></div>
+        </div>
+    </div>
+</div>
+
+
+
+{% load staticfiles %}
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src=" {% static 'finance/js/top_chart.js' %}" rel="stylesheet"></script>
+
+<script>
+
+var data= []
+var date = new Date();
+var lastday;
+$( document ).ready(function() {
+    data = {{data|safe}}
+    lastday = data[data.length-1][0];
+    for(x=0; x<data.length; x++){
+        y_m_d = data[x][0].split("-")
+        var doo = new Date(parseInt(y_m_d[0]), parseInt(y_m_d[1])-1, parseInt(y_m_d[2]), 0, 0, 0);
+        data[x][0] = doo.getTime();
+        data[x][1] = parseFloat(data[x][1].toFixed(2));
+    }
+    create_top_chart(data,date.getFullYear(),date.getMonth(),date.getDate(),lastday);
+
+});
+
+</script>
+
+</body>
+</html>

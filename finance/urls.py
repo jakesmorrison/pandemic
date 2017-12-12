@@ -7,5 +7,7 @@ urlpatterns = [
     url(r'^investment_analyzer$', views.investment_analyzer, name='investment_analyzer'),
     url(r'^retirement_withdrawl', views.retirement_withdrawl, name='retirement_withdrawl'),
     url(r'^sankey', views.sankey, name='sankey'),
+    url(r'^moviepass', views.moviepass, name='moviepass'),
+    url(r'^top', views.top, name='top'),
 
 ]

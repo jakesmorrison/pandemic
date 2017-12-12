@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MoviePass</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="container" style="margin: 0 auto"></div>
+
+</body>
+</html>
+
+{% load staticfiles %}
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+<script>
+
+$( document ).ready(function() {
+    width = $(document).width();
+    height = $(document).height();
+    $("#container").width(width);
+    $("#container").height(height);
+    createChart();
+});
+
+function createChart(){
+    Highcharts.chart('container', {
+
+      chart: {
+        type: 'scatter',
+        plotBorderWidth: 1,
+        zoomType: 'xy'
+      },
+
+      legend: {
+        enabled: false
+      },
+
+      title: {
+        text: 'Title'
+      },
+
+      subtitle: {
+        text: 'Subtitle'
+      },
+
+      xAxis: {
+        <!--min: 0,-->
+        <!--max: 100,-->
+        gridLineWidth: 1,
+        title: {
+          text: 'Rotten Tomatoes'
+        },
+        labels: {
+          format: '{value}%'
+        },
+        <!--plotLines: [{-->
+          <!--color: 'black',-->
+          <!--dashStyle: 'dot',-->
+          <!--width: 2,-->
+          <!--value: 65,-->
+          <!--label: {-->
+            <!--rotation: 0,-->
+            <!--y: 15,-->
+            <!--style: {-->
+              <!--fontStyle: 'italic'-->
+            <!--},-->
+            <!--text: 'Safe fat intake 65g/day'-->
+          <!--},-->
+          <!--zIndex: 3-->
+        <!--}]-->
+      },
+
+      yAxis: {
+        <!--min: 0,-->
+        <!--max: 100,-->
+        startOnTick: false,
+        endOnTick: false,
+        title: {
+          text: 'Metacritic'
+        },
+        labels: {
+          format: '{value}'
+        },
+        maxPadding: 0.2,
+        <!--plotLines: [{-->
+          <!--color: 'black',-->
+          <!--dashStyle: 'dot',-->
+          <!--width: 2,-->
+          <!--value: 50,-->
+          <!--label: {-->
+            <!--align: 'right',-->
+            <!--style: {-->
+              <!--fontStyle: 'italic'-->
+            <!--},-->
+            <!--text: 'Safe sugar intake 50g/day',-->
+            <!--x: -10-->
+          <!--},-->
+          <!--zIndex: 3-->
+        <!--}]-->
+      },
+
+      tooltip: {
+        useHTML: true,
+        headerFormat: '<table>',
+        pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
+          '<tr><th>Rotten Tomatoes:</th><td>{point.x}%</td></tr>' +
+          '<tr><th>Metacritic:</th><td>{point.y}</td></tr>' +
+          '<tr><th>Jake:</th><td>{point.Jake}</td></tr>',
+        footerFormat: '</table>',
+        followPointer: true
+      },
+
+      plotOptions: {
+        series: {
+          dataLabels: {
+            enabled: true,
+            format: '{point.name}'
+          },
+            marker: {
+                radius: 8
+            }
+
+        }
+      },
+
+      series: {{series | safe}}
+
+    });
+}
+
+</script>
