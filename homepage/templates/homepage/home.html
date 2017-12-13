@@ -76,16 +76,23 @@
                     <a class="page-scroll" href="{% url 'books:books.views.home' %}">Books</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="{% url 'loveletter:loveletter.views.main_window' %}">Love Letter</a>
+                    <a class="page-scroll" href="{% url 'moviepass:moviepass.views.moviepass' %}">MoviePass</a>
                 </li>
-                <li>
-                    <a class="page-scroll" href="{% url 'game:game.views.index' %}">Pandemic</a>
+                <li class="disable" role="button" aria-haspopup="true" aria-expanded="false">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Games
+                    <span class="caret"></span></a>
+                    <ul style="border-radius: 3px; background: #222;" class="dropdown-menu">
+                        <li><a style="color: #9d9d9d;" href="{% url 'loveletter:loveletter.views.main_window' %}">Love Letter</a></li>
+                        <li><a style="color: #9d9d9d;" href="{% url 'game:game.views.index' %}">Pandemic</a></li>
+                    </ul>
                 </li>
+
                 <li class="disable" role="button" aria-haspopup="true" aria-expanded="false">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">Finance
                     <span class="caret"></span></a>
                     <ul style="border-radius: 3px; background: #222;" class="dropdown-menu">
                         <li><a style="color: #9d9d9d;" href="{% url 'finance:finance.views.investment_analyzer' %}">Investment Analyzer</a></li>
+                        <li><a style="color: #9d9d9d;" href="{% url 'finance:finance.views.sankey' %}">Sankey</a></li>
                     </ul>
                 </li>
 
