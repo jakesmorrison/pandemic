@@ -40,8 +40,9 @@ def getColor(jake):
         color = "#ff5f5f"
     return color
 
+
 def moviepass(request):
-    df = pd.read_csv('/Users/jakesmorrison/Dropbox/Pycharm/pandemic/finance/static/finance/csv/moviepass.csv')
+    df = pd.read_csv('finance/static/finance/csv/moviepass.csv')
 
     data = []
     for index, row in df.iterrows():
