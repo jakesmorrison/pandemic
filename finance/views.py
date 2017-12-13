@@ -28,34 +28,6 @@ def sankey(request):
     }
     return render(request,"finance/sankey.html",context)
 
-def getColor(jake):
-    color = ""
-    if jake == "Love":
-        color = "#5fff5f"
-    elif jake == "Like":
-        color = "#5fafff"
-    elif jake == "Meh":
-        color = "#ffff5f"
-    elif jake == "Hate":
-        color = "#ff5f5f"
-    return color
-
-
-def moviepass(request):
-    df = pd.read_csv('finance/static/finance/csv/moviepass.csv')
-
-    data = []
-    for index, row in df.iterrows():
-        print(row)
-        data.append({'x':row["Rotten Tomatoes"],'y':row["Metacritc"],'z':row["Cost"],'color': getColor(row["Jake"]),'name':row["Movie"],'theater':row["Theater"],'Jake': row["Jake"]})
-
-    series = [{'data':data}]
-
-    context={
-        'series' : series,
-    }
-    return render(request,"finance/moviepass.html",context)
-
 
 def calc_easter(year):
     "Returns Easter as a date object."

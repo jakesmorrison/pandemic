@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>MoviePass</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'moviepass/css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="container" style="margin: 0 auto"></div>
+
+</body>
+</html>
+
+{% load staticfiles %}
+<script src=" {% static 'moviepass/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'moviepass/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'moviepass/js/highcharts.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'moviepass/js/highcharts-more.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'moviepass/js/highcharts-exporting.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'moviepass/js/rotten_meta_jake_chart.js' %}" rel="stylesheet"></script>
+
+<!--<script src="https://code.highcharts.com/highcharts.js"></script>-->
+<!--<script src="https://code.highcharts.com/highcharts-more.js"></script>-->
+<!--<script src="https://code.highcharts.com/modules/exporting.js"></script>-->
+
+<script>
+
+var data = {{series | safe}};
+
+$( document ).ready(function() {
+    width = $(document).width();
+    height = $(document).height();
+    $("#container").width(width);
+    $("#container").height(height);
+    rotten_meta_jake_chart(data)
+});
+
+
+</script>

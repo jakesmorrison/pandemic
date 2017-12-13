@@ -1,38 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>MoviePass</title>
-
-    {% load staticfiles %}
-    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
-
-</head>
-<body>
-
-<div id="container" style="margin: 0 auto"></div>
-
-</body>
-</html>
-
-{% load staticfiles %}
-<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
-<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/highcharts-more.js"></script>
-<script src="https://code.highcharts.com/modules/exporting.js"></script>
-
-<script>
-
-$( document ).ready(function() {
-    width = $(document).width();
-    height = $(document).height();
-    $("#container").width(width);
-    $("#container").height(height);
-    createChart();
-});
-
-function createChart(){
+function rotten_meta_jake_chart(data){
     Highcharts.chart('container', {
 
       chart: {
@@ -46,7 +12,7 @@ function createChart(){
       },
 
       title: {
-        text: 'Title'
+        text: ''
       },
 
       subtitle: {
@@ -135,9 +101,7 @@ function createChart(){
         }
       },
 
-      series: {{series | safe}}
+      series: data
 
     });
 }
-
-</script>

@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'p#-h!%k%x*q-^vt@mzc+oa!!*rdr5%gry2vduw7!w6d#v8-&3-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["jakobmorrison.net","www.jakobmorrison.net"]
 
@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'customdesign.apps.CustomdesignConfig',
     'workout.apps.WorkoutConfig',
     'creditcard.apps.CreditcardConfig',
+    'moviepass.apps.MoviepassConfig',
     'rest_framework',
 ]
 
