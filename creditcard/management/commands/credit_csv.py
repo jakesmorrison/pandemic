@@ -13,8 +13,8 @@ class Command(BaseCommand):
         self.convert_csv_to_db(options['type'])
 
     def convert_csv_to_db(self, csv_path):
-        csv_path_1 = "/root/pandemic/creditcard/static/csv/credit_status.csv"
-        csv_path_2 = "/root/pandemic/creditcard/static/csv/points_used.csv"
+        csv_path_1 = "/root/pandemic/creditcard/static/creditcard/csv/credit_status.csv"
+        csv_path_2 = "/root/pandemic/creditcard/static/creditcard/csv/points_used.csv"
         df = pd.read_csv(csv_path_1)
         df = df.fillna(value=0)
         for index, row in df.iterrows():
