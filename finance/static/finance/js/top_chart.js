@@ -10,31 +10,36 @@ function create_top_chart(data,year,month,day,lastday){
       text: ''
     },
     scrollbar: {
-      barBackgroundColor: 'gray',
-      barBorderRadius: 7,
-      barBorderWidth: 0,
-      buttonBackgroundColor: 'gray',
-      buttonBorderWidth: 0,
-      buttonArrowColor: 'blue',
-      buttonBorderRadius: 7,
-      rifleColor: 'blue',
-      trackBackgroundColor: 'white',
-      trackBorderWidth: 1,
-      trackBorderColor: 'silver',
-      trackBorderRadius: 7
+//      barBackgroundColor: 'gray',
+//      barBorderRadius: 7,
+//      barBorderWidth: 0,
+//      buttonBackgroundColor: 'gray',
+//      buttonBorderWidth: 0,
+//      buttonArrowColor: 'blue',
+//      buttonBorderRadius: 7,
+//      rifleColor: 'blue',
+//      trackBackgroundColor: 'white',
+//      trackBorderWidth: 1,
+//      trackBorderColor: 'silver',
+//      trackBorderRadius: 7
     },
     tooltip: {
         formatter: function() {
-            var d = new Date(parseInt(this.x));
-            return "Date: "+(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear()+"<br>"+
-            "TOP Hours: "+this.y+"<br>"+
-            "TOP Days: "+(this.y/8).toString().split(".")[0]
+            if(this.point) {
+                    return this.point.text
+            }
+            else{
+                var d = new Date(parseInt(this.x));
+                return "Date: "+(d.getMonth()+1)+'/'+d.getDate()+'/'+d.getFullYear()+"<br>"+
+                "TOP Hours: "+this.y+"<br>"+
+                "TOP Days: "+(this.y/8).toString().split(".")[0]
+            }
         }
     },
     exporting: { enabled: false },
     credits: {enabled: false },
     rangeSelector : {
-        selected: 4,
+        selected: 5,
         inputEnabled: true,
         buttonTheme: {
             visibility: 'hidden'
@@ -47,6 +52,7 @@ function create_top_chart(data,year,month,day,lastday){
     xAxis: {
       type: 'datetime',
       ordinal: true,
+      startOnTick: true,
       plotBands: [{
         color: 'rgba(95,175,255, 0.25)',
         from: Date.UTC(year,month,day),
@@ -90,12 +96,11 @@ function create_top_chart(data,year,month,day,lastday){
     type : 'flags',
         data : [{
             x : Date.UTC(2018, 4, 02),
-            title : 'A',
-            text : 'Costa Rica'
+            title : 'Nicaragua',
+            text : 'Two week vacation with Joie.'
         }],
         onSeries : 'dataseries',
-        shape : 'circlepin',
-        width : 16
+        shape : 'squarepin',
     }]
   });
 }

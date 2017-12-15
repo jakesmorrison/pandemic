@@ -2,10 +2,29 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Micron TOP</title>
 
     {% load staticfiles %}
     <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
 
 </head>
 <body>
@@ -17,6 +36,31 @@
             <div id="top_chart" style=""></div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-lg-6 col-lg-offset-3 col-xs-12" style="text-align:center">
+            <h2>Dates to get most value from TOP</h2>
+            <table>
+                <tr>
+                    <th>Dates</th>
+                    <th>Reasoning</th>
+                </tr>
+                <tr>
+                    <td>Easter Weekend</td>
+                    <td>9 days away from work while only taking 28.5 TOP hours.</td>
+                </tr>
+                <tr>
+                    <td>Thanksgiving and Black Friday</td>
+                    <td>9 days away from work while only taking 17 TOP hours.</td>
+                </tr>
+                <tr>
+                    <td>Christmas Eve, Christmas, New Years</td>
+                    <td>16 days away from work while only taking 45.4 TOP hours.</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
 </div>
 
 

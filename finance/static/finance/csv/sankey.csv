@@ -1,36 +1,39 @@
 source,target,value,c
-Pre Tax Income: 100%,Pre Tax Investments: 8%,503,#5fff5f
-Pre Tax Income: 100%,Post Tax Income: 65%,3924,#5fafff
-Pre Tax Income: 100%,Taxes: 27%,1648,#ff5f5f
-Pre Tax Investments: 8%,Investments: 35%,503,#5fff5f
-Investments: 35%,HSA: 3%,200,#5fff5f
-Investments: 35%,Traditional 401k: 5%,303,#5fff5f
-Investments: 35%,Roth 401k: 10%,607,#5fff5f
-Investments: 35%,Savings: 10%,600,#5fff5f
-Investments: 35%,Brokerage: 7%,400,#5fff5f
-Post Tax Income: 65%,Investments: 35%,1607,#5fff5f
-Post Tax Income: 65%,Rent: 16%,1000,#5fafff
-Post Tax Income: 65%,Car: 11%,666,#5fafff
-Car: 11%,Car Payment: 8%,484,#5fafff
-Car: 11%,Insurance: 1.5%,82,#5fafff
-Car: 11%, Gas: 1.5%, 100,#5fafff
-Post Tax Income: 65%,Food: 7%,439,#5fafff
+Pre Tax Salary: 100%,Company Match: 4.5%,310,#5fff5f
+Pre Tax Salary: 100%,Pre Tax Investments: 9%,572,#5fff5f
+Pre Tax Salary: 100%,Post Tax Income: 61%,4000,#5fafff
+Pre Tax Salary: 100%,Taxes: 25.5%,1674,#ff5f5f
+Pre Tax Investments: 9%,Investments: 38%,572,#5fff5f
+Company Match: 4.5%,Investments: 38%,310,#5fff5f
+Investments: 38%,HSA: 3%,200,#5fff5f
+Investments: 38%,Traditional 401k: 5.5%,372,#5fff5f
+Investments: 38%,Traditional 401k (CM): 4.5%,310,#5fff5f
+Investments: 38%,Roth 401k: 9.5%,618,#5fff5f
+Investments: 38%,Savings: 9.5%,600,#5fff5f
+Investments: 38%,Brokerage: 6%,400,#5fff5f
+Post Tax Income: 61%,Investments: 38%,1618,#5fff5f
+Post Tax Income: 61%,Rent: 15%,1000,#5fafff
+Post Tax Income: 61%,Car: 10%,666,#5fafff
+Car: 10%,Car Payment: 7%,484,#5fafff
+Car: 10%,Insurance: 1.5%,82,#5fafff
+Car: 10%, Gas: 1.5%, 100,#5fafff
+Post Tax Income: 61%,Food: 7%,439,#5fafff
 Food: 7%,Groceries: 4%,275,#5fafff
 Food: 7%,Restaurants: 3%,164,#5fafff
-Post Tax Income: 65%,Utilities: 1.5%,100,#5fafff
+Post Tax Income: 61%,Utilities: 1.5%,100,#5fafff
 Utilities: 1.5%,Gas: .2%,15,#5fafff
 Utilities: 1.5%,Power: .5%,35,#5fafff
 Utilities: 1.5%,Internet: .8%,50,#5fafff
-Post Tax Income: 65%,Entertainment: .6%,37,#5fafff
+Post Tax Income: 61%,Entertainment: .6%,37,#5fafff
 Entertainment: .6%, Amazon Prime: .13%, 8,#5fafff
 Entertainment: .6%, Server: .075%, 5,#5fafff
 Entertainment: .6%, MoviePass: .15%, 10,#5fafff
 Entertainment: .6%, Spotify: .15%, 10,#5fafff
 Entertainment: .6%, VPN: .065%, 4,#5fafff
-Post Tax Income: 65%,Dog: 1.2%,75,#5fafff
+Post Tax Income: 61%,Dog: 1.2%,75,#5fafff
 Dog: 1.2%, Dog Food: .8%, 50,#5fafff
 Dog: 1.2%, Dog Treat: .4%, 25,#5fafff
-Taxes: 27%,Federal: 14%,865,#ff5f5f
-Taxes: 27%,State: 5%,334,#ff5f5f
-Taxes: 27%,Medicare: 1%,85,#ff5f5f
-Taxes: 27%,Social Security: 6%,364,#ff5f5f
+Taxes: 25.5%,Federal: 14%,882,#ff5f5f
+Taxes: 25.5%,State: 5%,340,#ff5f5f
+Taxes: 25.5%,Medicare: 1%,87,#ff5f5f
+Taxes: 25.5%,Social Security: 6%,371,#ff5f5f
