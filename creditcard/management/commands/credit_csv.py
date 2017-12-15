@@ -4,6 +4,7 @@ from ...models import CreditStatus, PointsUsed
 import pandas as pd
 import numpy as np
 
+
 class Command(BaseCommand):
     def add_arguments(self, parser):
         parser.add_argument('type')
