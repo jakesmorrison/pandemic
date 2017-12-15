@@ -1,10 +1,10 @@
 function rotten_meta_jake_chart(data){
-    Highcharts.chart('container', {
+    Highcharts.chart('rotten_meta_jake_chart', {
 
       chart: {
         type: 'scatter',
-        plotBorderWidth: 1,
-        zoomType: 'xy'
+//        plotBorderWidth: 1,
+//        zoomType: 'xy'
       },
 
       legend: {
@@ -16,7 +16,7 @@ function rotten_meta_jake_chart(data){
       },
 
       subtitle: {
-        text: 'Subtitle'
+        text: ''
       },
 
       xAxis: {

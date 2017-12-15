@@ -14,7 +14,17 @@
 </head>
 <body>
 
-<div id="container" style="margin: 0 auto"></div>
+<div class="container">
+    <div class="row">
+        <div id="frame1" class="col-lg-6 col-xs-12 col-xs-offset-0">
+            <div id="rotten_meta_jake_chart" style="width: 100%; height: 100%;"></div>
+        </div>
+        <div id="frame2" class="col-lg-6 col-xs-12 col-xs-offset-0">
+            <div id="" style="width: 100%; height: 100%;"></div>
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
@@ -36,10 +46,9 @@
 var data = {{series | safe}};
 
 $( document ).ready(function() {
-    width = $(document).width();
-    height = $(document).height();
-    $("#container").width(width);
-    $("#container").height(height);
+    height = $(document).height()/2;
+    $("#frame1").height(height);
+    $("#frame2").height(height);
     rotten_meta_jake_chart(data)
 });
 
