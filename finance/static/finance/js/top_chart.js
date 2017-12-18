@@ -101,6 +101,15 @@ function create_top_chart(data,year,month,day,lastday){
         }],
         onSeries : 'dataseries',
         shape : 'squarepin',
+    },{
+    type : 'flags',
+        data : [{
+            x : Date.UTC(2018, 07, 9),
+            title : 'Cancun',
+            text : 'Bachelor Party with Nick and Dad.'
+        }],
+        onSeries : 'dataseries',
+        shape : 'squarepin',
     }]
   });
 }
