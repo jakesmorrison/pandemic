@@ -110,6 +110,15 @@ function create_top_chart(data,year,month,day,lastday){
         }],
         onSeries : 'dataseries',
         shape : 'squarepin',
+    },{
+    type : 'flags',
+        data : [{
+            x : Date.UTC(2018, 10, 22),
+            title : 'Hawaii',
+            text : 'Thanksgiving with Mother.'
+        }],
+        onSeries : 'dataseries',
+        shape : 'squarepin',
     }]
   });
 }
