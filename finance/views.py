@@ -44,8 +44,7 @@ def calc_easter(year):
 
 def top(request):
     start_date = datetime.date(2017, 9, 18)
-    now = datetime.datetime.now().date() + datetime.timedelta(400)
-    print(now)
+    now = datetime.datetime.now().date() + datetime.timedelta(500)
 
     end_date = datetime.date(2019, 1, 1)
     end_date = now

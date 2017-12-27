@@ -21,15 +21,16 @@ Post Tax Income: 61%,Food: 7%,439,#5fafff
 Food: 7%,Groceries: 4%,275,#5fafff
 Food: 7%,Restaurants: 3%,164,#5fafff
 Post Tax Income: 61%,Utilities: 1.5%,100,#5fafff
-Utilities: 1.5%,Gas: .2%,15,#5fafff
+Utilities: 1.5%,Gas: .2%,25,#5fafff
 Utilities: 1.5%,Power: .5%,35,#5fafff
 Utilities: 1.5%,Internet: .8%,50,#5fafff
 Post Tax Income: 61%,Entertainment: .6%,37,#5fafff
 Entertainment: .6%, Amazon Prime: .13%, 8,#5fafff
 Entertainment: .6%, Server: .075%, 5,#5fafff
 Entertainment: .6%, MoviePass: .15%, 10,#5fafff
-Entertainment: .6%, Spotify: .15%, 10,#5fafff
-Entertainment: .6%, VPN: .065%, 4,#5fafff
+Entertainment: .6%, Spotify: .15%, 8.33,#5fafff
+Entertainment: .6%, VPN: .065%, 3,#5fafff
+Entertainment: .6%, Google Drive: .06%, 2,#5fafff
 Post Tax Income: 61%,Dog: 1.2%,75,#5fafff
 Dog: 1.2%, Dog Food: .8%, 50,#5fafff
 Dog: 1.2%, Dog Treat: .4%, 25,#5fafff

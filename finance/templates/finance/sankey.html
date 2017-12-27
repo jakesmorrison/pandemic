@@ -12,7 +12,7 @@
 <body>
 
 <div class="container">
-    <h2 id="mytitle" class="centered">Sankey Chart</h2>
+    <h2 id="mytitle" class="centered">Sankey Chart (Yearly)</h2>
     <div class="row">
         <div class="col-xs-12" id="mydiv" style="height: 100%">
             <div id="chart"></div>
@@ -65,7 +65,7 @@ var path = sankey.link();
 
 
 // load the data (using the timelyportfolio csv method)
-d3.csv(" {% static 'finance/csv/sankey.csv' %}", function(error, data) {
+d3.csv(" {% static 'finance/csv/sankey_year.csv' %}", function(error, data) {
 
   //set up graph in same style as original example but empty
   graph = {

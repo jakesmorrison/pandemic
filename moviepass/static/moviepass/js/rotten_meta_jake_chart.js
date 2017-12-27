@@ -91,7 +91,7 @@ function rotten_meta_jake_chart(data){
       plotOptions: {
         series: {
           dataLabels: {
-            enabled: true,
+            enabled: false,
             format: '{point.name}'
           },
             marker: {
