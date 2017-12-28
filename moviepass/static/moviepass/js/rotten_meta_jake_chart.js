@@ -20,11 +20,11 @@ function rotten_meta_jake_chart(data){
       },
 
       xAxis: {
-        <!--min: 0,-->
-        <!--max: 100,-->
+        min: 0,
+        max: 100,
         gridLineWidth: 1,
         title: {
-          text: 'Rotten Tomatoes'
+          text: 'Rotten Tomatoes Critic'
         },
         labels: {
           format: '{value}%'
@@ -49,15 +49,15 @@ function rotten_meta_jake_chart(data){
         credits: {enabled: false },
 
       yAxis: {
-        <!--min: 0,-->
-        <!--max: 100,-->
+        min: 0,
+        max: 100,
         startOnTick: false,
         endOnTick: false,
         title: {
-          text: 'Metacritic'
+          text: 'Rotten Tomatoes User'
         },
         labels: {
-          format: '{value}'
+          format: '{value}%'
         },
         maxPadding: 0.2,
         <!--plotLines: [{-->
@@ -81,8 +81,8 @@ function rotten_meta_jake_chart(data){
         useHTML: true,
         headerFormat: '<table>',
         pointFormat: '<tr><th colspan="2"><h3>{point.name}</h3></th></tr>' +
-          '<tr><th>Rotten Tomatoes:</th><td>{point.x}%</td></tr>' +
-          '<tr><th>Metacritic:</th><td>{point.y}</td></tr>' +
+          '<tr><th>Rotten Tomatoes Critic:</th><td>{point.x}%</td></tr>' +
+          '<tr><th>Rotten Tomatoes User:</th><td>{point.y}%</td></tr>' +
           '<tr><th>Jake:</th><td>{point.Jake}</td></tr>',
         footerFormat: '</table>',
         followPointer: true
@@ -91,7 +91,8 @@ function rotten_meta_jake_chart(data){
       plotOptions: {
         series: {
           dataLabels: {
-            enabled: false,
+            style: {fontSize: 8},
+            enabled: true,
             format: '{point.name}'
           },
             marker: {
