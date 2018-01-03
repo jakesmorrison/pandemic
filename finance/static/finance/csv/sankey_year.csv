@@ -1,28 +1,27 @@
 source,target,value,c
 Pre Tax Salary: 100%,Company Match: 4.73%,4030,#5FFF5F
-Pre Tax Salary: 100%,Pre Tax Investments: 8.72%,7436,#5FFF5F
-Pre Tax Salary: 100%,Post Tax Income: 61.01%,52000,#5FaFFF
+Pre Tax Salary: 100%,Pre Tax Investments: 10.72%,9136,#5FFF5F
+Pre Tax Salary: 100%,Post Tax Income: 59.02%,50300,#5FaFFF
 Pre Tax Salary: 100%,Taxes: 25.53%,21762,#FF5F5F
-Pre Tax Investments: 8.72%,Investments: 38.13%,7436,#5FFF5F
-Company Match: 4.73%,Investments: 38.13%,4030,#5FFF5F
-Investments: 38.13%,HSA: 3.05%,2600,#5FFF5F
-Investments: 38.13%,Traditional 401K (CM): 4.73%,4030,#5FFF5F
-Investments: 38.13%,Traditional 401K: 5.67%,4836,#5FFF5F
-Investments: 38.13%,ROTH 401K: 9.43%,8034,#5FFF5F
-Investments: 38.13%,ROTH IRA: 6.45%,5500,#5FFF5F
-Investments: 38.13%,Savings: 2.7%,2300,#5FFF5F
-Investments: 38.13%,Brokerage: 6.1%,5200,#5FFF5F
-Post Tax Income: 61.01%,Investments: 38.13%,21034,#5FFF5F
-Post Tax Income: 61.01%,Rent: 14.08%,12000,#5FaFFF
-Post Tax Income: 61.01%,Car: 9.38%,7992,#5FaFFF
-Post Tax Income: 61.01%,Food: 7.04%,6000,#5FaFFF
-Post Tax Income: 61.01%,Utilities: 1.55%,1320,#5FaFFF
-Post Tax Income: 61.01%,Entertainment: 0.54%,459,#5FaFFF
-Post Tax Income: 61.01%,Dog: 1.06%,900,#5FaFFF
-Post Tax Income: 61.01%,Other: 2.69%,2295,#5FaFFF
-Car: 9.38%,Car Payment: 6.81%,5808,#5FaFFF
-Car: 9.38%,Insurance: 0.86%,730,#5FaFFF
-Car: 9.38%,Gas: 1.41%,1200,#5FaFFF
+Pre Tax Investments: 10.72%,Investments: 45.11%,9136,#5FFF5F
+Company Match: 4.73%,Investments: 45.11%,4030,#5FFF5F
+Investments: 45.11%,HSA: 3.05%,2600,#5FFF5F
+Investments: 45.11%,Traditional 401K (CM): 4.73%,4030,#5FFF5F
+Investments: 45.11%,Traditional 401K: 7.67%,6536,#5FFF5F
+Investments: 45.11%,ROTH 401K: 11.42%,9734,#5FFF5F
+Investments: 45.11%,ROTH IRA: 6.45%,5500,#5FFF5F
+Investments: 45.11%,Savings: 5.69%,4850,#5FFF5F
+Investments: 45.11%,Brokerage: 6.1%,5200,#5FFF5F
+Post Tax Income: 59.02%,Investments: 45.11%,25284,#5FFF5F
+Post Tax Income: 59.02%,Rent: 14.08%,12000,#5FaFFF
+Post Tax Income: 59.02%,Car: 2.26%,1930,#5FaFFF
+Post Tax Income: 59.02%,Food: 7.04%,6000,#5FaFFF
+Post Tax Income: 59.02%,Utilities: 1.55%,1320,#5FaFFF
+Post Tax Income: 59.02%,Entertainment: 0.54%,459,#5FaFFF
+Post Tax Income: 59.02%,Dog: 1.15%,980,#5FaFFF
+Post Tax Income: 59.02%,Other: 2.73%,2327,#5FaFFF
+Car: 2.26%,Insurance: 0.86%,730,#5FaFFF
+Car: 2.26%,Gas: 1.41%,1200,#5FaFFF
 Food: 7.04%,Restaurants: 3.52%,3000,#5FaFFF
 Food: 7.04%,Groceries: 3.52%,3000,#5FaFFF
 Utilities: 1.55%,Gas: 0.35%,300,#5FaFFF
@@ -35,8 +34,9 @@ Entertainment: 0.54%,Spotify: 0.12%,100,#5FaFFF
 Entertainment: 0.54%,VPN: 0.04%,35,#5FaFFF
 Entertainment: 0.54%,Google Drive: 0.02%,20,#5FaFFF
 Entertainment: 0.54%,LastPass: 0.03%,24,#5FaFFF
-Dog: 1.06%,Dog Food: 0.06%,50,#5FaFFF
-Dog: 1.06%,Dog Treat: 0.03%,25,#5FaFFF
+Dog: 1.15%,Dog Food: 0.7%,600,#5FaFFF
+Dog: 1.15%,Dog Treat: 0.21%,180,#5FaFFF
+Dog: 1.15%,Hair Cut: 0.23%,200,#5FaFFF
 Taxes: 25.53%,Federal: 13.45%,11466,#FF5F5F
 Taxes: 25.53%,Social Security: 5.66%,4823,#FF5F5F
 Taxes: 25.53%,State: 5.19%,4420,#FF5F5F
