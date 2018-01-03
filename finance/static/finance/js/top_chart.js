@@ -119,6 +119,15 @@ function create_top_chart(data,year,month,day,lastday){
         }],
         onSeries : 'dataseries',
         shape : 'squarepin',
+    },{
+    type : 'flags',
+        data : [{
+            x : Date.UTC(2018, 11, 31),
+            title : 'Japan',
+            text : 'New Years with Jeff?'
+        }],
+        onSeries : 'dataseries',
+        shape : 'squarepin',
     }]
   });
 }
