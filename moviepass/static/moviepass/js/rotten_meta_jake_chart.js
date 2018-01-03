@@ -3,8 +3,8 @@ function rotten_meta_jake_chart(data){
 
       chart: {
         type: 'scatter',
-//        plotBorderWidth: 1,
-//        zoomType: 'xy'
+        plotBorderWidth: 1,
+        zoomType: 'xy'
       },
 
       legend: {
