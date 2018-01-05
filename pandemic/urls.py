@@ -39,6 +39,7 @@ urlpatterns = [
     url(r'^workout/', include('workout.urls')),
     url(r'^creditcard/', include('creditcard.urls')),
     url(r'^moviepass/', include('moviepass.urls')),
+    url(r'^sandbox/', include('sandbox.urls')),
     url(r'', include('homepage.urls')),
 
 ]

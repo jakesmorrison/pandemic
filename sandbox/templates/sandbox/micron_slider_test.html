@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Slider</title>
+
+    <!-- CSS -->
+    {% load staticfiles %}
+    <link href="{% static 'sandbox/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'sandbox/css/jquery-ui.css' %}" rel="stylesheet">
+    <link href="{% static 'sandbox/css/custom_slider.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-xs-offset-0" style="padding:0;">
+            <br>
+            <br>
+            <p style="text-align: right;">100GB</p>
+            <div id="slider-range"></div>
+        </div>
+    </div>
+    <div class="row">
+        <div id="ssd_div" class="col-xs-4" style="text-align: center;">
+            <h3 class="ssd">SSD</h3>
+            <p id="part1"></p>
+        </div>
+        <div id="nvme_div" class="col-xs-4" style="text-align: center;">
+            <h3 class="nvme">NVME</h3>
+            <p id="part2"></p>
+        </div>
+        <div id="nvdimm_div" class="col-xs-4" style="text-align: center;">
+            <h3 class="nvdimm">NVDIMM</h3>
+            <p id="part3"></p>
+        </div>
+    </div>
+
+</div>
+
+<!-- JS -->
+{% load staticfiles %}
+<script src="{% static 'sandbox/js/jquery-1.12.4.js' %}" type="text/javascript"></script>
+<script src="{% static 'sandbox/js/jquery-ui.js' %}" type="text/javascript"></script>
+<script src="{% static 'sandbox/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+
+<script>
+
+
+$(document).ready(function() {
+
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 0,
+      max: 100,
+      values: [ 20, 60 ],
+      slide: function( event, ui ) {
+        $("#color_div").css('width', 100 - ui.values[ 1 ] +'%');
+        $("#part1").text(ui.values[ 0 ] + "%");
+        $("#part2").text(100 - ui.values[ 0 ] -  (100-ui.values[ 1 ]) + "%");
+        $("#part3").text(100-ui.values[ 1 ] + "%");
+
+        $("#ssd_div").css('width', ui.values[ 0 ] + "%")
+        $("#nvme_div").css('width', 100 - ui.values[ 0 ] -  (100-ui.values[ 1 ]) + "%")
+        $("#nvdimm_div").css('width', 100-ui.values[ 1 ] + "%")
+
+        if(ui.values[ 0 ] <= 10){
+            $(".ssd").css('font-size', (24+(ui.values[ 0 ]-11)).toString() + "px")
+        }
+        if( (100 - ui.values[ 0 ] -  (100-ui.values[ 1 ])) <= 10 ){
+            $(".nvme").css('font-size', (24+((100 - ui.values[ 0 ] -  (100-ui.values[ 1 ]))-11)).toString() + "px")
+        }
+        if(100-ui.values[ 1 ] <= 10){
+            $(".nvdimm").css('font-size', (24+((100-ui.values[ 1 ])-11)).toString() + "px")
+        }
+        if(ui.values[ 0 ] === 0){
+            $(".ssd").css('font-size', "0px")
+        }
+        if( (100 - ui.values[ 0 ] -  (100-ui.values[ 1 ]))  === 0){
+            $(".nvme").css('font-size', "0px")
+        }
+        if(100-ui.values[ 1 ]  === 0){
+            $(".nvdimm").css('font-size', "0px")
+        }
+
+
+
+
+      }
+    }).append('<div id="color_div" style="width: 60%"></div>');
+
+    $("#part1").text("20%")
+    $("#part2").text("40%")
+    $("#part3").text("40%")
+    $("#ssd_div").css('width', "20%")
+    $("#nvme_div").css('width', "40%")
+    $("#nvdimm_div").css('width', "40%")
+
+
+});
+
+
+</script>
+
+
+</body>
+</html>

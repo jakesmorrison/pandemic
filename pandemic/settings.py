@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'workout.apps.WorkoutConfig',
     'creditcard.apps.CreditcardConfig',
     'moviepass.apps.MoviepassConfig',
+    'sandbox.apps.SandboxConfig',
     'rest_framework',
 ]
 
