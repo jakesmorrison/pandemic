@@ -1,0 +1,26 @@
+
+.centered{
+    text-align: center;
+}
+
+.main-background{
+    background: #0077C8;
+}
+
+.myheadings{
+    color: #0077C8;
+    letter-spacing: 1px;
+    font-weight: bold;
+}
+
+.myfont{
+
+}
+
+#left_chart{
+border: 5px solid white;
+}
+
+#right_chart{
+border: 5px solid white;
+}
