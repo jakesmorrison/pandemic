@@ -32,7 +32,13 @@ def home(request):
     for x in db_books.values():
         df_temp = pd.DataFrame.from_dict(dict(x.items()), orient='index')
         df = df.append(df_temp.T, ignore_index=True)
+
+    year =2018
+    df["Remove"] = df["Date_Start"].apply(lambda x: int(str(x).split("-")[0]))
+    df = df[df["Remove"] == 2018]
+
     df_lookup = df
+
 
     df_display = df.drop("Lookup",1)
     df_display = df_display.drop("id",1)

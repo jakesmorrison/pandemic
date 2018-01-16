@@ -3,8 +3,13 @@
     text-align: center;
 }
 
-.main-background{
-    background: #0077C8;
+.mybody{
+    margin-left:1%;
+ }
+
+html, body {
+  height: 100%;
+  background: #0077C8;
 }
 
 .myheadings{
@@ -23,4 +28,18 @@ border: 5px solid white;
 
 #right_chart{
 border: 5px solid white;
+}
+
+.cutout_head{
+    border: 1px solid #2C2C2E;
+    background: white;
+    border-radius: 5px;
+}
+
+.box_shadow_shift4{
+    box-shadow: -3px -3px #2C2C2E;
+    width: 97%;
+    margin-left: 1%;
+    margin-right: 1%;
+    margin-bottom: 1%;
 }

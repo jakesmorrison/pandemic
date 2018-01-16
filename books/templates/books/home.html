@@ -5,7 +5,7 @@
     <!--<meta http-equiv="X-UA-Compatible" content="IE=edge">-->
     <!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
     <meta name="viewport" content="initial-scale=1">
-    <title>Books</title>
+    <title>2018 Reading Stats</title>
 
     <!-- Custom Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
@@ -52,7 +52,8 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-sm-10 col-sm-offset-1 timeline_outer">
-                  <div class="timeline">
+                  <h2 style="text-align: center; margin-top: -15px;">2018 Reading List</h2>
+                  <div style="z-index: 100;" class="timeline">
                       <div class="line"></div>
                   </div>
                 </div>
@@ -367,7 +368,7 @@ function tick_on_mouseover(element){
 	id_name = id_name.replace(/ /g,"_");
 	$('.'+id_name).css("font-size", "20px");
     $('.'+id_name).css("z-index", 2);
-    $('.'+id_name).css("width", "100px");
+    $('.'+id_name).css("width", "200px");
 }
 
 function tick_on_mouseout(element){
@@ -375,7 +376,7 @@ function tick_on_mouseout(element){
     id_name = $(element).attr('id');
 	id_name = id_name.replace(/ /g,"_");
 	$('.'+id_name).css("font-size", "10px");
-    $('.'+id_name).css("width", "80px");
+    $('.'+id_name).css("width", "200px");
 }
 
 function vector_button(element){

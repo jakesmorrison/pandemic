@@ -12,26 +12,30 @@
 
 </head>
 
-<body>
-<div class="container" style="width: 100%">
-    <div class="row" style="">
-        <div class="col-xs-12 cutout_head" style="margin-top:0px;">
-            <h1 class="myheadings myfont" style="margin-top: 15px;">Persistent Memory Accelerates IOPs</h1>
-            <p class="myheadings myfont "><i>Brought to you by</i></p>
-        </div>
-    </div>
+<body class="mybody">
+    <div class="wrapper"></div>
+        <div class="page-content-wrapper" style="width: 100%">
+            <div class="container-fluid">
+                <div class="row" style="">
+                    <div class="col-xs-12 cutout_head box_shadow_shift4" style="margin-top:0px;">
+                        <h1 class="myheadings myfont" style="margin-top: 15px;">Persistent Memory Accelerates IOPs</h1>
+                        <p class="myheadings myfont "><i>Brought to you by</i></p>
+                    </div>
+                </div>
 
-    <div class="row">
-        <div id="left_div" class="col-xs-6 col-xs-offset-0 main-background">
-            <div id="left_chart"></div>
+                <div class="row">
+                    <div id="left_div" class="col-xs-6 col-xs-offset-0 main-background">
+                        <div id="left_chart"></div>
+                    </div>
+                    <div id="right_div" class="col-xs-6 col-xs-offset-0 main-background">
+                        <button type="button" class="btn" onclick="requestData()" style="position: absolute;">Basic</button>
+                        <h3 id="chart_right_comment" class="centered" style="position: absolute; margin-left:25px;"></h3>
+                        <div id="right_chart"></div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div id="right_div" class="col-xs-6 col-xs-offset-0 main-background">
-            <button type="button" class="btn" onclick="requestData()" style="position: absolute;">Basic</button>
-            <h3 id="chart_right_comment" class="centered" style="position: absolute; margin-left:25px;"></h3>
-            <div id="right_chart"></div>
-        </div>
-    </div>
-</div>
+    </body>
 
 <!-- JS -->
 {% load staticfiles %}

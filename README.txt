@@ -17,6 +17,9 @@ python manage.py book_to_db "Foundation and Empire" "Isaac Asimov" "foundationan
 python manage.py book_to_db "American Gods" "Neil Gaiman" "americangods" "Fiction" "Fantasy" "2017-05-27" "2017-07-25" 
 python manage.py book_to_db "The Handmaid's Tale" "Margaret Atwood" "thehandmaidstale" "Fiction" "Dystopian" "2017-06-20" "2017-07-20"
 python manage.py book_to_db "Do Androids Dream of Electric Sheep?" "Philip K. Dick" "doandroidsdreamofelectricsheep" "Fiction" "Science Fiction" "2018-01-01" "2017-01-10"
+python manage.py book_to_db "Life of Pi" "Yann Martel" "lifeofpi" "Fiction" "Fantasy Adventure" "2018-01-07" "2018-01-21"
+
+
 
 #Softball
 python manage.py csv_to_db /root/pandemic/softball/static/softball/csv/last_game.csv
