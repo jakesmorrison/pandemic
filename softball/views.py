@@ -65,7 +65,7 @@ def index(request):
     dates = list(sorted(set(df_plot["Date"].tolist())))
     for date in dates:
         df_temp = df_plot[df_plot["Date"] == date]
-        df_temp = df_temp.sort(["Player"])
+        df_temp = df_temp.sort_values(by=["Player"])
         series.append({"name":str(date),"data":df_temp["OPS"].tolist()})
 
 
