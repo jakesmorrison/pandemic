@@ -18,8 +18,7 @@ python manage.py book_to_db "American Gods" "Neil Gaiman" "americangods" "Fictio
 python manage.py book_to_db "The Handmaid's Tale" "Margaret Atwood" "thehandmaidstale" "Fiction" "Dystopian" "2017-06-20" "2017-07-20"
 python manage.py book_to_db "Do Androids Dream of Electric Sheep?" "Philip K. Dick" "doandroidsdreamofelectricsheep" "Fiction" "Science Fiction" "2018-01-01" "2017-01-10"
 python manage.py book_to_db "Life of Pi" "Yann Martel" "lifeofpi" "Fiction" "Fantasy Adventure" "2018-01-07" "2018-01-21"
-
-
+python manage.py book_to_db "Amusing Ourselves To Death" "Neil Postman" "amusingourselvestodeath" "Non-Fiction" "Education" "2018-01-22" "2018-02-03"
 
 #Softball
 python manage.py csv_to_db /root/pandemic/softball/static/softball/csv/last_game.csv
