@@ -26,7 +26,7 @@ class Softball_Methods():
         df["Ranking"] = df['OPS'].rank(ascending=False)
         df = df.fillna(0)
         df["Ranking"] = df["Ranking"].apply(lambda x: int(x))
-        df = df.sort(["Ranking"])
+        df = df.sort_values(by=["Ranking"])
         return df
     def plot_data(df):
         df = df.groupby(["Player","Date"]).sum().reset_index()
