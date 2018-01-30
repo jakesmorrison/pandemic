@@ -61,6 +61,8 @@ def gameboard(request,rId):
     pd = methods.Pandemic()
     params = request.POST
 
+    print(rId)
+
     if "new" in params:
         pd.add_room(roomId = params["roomId"], createdBy = params["createdBy"],mutation = params["mutation"],
                     numberOfPandemicCards = params["numpandemiccards"],numberOfRoleCards = params["numrolecards"])
