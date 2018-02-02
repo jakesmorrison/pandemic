@@ -8,4 +8,5 @@ urlpatterns = [
     url(r'^retirement_withdrawl', views.retirement_withdrawl, name='retirement_withdrawl'),
     url(r'^sankey', views.sankey, name='sankey'),
     url(r'^top', views.top, name='top'),
+    url(r'^stock_tracker', views.stock_tracker, name='stock_tracker'),
 ]

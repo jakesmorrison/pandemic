@@ -3,7 +3,7 @@ import pandas as pd
 import datetime
 import holidays
 from .management import config as cfg
-
+from .management import stock_tracker_methods
 
 # Create your views here.
 # Create your views here.
@@ -125,3 +125,11 @@ def top(request):
         'data': data
     }
     return render(request,"finance/top.html",context)
+
+def stock_tracker(request):
+    stm =stock_tracker_methods.Stock_Tracker_Methods()
+    stack_data = stm.stack_data()
+
+    context = {
+    }
+    return render(request, "finance/stock_tracker.html", context)
