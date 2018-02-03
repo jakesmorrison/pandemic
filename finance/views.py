@@ -128,8 +128,12 @@ def top(request):
 
 def stock_tracker(request):
     stm =stock_tracker_methods.Stock_Tracker_Methods()
-    stack_data = stm.stack_data()
+    stack_data, date_data = stm.stack_data()
+
+    print(date_data)
 
     context = {
+        "stack_data": stack_data,
+        "date_data": date_data
     }
     return render(request, "finance/stock_tracker.html", context)

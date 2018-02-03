@@ -8,6 +8,7 @@
     <link href=" {% static 'finance/css/style.css' %}" rel="stylesheet">
     <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href=" {% static 'finance/css/bootstrap_slider.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/stock.css' %}" rel="stylesheet">
 
 </head>
 <body>
@@ -24,10 +25,16 @@
 <script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
 <script src="{% static 'finance/js/highcharts.js' %}"></script>
-<script src="{% static 'finance/js/exporting.js' %}"></script>
 <script src="{% static 'finance/js/stock_stack.js' %}"></script>
 
 <script>
+
+
+
+$( document ).ready(function() {
+    plot_stock_stack({{stack_data|safe}}, {{date_data|safe}})
+});
+
 </script>
 
 </body>

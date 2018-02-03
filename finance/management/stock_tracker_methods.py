@@ -1,12 +1,18 @@
 import datetime
 from ..models import MyStocks, Prices
+import pandas as pd
 
 class Stock_Tracker_Methods(object):
     def __init__(self):
         pass
     def stack_data(self):
-        stock_price = MyStocks.objects.all()
-        my_stock = Prices.objects.all()
+        my_stock = MyStocks.objects.all().values()
+        stock_price = Prices.objects.all().values()
+
+        df_stock_price = pd.DataFrame(list(stock_price))
+        df_my_stock = pd.DataFrame(list(my_stock))
+
+
 
         start_date = [str(x["Buy_Date"]) for x in MyStocks.objects.values("Buy_Date")][0].split("-")
         current_date = str(datetime.datetime.now()).split(" ")[0].split("-")
@@ -16,8 +22,47 @@ class Stock_Tracker_Methods(object):
 
         delta = d2 - d1
         date_list = []
-        for i in range(delta.days + 1):
-            date_list.append(d1 + datetime.timedelta(days=i))
+        stack_list = []
+        for index, row in df_my_stock.iterrows():
+            data = []
+            for i in range(delta.days + 1):
+                date = d1 + datetime.timedelta(days=i)
+                if row["Sell_Date"] == None:
+                    if date >= row["Buy_Date"]:
+                        todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
+                        todays_cost = todays_cost["Price"].tolist()
+                        if todays_cost:
+                            data.append({'y':round(float((todays_cost[0]-row["Cost"])*row["Quanity"]),2),"transaction":int(row["id"]),
+                                         "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
+                                         "quanity": int(row["Quanity"])})
+                            date_list.append(str(date))
+                    else:
+                        if df_stock_price[df_stock_price["Date"] == date].empty == False:
+                            date_list.append(str(date))
+                            data.append(0)
+                        else:
+                            pass
 
-        print(date_list)
+                else:
+                    if date >= row["Buy_Date"] and row["Sell_Date"] >= date:
+                        todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
+                        todays_cost = todays_cost["Price"].tolist()
+                        if todays_cost:
+                            data.append({'y':round(float((todays_cost[0]-row["Cost"])*row["Quanity"]),2),"transaction":int(row["id"]),
+                                         "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
+                                         "quanity": int(row["Quanity"])})
+                            date_list.append(str(date))
+                    else:
+                        if df_stock_price[df_stock_price["Date"] == date].empty == False:
+                            date_list.append(str(date))
+                            data.append(0)
+                        else:
+                            pass
+
+            stack_list.append({"name":row["Symbol"],"data":data,"threshold": 0,"negativeColor": '#ff5f5f', "color": '#5fff5f'})
+
+
+        return stack_list, sorted(list(set(date_list)))
+
+
 
