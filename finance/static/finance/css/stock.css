@@ -8,13 +8,20 @@ table {
 
 td, th {
     border: 1px solid #dddddd;
-    text-align: left;
+    text-align: center;
     padding: 8px;
 }
 
 tr:nth-child(even) {
-    background-color: #dddddd;
+    background-color: #ffffff;
+    text-align: center;
 }
+
+tr:nth-child(odd) {
+    background-color: #ffffff;
+    text-align: center;
+}
+
 
 .tt_header{
     font-size: 20px;
