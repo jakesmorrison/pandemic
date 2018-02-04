@@ -25,4 +25,16 @@ tr:nth-child(odd) {
 
 .tt_header{
     font-size: 20px;
+    text-align: center;
+    margin: 0;
+    margin-top: -15px;
+}
+.date{
+    margin: 0 0 0;
+    text-align:center;
+    margin-top: 50px;
+}
+
+.table_left{
+    font-weight: bold;
 }
