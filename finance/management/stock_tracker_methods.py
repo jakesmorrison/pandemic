@@ -65,4 +65,27 @@ class Stock_Tracker_Methods(object):
         return stack_list, sorted(list(set(date_list)))
 
 
+    def get_money_in_market(self):
+        my_stock = MyStocks.objects.all().values()
+        stock_price = Prices.objects.all().values()
+
+        df_stock_price = pd.DataFrame(list(stock_price))
+        df_my_stock = pd.DataFrame(list(my_stock))
+
+        total_money_in_market = 0
+        for index, row in df_my_stock.iterrows():
+            stock = row["Symbol"]
+            quanity = row["Quanity"]
+            sold = row["Sell_Date"]
+            if sold == None:
+                newest_price = df_stock_price[df_stock_price["Symbol"]==stock]
+                newest_price = newest_price.sort(['Date'])["Price"].tolist()[-1]
+                total_money_in_market = total_money_in_market + newest_price*quanity
+
+        return total_money_in_market
+
+    def get_gain_loss(self):
+        pass
+
+
 

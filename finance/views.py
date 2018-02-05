@@ -130,10 +130,12 @@ def stock_tracker(request):
     stm =stock_tracker_methods.Stock_Tracker_Methods()
     stack_data, date_data = stm.stack_data()
 
-    print(date_data)
+    money_in_market = stm.get_money_in_market()
+    # gain_loss = stm.get_gain_loss()
 
     context = {
         "stack_data": stack_data,
-        "date_data": date_data
+        "date_data": date_data,
+        "money_in_market": money_in_market
     }
     return render(request, "finance/stock_tracker.html", context)

@@ -32,7 +32,7 @@ tr:nth-child(odd) {
 .date{
     margin: 0 0 0;
     text-align:center;
-    margin-top: 50px;
+    margin-top: 0px;
 }
 
 .table_left{
