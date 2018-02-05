@@ -51,6 +51,14 @@ function plot_stock_stack(stack_data, dates){
         plotOptions: {
             column: {
                 stacking: 'normal',
+                dataLabels:{
+                    enabled: true,
+                    formatter: function () {
+                        if ( this.point.y != 0 ){
+                            return this.series.name
+                        }
+                    }
+                },
                 borderColor: '#fff',
                 borderWidth: 5
             }
