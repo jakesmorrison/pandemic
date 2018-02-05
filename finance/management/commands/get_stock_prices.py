@@ -25,12 +25,19 @@ class Command(BaseCommand):
         symbol_list = list(set(df["Symbol"].tolist()))
         for x in symbol_list:
             date, close_price = self.get_stock_price(x)
-            p = Prices(
-                Date=date,
-                Symbol=x,
-                Price=close_price,
-            )
-            p.save()
+
+            try:
+                obj = Prices.objects.get(Date=date,Symbol=x)
+                obj.Price = close_price
+                obj.save
+            except:
+                p = Prices(
+                    Date=date,
+                    Symbol=x,
+                    Price=close_price,
+                )
+                p.save()
+
 
     def get_stock_price(self,symbol):
         url = "https://finance.yahoo.com/quote/"+symbol+"/history"
