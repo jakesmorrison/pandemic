@@ -79,7 +79,7 @@ class Stock_Tracker_Methods(object):
             sold = row["Sell_Date"]
             if sold == None:
                 newest_price = df_stock_price[df_stock_price["Symbol"]==stock]
-                newest_price = newest_price.sort(['Date'])["Price"].tolist()[-1]
+                newest_price = newest_price.sort_values(by=['Date'])["Price"].tolist()[-1]
                 total_money_in_market = total_money_in_market + newest_price*quanity
 
         return total_money_in_market
