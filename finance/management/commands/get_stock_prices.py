@@ -13,7 +13,8 @@ class Command(BaseCommand):
 
 
     def handle(self, *args, **options):
-        if options['number_of_days'] == 1:
+
+        if options['number_of_days'] == "1":
             self.add_to_db()
         else:
             self.get_historic_stock_prices(options["symbol"], int(options['number_of_days']))
