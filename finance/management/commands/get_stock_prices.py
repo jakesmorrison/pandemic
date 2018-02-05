@@ -25,11 +25,10 @@ class Command(BaseCommand):
         symbol_list = list(set(df["Symbol"].tolist()))
         for x in symbol_list:
             date, close_price = self.get_stock_price(x)
-
             try:
                 obj = Prices.objects.get(Date=date,Symbol=x)
                 obj.Price = close_price
-                obj.save
+                obj.save()
             except:
                 p = Prices(
                     Date=date,
