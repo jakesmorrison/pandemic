@@ -60,9 +60,27 @@ function plot_stock_stack(stack_data, dates){
                     }
                 },
                 borderColor: '#fff',
-                borderWidth: 5
-            }
+                borderWidth: 5,
+                point: {
+                    events: {
+                        click: function () {
+                            isolate_stock(this.series.name);
+                        }
+                    }
+                }
+            },
         },
         series: stack_data
     });
+
+    function isolate_stock(symbol){
+        $.each(chart.series, function(i, ser) {
+            if(ser.name === symbol){
+                console.log(ser)
+            }
+            else{
+                ser.hide();
+            }
+        });
+    }
 }
