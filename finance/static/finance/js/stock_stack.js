@@ -1,3 +1,4 @@
+var hidden = false;
 function plot_stock_stack(stack_data, dates){
     var chart = Highcharts.chart('stock_stacked', {
         chart: {
@@ -74,13 +75,22 @@ function plot_stock_stack(stack_data, dates){
     });
 
     function isolate_stock(symbol){
-        $.each(chart.series, function(i, ser) {
-            if(ser.name === symbol){
-                console.log(ser)
-            }
-            else{
-                ser.hide();
-            }
-        });
+        if(hidden === false){
+            $.each(chart.series, function(i, ser) {
+                if(ser.name === symbol){
+                    console.log(ser)
+                }
+                else{
+                    ser.hide();
+                }
+            });
+            hidden = true;
+        }
+        else{
+            $.each(chart.series, function(i, ser) {
+                ser.show();
+            });
+            hidden = false;
+        }
     }
 }
