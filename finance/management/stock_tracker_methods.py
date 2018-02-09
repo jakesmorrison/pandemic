@@ -124,11 +124,16 @@ class Stock_Tracker_Methods(object):
         df_my_stock["% Gain/Loss"] = total_gain_list
         df_my_stock["$ Gain/Loss"] = (df_my_stock["Price"]-df_my_stock["Cost"])*df_my_stock["Quanity"]
 
-        val1 = float(sum(list(df_my_stock["Cost"]*df_my_stock["Quanity"])))
-        val2 = float(sum(list(df_my_stock["Price"]*df_my_stock["Quanity"])))
+        test = pd.DataFrame()
+        test["buying"] = (df_my_stock["Cost"]*df_my_stock["Quanity"])
+        test["selling"] = (df_my_stock["Price"]*df_my_stock["Quanity"])
 
-        gain_loss_percent = ((val2-val1)/val1)*100
 
+        buying = float(test["buying"].sum())
+        selling = float(test["selling"].sum())
+
+
+        gain_loss_percent = ((selling-buying)/buying)*100
         gain_loss_cash = float(df_my_stock["$ Gain/Loss"].sum().tolist()[0])
 
         gain_loss_percent = "{:0.2f}%".format(gain_loss_percent)
