@@ -7,7 +7,8 @@
     {% load staticfiles %}
     <link href=" {% static 'finance/css/style.css' %}" rel="stylesheet">
     <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link href=" {% static 'finance/css/bootstrap_slider.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/fixedColumns.dataTables.min.css' %}" rel="stylesheet">
     <link href=" {% static 'finance/css/stock.css' %}" rel="stylesheet">
 
 </head>
@@ -21,21 +22,33 @@
                 <h4>Total Amount in the Market</h4>
                 <h5>${{money_in_market|safe}}</h5>
                 <h4>Total Gains/Loss</h4>
-                <h5>test</h5>
+                <h5>{{gain_loss_percent|safe}}</h5>
+                <h4>Total Money Gain/Loss</h4>
+                <h5>{{gain_loss_cash|safe}}</h5>
             </div>
         </div>
         <div class="col-lg-9 col-lg-offset-0 col-xs-12">
             <div id="stock_stacked" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
         </div>
     </div>
+    <div class="row row1">
+        <div class="col-lg-9 col-lg-offset-0 col-xs-12">
+            <div id="table">
+                {{ html_table|safe }}
+            </div>
+        </div>
+    </div>
+
 </div>
 
 
 {% load staticfiles %}
 <script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
-<script src="{% static 'finance/js/highcharts.js' %}"></script>
-<script src="{% static 'finance/js/stock_stack.js' %}"></script>
+<script src=" {% static 'finance/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/highcharts.js' %}"></script>
+<script src=" {% static 'finance/js/stock_stack.js' %}"></script>
 
 <script>
 

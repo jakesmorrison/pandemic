@@ -87,8 +87,56 @@ class Stock_Tracker_Methods(object):
 
         return total_money_in_market
 
-    def get_gain_loss(self):
-        pass
+
+    def get_table(self):
+        my_stock = MyStocks.objects.all().values()
+        stock_price = Prices.objects.all().values()
 
 
+        df_stock_price = pd.DataFrame(list(stock_price))
+        df_stock_price = df_stock_price.sort_values(by=['Date'])
+
+        df_my_stock = pd.DataFrame(list(my_stock))
+
+        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Cost,Sell_Date".split(",")]
+
+        total_price_list = []
+        total_gain_list = []
+        for index,row in df_my_stock.iterrows():
+            symbol = row["Symbol"]
+            quanity = row["Quanity"]
+            cost = row["Cost"]
+            if row["Sell_Date"] == None:
+                current_price = df_stock_price[df_stock_price["Symbol"]==symbol]["Price"].tolist()[-1]
+                total_price = current_price
+                gain = ((total_price-cost)/cost)*100
+                total_price_list.append(total_price)
+                total_gain_list.append(gain)
+            else:
+                sale_price = df_stock_price[(df_stock_price["Symbol"] == symbol) & (df_stock_price["Date"] == row["Sell_Date"])]
+                sale_price = sale_price["Price"]
+                total_price = sale_price
+                gain = ((sale_price-cost)/cost)*100
+                total_price_list.append(total_price)
+                total_gain_list.append(gain)
+
+        df_my_stock["Price"] = total_price_list
+        df_my_stock["% Gain/Loss"] = total_gain_list
+        df_my_stock["$ Gain/Loss"] = (df_my_stock["Price"]-df_my_stock["Cost"])*df_my_stock["Quanity"]
+
+        val1 = float(sum(list(df_my_stock["Cost"]*df_my_stock["Quanity"])))
+        val2 = float(sum(list(df_my_stock["Price"]*df_my_stock["Quanity"])))
+
+        gain_loss_percent = ((val2-val1)/val1)*100
+
+        gain_loss_cash = float(df_my_stock["$ Gain/Loss"].sum().tolist()[0])
+
+        gain_loss_percent = "{:0.2f}%".format(gain_loss_percent)
+        gain_loss_cash =  "${:0.2f}".format(gain_loss_cash)
+
+        df_my_stock["Price"] = df_my_stock["Price"].apply(lambda x: "{:0.2f}".format(float(x)))
+        df_my_stock["% Gain/Loss"] = df_my_stock["% Gain/Loss"].apply(lambda x: "{:0.2f}%".format(float(x)))
+        df_my_stock["$ Gain/Loss"] = df_my_stock["$ Gain/Loss"].apply(lambda x: "${:0.2f}".format(float(x)))
+
+        return df_my_stock, gain_loss_percent, gain_loss_cash
 

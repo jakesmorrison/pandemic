@@ -133,9 +133,16 @@ def stock_tracker(request):
     money_in_market = stm.get_money_in_market()
     # gain_loss = stm.get_gain_loss()
 
+    table, gain_loss_percent, gain_loss_cash = stm.get_table()
+
+    html_table = table.to_html(index=False,classes='table table-striped table-bordered table-hover table-responsive')
+
     context = {
         "stack_data": stack_data,
         "date_data": date_data,
-        "money_in_market": money_in_market
+        "money_in_market": money_in_market,
+        "gain_loss_percent": gain_loss_percent,
+        "gain_loss_cash": gain_loss_cash,
+        "html_table": html_table
     }
     return render(request, "finance/stock_tracker.html", context)
