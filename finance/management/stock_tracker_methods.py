@@ -128,7 +128,7 @@ class Stock_Tracker_Methods(object):
         test["buying"] = (df_my_stock["Cost"]*df_my_stock["Quanity"])
         test["selling"] = (df_my_stock["Price"]*df_my_stock["Quanity"])
 
-        print(test)
+        print(test["selling"].sum())
 
 
         buying = float(test["buying"].sum())
