@@ -97,14 +97,17 @@ class Stock_Tracker_Methods(object):
         df_stock_price = df_stock_price.sort_values(by=['Date'])
 
         df_my_stock = pd.DataFrame(list(my_stock))
-
         df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Cost,Sell_Date".split(",")]
+
+        #Convert to Float
+        df_my_stock["Cost"] = df_my_stock["Cost"].apply(lambda x: float(x))
+        df_my_stock["Quanity"] = df_my_stock["Quanity"].apply(lambda x: float(x))
+        df_stock_price["Price"] = df_stock_price["Price"].apply(lambda x: float(x))
 
         total_price_list = []
         total_gain_list = []
         for index,row in df_my_stock.iterrows():
             symbol = row["Symbol"]
-            quanity = row["Quanity"]
             cost = row["Cost"]
             if row["Sell_Date"] == None:
                 current_price = df_stock_price[df_stock_price["Symbol"]==symbol]["Price"].tolist()[-1]
@@ -114,7 +117,7 @@ class Stock_Tracker_Methods(object):
                 total_gain_list.append(gain)
             else:
                 sale_price = df_stock_price[(df_stock_price["Symbol"] == symbol) & (df_stock_price["Date"] == row["Sell_Date"])]
-                sale_price = sale_price["Price"]
+                sale_price = sale_price["Price"].tolist()[0]
                 total_price = sale_price
                 gain = ((sale_price-cost)/cost)*100
                 total_price_list.append(total_price)
@@ -128,15 +131,12 @@ class Stock_Tracker_Methods(object):
         test["buying"] = (df_my_stock["Cost"]*df_my_stock["Quanity"])
         test["selling"] = (df_my_stock["Price"]*df_my_stock["Quanity"])
 
-        print(test["selling"].sum())
-
-
-        buying = float(test["buying"].sum())
-        selling = float(test["selling"].sum())
+        buying = test["buying"].sum()
+        selling = test["selling"].sum()
 
 
         gain_loss_percent = ((selling-buying)/buying)*100
-        gain_loss_cash = float(df_my_stock["$ Gain/Loss"].sum().tolist()[0])
+        gain_loss_cash = df_my_stock["$ Gain/Loss"].sum()
 
         gain_loss_percent = "{:0.2f}%".format(gain_loss_percent)
         gain_loss_cash =  "${:0.2f}".format(gain_loss_cash)
