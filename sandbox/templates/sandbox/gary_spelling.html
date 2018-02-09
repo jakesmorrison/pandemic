@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gary Spelling</title>
+
+    <!-- CSS -->
+    {% load staticfiles %}
+    <link href="{% static 'sandbox/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'sandbox/css/jquery-ui.css' %}" rel="stylesheet">
+    <link href="{% static 'sandbox/css/gary_spelling.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div id="spelling_box" class="spelling_box">
+    <span id="letter_0" class="letter">s</span>
+    <span id="letter_1" class="letter">a</span>
+    <span id="letter_2" class="letter">m</span>
+</div>
+
+
+<!-- JS -->
+{% load staticfiles %}
+<script src="{% static 'sandbox/js/jquery-1.12.4.js' %}" type="text/javascript"></script>
+<script src="{% static 'sandbox/js/jquery-ui.js' %}" type="text/javascript"></script>
+<script src="{% static 'sandbox/js/bootstrap.min.js' %}" type="text/javascript"></script>
+
+
+<script>
+$(document).ready(function() {
+    for(x=0; x<3; x++){
+        var position = $("#letter_"+x.toString()).position();
+        var width = $("#letter_"+x.toString()).width();
+        var height =  $("#letter_"+x.toString()).height();
+
+        console.log(height)
+
+        var left = position.left + width/2;
+        var top = 40;
+
+        $("#spelling_box").append("<div id='dot_"+x.toString()+"' class='dot'></div>")
+        $("#dot_"+x.toString()).css("left", left);
+        $("#dot_"+x.toString()).css("top", top);
+    }
+});
+</script>
+</body>
+</html>

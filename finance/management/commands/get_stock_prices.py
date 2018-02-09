@@ -20,7 +20,7 @@ class Command(BaseCommand):
             self.get_historic_stock_prices(options["symbol"], int(options['number_of_days']))
 
     def add_to_db(self):
-        q = MyStocks.objects.values("Symbol")
+        q = MyStocks.objects.filter(Sell_Date=None).values("Symbol")
         df = pd.DataFrame.from_records(q)
         symbol_list = list(set(df["Symbol"].tolist()))
         for x in symbol_list:
