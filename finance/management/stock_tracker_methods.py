@@ -13,7 +13,15 @@ class Stock_Tracker_Methods(object):
         stock_price = Prices.objects.all().values()
 
         df_stock_price = pd.DataFrame(list(stock_price))
+        df_stock_price = df_stock_price.sort_values(by=['Date'])
+
         df_my_stock = pd.DataFrame(list(my_stock))
+        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Cost,Sell_Date".split(",")]
+
+        # Convert to Float
+        df_my_stock["Cost"] = df_my_stock["Cost"].apply(lambda x: float(x))
+        df_my_stock["Quanity"] = df_my_stock["Quanity"].apply(lambda x: float(x))
+        df_stock_price["Price"] = df_stock_price["Price"].apply(lambda x: float(x))
 
         start_date = [str(x["Buy_Date"]) for x in MyStocks.objects.values("Buy_Date")][0].split("-")
         current_date = str(datetime.datetime.now()).split(" ")[0].split("-")
@@ -21,11 +29,10 @@ class Stock_Tracker_Methods(object):
         d1 = datetime.date(int(start_date[0]), int(start_date[1]), int(start_date[2]))  #start date
         d2 = datetime.date(int(current_date[0]), int(current_date[1]), int(current_date[2])) #end date
 
+
         delta = d2 - d1
-        date_list = []
-        stack_list = []
+        data = []
         for index, row in df_my_stock.iterrows():
-            data = []
             for i in range(delta.days + 1):
                 date = d1 + datetime.timedelta(days=i)
                 new_date = str(date).split("-")
@@ -34,44 +41,40 @@ class Stock_Tracker_Methods(object):
                 ts = (dt_with_tz - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds()
                 epoch = int(ts*1000)
 
+                # If not sold and current date is greater than buy date.
                 if row["Sell_Date"] == None:
                     if date >= row["Buy_Date"]:
                         todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
                         todays_cost = todays_cost["Price"].tolist()
                         if todays_cost:
-                            data.append({'y':round(float((todays_cost[0]-row["Cost"])*row["Quanity"]),2),"transaction":int(row["id"]),
-                                         "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
-                                         "quanity": int(row["Quanity"])})
-                            date_list.append(str(date))
-                    else:
-                        if df_stock_price[df_stock_price["Date"] == date].empty == False:
-                            date_list.append(str(date))
-                            data.append(0)
-                        else:
-                            pass
+                            val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
+                            if val>0:
+                                data.append({"x": epoch, "y": val, 'color': '#5fffaf', "name": row["Symbol"]})
+                            else:
+                                data.append({"x": epoch, "y": val, 'color': '#ff7979', "name": row["Symbol"]})
 
+                            # data.append({'x':epoch,'y':,"transaction":int(row["id"]),
+                            #              "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
+                            #              "quanity": int(row["Quanity"]),'color':'#5fffaf'})
                 else:
                     if date >= row["Buy_Date"] and row["Sell_Date"] >= date:
                         todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
                         todays_cost = todays_cost["Price"].tolist()
                         if todays_cost:
-
-                            data.append({'y':round(float((todays_cost[0]-row["Cost"])*row["Quanity"]),2),"transaction":int(row["id"]),
-                                         "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
-                                         "quanity": int(row["Quanity"])})
-                            date_list.append(str(date))
-                    else:
-                        if df_stock_price[df_stock_price["Date"] == date].empty == False:
-                            date_list.append(str(date))
-                            data.append(0)
-                        else:
-                            pass
-
-            stack_list.append({"name":row["Symbol"],"data":data,"threshold": 0,"negativeColor": '#ff7979', "color": '#5fffaf'})
+                            val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
+                            if val>0:
+                                data.append({"x": epoch, "y": val, 'color': '#5fffaf', "name": row["Symbol"]})
+                            else:
+                                data.append({"x": epoch, "y": val, 'color': '#ff7979', "name": row["Symbol"]})
 
 
-        return stack_list, sorted(list(set(date_list)))
+        df = pd.DataFrame(data)
+        df = df.sort_values(by='x')
+        data=[]
+        for index, row in df.iterrows():
+            data.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"]})
 
+        return data
 
     def get_money_in_market(self):
         my_stock = MyStocks.objects.all().values()
@@ -157,6 +160,40 @@ class Stock_Tracker_Methods(object):
                                                              "Price":"Current/Sell Price","% Gain/Loss": "Return %","$ Gain/Loss": "Return $"})
 
 
-
         return df_my_stock, gain_loss_percent, gain_loss_cash
+
+
+    def area_chart(self):
+        my_stock = MyStocks.objects.all().values()
+        stock_price = Prices.objects.all().values()
+
+        df_stock_price = pd.DataFrame(list(stock_price))
+        df_stock_price = df_stock_price.sort_values(by=['Date'])
+
+        df_my_stock = pd.DataFrame(list(my_stock))
+        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Cost,Sell_Date".split(",")]
+
+        # Convert to Float
+        df_my_stock["Cost"] = df_my_stock["Cost"].apply(lambda x: float(x))
+        df_my_stock["Quanity"] = df_my_stock["Quanity"].apply(lambda x: float(x))
+        df_stock_price["Price"] = df_stock_price["Price"].apply(lambda x: float(x))
+
+        new_df = pd.merge(df_stock_price, df_my_stock, how='left', on=['Symbol'])
+        new_df["Price"] = new_df["Price"] * new_df["Quanity"]
+        new_df["Cost"] = new_df["Cost"] * new_df["Quanity"]
+
+        new_df = new_df.groupby(["Date"]).sum().reset_index()
+
+        date_list = new_df["Date"].tolist()
+        price_list = new_df["Price"].tolist()
+        data1 = []
+        for n, x in enumerate(date_list):
+            new_date = str(x).split("-")
+            tz = pytz.timezone('America/Boise')
+            dt_with_tz = tz.localize(datetime.datetime(int(new_date[0]), int(new_date[1]), int(new_date[2]), 0, 0, 0),is_dst=None)
+            ts = (dt_with_tz - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds()
+            epoch = int(ts * 1000)
+            data1.append({"x":epoch,"y":price_list[n]})
+
+        return data1
 

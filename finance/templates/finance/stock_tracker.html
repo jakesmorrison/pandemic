@@ -56,14 +56,17 @@
 <script src=" {% static 'finance/js/datatables.min.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'finance/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
 <script src="http://code.highcharts.com/stock/highstock.js"></script>
-<script src=" {% static 'finance/js/stock_stack.js' %}"></script>
+<!--<script src=" {% static 'finance/js/stock_stack.js' %}"></script>-->
+<script src=" {% static 'finance/js/stock_area.js' %}"></script>
 
 <script>
 
 
 
 $( document ).ready(function() {
-    plot_stock_stack({{stack_data|safe}}, {{date_data|safe}})
+    <!--plot_stock_stack({{stack_data|safe}}, {{date_data|safe}})-->
+
+    stock_spline({{data1|safe}},{{data2|safe}});
 
     var total_height = $(document).height();
     var row_height = total_height/2;
