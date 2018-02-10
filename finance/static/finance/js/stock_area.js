@@ -53,9 +53,10 @@ function stock_spline(data1,data2){
                         return '<span>'+this.key+'</span>'+'<span>'+": $"+this.y+'</span>'
                     }
                     else{
-                        d = new Date(0);
-                        d.setUTCSeconds(this.key/1000);
-                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>$"+this.y+'</span>'
+//                        d = new Date(0);
+//                        d.setUTCSeconds(this.key/1000);
+//                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>$"+this.y+'</span>'
+                        return "test"
                     }
                 }
             },
