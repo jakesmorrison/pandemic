@@ -19,7 +19,7 @@
 <div class="container">
     <div class="row1">
         <div class="col-lg-3 col-lg-offset-0 col-xs-12">
-            <div class="my_table">
+            {{ html_table|safe }}
             </div>
         </div>
         <div class="col-lg-9 col-lg-offset-0 col-xs-12">
@@ -64,29 +64,37 @@
 
 
 $( document ).ready(function() {
+
+    var total_height = $(document).height();
+    $("#stock_stacked").css("height",total_height)
+
     <!--plot_stock_stack({{stack_data|safe}}, {{date_data|safe}})-->
 
     stock_spline({{data1|safe}},{{data2|safe}});
 
-    var total_height = $(document).height();
-    var row_height = total_height/2;
-    $(".row1").css("height",row_height)
-    $(".row2").css("height",row_height)
+    <!--var total_height = $(document).height();-->
+    <!--var row_height = total_height/2;-->
+    <!--$(".row1").css("height",row_height)-->
+    <!--$(".row2").css("height",row_height)-->
 
-    $(".info_row").css("height",row_height/3)
-    $("#stock_stacked").css("height",row_height)
-    $(".table").css("height",row_height)
+    <!--$(".info_row").css("height",row_height/3)-->
+    <!--$("#stock_stacked").css("height",row_height)-->
+    <!--$(".table").css("height",row_height)-->
 
 
-    var table_height = row_height - $("#dataTables_scrollHead").height();
-
-});
+    <!--var table_height = row_height - $("#dataTables_scrollHead").height();-->
 
     $('.table').DataTable({
+        scrollY:        total_height,
         scrollCollapse: true,
+        scrollX:        true,
         paging:         false,
         "order": [[ 0, "decs" ]],
     });
+
+});
+
+
 
 
 

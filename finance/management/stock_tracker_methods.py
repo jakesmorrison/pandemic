@@ -193,7 +193,7 @@ class Stock_Tracker_Methods(object):
             dt_with_tz = tz.localize(datetime.datetime(int(new_date[0]), int(new_date[1]), int(new_date[2]), 0, 0, 0),is_dst=None)
             ts = (dt_with_tz - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds()
             epoch = int(ts * 1000)
-            data1.append({"x":epoch,"y":price_list[n]})
+            data1.append({"x":epoch,"y":float('{0:.2f}'.format(price_list[n]))})
 
         return data1
 

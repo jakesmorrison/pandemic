@@ -8,7 +8,8 @@ function stock_spline(data1,data2){
             rangeSelector: {
                 selected: 1
             },
-
+            exporting: { enabled: false },
+            credits: {enabled: false },
             title: {
                 text: 'AAPL Historical'
             },
@@ -24,9 +25,9 @@ function stock_spline(data1,data2){
                     x: -3
                 },
                 title: {
-                    text: 'OHLC'
+                    text: 'Portfolio Value'
                 },
-                height: '60%',
+                height: '50%',
                 lineWidth: 2,
                 resize: {
                     enabled: true
@@ -37,10 +38,10 @@ function stock_spline(data1,data2){
                     x: -3
                 },
                 title: {
-                    text: 'Volume'
+                    text: 'Dollar Change ($)'
                 },
-                top: '65%',
-                height: '35%',
+                top: '55%',
+                height: '45%',
                 offset: 0,
                 lineWidth: 2
             }],
@@ -81,6 +82,26 @@ function stock_spline(data1,data2){
                         }
                     }
                 },
+                areaspline: {
+                    fillColor: {
+                        linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
+                        stops: [
+                            [0, '#5f5fff'],
+                            [1, '#acacff']
+                        ]
+                    },
+                    lineWidth: 5,
+                    marker: {
+                        enabled: false
+                    },
+                    shadow: false,
+                    states: {
+                        hover: {
+                            lineWidth: 1
+                        }
+                    },
+                    threshold: null
+                }
             },
             series: [{
                 type: 'areaspline',
