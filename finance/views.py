@@ -2,6 +2,7 @@ from django.shortcuts import render
 import pandas as pd
 import datetime
 import holidays
+import time
 from .management import config as cfg
 from .management import stock_tracker_methods
 
@@ -129,6 +130,7 @@ def top(request):
 def stock_tracker(request):
     stm =stock_tracker_methods.Stock_Tracker_Methods()
     stack_data, date_data = stm.stack_data()
+
 
     money_in_market = stm.get_money_in_market()
     # gain_loss = stm.get_gain_loss()

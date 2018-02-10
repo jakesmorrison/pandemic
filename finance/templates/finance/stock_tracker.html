@@ -2,6 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Title</title>
 
     {% load staticfiles %}
@@ -15,27 +17,35 @@
 <body>
 
 <div class="container">
-    <div class="row row1">
-        <h2>Daily Stock Change</h2>
+    <div class="row1">
         <div class="col-lg-3 col-lg-offset-0 col-xs-12">
             <div class="my_table">
-                <h4>Total Amount in the Market</h4>
-                <h5>${{money_in_market|safe}}</h5>
-                <h4>Total Gains/Loss</h4>
-                <h5>{{gain_loss_percent|safe}}</h5>
-                <h4>Total Money Gain/Loss</h4>
-                <h5>{{gain_loss_cash|safe}}</h5>
             </div>
         </div>
         <div class="col-lg-9 col-lg-offset-0 col-xs-12">
-            <div id="stock_stacked" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+            <div id="stock_stacked" style="margin: 0 auto"></div>
         </div>
     </div>
-    <div class="row-fluid">
-        <div class="page-break col-md-8 col-md-offset-2 col-xs-12">
-            {{ html_table|safe }}
-        </div>
-    </div>
+
+    <!--<div class="row1">-->
+        <!--<div class="page-break col-lg-4 col-lg-offset-0 col-xs-12">-->
+            <!--<div class="row info_row info_row_1">-->
+                <!--<h4 class="info_header">Porfolio Value</h4>-->
+                <!--<h5 class="info_text">${{money_in_market|safe}}</h5>-->
+            <!--</div>-->
+            <!--<div class="row info_row info_row_2">-->
+                <!--<h4 class="info_header">Gains/Loss %</h4>-->
+                <!--<h5 class="info_text">{{gain_loss_percent|safe}}</h5>-->
+            <!--</div>-->
+            <!--<div class="row info_row info_row_3">-->
+                <!--<h4 class="info_header">Gain/Loss $</h4>-->
+                <!--<h5 class="info_text">{{gain_loss_cash|safe}}</h5>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--<div class="page-break col-lg-8 col-lg-offset-0 col-xs-12">-->
+            <!--{{ html_table|safe }}-->
+        <!--</div>-->
+    <!--</div>-->
 
 </div>
 
@@ -45,7 +55,7 @@
 <script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'finance/js/datatables.min.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'finance/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
-<script src=" {% static 'finance/js/highcharts.js' %}"></script>
+<script src="http://code.highcharts.com/stock/highstock.js"></script>
 <script src=" {% static 'finance/js/stock_stack.js' %}"></script>
 
 <script>
@@ -55,12 +65,27 @@
 $( document ).ready(function() {
     plot_stock_stack({{stack_data|safe}}, {{date_data|safe}})
 
+    var total_height = $(document).height();
+    var row_height = total_height/2;
+    $(".row1").css("height",row_height)
+    $(".row2").css("height",row_height)
+
+    $(".info_row").css("height",row_height/3)
+    $("#stock_stacked").css("height",row_height)
+    $(".table").css("height",row_height)
+
+
+    var table_height = row_height - $("#dataTables_scrollHead").height();
 
 });
 
-$('.table').DataTable({
-    "order": [[ 0, "asc" ]],
-});
+    $('.table').DataTable({
+        scrollCollapse: true,
+        paging:         false,
+        "order": [[ 0, "decs" ]],
+    });
+
+
 
 
 </script>

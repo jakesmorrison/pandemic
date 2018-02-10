@@ -1,6 +1,9 @@
 import datetime
 from ..models import MyStocks, Prices
 import pandas as pd
+import time
+import datetime
+import pytz
 
 class Stock_Tracker_Methods(object):
     def __init__(self):
@@ -11,8 +14,6 @@ class Stock_Tracker_Methods(object):
 
         df_stock_price = pd.DataFrame(list(stock_price))
         df_my_stock = pd.DataFrame(list(my_stock))
-
-
 
         start_date = [str(x["Buy_Date"]) for x in MyStocks.objects.values("Buy_Date")][0].split("-")
         current_date = str(datetime.datetime.now()).split(" ")[0].split("-")
@@ -27,6 +28,12 @@ class Stock_Tracker_Methods(object):
             data = []
             for i in range(delta.days + 1):
                 date = d1 + datetime.timedelta(days=i)
+                new_date = str(date).split("-")
+                tz = pytz.timezone('America/Boise')
+                dt_with_tz = tz.localize(datetime.datetime(int(new_date[0]), int(new_date[1]), int(new_date[2]), 0, 0, 0), is_dst=None)
+                ts = (dt_with_tz - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds()
+                epoch = int(ts*1000)
+
                 if row["Sell_Date"] == None:
                     if date >= row["Buy_Date"]:
                         todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
@@ -48,6 +55,7 @@ class Stock_Tracker_Methods(object):
                         todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
                         todays_cost = todays_cost["Price"].tolist()
                         if todays_cost:
+
                             data.append({'y':round(float((todays_cost[0]-row["Cost"])*row["Quanity"]),2),"transaction":int(row["id"]),
                                          "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
                                          "quanity": int(row["Quanity"])})
@@ -59,7 +67,7 @@ class Stock_Tracker_Methods(object):
                         else:
                             pass
 
-            stack_list.append({"name":row["Symbol"],"data":data,"threshold": 0,"negativeColor": '#ff5f5f', "color": '#5fff5f'})
+            stack_list.append({"name":row["Symbol"],"data":data,"threshold": 0,"negativeColor": '#ff7979', "color": '#5fffaf'})
 
 
         return stack_list, sorted(list(set(date_list)))
@@ -134,7 +142,6 @@ class Stock_Tracker_Methods(object):
         buying = test["buying"].sum()
         selling = test["selling"].sum()
 
-
         gain_loss_percent = ((selling-buying)/buying)*100
         gain_loss_cash = df_my_stock["$ Gain/Loss"].sum()
 
@@ -144,6 +151,12 @@ class Stock_Tracker_Methods(object):
         df_my_stock["Price"] = df_my_stock["Price"].apply(lambda x: "{:0.2f}".format(float(x)))
         df_my_stock["% Gain/Loss"] = df_my_stock["% Gain/Loss"].apply(lambda x: "{:0.2f}%".format(float(x)))
         df_my_stock["$ Gain/Loss"] = df_my_stock["$ Gain/Loss"].apply(lambda x: "${:0.2f}".format(float(x)))
+
+        df_my_stock = df_my_stock.rename(index=str, columns={"id":"ID","Symbol":"Ticker","Quanity":"Quanity",
+                                                             "Buy_Date":"Purchase Date","Cost":"Initial Price","Sell_Date":"Sell Date",
+                                                             "Price":"Current/Sell Price","% Gain/Loss": "Return %","$ Gain/Loss": "Return $"})
+
+
 
         return df_my_stock, gain_loss_percent, gain_loss_cash
 

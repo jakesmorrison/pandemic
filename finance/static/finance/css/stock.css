@@ -1,3 +1,9 @@
+@media (min-width: 1200px) {
+    .container{
+        width: 95%;
+    }
+}
+
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
@@ -37,4 +43,50 @@ tr:nth-child(odd) {
 
 .table_left{
     font-weight: bold;
+}
+
+
+.info_header{
+    text-align:center;
+    font-size: 16px;
+    font-size: 2vw;
+}
+
+.info_text{
+    text-align:center;
+    font-size: 16px;
+    font-size: 2vw;
+}
+
+
+@media (max-width: 600px) {
+    .info_header{
+        font-size: 6vw;
+    }
+
+    .info_text{
+        font-size: 6vw;
+    }
+}
+
+.info_row_1{
+    background: blue;
+    border: 20px solid white;
+    border-radius: 25px;
+}
+
+.info_row_2{
+    background: blue;
+    border: 20px solid white;
+    border-radius: 25px;
+}
+
+.info_row_3{
+    background: blue;
+    border: 20px solid white;
+    border-radius: 25px;
+}
+
+.row1 {
+    background: #2f3a45;
 }

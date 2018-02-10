@@ -1,4 +1,5 @@
 var hidden = false;
+
 function plot_stock_stack(stack_data, dates){
     var chart = Highcharts.chart('stock_stacked', {
         chart: {
@@ -12,23 +13,46 @@ function plot_stock_stack(stack_data, dates){
             text: ''
         },
         xAxis: {
-            categories: dates
+            categories: dates,
+            labels: {
+                style: {
+                    color: 'white',
+                    fontSize:'13px',
+                }
+            },
+
         },
         yAxis: {
+            opposite: true,
+            gridLineWidth: 1,
+            tickLength: 5,
+            tickWidth: 1,
+            tickPosition: 'outside',
+            labels: {
+                style: {
+                    color: 'white',
+                    fontSize:'12px',
+                }
+            },
             title: {
-                text: 'Dollar Change ($)'
+                text: 'Dollar Change ($)',
+                style: {
+                    fontSize:'18px',
+                    color: 'white'
+                },
+
             },
             stackLabels: {
                 enabled: true,
                 style: {
                     fontWeight: 'bold',
-                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'gray'
+                    color: (Highcharts.theme && Highcharts.theme.textColor) || 'white'
                 }
             },
             plotLines: [{
                 value: 0,
-                color: 'black',
-                width: 3,
+                color: 'white',
+                width: 1,
                 zIndex: 5
             }]
         },
@@ -60,8 +84,8 @@ function plot_stock_stack(stack_data, dates){
                         }
                     }
                 },
-                borderColor: '#fff',
-                borderWidth: 5,
+                borderColor: '#2f3a45',
+                borderWidth: 3,
                 point: {
                     events: {
                         click: function () {
@@ -70,6 +94,12 @@ function plot_stock_stack(stack_data, dates){
                     }
                 }
             },
+            series: {
+                pointPadding: 0,
+                groupPadding: .05,
+                pointRange: 0,
+            }
+
         },
         series: stack_data
     });
