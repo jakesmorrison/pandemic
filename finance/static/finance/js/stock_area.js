@@ -64,14 +64,6 @@ function stock_spline(data1,data2){
             plotOptions: {
                 column: {
                     stacking: 'normal',
-                    dataLabels:{
-                        enabled: true,
-                        formatter: function () {
-                            if ( this.point.y != 0 ){
-                                return this.key
-                            }
-                        }
-                    },
                     borderColor: 'white',
                     borderWidth: 3,
 //                    point: {
