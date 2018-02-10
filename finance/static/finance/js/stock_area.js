@@ -4,6 +4,7 @@ function stock_spline(data1,data2){
             chart: {
                 borderWidth: 0,
                 backgroundColor: null,
+                zoomType: 'xy'
             },
             rangeSelector: {
                 selected: 1
@@ -64,6 +65,14 @@ function stock_spline(data1,data2){
             plotOptions: {
                 column: {
                     stacking: 'normal',
+                    dataLabels:{
+                        enabled: true,
+                        formatter: function () {
+                            if ( this.point.y != 0 ){
+                                return this.key
+                            }
+                        }
+                    },
                     borderColor: 'white',
                     borderWidth: 3,
 //                    point: {
