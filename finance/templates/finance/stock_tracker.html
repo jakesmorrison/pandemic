@@ -84,17 +84,15 @@ $( document ).ready(function() {
 
     <!--var table_height = row_height - $("#dataTables_scrollHead").height();-->
 
+});
+
     $('.table').DataTable({
-        scrollY:        total_height,
+        scrollY:        "500px",
         scrollCollapse: true,
         scrollX:        true,
         paging:         false,
         "order": [[ 0, "decs" ]],
     });
-
-});
-
-
 
 
 
