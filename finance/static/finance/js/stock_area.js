@@ -27,7 +27,7 @@ function stock_spline(data1,data2){
                 title: {
                     text: 'Portfolio Value'
                 },
-                height: '50%',
+                height: '35%',
                 lineWidth: 2,
                 resize: {
                     enabled: true
@@ -40,8 +40,8 @@ function stock_spline(data1,data2){
                 title: {
                     text: 'Dollar Change ($)'
                 },
-                top: '55%',
-                height: '45%',
+                top: '40%',
+                height: '65%',
                 offset: 0,
                 lineWidth: 2
             }],
