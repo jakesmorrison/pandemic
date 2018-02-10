@@ -10,14 +10,15 @@ function stock_spline(data1,data2){
             },
             exporting: { enabled: false },
             credits: {enabled: false },
+            rangeSelector: {enabled: false},
             title: {
-                text: 'AAPL Historical'
+                text: ''
             },
             xAxis: {
                 type: 'datetime',
                 showLastLabel: false,
-                endOnTick: true
-
+                endOnTick: true,
+                range: 7 * 24 * 3600 * 1000
             },
             yAxis: [{
                 labels: {
@@ -41,7 +42,7 @@ function stock_spline(data1,data2){
                     text: 'Dollar Change ($)'
                 },
                 top: '40%',
-                height: '65%',
+                height: '60%',
                 offset: 0,
                 lineWidth: 2
             }],
@@ -53,10 +54,9 @@ function stock_spline(data1,data2){
                         return '<span>'+this.key+'</span>'+'<span>'+": $"+this.y+'</span>'
                     }
                     else{
-//                        d = new Date(0);
-//                        d.setUTCSeconds(this.key/1000);
-//                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>$"+this.y+'</span>'
-                        return "test"
+                        d = new Date(0);
+                        d.setUTCSeconds(this.key/1000);
+                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>$"+this.y+'</span>'
                     }
                 }
             },
@@ -68,21 +68,20 @@ function stock_spline(data1,data2){
                         enabled: true,
                         formatter: function () {
                             if ( this.point.y != 0 ){
-//                                return this.key
-                                return "test"
+                                return this.key
                             }
                         }
                     },
                     borderColor: 'white',
                     borderWidth: 3,
-                    point: {
-                        events: {
-                            click: function () {
-                                console.log(this.options)
+//                    point: {
+//                        events: {
+//                            click: function () {
+//                                console.log(this.options)
 //                                isolate_stock(this.options.name);
-                            }
-                        }
-                    }
+//                            }
+//                        }
+//                    }
                 },
                 areaspline: {
                     fillColor: {
