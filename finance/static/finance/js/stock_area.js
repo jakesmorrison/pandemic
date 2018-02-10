@@ -19,9 +19,10 @@ function stock_spline(data1,data2){
                 type: 'datetime',
                 showLastLabel: false,
                 endOnTick: true,
-                range: 7 * 24 * 3600 * 1000
+                range: 3 * 24 * 3600 * 1000
             },
             yAxis: [{
+                min: 0,
                 labels: {
                     align: 'right',
                     x: -3
