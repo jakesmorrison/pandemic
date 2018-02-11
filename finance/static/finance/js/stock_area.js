@@ -58,7 +58,15 @@ function stock_spline(data1,data2){
                 top: '40%',
                 height: '60%',
                 offset: 0,
-                lineWidth: 2
+                lineWidth: 2,
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                    }
+                },
+
             }],
 
             tooltip: {
