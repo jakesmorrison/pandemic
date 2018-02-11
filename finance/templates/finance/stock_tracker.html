@@ -23,10 +23,15 @@
             </div>
         </div>
         <div class="col-lg-9 col-lg-offset-0 col-xs-12">
-            <h3 class=highcharts_overlay "highcharts_overlay"><span>Portfolio:</span> ${{money_in_market|safe}}</h3>
+            <div class="highcharts_overlay">
+                <h3><span>Portfolio:</span> ${{money_in_market|safe}}</h3>
+                <h5><span>Gain/Loss:</span> {{gain_loss_cash|safe}}</h5>
+                <h5><span>Gain/Loss:</span> {{gain_loss_percent|safe}}</h5>
+            </div>
             <div id="stock_stacked" style="margin: 0 auto"></div>
         </div>
     </div>
+
 
     <!--<div class="row1">-->
         <!--<div class="page-break col-lg-4 col-lg-offset-0 col-xs-12">-->

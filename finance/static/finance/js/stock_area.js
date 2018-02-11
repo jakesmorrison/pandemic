@@ -19,7 +19,10 @@ function stock_spline(data1,data2){
                 type: 'datetime',
                 showLastLabel: false,
                 endOnTick: true,
-                range: 30 * 24 * 3600 * 1000
+                range: 30 * 24 * 3600 * 1000,
+                crosshair: true,
+                lineColor: '#000',
+                tickColor: '#000',
             },
             yAxis: [{
                 min: 0,
@@ -30,6 +33,9 @@ function stock_spline(data1,data2){
                 title: {
                     text: 'Portfolio Value'
                 },
+                gridLineWidth: 0,
+                tickLength: 5,
+                tickWidth: 1,
                 height: '35%',
                 lineWidth: 2,
                 resize: {
@@ -43,6 +49,12 @@ function stock_spline(data1,data2){
                 title: {
                     text: 'Dollar Change ($)'
                 },
+                plotLines: [{
+                    value: 0,
+                    color: 'black',
+                    width: 5,
+                    zIndex: 5
+                }],
                 top: '40%',
                 height: '60%',
                 offset: 0,

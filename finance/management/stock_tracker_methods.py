@@ -73,19 +73,19 @@ class Stock_Tracker_Methods(object):
 
         df = pd.DataFrame(data)
         df = df.sort_values(by='x')
-        data=[]
+        stack_data_list=[]
         for index, row in df.iterrows():
-            data.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"]})
+            stack_data_list.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"]})
 
         df_p = pd.DataFrame(portfolio_data)
         df_p = df_p.groupby(["x"]).sum().reset_index()
         df_p = df_p.sort_values(by='x')
 
-        port_data = []
+        port_data_list = []
         for index, row in df_p.iterrows():
-            port_data.append({"x": row["x"], "y": float('{0:.2f}'.format(row["y"]))})
+            port_data_list.append({"x": row["x"], "y": float('{0:.2f}'.format(row["y"]))})
 
-        return data, port_data
+        return stack_data_list, port_data_list
 
     def get_money_in_market(self):
         my_stock = MyStocks.objects.all().values()
