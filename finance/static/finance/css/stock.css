@@ -90,3 +90,8 @@ tr:nth-child(odd) {
 .row1 {
     background: white;
 }
+
+.highcharts_overlay{
+    position: absolute;
+    z-index: 100;
+}
