@@ -32,6 +32,7 @@ class Stock_Tracker_Methods(object):
 
         delta = d2 - d1
         data = []
+        portfolio_data = []
         for index, row in df_my_stock.iterrows():
             for i in range(delta.days + 1):
                 date = d1 + datetime.timedelta(days=i)
@@ -48,6 +49,7 @@ class Stock_Tracker_Methods(object):
                         todays_cost = todays_cost["Price"].tolist()
                         if todays_cost:
                             val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
+                            portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': '#5fffaf', "name": row["Symbol"]})
                             else:
@@ -62,6 +64,7 @@ class Stock_Tracker_Methods(object):
                         todays_cost = todays_cost["Price"].tolist()
                         if todays_cost:
                             val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
+                            portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': '#5fffaf', "name": row["Symbol"]})
                             else:
@@ -74,7 +77,15 @@ class Stock_Tracker_Methods(object):
         for index, row in df.iterrows():
             data.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"]})
 
-        return data
+        df_p = pd.DataFrame(portfolio_data)
+        df_p = df_p.groupby(["x"]).sum().reset_index()
+        df_p = df_p.sort_values(by='x')
+
+        port_data = []
+        for index, row in df_p.iterrows():
+            port_data.append({"x": row["x"], "y": row["y"]})
+
+        return data, port_data
 
     def get_money_in_market(self):
         my_stock = MyStocks.objects.all().values()

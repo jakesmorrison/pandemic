@@ -129,9 +129,9 @@ def top(request):
 
 def stock_tracker(request):
     stm =stock_tracker_methods.Stock_Tracker_Methods()
-    data2 = stm.stack_data()
+    data2, data1 = stm.stack_data()
 
-    data1 = stm.area_chart()
+    # data1 = stm.area_chart()
 
     money_in_market = stm.get_money_in_market()
     # gain_loss = stm.get_gain_loss()
@@ -139,8 +139,6 @@ def stock_tracker(request):
     table, gain_loss_percent, gain_loss_cash = stm.get_table()
 
     html_table = table.to_html(index=False,classes='table table-striped table-bordered table-hover table-responsive')
-
-    print(data2)
 
     context = {
         # "stack_data": stack_data,
