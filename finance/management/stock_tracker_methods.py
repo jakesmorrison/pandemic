@@ -83,7 +83,7 @@ class Stock_Tracker_Methods(object):
 
         port_data = []
         for index, row in df_p.iterrows():
-            port_data.append({"x": row["x"], "y": float('{0:.2f}'.format(row["y"])})
+            port_data.append({"x": row["x"], "y": float('{0:.2f}'.format(row["y"]))})
 
         return data, port_data
 
