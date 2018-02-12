@@ -102,7 +102,7 @@ function stock_spline(data1,data2){
                         },
                         formatter: function () {
                             if ( this.point.y != 0 ){
-                                console.log(this.key)
+                                console.log(this)
                                 return this.key
                             }
                         }
