@@ -42,14 +42,18 @@ function stock_spline(data1,data2){
             }, {
                 labels: {
                     align: 'right',
-                    x: -3
+                    x: -3,
+                    color: 'white',
+                    fontSize:'12px',
+                    textShadow: false,
                 },
+                opposite: true,
                 title: {
                     text: 'Dollar Change ($)'
                 },
                 plotLines: [{
                     value: 0,
-                    color: 'black',
+                    color: 'rgb(112,134,158)',
                     width: 3,
                     zIndex: 5
                 }],
@@ -61,7 +65,8 @@ function stock_spline(data1,data2){
                     enabled: true,
                     style: {
                         fontWeight: 'bold',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black',
+                        color:  'black',
+                        textShadow: false,
                         cursor: 'default'
                     }
                 },
@@ -89,8 +94,11 @@ function stock_spline(data1,data2){
                         enabled: true,
                         style: {
                             fontWeight: 'bold',
-                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black',
-                            cursor: 'default'
+                            color: 'black',
+                            textShadow: false,
+                            cursor: 'default',
+                            textOutline: false,
+                            zIndex:100
                         },
                         formatter: function () {
                             if ( this.point.y != 0 ){

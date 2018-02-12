@@ -181,7 +181,6 @@ class Stock_Tracker_Methods(object):
                                                              "Buy_Date":"Purchase Date","Cost":"Initial Price","Sell_Date":"Sell Date",
                                                              "Price":"Current/Sell Price","% Gain/Loss": "Return %","$ Gain/Loss": "Return $"})
 
-
         return df_my_stock, gain_loss_percent, gain_loss_cash
 
 
