@@ -96,4 +96,5 @@ tr:nth-child(odd) {
     z-index: 100;
     background: white;
     margin-left: 5%;
+    margin-top: 5%
 }

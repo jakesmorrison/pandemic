@@ -29,7 +29,7 @@
                 <h4><span>Gain/Loss:</span> <span class="gain_loss_cash">${{gain_loss_cash|safe}}</span></h4>
                 <h4><span>Gain/Loss:</span> <span class="gain_loss_percent">{{gain_loss_percent|safe}}%</span></h4>
             </div>
-            <div id="stock_stacked" style="margin: 0 auto; margin-top: 5%;"></div>
+            <div id="stock_stacked" style="margin: 0 auto; margin-top: 10%;"></div>
         </div>
     </div>
 
@@ -74,7 +74,7 @@
 $( document ).ready(function() {
 
     var total_height = $(document).height();
-    $("#stock_stacked").css("height",total_height*.90);
+    $("#stock_stacked").css("height",total_height*.80);
     stock_spline({{data1|safe}},{{data2|safe}});
 
     if({{gain_loss_cash|safe}} >= 0){
@@ -94,7 +94,7 @@ $( document ).ready(function() {
 });
 
     $('.table').DataTable({
-        sScrollY:      $(document).height()*.50,
+        sScrollY:      $(document).height()*.30,
         scrollCollapse: true,
         scrollX:        true,
         paging:         false,
