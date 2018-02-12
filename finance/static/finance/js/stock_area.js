@@ -61,7 +61,8 @@ function stock_spline(data1,data2){
                     enabled: true,
                     style: {
                         fontWeight: 'bold',
-                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black'
+                        color: (Highcharts.theme && Highcharts.theme.textColor) || 'black',
+                        cursor: 'default'
                     }
                 },
 
@@ -86,6 +87,11 @@ function stock_spline(data1,data2){
                     stacking: 'normal',
                     dataLabels:{
                         enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: (Highcharts.theme && Highcharts.theme.textColor) || 'black',
+                            cursor: 'default'
+                        },
                         formatter: function () {
                             if ( this.point.y != 0 ){
                                 return this.key
@@ -100,7 +106,7 @@ function stock_spline(data1,data2){
                                 isolate_stock(this.options.name);
                             }
                         }
-                    }
+                    },
                 },
                 areaspline: {
                     color: 'rgb(47, 58, 69)',
