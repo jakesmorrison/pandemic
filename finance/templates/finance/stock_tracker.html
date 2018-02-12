@@ -78,7 +78,7 @@ $( document ).ready(function() {
     var total_height = $(document).height();
     $("#stock_stacked").css("height",total_height*.80);
     stock_spline({{data1|safe}},{{data2|safe}});
-    $("#pie_chart").css("height",total_height*.40);
+    $("#pie_chart").css("height",total_height*.30);
     pie_chart({{pie_series|safe}});
 
     if({{gain_loss_cash|safe}} >= 0){
@@ -98,7 +98,7 @@ $( document ).ready(function() {
 });
 
     $('.table').DataTable({
-        sScrollY:      $(document).height()*.30,
+        sScrollY:      $(document).height()*.25,
         scrollCollapse: true,
         scrollX:        true,
         paging:         false,
