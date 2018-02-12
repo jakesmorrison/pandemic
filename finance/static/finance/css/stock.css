@@ -94,4 +94,6 @@ tr:nth-child(odd) {
 .highcharts_overlay{
     position: absolute;
     z-index: 100;
+    background: white;
+    margin-left: 5%;
 }

@@ -29,6 +29,8 @@ class Stock_Tracker_Methods(object):
         d1 = datetime.date(int(start_date[0]), int(start_date[1]), int(start_date[2]))  #start date
         d2 = datetime.date(int(current_date[0]), int(current_date[1]), int(current_date[2])) #end date
 
+        color_pos = "#007800"
+        color_neg = "#b30000"
 
         delta = d2 - d1
         data = []
@@ -51,9 +53,9 @@ class Stock_Tracker_Methods(object):
                             val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
                             portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
                             if val>0:
-                                data.append({"x": epoch, "y": val, 'color': '#5fffaf', "name": row["Symbol"]})
+                                data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"]})
                             else:
-                                data.append({"x": epoch, "y": val, 'color': '#ff7979', "name": row["Symbol"]})
+                                data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"]})
 
                             # data.append({'x':epoch,'y':,"transaction":int(row["id"]),
                             #              "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
@@ -66,9 +68,9 @@ class Stock_Tracker_Methods(object):
                             val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
                             portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
                             if val>0:
-                                data.append({"x": epoch, "y": val, 'color': '#5fffaf', "name": row["Symbol"]})
+                                data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"]})
                             else:
-                                data.append({"x": epoch, "y": val, 'color': '#ff7979', "name": row["Symbol"]})
+                                data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"]})
 
 
         df = pd.DataFrame(data)
@@ -159,8 +161,8 @@ class Stock_Tracker_Methods(object):
         gain_loss_percent = ((selling-buying)/buying)*100
         gain_loss_cash = df_my_stock["$ Gain/Loss"].sum()
 
-        gain_loss_percent = "{:0.2f}%".format(gain_loss_percent)
-        gain_loss_cash =  "${:0.2f}".format(gain_loss_cash)
+        gain_loss_percent = "{:0.2f}".format(gain_loss_percent)
+        gain_loss_cash =  "{:0.2f}".format(gain_loss_cash)
 
         df_my_stock["Price"] = df_my_stock["Price"].apply(lambda x: "{:0.2f}".format(float(x)))
         df_my_stock["% Gain/Loss"] = df_my_stock["% Gain/Loss"].apply(lambda x: "{:0.2f}%".format(float(x)))

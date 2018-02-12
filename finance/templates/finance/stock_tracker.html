@@ -19,17 +19,17 @@
 <div class="container">
     <div class="row1">
         <div class="col-lg-3 col-lg-offset-0 col-xs-12">
-            <h2>test</h2>
+            <h2>RobinHood</h2>
             {{ html_table|safe }}
             </div>
         </div>
         <div class="col-lg-9 col-lg-offset-0 col-xs-12">
             <div class="highcharts_overlay">
-                <h3><span>Portfolio:</span> ${{money_in_market|safe}}</h3>
-                <h5><span>Gain/Loss:</span> {{gain_loss_cash|safe}}</h5>
-                <h5><span>Gain/Loss:</span> {{gain_loss_percent|safe}}</h5>
+                <h3><span>Portfolio:</span> <span>${{money_in_market|safe}}</span></h3>
+                <h4><span>Gain/Loss:</span> <span class="gain_loss_cash">${{gain_loss_cash|safe}}</span></h4>
+                <h4><span>Gain/Loss:</span> <span class="gain_loss_percent">{{gain_loss_percent|safe}}%</span></h4>
             </div>
-            <div id="stock_stacked" style="margin: 0 auto"></div>
+            <div id="stock_stacked" style="margin: 0 auto; margin-top: 5%;"></div>
         </div>
     </div>
 
@@ -74,27 +74,24 @@
 $( document ).ready(function() {
 
     var total_height = $(document).height();
-    $("#stock_stacked").css("height",total_height*.95);
-
-    <!--plot_stock_stack({{stack_data|safe}}, {{date_data|safe}})-->
-
+    $("#stock_stacked").css("height",total_height*.90);
     stock_spline({{data1|safe}},{{data2|safe}});
 
-    <!--var total_height = $(document).height();-->
-    <!--var row_height = total_height/2;-->
-    <!--$(".row1").css("height",row_height)-->
-    <!--$(".row2").css("height",row_height)-->
+    if({{gain_loss_cash|safe}} >= 0){
+        $(".gain_loss_cash").css("color","#007800");
+    }
+    else{
+        $(".gain_loss_cash").css("color","#b30000");
+    }
+    if({{gain_loss_percent|safe}} >= 0){
+        $(".gain_loss_percent").css("color","#007800");
+    }
+    else{
+        $(".gain_loss_percent").css("color","#b30000");
+    }
 
-    <!--$(".info_row").css("height",row_height/3)-->
-    <!--$("#stock_stacked").css("height",row_height)-->
-    <!--$(".table").css("height",row_height)-->
-
-
-    <!--var table_height = row_height - $("#dataTables_scrollHead").height();-->
 
 });
-
-
 
     $('.table').DataTable({
         sScrollY:      $(document).height()*.50,

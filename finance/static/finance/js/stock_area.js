@@ -21,8 +21,6 @@ function stock_spline(data1,data2){
                 endOnTick: true,
                 range: 30 * 24 * 3600 * 1000,
                 crosshair: true,
-                lineColor: '#000',
-                tickColor: '#000',
             },
             yAxis: [{
                 min: 0,
@@ -52,7 +50,7 @@ function stock_spline(data1,data2){
                 plotLines: [{
                     value: 0,
                     color: 'black',
-                    width: 5,
+                    width: 3,
                     zIndex: 5
                 }],
                 top: '40%',
@@ -96,21 +94,21 @@ function stock_spline(data1,data2){
                     },
                     borderColor: 'white',
                     borderWidth: 3,
-//                    point: {
-//                        events: {
-//                            click: function () {
-//                                console.log(this.options)
-//                                isolate_stock(this.options.name);
-//                            }
-//                        }
-//                    }
+                    point: {
+                        events: {
+                            click: function () {
+                                isolate_stock(this.options.name);
+                            }
+                        }
+                    }
                 },
                 areaspline: {
+                    color: 'rgb(47, 58, 69)',
                     fillColor: {
                         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
                         stops: [
-                            [0, '#5f5fff'],
-                            [1, '#acacff']
+                            [0, 'rgb(47, 58, 69)'],
+                            [1, 'rgb(112,134,158)']
                         ]
                     },
                     lineWidth: 5,
@@ -139,26 +137,21 @@ function stock_spline(data1,data2){
         });
 
 
-//    function isolate_stock(symbol){
-//
-//        if(hidden === false){
-//            $.each(chart.series, function(i, ser) {
-//                console.log(ser)
-//                if(ser.name === symbol){
-//                    console.log(ser)
-//                }
-//                else{
-//                    ser.hide();
-//                }
-//            });
-//            hidden = true;
-//        }
-//        else{
-//            $.each(chart.series, function(i, ser) {
-//                ser.show();
-//            });
-//            hidden = false;
-//        }
-//    }
+    function isolate_stock(symbol){
+        if(hidden === false){
+            new_data = [];
+            for(x=0;x<data2.length;x++){
+                if( symbol === data2[x]["name"] ){
+                    new_data.push(data2[x])
+                }
+            }
+            hidden = true
+            chart.series[1].setData(new_data);
+        }
+        else{
+            hidden = false
+            chart.series[1].setData(data2);
 
+        }
+    }
 }
