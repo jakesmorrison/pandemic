@@ -23,6 +23,15 @@ class Stock_Tracker_Methods(object):
         df_my_stock["Quanity"] = df_my_stock["Quanity"].apply(lambda x: float(x))
         df_stock_price["Price"] = df_stock_price["Price"].apply(lambda x: float(x))
 
+        pie_data = df_my_stock.copy()
+        pie_data["Sell_Date"] = pie_data["Sell_Date"].apply(lambda x: str(x))
+        pie_data = pie_data[pie_data["Sell_Date"]=="None"]
+        pie_data = pie_data.groupby(["Symbol"]).sum().reset_index()
+        pie_data_list=[]
+        for index, row in pie_data.iterrows():
+            pie_data_list.append({'name':row["Symbol"],'y':row["Quanity"]})
+        pie_series = [{'name': 'Stock','colorByPoint': "true", 'data': pie_data_list}]
+
         start_date = [str(x["Buy_Date"]) for x in MyStocks.objects.values("Buy_Date")][0].split("-")
         current_date = str(datetime.datetime.now()).split(" ")[0].split("-")
 
@@ -87,7 +96,7 @@ class Stock_Tracker_Methods(object):
         for index, row in df_p.iterrows():
             port_data_list.append({"x": row["x"], "y": float('{0:.2f}'.format(row["y"]))})
 
-        return stack_data_list, port_data_list
+        return stack_data_list, port_data_list, pie_series
 
     def get_money_in_market(self):
         my_stock = MyStocks.objects.all().values()

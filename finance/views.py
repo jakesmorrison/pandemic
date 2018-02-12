@@ -129,7 +129,7 @@ def top(request):
 
 def stock_tracker(request):
     stm =stock_tracker_methods.Stock_Tracker_Methods()
-    stack_data_list, port_data_list = stm.stack_data()
+    stack_data_list, port_data_list, pie_series = stm.stack_data()
 
     table, gain_loss_percent, gain_loss_cash = stm.get_table()
 
@@ -141,6 +141,7 @@ def stock_tracker(request):
         "gain_loss_cash": gain_loss_cash,
         "html_table": html_table,
         "data1": port_data_list,
-        "data2": stack_data_list
+        "data2": stack_data_list,
+        "pie_series": pie_series
     }
     return render(request, "finance/stock_tracker.html", context)
