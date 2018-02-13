@@ -144,6 +144,9 @@ function stock_spline(data1,data2){
                 stacking: 'normal',
                 data: data2,
                 yAxis: 1,
+                dataGrouping: {
+                    enabled: false
+                }
             }]
         });
 
