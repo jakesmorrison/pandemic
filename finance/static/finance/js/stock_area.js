@@ -1,5 +1,6 @@
 var hidden = false;
 function stock_spline(data1,data2){
+    console.log(data2)
     var chart = Highcharts.stockChart('stock_stacked', {
             chart: {
                 borderWidth: 0,
@@ -13,10 +14,10 @@ function stock_spline(data1,data2){
             },
             xAxis: {
                 type: 'datetime',
-//                showLastLabel: false,
-//                endOnTick: true,
-//                range: 14 * 24 * 3600 * 1000,
-//                crosshair: true,
+                showLastLabel: false,
+                endOnTick: true,
+                range: 14 * 24 * 3600 * 1000,
+                crosshair: true,
             },
             yAxis: [{
                 min: 0,
@@ -27,14 +28,14 @@ function stock_spline(data1,data2){
                 title: {
                     text: 'Portfolio Value'
                 },
-//                gridLineWidth: 0,
-//                tickLength: 5,
-//                tickWidth: 1,
-//                height: '35%',
-//                lineWidth: 2,
-//                resize: {
-//                    enabled: true
-//                }
+                gridLineWidth: 0,
+                tickLength: 5,
+                tickWidth: 1,
+                height: '35%',
+                lineWidth: 2,
+                resize: {
+                    enabled: true
+                }
             }, {
                 labels: {
                     align: 'right',
@@ -57,61 +58,61 @@ function stock_spline(data1,data2){
                 height: '60%',
                 offset: 0,
                 lineWidth: 2,
-//                stackLabels: {
-//                    enabled: true,
-//                    style: {
-//                        fontWeight: 'bold',
-//                        color:  'black',
-//                        textShadow: false,
-//                        cursor: 'default'
-//                    }
-//                },
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color:  'black',
+                        textShadow: false,
+                        cursor: 'default'
+                    }
+                },
 
             }],
 
-//            tooltip: {
-//                split: false,
-//                formatter: function () {
-//                    if ((typeof this.key) == (typeof "test")){
-//                        return '<span>'+this.key+'</span>'+'<span>'+": $"+this.y+'</span>'
-//                    }
-//                    else{
-//                        d = new Date(0);
-//                        d.setUTCSeconds(this.key/1000);
-//                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>$"+this.y+'</span>'
-//                    }
-//                }
-//            },
+            tooltip: {
+                split: false,
+                formatter: function () {
+                    if ((typeof this.key) == (typeof "test")){
+                        return '<span>'+this.key+'</span>'+'<span>'+": $"+this.y+'</span>'
+                    }
+                    else{
+                        d = new Date(0);
+                        d.setUTCSeconds(this.key/1000);
+                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>$"+this.y+'</span>'
+                    }
+                }
+            },
 
             plotOptions: {
                 column: {
                     stacking: 'normal',
-//                    dataLabels:{
-//                        enabled: true,
-//                        style: {
-//                            fontWeight: 'bold',
-//                            color: 'black',
-//                            textShadow: false,
-//                            cursor: 'default',
-//                            textOutline: false,
-//                            zIndex:100
-//                        },
-//                        formatter: function () {
-//                            if ( this.point.y != 0 ){
-//                                console.log(this)
-//                                return this.key
-//                            }
-//                        }
-//                    },
+                    dataLabels:{
+                        enabled: true,
+                        style: {
+                            fontWeight: 'bold',
+                            color: 'black',
+                            textShadow: false,
+                            cursor: 'default',
+                            textOutline: false,
+                            zIndex:100
+                        },
+                        formatter: function () {
+                            if ( this.point.y != 0 ){
+                                console.log(this)
+                                return this.key
+                            }
+                        }
+                    },
                     borderColor: 'white',
                     borderWidth: 3,
-//                    point: {
-//                        events: {
-//                            click: function () {
-//                                isolate_stock(this.options.name);
-//                            }
-//                        }
-//                    },
+                    point: {
+                        events: {
+                            click: function () {
+                                isolate_stock(this.options.name);
+                            }
+                        }
+                    },
                 },
                 areaspline: {
                     color: 'rgb(47, 58, 69)',
