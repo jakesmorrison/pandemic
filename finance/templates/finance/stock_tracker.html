@@ -75,6 +75,8 @@
 
 $( document ).ready(function() {
 
+    console.log({{data2|safe}})
+
     var total_height = $(document).height();
     $("#stock_stacked").css("height",total_height*.80);
     stock_spline({{data1|safe}},{{data2|safe}});

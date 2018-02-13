@@ -4,10 +4,6 @@ function stock_spline(data1,data2){
             chart: {
                 borderWidth: 0,
                 backgroundColor: null,
-                zoomType: 'xy'
-            },
-            rangeSelector: {
-                selected: 1
             },
             exporting: { enabled: false },
             credits: {enabled: false },
@@ -19,7 +15,7 @@ function stock_spline(data1,data2){
                 type: 'datetime',
                 showLastLabel: false,
                 endOnTick: true,
-                range: 30 * 24 * 3600 * 1000,
+                range: 14 * 24 * 3600 * 1000,
                 crosshair: true,
             },
             yAxis: [{
