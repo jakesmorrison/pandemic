@@ -1,6 +1,5 @@
 var hidden = false;
 function stock_spline(data1,data2){
-    console.log(data2)
     var chart = Highcharts.stockChart('stock_stacked', {
             chart: {
                 borderWidth: 0,
@@ -54,7 +53,7 @@ function stock_spline(data1,data2){
                     zIndex: 5
                 }],
                 top: '40%',
-                height: '50%',
+                height: '60%',
                 offset: 0,
                 lineWidth: 2,
                 stackLabels: {
@@ -98,7 +97,6 @@ function stock_spline(data1,data2){
                         },
                         formatter: function () {
                             if ( this.point.y != 0 ){
-                                console.log(this)
                                 return this.key
                             }
                         }
