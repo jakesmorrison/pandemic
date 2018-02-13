@@ -20,6 +20,7 @@
     <div class="row1">
         <div class="col-lg-3 col-lg-offset-0 col-xs-12">
             <h2>RobinHood</h2>
+            <div class="test"></div>
             <div id="pie_chart" style="margin: 0 auto; margin-top: 5%;"></div>
             {{ html_table|safe }}
             </div>
@@ -66,6 +67,7 @@
 <script src=" {% static 'finance/js/highstock.js' %}" rel="stylesheet"></script>
 <!--<script src=" {% static 'finance/js/highcharts.js' %}" rel="stylesheet"></script>-->
 <!--<script src=" {% static 'finance/js/stock_stack.js' %}"></script>-->
+<script src=" {% static 'finance/js/jquery-sparkline.js' %}"></script>
 <script src=" {% static 'finance/js/stock_area.js' %}"></script>
 <script src=" {% static 'finance/js/pie_chart.js' %}"></script>
 
@@ -106,7 +108,7 @@ $( document ).ready(function() {
         scrollX:        true,
         paging:         false,
         "order": [[ 0, "decs" ]],
-        language: { search: "" },
+        language: { search: "Search" },
         fixedColumns:   {
             leftColumns: 2,
             rightColumns: 0

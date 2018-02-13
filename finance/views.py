@@ -133,8 +133,7 @@ def stock_tracker(request):
 
     table, gain_loss_percent, gain_loss_cash = stm.get_table()
 
-    html_table = table.to_html(index=False,classes='table table-striped table-bordered table-hover table-responsive')
-
+    html_table = table.to_html(index=False,classes='table nowrap compact order-column table-responsive')
 
     context = {
         "money_in_market": port_data_list[-1]["y"],
