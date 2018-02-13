@@ -7,8 +7,8 @@ function stock_spline(data1,data2){
                 backgroundColor: null,
             },
             exporting: { enabled: false },
-            credits: {enabled: false },
-            rangeSelector: {enabled: false},
+            credits: { enabled: false },
+            rangeSelector: { enabled: false },
             title: {
                 text: ''
             },
@@ -17,7 +17,6 @@ function stock_spline(data1,data2){
                 showLastLabel: false,
                 endOnTick: true,
                 range: 14 * 24 * 3600 * 1000,
-                crosshair: true,
             },
             yAxis: [{
                 min: 0,
@@ -55,7 +54,7 @@ function stock_spline(data1,data2){
                     zIndex: 5
                 }],
                 top: '40%',
-                height: '60%',
+                height: '50%',
                 offset: 0,
                 lineWidth: 2,
                 stackLabels: {
@@ -144,7 +143,6 @@ function stock_spline(data1,data2){
                 stacking: 'normal',
                 data: data2,
                 yAxis: 1,
-
             }]
         });
 
