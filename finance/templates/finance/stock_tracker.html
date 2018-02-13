@@ -18,14 +18,13 @@
 
 <div class="container">
     <div class="row1">
-        <div class="col-lg-3 col-lg-offset-0 col-xs-12">
+        <div class="col-lg-4 col-lg-offset-0 col-xs-12">
             <h2>RobinHood</h2>
-            <div class="test"></div>
             <div id="pie_chart" style="margin: 0 auto; margin-top: 5%;"></div>
             {{ html_table|safe }}
             </div>
         </div>
-        <div class="col-lg-9 col-lg-offset-0 col-xs-12">
+        <div class="col-lg-8 col-lg-offset-0 col-xs-12">
             <div class="highcharts_overlay">
                 <h3><span>Portfolio:</span> <span>${{money_in_market|safe}}</span></h3>
                 <h4><span>Gain/Loss:</span> <span class="gain_loss_cash">${{gain_loss_cash|safe}}</span></h4>
@@ -99,21 +98,24 @@ $( document ).ready(function() {
         $(".gain_loss_percent").css("color","#b30000");
     }
 
+    $("#DataTables_Table_0_filter").append('<div class="test"></div>')
 
 });
 
-    $('.table').DataTable({
-        sScrollY:      $(document).height()*.20,
-        scrollCollapse: true,
-        scrollX:        true,
-        paging:         false,
-        "order": [[ 0, "decs" ]],
-        language: { search: "Search" },
-        fixedColumns:   {
-            leftColumns: 2,
-            rightColumns: 0
-        }
-    });
+$('.table').DataTable({
+    sScrollY:      $(document).height()*.20,
+    scrollCollapse: true,
+    scrollX:        true,
+    paging:         false,
+    "order": [[ 0, "decs" ]],
+    language: { search: "Search" },
+    fixedColumns:   {
+        leftColumns: 2,
+        rightColumns: 0
+    }
+});
+
+
 
 
 

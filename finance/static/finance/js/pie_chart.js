@@ -47,7 +47,11 @@ function pie_chart(pie_series){
     });
 
     function custom_tooltip(){
-//        $(".test").sparkline([5,6,7,2,0,-4,-2,4], {type: 'bar',barColor: '#3f7f00'})
-    }
-
+        $(".test").sparkline([5,6,7,2,0,-4,-2,4], {
+            type: 'bar',
+            height: '30px',
+            barWidth: 10,
+            barSpacing: 2,
+            barColor: '#5fbf00'});
+        }
 }
