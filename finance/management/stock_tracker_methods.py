@@ -38,8 +38,8 @@ class Stock_Tracker_Methods(object):
         d1 = datetime.date(int(start_date[0]), int(start_date[1]), int(start_date[2]))  #start date
         d2 = datetime.date(int(current_date[0]), int(current_date[1]), int(current_date[2])) #end date
 
-        color_pos = "#007800"
-        color_neg = "#b30000"
+        color_pos = "#229954"
+        color_neg = "#CD5C5C"
 
         delta = d2 - d1
         data = []
