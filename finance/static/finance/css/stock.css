@@ -100,3 +100,7 @@ tr:nth-child(odd) {
     border-radius: 3px;
     opacity: 0.7;
 }
+
+.dataTables_wrapper{
+    margin-top: 30px;
+}
