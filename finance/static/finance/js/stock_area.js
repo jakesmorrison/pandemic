@@ -24,7 +24,7 @@ function stock_spline(data1,data2){
                     x: -3
                 },
                 title: {
-                    text: 'Portfolio Value'
+                    text: 'Portfolio Value $'
                 },
                 gridLineWidth: 0,
                 tickLength: 5,
@@ -35,6 +35,9 @@ function stock_spline(data1,data2){
                     enabled: true
                 }
             }, {
+                resize: {
+                    enabled: true
+                },
                 labels: {
                     align: 'right',
                     x: -3,
