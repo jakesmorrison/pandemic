@@ -13,10 +13,10 @@ function stock_spline(data1,data2){
             },
             xAxis: {
                 type: 'datetime',
-                showLastLabel: false,
-                endOnTick: true,
-                range: 14 * 24 * 3600 * 1000,
-                crosshair: true,
+//                showLastLabel: false,
+//                endOnTick: true,
+//                range: 14 * 24 * 3600 * 1000,
+//                crosshair: true,
             },
             yAxis: [{
                 min: 0,
@@ -27,11 +27,11 @@ function stock_spline(data1,data2){
                 title: {
                     text: 'Portfolio Value'
                 },
-                gridLineWidth: 0,
-                tickLength: 5,
-                tickWidth: 1,
-                height: '35%',
-                lineWidth: 2,
+//                gridLineWidth: 0,
+//                tickLength: 5,
+//                tickWidth: 1,
+//                height: '35%',
+//                lineWidth: 2,
 //                resize: {
 //                    enabled: true
 //                }
