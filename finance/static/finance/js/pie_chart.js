@@ -1,6 +1,6 @@
 function pie_chart(pie_series){
     Highcharts.chart('pie_chart', {
-      colors: ['#058DC7', '#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572','#FF9655', '#FFF263', '#6AF9C4'],
+      colors: ['#641E16','#512E5F','#1B4F72','#0B5345','#186A3B','#7E5109','#6E2C00','#4D5656','#1B2631'],
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
