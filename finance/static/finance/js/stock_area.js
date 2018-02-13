@@ -1,7 +1,7 @@
 var hidden = false;
 function stock_spline(data1,data2){
+    console.log(data2)
     var chart = Highcharts.stockChart('stock_stacked', {
-            console.log(data2)
             chart: {
                 borderWidth: 0,
                 backgroundColor: null,
