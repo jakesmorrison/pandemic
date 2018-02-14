@@ -9,20 +9,24 @@ class Stock_Tracker_Methods(object):
     def __init__(self):
         pass
     def stack_data(self):
+        # Get data from db
         my_stock = MyStocks.objects.all().values()
         stock_price = Prices.objects.all().values()
 
+        #Convert into dataframe
         df_stock_price = pd.DataFrame(list(stock_price))
         df_stock_price = df_stock_price.sort_values(by=['Date'])
 
         df_my_stock = pd.DataFrame(list(my_stock))
-        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Cost,Sell_Date".split(",")]
+        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Buy_Price,Sell_Date,Sell_Price".split(",")]
 
         # Convert to Float
-        df_my_stock["Cost"] = df_my_stock["Cost"].apply(lambda x: float(x))
+        df_my_stock["Buy_Price"] = df_my_stock["Buy_Price"].apply(lambda x: float(x))
+        df_my_stock["Sell_Price"] = df_my_stock["Sell_Price"].apply(lambda x: float(x))
         df_my_stock["Quanity"] = df_my_stock["Quanity"].apply(lambda x: float(x))
         df_stock_price["Price"] = df_stock_price["Price"].apply(lambda x: float(x))
 
+        # get data for pie chart
         pie_data = df_my_stock.copy()
         pie_data["Sell_Date"] = pie_data["Sell_Date"].apply(lambda x: str(x))
         pie_data = pie_data[pie_data["Sell_Date"]=="None"]
@@ -32,6 +36,9 @@ class Stock_Tracker_Methods(object):
             pie_data_list.append({'name':row["Symbol"],'y':row["Quanity"]})
         pie_series = [{'name': 'Stock','colorByPoint': "true", 'data': pie_data_list}]
 
+
+        # Stack data
+        # Get dates
         start_date = [str(x["Buy_Date"]) for x in MyStocks.objects.values("Buy_Date")][0].split("-")
         current_date = str(datetime.datetime.now()).split(" ")[0].split("-")
 
@@ -54,94 +61,76 @@ class Stock_Tracker_Methods(object):
                 epoch = int(ts*1000)
 
                 # If not sold and current date is greater than buy date.
+                # If stock has not been sold.
                 if row["Sell_Date"] == None:
+                    # If the current date is equal or past the buy date
                     if date >= row["Buy_Date"]:
+                        # Get data stock price data.
                         todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
                         todays_cost = todays_cost["Price"].tolist()
                         if todays_cost:
-                            val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
+                            # get the value of the stock based on current price.
                             portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
+                            # get diff between buy price and current price.
+                            val = float('{0:.2f}'.format((todays_cost[0]-row["Buy_Price"])*row["Quanity"]))
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"]})
                             else:
                                 data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"]})
 
-                            # data.append({'x':epoch,'y':,"transaction":int(row["id"]),
-                            #              "cost":round(float(row["Cost"]),2),"buydate":str(row["Buy_Date"]),"selldate":str(row["Sell_Date"]),
-                            #              "quanity": int(row["Quanity"]),'color':'#5fffaf'})
+                # If stock did sell
                 else:
                     if date >= row["Buy_Date"] and row["Sell_Date"] >= date:
-                        todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
-                        todays_cost = todays_cost["Price"].tolist()
-                        if todays_cost:
-                            val = float('{0:.2f}'.format((todays_cost[0]-row["Cost"])*row["Quanity"]))
-                            portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
-                            if val>0:
-                                data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"]})
-                            else:
-                                data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"]})
+                        # todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
+                        # todays_cost = todays_cost["Price"].tolist()
+                        val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
+                        portfolio_data.append({"x": epoch, "y": row["Sell_Price"]*row["Quanity"]})
+                        if val>0:
+                            data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"]})
+                        else:
+                            data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"]})
 
-
+        # FOR STACK: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df = pd.DataFrame(data)
         df = df.sort_values(by='x')
         stack_data_list=[]
         for index, row in df.iterrows():
             stack_data_list.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"]})
 
+        # FOR PORTFOLIOJ: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df_p = pd.DataFrame(portfolio_data)
         df_p = df_p.groupby(["x"]).sum().reset_index()
         df_p = df_p.sort_values(by='x')
-
         port_data_list = []
         for index, row in df_p.iterrows():
             port_data_list.append({"x": row["x"], "y": float('{0:.2f}'.format(row["y"]))})
 
         return stack_data_list, port_data_list, pie_series
 
-    def get_money_in_market(self):
-        my_stock = MyStocks.objects.all().values()
-        stock_price = Prices.objects.all().values()
-
-        df_stock_price = pd.DataFrame(list(stock_price))
-        df_my_stock = pd.DataFrame(list(my_stock))
-
-        total_money_in_market = 0
-        for index, row in df_my_stock.iterrows():
-            stock = row["Symbol"]
-            quanity = row["Quanity"]
-            sold = row["Sell_Date"]
-            try:
-                if sold == None:
-                    newest_price = df_stock_price[df_stock_price["Symbol"]==stock]
-                    newest_price = newest_price.sort_values(by=['Date'])["Price"].tolist()[-1]
-                    total_money_in_market = total_money_in_market + newest_price*quanity
-            except:
-                pass
-
-        return total_money_in_market
-
 
     def get_table(self):
-        my_stock = MyStocks.objects.all().values()
         stock_price = Prices.objects.all().values()
-
-
         df_stock_price = pd.DataFrame(list(stock_price))
         df_stock_price = df_stock_price.sort_values(by=['Date'])
 
+        my_stock = MyStocks.objects.all().values()
         df_my_stock = pd.DataFrame(list(my_stock))
-        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Cost,Sell_Date".split(",")]
+        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Buy_Price,Sell_Date,Sell_Price".split(",")]
 
         #Convert to Float
-        df_my_stock["Cost"] = df_my_stock["Cost"].apply(lambda x: float(x))
+        df_my_stock["Buy_Price"] = df_my_stock["Buy_Price"].apply(lambda x: float(x))
+        df_my_stock["Sell_Price"] = df_my_stock["Sell_Price"].apply(lambda x: float(x))
         df_my_stock["Quanity"] = df_my_stock["Quanity"].apply(lambda x: float(x))
         df_stock_price["Price"] = df_stock_price["Price"].apply(lambda x: float(x))
+
+        # df_my_stock["$ Gain/Loss"] = (df_my_stock["Sell_Price"]-df_my_stock["Buy_Price"])*df_my_stock["Quanity"]
+        # df_my_stock["% Gain/Loss"] = ((df_my_stock["Sell_Price"]-df_my_stock["Buy_Price"])/df_my_stock["Sell_Price"])*100
 
         total_price_list = []
         total_gain_list = []
         for index,row in df_my_stock.iterrows():
             symbol = row["Symbol"]
-            cost = row["Cost"]
+            cost = row["Buy_Price"]
             if row["Sell_Date"] == None:
                 current_price = df_stock_price[df_stock_price["Symbol"]==symbol]["Price"].tolist()[-1]
                 total_price = current_price
@@ -149,19 +138,16 @@ class Stock_Tracker_Methods(object):
                 total_price_list.append(total_price)
                 total_gain_list.append(gain)
             else:
-                sale_price = df_stock_price[(df_stock_price["Symbol"] == symbol) & (df_stock_price["Date"] == row["Sell_Date"])]
-                sale_price = sale_price["Price"].tolist()[0]
-                total_price = sale_price
-                gain = ((sale_price-cost)/cost)*100
-                total_price_list.append(total_price)
+                gain = ((row["Sell_Price"]-row["Buy_Price"])/row["Buy_Price"])*100
+                total_price_list.append(row["Sell_Price"])
                 total_gain_list.append(gain)
 
         df_my_stock["Price"] = total_price_list
         df_my_stock["% Gain/Loss"] = total_gain_list
-        df_my_stock["$ Gain/Loss"] = (df_my_stock["Price"]-df_my_stock["Cost"])*df_my_stock["Quanity"]
+        df_my_stock["$ Gain/Loss"] = (df_my_stock["Price"]-df_my_stock["Buy_Price"])*df_my_stock["Quanity"]
 
         test = pd.DataFrame()
-        test["buying"] = (df_my_stock["Cost"]*df_my_stock["Quanity"])
+        test["buying"] = (df_my_stock["Buy_Price"]*df_my_stock["Quanity"])
         test["selling"] = (df_my_stock["Price"]*df_my_stock["Quanity"])
 
         buying = test["buying"].sum()
@@ -181,40 +167,6 @@ class Stock_Tracker_Methods(object):
                                                              "Buy_Date":"Purchase Date","Cost":"Initial Price","Sell_Date":"Sell Date",
                                                              "Price":"Current/Sell Price","% Gain/Loss": "Return %","$ Gain/Loss": "Return $"})
 
+        del df_my_stock["Sell_Price"]
         return df_my_stock, gain_loss_percent, gain_loss_cash
-
-
-    def area_chart(self):
-        my_stock = MyStocks.objects.all().values()
-        stock_price = Prices.objects.all().values()
-
-        df_stock_price = pd.DataFrame(list(stock_price))
-        df_stock_price = df_stock_price.sort_values(by=['Date'])
-
-        df_my_stock = pd.DataFrame(list(my_stock))
-        df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Cost,Sell_Date".split(",")]
-
-        # Convert to Float
-        df_my_stock["Cost"] = df_my_stock["Cost"].apply(lambda x: float(x))
-        df_my_stock["Quanity"] = df_my_stock["Quanity"].apply(lambda x: float(x))
-        df_stock_price["Price"] = df_stock_price["Price"].apply(lambda x: float(x))
-
-        new_df = pd.merge(df_stock_price, df_my_stock, how='left', on=['Symbol'])
-        new_df["Price"] = new_df["Price"] * new_df["Quanity"]
-        new_df["Cost"] = new_df["Cost"] * new_df["Quanity"]
-
-        new_df = new_df.groupby(["Date"]).sum().reset_index()
-
-        date_list = new_df["Date"].tolist()
-        price_list = new_df["Price"].tolist()
-        data1 = []
-        for n, x in enumerate(date_list):
-            new_date = str(x).split("-")
-            tz = pytz.timezone('America/Boise')
-            dt_with_tz = tz.localize(datetime.datetime(int(new_date[0]), int(new_date[1]), int(new_date[2]), 0, 0, 0),is_dst=None)
-            ts = (dt_with_tz - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds()
-            epoch = int(ts * 1000)
-            data1.append({"x":epoch,"y":float('{0:.2f}'.format(price_list[n]))})
-
-        return data1
 
