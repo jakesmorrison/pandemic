@@ -135,8 +135,6 @@ def stock_tracker(request):
 
     html_table = table.to_html(index=False,classes='table nowrap compact order-column table-responsive')
 
-    print(html_table)
-
     context = {
         "money_in_market": port_data_list[-1]["y"],
         "gain_loss_percent": gain_loss_percent,

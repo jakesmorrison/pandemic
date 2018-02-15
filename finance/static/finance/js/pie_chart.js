@@ -1,6 +1,8 @@
 function pie_chart(pie_series){
     var my_pie_chart = Highcharts.chart('pie_chart', {
-      colors: ['#641E16','#512E5F','#1B4F72','#0B5345','#186A3B','#7E5109','#995324','#4D5656','#1B2631','#F9E79F'],
+      colors: ['rgba(100, 30, 22,.8)','rgba(81, 46, 95,.8)',
+               'rgba(27, 79, 114,.8)','rgba(11, 83, 69,.8)','rgba(34, 204, 106,.8)',
+               'rgba(77, 86, 86,.8)','rgba(153, 99, 13,.8)','rgba(153, 83, 36,.8)','rgba(27, 38, 49,.8)'],
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,
@@ -10,8 +12,9 @@ function pie_chart(pie_series){
         spacingTop: 0,
         spacingBottom: 0,
         spacingLeft: 0,
-        spacingRight: 0
-
+        spacingRight: 0,
+        borderWidth: 0,
+        backgroundColor: null,
       },
     exporting: { enabled: false },
     credits: {enabled: false },
@@ -32,7 +35,7 @@ function pie_chart(pie_series){
             format: '<b>{point.name}</b>: {point.percentage:.1f} %',
             style: {
               color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-            }
+            },
           },
           point: {
             events: {
@@ -40,7 +43,8 @@ function pie_chart(pie_series){
                     custom_tooltip();
                 }
             }
-          }
+          },
+          innerSize: '30%',
         }
       },
       series: pie_series

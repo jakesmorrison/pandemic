@@ -66,11 +66,9 @@ function stock_spline(data1,data2){
                         color:  'black',
                         textShadow: false,
                         cursor: 'default'
-                    }
+                    },
                 },
-
             }],
-
             tooltip: {
                 split: false,
                 formatter: function () {
@@ -120,17 +118,17 @@ function stock_spline(data1,data2){
                         linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1},
                         stops: [
                             [0, 'rgb(47, 58, 69)'],
-                            [1, 'rgb(112,134,158)']
+                            [1, 'rgb(112,134,158)'],
                         ]
                     },
-                    lineWidth: 5,
+                    lineWidth: 6,
                     marker: {
                         enabled: false
                     },
                     shadow: false,
                     states: {
                         hover: {
-                            lineWidth: 1
+                            lineWidth: 3
                         }
                     },
                     threshold: null

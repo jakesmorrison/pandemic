@@ -107,6 +107,7 @@ tr:nth-child(odd) {
 
 .dataTables_wrapper{
     margin-top: 30px;
+    background: white;
 }
 
 .test{
@@ -116,3 +117,6 @@ tr:nth-child(odd) {
     top: 0;
 }
 
+body{
+    background: white;
+}
