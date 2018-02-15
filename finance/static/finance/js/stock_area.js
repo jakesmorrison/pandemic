@@ -1,4 +1,5 @@
 var hidden = false;
+var toggle = 0;
 function stock_spline(data1,data2){
     var chart = Highcharts.stockChart('stock_stacked', {
             chart: {
@@ -47,7 +48,7 @@ function stock_spline(data1,data2){
                 },
                 opposite: true,
                 title: {
-                    text: 'Dollar Change ($)'
+                    text: 'zzz'
                 },
                 plotLines: [{
                     value: 0,
@@ -145,7 +146,7 @@ function stock_spline(data1,data2){
                 dataGrouping: {
                     enabled: false
                 }
-            }]
+            }],
         });
 
 
@@ -166,4 +167,30 @@ function stock_spline(data1,data2){
 
         }
     }
+
+    $('#toggle').click(function(){
+        toggle_data = [];
+        if(toggle===0){
+            toggle = 1;
+            for(x=0;x<data2.length;x++){
+                if( data2[x]["y"] > 0 ){
+                    toggle_data.push(data2[x])
+                }
+            }
+            chart.series[1].setData(toggle_data);
+        }
+        else if(toggle===1){
+            toggle = 2;
+            for(x=0;x<data2.length;x++){
+                if( data2[x]["y"] < 0 ){
+                    toggle_data.push(data2[x])
+                }
+            }
+            chart.series[1].setData(toggle_data);
+        }
+        else{
+            toggle = 0;
+            chart.series[1].setData(data2);
+        }
+    });
 }

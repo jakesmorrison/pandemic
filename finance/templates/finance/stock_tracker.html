@@ -25,6 +25,7 @@
             </div>
         </div>
         <div class="col-lg-8 col-lg-offset-0 col-xs-12">
+            <button id="toggle" type="button" class="btn btn-default rotate">Dollar Change ($)</button>
             <div class="highcharts_overlay">
                 <h3><span>Portfolio:</span> <span>${{money_in_market|safe}}</span></h3>
                 <h4><span>Gain/Loss:</span> <span class="gain_loss_cash">${{gain_loss_cash|safe}}</span></h4>
@@ -98,8 +99,14 @@ $( document ).ready(function() {
         $(".gain_loss_percent").css("color","#b30000");
     }
 
-    $("#DataTables_Table_0_filter").append('<div class="test"></div>')
+    second_y_axis = $("text:contains('zzz')" )[0];
+    x_val = (second_y_axis).getAttribute( 'x' );
+    y_val = (second_y_axis).getAttribute( 'y' );
 
+    console.log(x_val)
+
+    $("#toggle").css("left", parseInt(x_val)-30);
+    $("#toggle").css("top", parseInt(y_val)+30);
 });
 
 $('.table').DataTable({

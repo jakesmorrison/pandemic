@@ -120,3 +120,29 @@ tr:nth-child(odd) {
 body{
     background: white;
 }
+
+#toggle{
+    position: absolute;
+    z-index: 50;
+    font-size: 13px;
+    padding: 4px;
+}
+
+.rotate {
+
+/* Safari */
+-webkit-transform: rotate(90deg);
+
+/* Firefox */
+-moz-transform: rotate(90deg);
+
+/* IE */
+-ms-transform: rotate(90deg);
+
+/* Opera */
+-o-transform: rotate(90deg);
+
+/* Internet Explorer */
+filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+
+}
