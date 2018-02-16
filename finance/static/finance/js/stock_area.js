@@ -77,9 +77,10 @@ function stock_spline(data1,data2){
                         return '<span>'+this.key+'('+this.point.id+')'+'</span>'+'<span>'+": $"+this.y+'</span>'
                     }
                     else{
+                        gain = get_daily_gain(this.point.index);
                         d = new Date(0);
                         d.setUTCSeconds(this.key/1000);
-                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>$"+this.y+'</span>'
+                        return '<span>'+d.toString().split("00")[0]+'</span>'+'<span>'+"<br>Total: $"+this.y+'</span><br><span>Daily Gain: '+gain+'%</span>'
                     }
                 }
             },
@@ -193,4 +194,16 @@ function stock_spline(data1,data2){
             chart.series[1].setData(data2);
         }
     });
+
+    function get_daily_gain(index){
+        prev = index - 1;
+        if (prev >=0 ){
+            x1 = chart.series[0].data[index].y
+            x2 = chart.series[0].data[prev].y
+            return (((x1-x2)/x2)*100).toFixed(2);
+        }
+        else{
+            return 0
+        }
+    }
 }
