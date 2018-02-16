@@ -74,7 +74,7 @@ function stock_spline(data1,data2){
                 split: false,
                 formatter: function () {
                     if ((typeof this.key) == (typeof "test")){
-                        return '<span>'+this.key+'</span>'+'<span>'+": $"+this.y+'</span>'
+                        return '<span>'+this.key+'('+this.point.id+')'+'</span>'+'<span>'+": $"+this.y+'</span>'
                     }
                     else{
                         d = new Date(0);

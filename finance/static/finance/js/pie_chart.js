@@ -1,8 +1,9 @@
 function pie_chart(pie_series){
     var my_pie_chart = Highcharts.chart('pie_chart', {
       colors: ['rgba(100, 30, 22,.8)','rgba(81, 46, 95,.8)',
-               'rgba(27, 79, 114,.8)','rgba(11, 83, 69,.8)','rgba(34, 204, 106,.8)',
-               'rgba(77, 86, 86,.8)','rgba(153, 99, 13,.8)','rgba(153, 83, 36,.8)','rgba(27, 38, 49,.8)'],
+               'rgba(27, 79, 114,.8)','rgba(11, 83, 69,.8)',
+               'rgba(77, 86, 86,.8)','rgba(153, 99, 13,.8)',
+               'rgba(153, 83, 36,.8)','rgba(27, 38, 49,.8)'],
       chart: {
         plotBackgroundColor: null,
         plotBorderWidth: null,

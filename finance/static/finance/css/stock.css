@@ -126,7 +126,29 @@ body{
     z-index: 50;
     font-size: 13px;
     padding: 4px;
+    color: #666666;
+    border-color: white;
+
 }
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+    color: #666666;
+    background-color: white;
+    border-color: white; /*set the color you want here*/
+    outline: none;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn-default:active:focus {
+    color: #666666;
+    background-color: white;
+    border-color: white; /*set the color you want here*/
+    outline: none;
+}
+
 
 .rotate {
 

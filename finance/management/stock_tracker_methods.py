@@ -74,9 +74,9 @@ class Stock_Tracker_Methods(object):
                             # get diff between buy price and current price.
                             val = float('{0:.2f}'.format((todays_cost[0]-row["Buy_Price"])*row["Quanity"]))
                             if val>0:
-                                data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"]})
+                                data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
                             else:
-                                data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"]})
+                                data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
 
                 # If stock did sell
                 else:
@@ -86,16 +86,16 @@ class Stock_Tracker_Methods(object):
                         val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
                         portfolio_data.append({"x": epoch, "y": row["Sell_Price"]*row["Quanity"]})
                         if val>0:
-                            data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"]})
+                            data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
                         else:
-                            data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"]})
+                            data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
 
         # FOR STACK: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df = pd.DataFrame(data)
         df = df.sort_values(by='x')
         stack_data_list=[]
         for index, row in df.iterrows():
-            stack_data_list.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"]})
+            stack_data_list.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"], 'id': row["id"]})
 
         # FOR PORTFOLIOJ: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df_p = pd.DataFrame(portfolio_data)
