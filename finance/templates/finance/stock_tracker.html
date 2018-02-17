@@ -74,6 +74,7 @@
 <script>
 
 
+var summation = 0;
 
 $( document ).ready(function() {
 
@@ -108,16 +109,38 @@ $( document ).ready(function() {
 });
 
 $('.table').DataTable({
-    sScrollY:      $(document).height()*.20,
+    sScrollY:      $(document).height()*.25,
     scrollCollapse: true,
     scrollX:        true,
     paging:         false,
     "order": [[ 0, "decs" ]],
-    language: { search: "Search" },
+    language: { search: "<span class='sum_span'>Search</span>" },
     fixedColumns:   {
         leftColumns: 2,
         rightColumns: 0
     }
+});
+
+$('.table_button').click(function(){
+    label = $("#DataTables_Table_0_filter").children()[0];
+    span = $(label).children()[0];
+
+    if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
+        summation = parseFloat(summation) + parseFloat($(this).text());
+        summation = summation.toFixed(2);
+        $(this).css("background","rgba(185, 219, 255, .5)");
+        $(span).text("$"+summation);
+    }
+    else{
+        $('.table_button').css("background","rgba(0, 0, 0, 0) ");
+        summation = 0;
+        $(span).text("");
+    }
+
+
+
+
+
 });
 
 

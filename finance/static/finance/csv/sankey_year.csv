@@ -1,8 +1,8 @@
 source,target,value,c
 Pre Tax Salary: 100%,Company Match: 4.73%,4030,#5FFF5F
 Pre Tax Salary: 100%,Pre Tax Investments: 14.7%,12532,#5FFF5F
-Pre Tax Salary: 100%,Post Tax Income: 58.02%,49451.22,#5FaFFF
-Pre Tax Salary: 100%,Taxes: 22.55%,19214.78,#FF5F5F
+Pre Tax Salary: 100%,Post Tax Income: 59.14%,50407.5,#5FaFFF
+Pre Tax Salary: 100%,Taxes: 21.42%,18258.5,#FF5F5F
 Pre Tax Investments: 14.7%,Investments: 49.08%,12532,#5FFF5F
 Company Match: 4.73%,Investments: 49.08%,4030,#5FFF5F
 Investments: 49.08%,HSA: 3.36%,2860,#5FFF5F
@@ -12,14 +12,14 @@ Investments: 49.08%,ROTH 401K: 11.35%,9672,#5FFF5F
 Investments: 49.08%,ROTH IRA: 6.45%,5500,#5FFF5F
 Investments: 49.08%,Savings: 5.75%,4900,#5FFF5F
 Investments: 49.08%,Brokerage: 6.1%,5200,#5FFF5F
-Post Tax Income: 58.02%,Investments: 49.08%,25272,#5FFF5F
-Post Tax Income: 58.02%,Rent: 14.08%,12000,#5FaFFF
-Post Tax Income: 58.02%,Car: 2.93%,2497,#5FaFFF
-Post Tax Income: 58.02%,Food: 7.74%,6600,#5FaFFF
-Post Tax Income: 58.02%,Utilities: 1.55%,1320,#5FaFFF
-Post Tax Income: 58.02%,Entertainment: 0.54%,459,#5FaFFF
-Post Tax Income: 58.02%,Dog: 1.15%,980,#5FaFFF
-Post Tax Income: 58.02%,Other: 0.38%,323.220000000001,#5FaFFF
+Post Tax Income: 59.14%,Investments: 49.08%,25272,#5FFF5F
+Post Tax Income: 59.14%,Rent: 14.08%,12000,#5FaFFF
+Post Tax Income: 59.14%,Car: 2.93%,2497,#5FaFFF
+Post Tax Income: 59.14%,Food: 7.74%,6600,#5FaFFF
+Post Tax Income: 59.14%,Utilities: 1.55%,1320,#5FaFFF
+Post Tax Income: 59.14%,Entertainment: 0.54%,459,#5FaFFF
+Post Tax Income: 59.14%,Dog: 1.15%,980,#5FaFFF
+Post Tax Income: 59.14%,Other: 1.5%,1279.5,#5FaFFF
 Car: 2.93%,Insurance: 1.05%,897,#5FaFFF
 Car: 2.93%,Gas: 1.88%,1600,#5FaFFF
 Food: 7.74%,Restaurants: 4.22%,3600,#5FaFFF
@@ -37,7 +37,7 @@ Entertainment: 0.54%,LastPass: 0.03%,24,#5FaFFF
 Dog: 1.15%,Dog Food: 0.7%,600,#5FaFFF
 Dog: 1.15%,Dog Treat: 0.21%,180,#5FaFFF
 Dog: 1.15%,Hair Cut: 0.23%,200,#5FaFFF
-Taxes: 22.55%,Federal: 10.54%,8983.78,#FF5F5F
-Taxes: 22.55%,Social Security: 5.67%,4836,#FF5F5F
-Taxes: 22.55%,State: 5%,4264,#FF5F5F
-Taxes: 22.55%,Medicare: 1.33%,1131,#FF5F5F
+Taxes: 21.42%,Federal: 9.71%,8274.5,#FF5F5F
+Taxes: 21.42%,Social Security: 5.66%,4823,#FF5F5F
+Taxes: 21.42%,State: 4.73%,4030,#FF5F5F
+Taxes: 21.42%,Medicare: 1.33%,1131,#FF5F5F
