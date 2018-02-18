@@ -14,9 +14,13 @@ function stock_spline(data1,data2){
             },
             xAxis: {
                 type: 'datetime',
-                showLastLabel: false,
-                endOnTick: true,
-                range: 10 * 24 * 3600 * 1000,
+                minTickInterval: 20000,
+                tickPositioner: function (min, max) {
+                  var ticks = this.series[0].processedXData.slice(); // get point positions copy
+                  ticks.info = this.tickPositions.info;              // copy format for labels
+                  return ticks;                                      // return new ticks
+                },
+                range: 14 * 24 * 3600 * 1000,
             },
             yAxis: [{
                 min: 0,

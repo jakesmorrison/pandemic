@@ -75,6 +75,8 @@
 
 
 var summation = 0;
+var column_number;
+
 
 $( document ).ready(function() {
 
@@ -133,6 +135,11 @@ $('.table_button').on('click mouseover', function (e) {
         buy_price_row = $(row).find("td:nth-child(5)")[0]
         sell_price_row = $(row).find("td:nth-child(7)")[0]
         ret = $(row).find("td:nth-child(9)")[0]
+
+        if ($(this).parent().children().index($(this)) != column_number){
+            summation = 0;
+            $('.table_button').css("background","rgba(0, 0, 0, 0) ");
+        }
 
         column_number = $(this).parent().children().index($(this));
 
@@ -200,10 +207,16 @@ $('.table_button').click(function(){
     label = $("#DataTables_Table_0_filter").children()[0];
     span = $(label).children()[0];
     row = $(this).parent()[0];
+    stock = $(row).find("td:nth-child(2)")[0]
     quanity_row = $(row).find("td:nth-child(3)")[0]
     buy_price_row = $(row).find("td:nth-child(5)")[0]
     sell_price_row = $(row).find("td:nth-child(7)")[0]
     ret = $(row).find("td:nth-child(9)")[0]
+
+    if ($(this).parent().children().index($(this)) != column_number){
+        summation = 0;
+        $('.table_button').css("background","rgba(0, 0, 0, 0) ");
+    }
 
     column_number = $(this).parent().children().index($(this));
 
@@ -264,11 +277,6 @@ $('.table_button').click(function(){
         }
     }
 });
-
-
-
-
-
 
 
 </script>
