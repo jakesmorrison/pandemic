@@ -34,28 +34,6 @@
             <div id="stock_stacked" style="margin: 0 auto; margin-top: 5%; width: 100%;"></div>
         </div>
     </div>
-
-
-    <!--<div class="row1">-->
-        <!--<div class="page-break col-lg-4 col-lg-offset-0 col-xs-12">-->
-            <!--<div class="row info_row info_row_1">-->
-                <!--<h4 class="info_header">Porfolio Value</h4>-->
-                <!--<h5 class="info_text">${{money_in_market|safe}}</h5>-->
-            <!--</div>-->
-            <!--<div class="row info_row info_row_2">-->
-                <!--<h4 class="info_header">Gains/Loss %</h4>-->
-                <!--<h5 class="info_text">{{gain_loss_percent|safe}}</h5>-->
-            <!--</div>-->
-            <!--<div class="row info_row info_row_3">-->
-                <!--<h4 class="info_header">Gain/Loss $</h4>-->
-                <!--<h5 class="info_text">{{gain_loss_cash|safe}}</h5>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<div class="page-break col-lg-8 col-lg-offset-0 col-xs-12">-->
-            <!--{{ html_table|safe }}-->
-        <!--</div>-->
-    <!--</div>-->
-
 </div>
 
 
@@ -70,6 +48,8 @@
 <script src=" {% static 'finance/js/jquery-sparkline.js' %}"></script>
 <script src=" {% static 'finance/js/stock_area.js' %}"></script>
 <script src=" {% static 'finance/js/pie_chart.js' %}"></script>
+<script src=" {% static 'finance/js/stock_table.js' %}"></script>
+
 
 <script>
 
@@ -110,173 +90,6 @@ $( document ).ready(function() {
     $("#toggle").css("top", parseInt(y_val)+30);
 });
 
-$('.table').DataTable({
-    sScrollY:      $(document).height()*.20,
-    scrollCollapse: true,
-    scrollX:        true,
-    paging:         false,
-    "order": [[ 0, "decs" ]],
-    language: { search: "<span class='sum_span'>Search</span>" },
-    fixedColumns:   {
-        leftColumns: 2,
-        rightColumns: 0
-    },
-    "search": {
-        "regex": true
-    }
-});
-
-$('.table_button').on('click mouseover', function (e) {
-    if (e.shiftKey === true){
-        label = $("#DataTables_Table_0_filter").children()[0];
-        span = $(label).children()[0];
-        row = $(this).parent()[0];
-        quanity_row = $(row).find("td:nth-child(3)")[0]
-        buy_price_row = $(row).find("td:nth-child(5)")[0]
-        sell_price_row = $(row).find("td:nth-child(7)")[0]
-        ret = $(row).find("td:nth-child(9)")[0]
-
-        if ($(this).parent().children().index($(this)) != column_number){
-            summation = 0;
-            $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-        }
-
-        column_number = $(this).parent().children().index($(this));
-
-        //Quanity
-        if (column_number === 2){
-            if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-                summation = parseInt(summation) + parseInt($(this).text());
-                summation = summation.toFixed(0);
-                $(this).css("background","rgba(185, 219, 255, .5)");
-                $(span).text("Number of Stocks: "+summation);
-            }
-            else{
-                $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-                summation = 0;
-                $(span).text("");
-            }
-        }
-
-        else if (column_number === 4){
-            if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-                summation = parseFloat(summation) + (parseFloat($(this).text())*parseFloat($(quanity_row).text()));
-                summation = summation.toFixed(2);
-                $(this).css("background","rgba(185, 219, 255, .5)");
-                $(span).text("$ "+summation);
-            }
-            else{
-                $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-                summation = 0;
-                $(span).text("");
-            }
-        }
-
-        else if (column_number === 6){
-            if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-                summation = parseFloat(summation) + (parseFloat($(this).text())*parseFloat($(quanity_row).text()));
-                summation = summation.toFixed(2);
-                $(this).css("background","rgba(185, 219, 255, .5)");
-                $(span).text("$ "+summation);
-            }
-            else{
-                $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-                summation = 0;
-                $(span).text("");
-            }
-        }
-
-        else if (column_number === 8){
-            if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-                summation = parseFloat(summation) + (parseFloat($(this).text().replace("$","")));
-                summation = summation.toFixed(2);
-                $(this).css("background","rgba(185, 219, 255, .5)");
-                $(span).text("$ "+summation);
-            }
-            else{
-                $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-                summation = 0;
-                $(span).text("");
-            }
-        }
-
-    }
-});
-
-$('.table_button').click(function(){
-    label = $("#DataTables_Table_0_filter").children()[0];
-    span = $(label).children()[0];
-    row = $(this).parent()[0];
-    stock = $(row).find("td:nth-child(2)")[0]
-    quanity_row = $(row).find("td:nth-child(3)")[0]
-    buy_price_row = $(row).find("td:nth-child(5)")[0]
-    sell_price_row = $(row).find("td:nth-child(7)")[0]
-    ret = $(row).find("td:nth-child(9)")[0]
-
-    if ($(this).parent().children().index($(this)) != column_number){
-        summation = 0;
-        $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-    }
-
-    column_number = $(this).parent().children().index($(this));
-
-    //Quanity
-    if (column_number === 2){
-        if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-            summation = parseInt(summation) + parseInt($(this).text());
-            summation = summation.toFixed(0);
-            $(this).css("background","rgba(185, 219, 255, .5)");
-            $(span).text("Number of Stocks: "+summation);
-        }
-        else{
-            $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-            summation = 0;
-            $(span).text("");
-        }
-    }
-
-    else if (column_number === 4){
-        if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-            summation = parseFloat(summation) + (parseFloat($(this).text())*parseFloat($(quanity_row).text()));
-            summation = summation.toFixed(2);
-            $(this).css("background","rgba(185, 219, 255, .5)");
-            $(span).text("$ "+summation);
-        }
-        else{
-            $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-            summation = 0;
-            $(span).text("");
-        }
-    }
-
-    else if (column_number === 6){
-        if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-            summation = parseFloat(summation) + (parseFloat($(this).text())*parseFloat($(quanity_row).text()));
-            summation = summation.toFixed(2);
-            $(this).css("background","rgba(185, 219, 255, .5)");
-            $(span).text("$ "+summation);
-        }
-        else{
-            $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-            summation = 0;
-            $(span).text("");
-        }
-    }
-
-    else if (column_number === 8){
-        if($(this).css("background").split("none")[0] === "rgba(0, 0, 0, 0) "){
-            summation = parseFloat(summation) + (parseFloat($(this).text().replace("$","")));
-            summation = summation.toFixed(2);
-            $(this).css("background","rgba(185, 219, 255, .5)");
-            $(span).text("$ "+summation);
-        }
-        else{
-            $('.table_button').css("background","rgba(0, 0, 0, 0) ");
-            summation = 0;
-            $(span).text("");
-        }
-    }
-});
 
 
 </script>
