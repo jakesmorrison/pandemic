@@ -97,7 +97,7 @@ class Stock_Tracker_Methods(object):
                             else:
                                 data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
 
-                        else if date >= row["Buy_Date"] and date =< row["Sell_Date"]:
+                        elif date >= row["Buy_Date"] and date =< row["Sell_Date"]:
                             val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
