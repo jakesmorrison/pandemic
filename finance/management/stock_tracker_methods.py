@@ -91,11 +91,20 @@ class Stock_Tracker_Methods(object):
                             todays_cost = todays_cost["Price"].tolist()
                             #val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
                             val = float('{0:.2f}'.format((todays_cost[0] - row["Buy_Price"]) * row["Quanity"]))
-                            portfolio_data.append({"x": epoch, "y": row["Sell_Price"]*row["Quanity"]})
+                            portfolio_data.append({"x": epoch, "y": val})
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
                             else:
                                 data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
+
+                        else if date >= row["Buy_Date"] and date =< row["Sell_Date"]:
+                            val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
+                            if val>0:
+                                data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
+                            else:
+                                data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
+
+
 
         # FOR STACK: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df = pd.DataFrame(data)
