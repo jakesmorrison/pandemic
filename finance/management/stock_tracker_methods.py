@@ -98,7 +98,7 @@ class Stock_Tracker_Methods(object):
 
         # FOR STACK: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df = pd.DataFrame(data)
-        df = df.sort_values(by='x')
+        df = df.sort_values(by=['x', 'name'])
         stack_data_list=[]
         for index, row in df.iterrows():
             stack_data_list.append({"x": row["x"], "y": row["y"], 'color': row["color"], 'name': row["name"], 'id': row["id"]})
