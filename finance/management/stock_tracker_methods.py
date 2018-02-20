@@ -106,6 +106,7 @@ class Stock_Tracker_Methods(object):
 
 
 
+
         # FOR STACK: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df = pd.DataFrame(data)
         df = df.sort_values(by=['x', 'name'])
