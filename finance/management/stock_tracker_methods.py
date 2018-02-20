@@ -86,17 +86,18 @@ class Stock_Tracker_Methods(object):
 
                     # If stock did sell
                     else:
+                        # before sell date
                         if date >= row["Buy_Date"] and date < row["Sell_Date"]:
                             todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
                             todays_cost = todays_cost["Price"].tolist()
                             #val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
                             val = float('{0:.2f}'.format((todays_cost[0] - row["Buy_Price"]) * row["Quanity"]))
-                            portfolio_data.append({"x": epoch, "y": val})
+                            portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
                             else:
                                 data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
-
+                        # on sale date
                         elif date >= row["Buy_Date"] and date <= row["Sell_Date"]:
                             val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
                             if val>0:
