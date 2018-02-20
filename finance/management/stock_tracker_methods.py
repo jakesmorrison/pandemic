@@ -17,6 +17,10 @@ class Stock_Tracker_Methods(object):
         df_stock_price = pd.DataFrame(list(stock_price))
         df_stock_price = df_stock_price.sort_values(by=['Date'])
 
+        market_dates = df_stock_price["Date"].tolist()
+
+
+
         df_my_stock = pd.DataFrame(list(my_stock))
         df_my_stock = df_my_stock["id,Symbol,Quanity,Buy_Date,Buy_Price,Sell_Date,Sell_Price".split(",")]
 
@@ -60,35 +64,37 @@ class Stock_Tracker_Methods(object):
                 ts = (dt_with_tz - datetime.datetime(1970, 1, 1, tzinfo=pytz.utc)).total_seconds()
                 epoch = int(ts*1000)
 
-                # If not sold and current date is greater than buy date.
-                # If stock has not been sold.
-                if row["Sell_Date"] == None:
-                    # If the current date is equal or past the buy date
-                    if date >= row["Buy_Date"]:
-                        # Get data stock price data.
-                        todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
-                        todays_cost = todays_cost["Price"].tolist()
-                        if todays_cost:
-                            # get the value of the stock based on current price.
-                            portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
-                            # get diff between buy price and current price.
-                            val = float('{0:.2f}'.format((todays_cost[0]-row["Buy_Price"])*row["Quanity"]))
+
+                if date in market_dates:
+                    # If not sold and current date is greater than buy date.
+                    # If stock has not been sold.
+                    if row["Sell_Date"] == None:
+                        # If the current date is equal or past the buy date
+                        if date >= row["Buy_Date"]:
+                            # Get data stock price data.
+                            todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
+                            todays_cost = todays_cost["Price"].tolist()
+                            if todays_cost:
+                                # get the value of the stock based on current price.
+                                portfolio_data.append({"x": epoch, "y": todays_cost[0]*row["Quanity"]})
+                                # get diff between buy price and current price.
+                                val = float('{0:.2f}'.format((todays_cost[0]-row["Buy_Price"])*row["Quanity"]))
+                                if val>0:
+                                    data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
+                                else:
+                                    data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
+
+                    # If stock did sell
+                    else:
+                        if date >= row["Buy_Date"] and row["Sell_Date"] >= date:
+                            # todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
+                            # todays_cost = todays_cost["Price"].tolist()
+                            val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
+                            portfolio_data.append({"x": epoch, "y": row["Sell_Price"]*row["Quanity"]})
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
                             else:
                                 data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
-
-                # If stock did sell
-                else:
-                    if date >= row["Buy_Date"] and row["Sell_Date"] >= date:
-                        # todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
-                        # todays_cost = todays_cost["Price"].tolist()
-                        val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
-                        portfolio_data.append({"x": epoch, "y": row["Sell_Price"]*row["Quanity"]})
-                        if val>0:
-                            data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
-                        else:
-                            data.append({"x": epoch, "y": val, 'color': color_neg, "name": row["Symbol"], "id": row["id"]})
 
         # FOR STACK: Creating temp dataframe,sorting and then putting it back into dictionary form.
         df = pd.DataFrame(data)

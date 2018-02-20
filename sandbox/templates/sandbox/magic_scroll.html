@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'sandbox/css/scrollmagic.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<script src=" {% static 'travel/js/jquery-3.2.1.js' %}" ></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" ></script>
+
+<div class="container">
+    <div id="row1" class="row">
+        <h2 id="title_animate" class="title">Robinhood</h2>
+    </div>
+
+    <div id="row2" class="row">
+        <div class="col-lg-6">
+            <p>faasf</p>
+        </div>
+        <div class="col-lg-6">
+            <div id="pin1" class="">
+
+            </div>
+        </div>
+    </div>
+
+    <div id="row3" class="row">
+        <div id="trigger2" class="spacer s0"></div>
+        <div class="col-lg-6">
+            <p>faasf</p>
+        </div>
+        <div class="col-lg-6">
+            <div id="" class="">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+
+$( document ).ready(function() {
+    $('.row').css("height",height);
+    $('.title').css("margin-top",height/2);
+});
+
+var width = $(window).width();
+var height = $(window).height();
+var offset = 200;
+var scroll_position = 0;
+var up_down = "";
+var row2_hit = false;
+var row3_hit = false;
+
+
+
+$( window ).scroll(function() {
+    var current_scroll_position = $(this).scrollTop();
+    if (current_scroll_position > scroll_position){up_down = "down"}
+    else if(current_scroll_position < scroll_position){up_down = "up"}
+    else{up_down = ""}
+    scroll_position = current_scroll_position;
+
+
+    if (up_down != ""){
+
+        if(current_scroll_position >= 0 && current_scroll_position < height/2){
+            $(".title").css("opacity",1-(current_scroll_position/(height/2)));
+            row2_hit=false;
+            row3_hit=false;
+        }
+        if(up_down === "down" && row2_hit == false && current_scroll_position > 1*height/2){
+            row2_hit = true;
+            $('html, body').animate({
+                scrollTop: 1*height
+            }, 200);
+
+        }
+
+        if(up_down === "down" && row3_hit == false && current_scroll_position > 1*height+offset){
+            row3_hit = true;
+            $('html, body').animate({
+                scrollTop: 2*height
+            }, 500);
+
+        }
+
+
+    }
+
+});
+
+</script>
+
+</body>
+</html>

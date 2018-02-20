@@ -34,3 +34,7 @@ def get_data(request):
 def gary_spelling(request):
     context={}
     return(render(request, 'sandbox/gary_spelling.html',context))
+
+def career_day(request):
+    context={}
+    return(render(request, 'sandbox/magic_scroll.html',context))

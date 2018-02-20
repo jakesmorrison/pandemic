@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Stock Tracker</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/style.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/jquery.dataTables.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/fixedColumns.dataTables.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/stock.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+
+    <div id="row0" class="row">
+        <h2 id="title_animate" class="title">Robinhood</h2>
+    </div>
+
+    <div id="row1" class="row">
+        <div class="col-lg-4 col-lg-offset-0 col-xs-12">
+            {{ html_table|safe }}
+        </div>
+        <div class="col-lg-8 col-lg-offset-0 col-xs-12">
+            <!--<button id="toggle" type="button" class="btn btn-default rotate">Dollar Change ($)</button>-->
+            <!--<div class="highcharts_overlay">-->
+                <!--<h3><span>Portfolio:</span> <span>${{money_in_market|safe}}</span></h3>-->
+                <!--<h4><span>Gain/Loss:</span> <span class="gain_loss_cash">${{gain_loss_cash|safe}}</span></h4>-->
+                <!--<h4><span>Gain/Loss:</span> <span class="gain_loss_percent">{{gain_loss_percent|safe}}%</span></h4>-->
+            <!--</div>-->
+            <div id="stock_stacked" style="position: absolute; margin: 0 auto; margin-top: 5%; width: 100%;"></div>
+        </div>
+    </div>
+
+    <div id="row2" class="row">
+        <div class="col-lg-4 col-lg-offset-0 col-xs-12">
+            <div id="pie_chart" style="margin: 0 auto; margin-top: 5%;"></div>
+        </div>
+        <div class="col-lg-8 col-lg-offset-0 col-xs-12">
+        </div>
+    </div>
+
+
+</div>
+
+
+{% load staticfiles %}
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/highstock.js' %}" rel="stylesheet"></script>
+<!--<script src=" {% static 'finance/js/highcharts.js' %}" rel="stylesheet"></script>-->
+<!--<script src=" {% static 'finance/js/stock_stack.js' %}"></script>-->
+<script src=" {% static 'finance/js/jquery-sparkline.js' %}"></script>
+<script src=" {% static 'finance/js/stock_area.js' %}"></script>
+<script src=" {% static 'finance/js/pie_chart.js' %}"></script>
+<script src=" {% static 'finance/js/stock_table.js' %}"></script>
+
+
+<script>
+
+
+var summation = 0;
+var column_number;
+
+
+$( document ).ready(function() {
+    $('.row').css("height",height);
+    $('.title').css("margin-top",height/2);
+
+
+    var stack_data = {{data2|safe}};
+
+    var total_height = $(document).height();
+    $("#pie_chart").css("height",total_height*.30);
+    $("#stock_stacked").css("height",(total_height/3)*.9);
+
+    stock_spline({{data1|safe}},stack_data);
+    pie_chart({{pie_series|safe}});
+
+    if({{gain_loss_cash|safe}} >= 0){
+        $(".gain_loss_cash").css("color","#007800");
+    }
+    else{
+        $(".gain_loss_cash").css("color","#b30000");
+    }
+    if({{gain_loss_percent|safe}} >= 0){
+        $(".gain_loss_percent").css("color","#007800");
+    }
+    else{
+        $(".gain_loss_percent").css("color","#b30000");
+    }
+
+    second_y_axis = $("text:contains('zzz')" )[0];
+    x_val = (second_y_axis).getAttribute( 'x' );
+    y_val = (second_y_axis).getAttribute( 'y' );
+
+    $("#toggle").css("left", parseInt(x_val)-35);
+    $("#toggle").css("top", parseInt(y_val)+30);
+});
+
+
+var width = $(window).width();
+var height = $(window).height();
+var offset = 200;
+var scroll_position = 0;
+var up_down = "";
+var row2_hit = false;
+var row3_hit = false;
+
+
+$( window ).scroll(function() {
+    var current_scroll_position = $(this).scrollTop();
+    if (current_scroll_position > scroll_position){up_down = "down"}
+    else if(current_scroll_position < scroll_position){up_down = "up"}
+    else{up_down = ""}
+    scroll_position = current_scroll_position;
+
+
+    if (up_down != ""){
+
+        if(current_scroll_position >= 0 && current_scroll_position < height/2){
+            $(".title").css("opacity",1-(current_scroll_position/(height/2)));
+            row2_hit=false;
+            row3_hit=false;
+        }
+        if(up_down === "down" && row2_hit == false && current_scroll_position > 1*height/2){
+            row2_hit = true;
+            $('html, body').animate({
+                scrollTop: 1*height
+            }, 200);
+
+        }
+
+        if(up_down === "down" && row3_hit == false && current_scroll_position > 1*height+offset){
+            row3_hit = true;
+            $('html, body').animate({
+                scrollTop: 2*height
+            }, 500);
+
+        }
+
+        if (scroll_position>height){
+            $("#stock_stacked").css({'top': scroll_position-height});
+        }
+    }
+
+});
+
+
+
+</script>
+
+</body>
+</html>

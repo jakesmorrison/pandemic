@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Cabin|Inconsolata|Nunito|Nunito+Sans|Pacifico|Quicksand|Rubik|VT323" rel="stylesheet">
+    <link href=" {% static 'sandbox/css/career_day.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div style="width: 100%;" class="container">
+    <div style="background-color: #ff5f5f" class="row panels" data-section-name="intro">
+        <div class="col-lg-5 col-lg-offset-1 intro_heading">
+            <h1 class="heading font">Computer Science<h1>
+            <h1 class="heading font hide">Programming<h1>
+            <h1 class="heading font hide">Coding<h1>
+        </div>
+        <div class="col-lg-6 col-lg-offset-0 list_heading">
+            <ul>
+              <li id="list_1" class="list font">Program/Code</li>
+              <li id="list_2" class="list font">Learn Syntax</li>
+              <li id="list_3" class="list font">Application and Consequences of Programming</li>
+            </ul>
+        </div>
+    </div>
+    <div style="background-color: white" class="row panels" data-section-name="one">
+    </div>
+</div>
+
+
+<script src=" {% static 'travel/js/jquery-3.2.1.js' %}" ></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" ></script>
+<script src=" {% static 'softball/js/highcharts.js' %}" ></script>
+<script src=" {% static 'travel/js/jquery.scrollify.min.js' %}" ></script>
+
+
+<script>
+$( document ).ready(function() {
+    var width = $(window).width();
+    var height = $(window).height();
+
+    $('.my_row').css("width",width);
+    $('.my_row').css("height",height);
+
+    var intro_heading = (height - parseInt($('.intro_heading').css("height").replace("px","")))/2;
+    $('.intro_heading').css("margin-top", intro_heading)
+
+    var list_heading = (height - parseInt($('.list_heading').css("height").replace("px","")))/2;
+    $('.list_heading').css("margin-top", list_heading)
+
+
+
+    $(function() {
+        $.scrollify({
+            section : ".panels",
+            sectionName : "section-name",
+            interstitialSection : "test",
+            easing: "easeOutExpo",
+            scrollSpeed: 1100,
+            offset : 0,
+            scrollbars: true,
+            standardScrollElements: "",
+            setHeights: true,
+            overflowScroll: true,
+            updateHash: true,
+            touchScroll:true,
+            before:function(i, panels) {
+                var ref = panels[i].attr("data-section-name");
+
+                if(ref === "intro"){
+                    console.log(ref)
+                }
+
+
+            },
+            after:function(i, panels) {
+                var ref = panels[i].attr("data-section-name");
+
+            },
+            afterResize:function() {},
+            afterRender:function() {}
+        });
+    });
+
+
+    start();
+
+});
+
+
+function start(){
+    $('.list_heading').addClass("hide")
+    setTimeout(function() {
+        $('.list_heading').removeClass("hide")
+
+            setTimeout(function() {
+                $('#list_1').addClass("strike");
+                setTimeout(function() {
+                    $('#list_2').addClass("strike")
+                    setTimeout(function() {
+                        flash();
+                    },1000);
+                },1000);
+            },1000);
+
+    },3000);
+}
+
+function flash() {
+    $('#list_3').addClass("bold")
+    setTimeout(function() {
+        $('#list_3').removeClass("bold");
+
+        setTimeout(function() {
+            $('#list_3').addClass("bold");
+            setTimeout(function() {
+                $('#list_3').removeClass("bold");
+                    setTimeout(function() {
+                        $('#list_3').addClass("bold");
+                    }, 500);
+            }, 500);
+        }, 500);
+
+    }, 500);
+}
+</script>
+
+</body>
+</html>
