@@ -90,7 +90,7 @@ class Stock_Tracker_Methods(object):
                             # todays_cost = df_stock_price[(df_stock_price["Symbol"] == row["Symbol"]) & (df_stock_price["Date"] == date)]
                             # todays_cost = todays_cost["Price"].tolist()
                             val = float('{0:.2f}'.format((row["Sell_Price"]-row["Buy_Price"])*row["Quanity"]))
-                            portfolio_data.append({"x": epoch, "y": row["Sell_Price"]*row["Quanity"]})
+                            #portfolio_data.append({"x": epoch, "y": row["Sell_Price"]*row["Quanity"]})
                             if val>0:
                                 data.append({"x": epoch, "y": val, 'color': color_pos, "name": row["Symbol"], "id": row["id"]})
                             else:
