@@ -7,19 +7,19 @@
     {% load staticfiles %}
     <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Cabin|Inconsolata|Nunito|Nunito+Sans|Pacifico|Quicksand|Rubik|VT323" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href=" {% static 'sandbox/css/career_day.css' %}" rel="stylesheet">
+
 
 </head>
 <body>
 
 <div style="width: 100%;" class="container">
     <div style="background-color: #ff5f5f" class="row panels" data-section-name="intro">
-        <div class="col-lg-5 col-lg-offset-1 intro_heading">
-            <h1 class="heading font">Computer Science<h1>
-            <h1 class="heading font hide">Programming<h1>
-            <h1 class="heading font hide">Coding<h1>
+        <div class="col-lg-6 col-lg-offset-0 intro_heading">
+            <h1 class="heading font"><i class="fa fa-angle-left left-arrow" aria-hidden="true" type="button" id="arrow_intro"></i>Computer Science<h1>
         </div>
-        <div class="col-lg-6 col-lg-offset-0 list_heading">
+        <div class="col-lg-6 col-lg-offset-0 list_heading hide">
             <ul>
               <li id="list_1" class="list font">Program/Code</li>
               <li id="list_2" class="list font">Learn Syntax</li>
@@ -86,47 +86,29 @@ $( document ).ready(function() {
         });
     });
 
-
-    start();
-
 });
 
+$("#arrow_intro").click(function() {
+  console.log("test");
+  $('.heading').toggleClass('heading-active');
+});
 
 function start(){
     $('.list_heading').addClass("hide")
     setTimeout(function() {
         $('.list_heading').removeClass("hide")
-
             setTimeout(function() {
                 $('#list_1').addClass("strike");
                 setTimeout(function() {
                     $('#list_2').addClass("strike")
                     setTimeout(function() {
-                        flash();
+                        $('#list_3').addClass("bold")
                     },1000);
                 },1000);
             },1000);
-
     },3000);
 }
 
-function flash() {
-    $('#list_3').addClass("bold")
-    setTimeout(function() {
-        $('#list_3').removeClass("bold");
-
-        setTimeout(function() {
-            $('#list_3').addClass("bold");
-            setTimeout(function() {
-                $('#list_3').removeClass("bold");
-                    setTimeout(function() {
-                        $('#list_3').addClass("bold");
-                    }, 500);
-            }, 500);
-        }, 500);
-
-    }, 500);
-}
 </script>
 
 </body>

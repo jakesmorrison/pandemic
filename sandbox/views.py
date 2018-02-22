@@ -37,4 +37,4 @@ def gary_spelling(request):
 
 def career_day(request):
     context={}
-    return(render(request, 'sandbox/magic_scroll.html',context))
+    return(render(request, 'sandbox/career_day.html',context))
