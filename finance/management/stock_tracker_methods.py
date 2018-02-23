@@ -5,6 +5,10 @@ import time
 import datetime
 import pytz
 
+total_amount_deposited = 2959
+total_from_free_stock = 75.93
+total_for_trading = total_amount_deposited + total_from_free_stock
+
 class Stock_Tracker_Methods(object):
     def __init__(self):
         pass
@@ -164,15 +168,8 @@ class Stock_Tracker_Methods(object):
         df_my_stock["% Gain/Loss"] = total_gain_list
         df_my_stock["$ Gain/Loss"] = (df_my_stock["Price"]-df_my_stock["Buy_Price"])*df_my_stock["Quanity"]
 
-        test = pd.DataFrame()
-        test["buying"] = (df_my_stock["Buy_Price"]*df_my_stock["Quanity"])
-        test["selling"] = (df_my_stock["Price"]*df_my_stock["Quanity"])
-
-        buying = test["buying"].sum()
-        selling = test["selling"].sum()
-
-        gain_loss_percent = ((selling-buying)/buying)*100
         gain_loss_cash = df_my_stock["$ Gain/Loss"].sum()
+        gain_loss_percent = (gain_loss_cash/total_for_trading)*100
 
         gain_loss_percent = "{:0.2f}".format(gain_loss_percent)
         gain_loss_cash =  "{:0.2f}".format(gain_loss_cash)
