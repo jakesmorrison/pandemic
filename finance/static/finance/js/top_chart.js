@@ -106,7 +106,7 @@ function create_top_chart(data,year,month,day,lastday){
         data : [{
             x : Date.UTC(2018, 07, 9),
             title : 'Cancun',
-            text : 'Bachelor Party with Nick and Dad.'
+            text : 'Bachelor Party.'
         }],
         onSeries : 'dataseries',
         shape : 'squarepin',
@@ -115,7 +115,7 @@ function create_top_chart(data,year,month,day,lastday){
         data : [{
             x : Date.UTC(2018, 10, 22),
             title : 'Hawaii',
-            text : 'Thanksgiving with Mother.'
+            text : 'Thanksgiving.'
         }],
         onSeries : 'dataseries',
         shape : 'squarepin',
