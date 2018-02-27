@@ -16,10 +16,10 @@
 
 <div style="width: 100%;" class="container">
     <div style="background-color: #ff5f5f" class="row panels" data-section-name="intro">
-        <div class="col-lg-6 col-lg-offset-0 intro_heading">
+        <div class="col-lg-6 col-lg-offset-0 intro_heading intro_left">
             <h1 class="heading font"><i class="fa fa-angle-left left-arrow" aria-hidden="true" type="button" id="arrow_intro"></i>Computer Science<h1>
         </div>
-        <div class="col-lg-6 col-lg-offset-0 list_heading hide">
+        <div class="col-lg-6 col-lg-offset-0 list_heading intro_right hide">
             <ul>
               <li id="list_1" class="list font">Program/Code</li>
               <li id="list_2" class="list font">Learn Syntax</li>
@@ -86,11 +86,16 @@ $( document ).ready(function() {
         });
     });
 
+
 });
 
 $("#arrow_intro").click(function() {
   console.log("test");
   $('.heading').toggleClass('heading-active');
+
+  $('.intro_left').addClass('col-lg-4').removeClass('col-lg-6');
+  $('.intro_right').addClass('col-lg-8').removeClass('col-lg-6');
+
 });
 
 function start(){
