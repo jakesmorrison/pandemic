@@ -245,4 +245,3 @@ def all_book_vector_chart(request):
         "vector_scatter": vector_scatter
     }
     return JsonResponse(json.loads(json.dumps(context)))
-
