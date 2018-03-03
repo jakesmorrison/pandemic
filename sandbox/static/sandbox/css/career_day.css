@@ -3,57 +3,11 @@
     letter-spacing: 2px;
 }
 
-.hide{
-    opacity: 1;
-    display: none;
+.single-row{
+    background: #5fff5f;
 }
 
-.intro_heading{
-}
-
-.heading{
-    margin: 0;
-    padding: 0;
-    font-size: 60px;
-    text-align: left;
-    width: 100%;
-    transition: width 2s, font-size 2s ease;
-}
-
-.heading-active {
-    width: 70%;
-    font-size: 40px;
-}
-
-
-.list{
-    font-size: 35px;
-}
-
-.centered{
+.picture{
+    height: 100%;
     text-align: center;
 }
-
-.strike{
-    text-decoration: line-through;
-}
-
-.bold{
-    font-weight: bold;
-    font-size: 40px;
-}
-
-.left-arrow{
-    cursor: pointer;
-    font-size: 30px;
-    margin-right: 10px;
-}
-
-.left-arrow:hover {color: black}
-
-.left-arrow:active {
-  color: black;
-  transform: translateY(4px);
-}
-
-

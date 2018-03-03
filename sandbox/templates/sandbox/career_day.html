@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Career Day!</title>
 
     {% load staticfiles %}
     <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -15,27 +15,43 @@
 <body>
 
 <div style="width: 100%;" class="container">
-    <div style="background-color: #ff5f5f" class="row panels" data-section-name="intro">
-        <div class="col-lg-6 col-lg-offset-0 intro_heading intro_left">
-            <h1 class="heading font"><i class="fa fa-angle-left left-arrow" aria-hidden="true" type="button" id="arrow_intro"></i>Computer Science<h1>
+    <div class="row single-row">
+        <div class="col-lg-1 button-col" style="background: white;">
+
+            <div class="row picture_row_1" ></div>
+            <div class="row picture_row_2"></div>
+            <div class="row picture_row_3" ></div>
+
+
         </div>
-        <div class="col-lg-6 col-lg-offset-0 list_heading intro_right hide">
-            <ul>
-              <li id="list_1" class="list font">Program/Code</li>
-              <li id="list_2" class="list font">Learn Syntax</li>
-              <li id="list_3" class="list font">Application and Consequences of Programming</li>
-            </ul>
+        <div class="col-lg-4 picture-col" style="background: black;">
+            <div class="row picture_row_1" style="background: blue;">
+
+            </div>
+            <div class="row picture_row_2">
+                <!--<img class="picture" src="{% static 'sandbox/images/mal.jpg' %}">-->
+                <div id="container"></div>
+            </div>
+            <div class="row picture_row_3" style="background: red;">
+
+            </div>
         </div>
+
+        <div class="col-lg-7 data-col" ">
+
+        </div>
+
     </div>
-    <div style="background-color: white" class="row panels" data-section-name="one">
-    </div>
+
 </div>
 
 
 <script src=" {% static 'travel/js/jquery-3.2.1.js' %}" ></script>
 <script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" ></script>
-<script src=" {% static 'softball/js/highcharts.js' %}" ></script>
-<script src=" {% static 'travel/js/jquery.scrollify.min.js' %}" ></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/modules/boost.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src=" {% static 'sandbox/js/picture_scatter.js' %}" ></script>
 
 
 <script>
@@ -43,76 +59,19 @@ $( document ).ready(function() {
     var width = $(window).width();
     var height = $(window).height();
 
-    $('.my_row').css("width",width);
-    $('.my_row').css("height",height);
+    $('.single-row').css("width",width);
+    $('.single-row').css("height",height);
+    $('.button-col').css("height",height);
+    $('.picture-col').css("height",height);
+    $('.data-col').css("height",height);
 
-    var intro_heading = (height - parseInt($('.intro_heading').css("height").replace("px","")))/2;
-    $('.intro_heading').css("margin-top", intro_heading)
+    $('.picture_row_1').css("height",height*.1);
+    $('.picture_row_2').css("height",height*.6);
+    $('.picture_row_3').css("height",height*.3);
 
-    var list_heading = (height - parseInt($('.list_heading').css("height").replace("px","")))/2;
-    $('.list_heading').css("margin-top", list_heading)
-
-
-
-    $(function() {
-        $.scrollify({
-            section : ".panels",
-            sectionName : "section-name",
-            interstitialSection : "test",
-            easing: "easeOutExpo",
-            scrollSpeed: 1100,
-            offset : 0,
-            scrollbars: true,
-            standardScrollElements: "",
-            setHeights: true,
-            overflowScroll: true,
-            updateHash: true,
-            touchScroll:true,
-            before:function(i, panels) {
-                var ref = panels[i].attr("data-section-name");
-
-                if(ref === "intro"){
-                    console.log(ref)
-                }
-
-
-            },
-            after:function(i, panels) {
-                var ref = panels[i].attr("data-section-name");
-
-            },
-            afterResize:function() {},
-            afterRender:function() {}
-        });
-    });
-
+    plot_picture();
 
 });
-
-$("#arrow_intro").click(function() {
-  console.log("test");
-  $('.heading').toggleClass('heading-active');
-
-  $('.intro_left').addClass('col-lg-4').removeClass('col-lg-6');
-  $('.intro_right').addClass('col-lg-8').removeClass('col-lg-6');
-
-});
-
-function start(){
-    $('.list_heading').addClass("hide")
-    setTimeout(function() {
-        $('.list_heading').removeClass("hide")
-            setTimeout(function() {
-                $('#list_1').addClass("strike");
-                setTimeout(function() {
-                    $('#list_2').addClass("strike")
-                    setTimeout(function() {
-                        $('#list_3').addClass("bold")
-                    },1000);
-                },1000);
-            },1000);
-    },3000);
-}
 
 </script>
 
