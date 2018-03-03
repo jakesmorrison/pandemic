@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^creditcard/', include('creditcard.urls')),
     url(r'^moviepass/', include('moviepass.urls')),
     url(r'^sandbox/', include('sandbox.urls')),
-    url(r'^oscars/', include('oscar.urls')),
+    url(r'^oscar/', include('oscar.urls')),
     url(r'', include('homepage.urls')),
 
 ]
