@@ -18,8 +18,10 @@ class Winners(models.Model):
         return "{} {} {} {}".format(self.Year,self.Cat,self.Name,self.Weight)
 
 class Users(models.Model):
+    Year = models.IntegerField(default=0)
     User = models.CharField(max_length=1000)
-    Selections = PickledObjectField(default=[])
+    Cat = models.CharField(max_length=1000,default="")
+    Won = models.CharField(max_length=1000,default="")
+    Favorite = models.CharField(max_length=1000)
     def __str__(self):
-        return "{} {}".format(self.User,self.Selections)
-
+        return "{} {} {} {} {}".format(self.User,self.Cat,self.Won,self.Year,self.Favorite)

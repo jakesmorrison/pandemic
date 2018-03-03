@@ -16,8 +16,8 @@ admin.site.register(
 
 admin.site.register(
     Users,
-    list_display="User,Selections".split(","),
-    list_display_links="User,Selections".split(","),
+    list_display="Year,User,Cat,Won,Favorite".split(","),
+    list_display_links="Year,User,Cat,Won,Favorite".split(","),
 )
 
 

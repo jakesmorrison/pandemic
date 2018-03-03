@@ -28,13 +28,7 @@
                 </div>
             </div>
 
-            <!--<div class="row row2 scrollrow" style="background-color: red;">-->
-                <!--<div class="col-xs-12">-->
-                <!--<h2>List the order that you think </h2>-->
-                <!--</div>-->
-            <!--</div>-->
-
-            <div class="row row3 scrollrow" style="background-color: black;">
+            <div class="row row2 scrollrow" style="background-color: black;">
                 <div class="col-xs-12">
                     <div class="row cat_row">
                         <h1 class="cat"><h1>
@@ -70,6 +64,8 @@
 var current_page = 0;
 var oscar_options = {{oscar_options|safe}}
 var selections = {}
+var data_loaded = false;
+var prev_data;
 
 
 $( document ).ready(function() {
@@ -99,12 +95,22 @@ $( document ).ready(function() {
 
     $.scrollify({
         section : ".scrollrow",
+        before:function() {
+            <!--if ("row row2 scrollrow" === $.scrollify.current().attr('class') ){-->
+                <!--if (data_loaded == false){-->
+                    <!--data_loaded == true;-->
+                    <!--prev_data = ["test","test"]-->
+                <!--}-->
+
+            <!--}-->
+        },
+        after:function() {},
+
     });
 
     $.scrollify.move("#1");
 
 });
-
 
 
 $('input:text').click(
@@ -125,7 +131,7 @@ function create_table(somelist){
 
 $( ".next" ).click(function() {
   // get current radio data
-  selections[$(".cat").text()] = [$('input[name=winner]:checked').val(), $('input[name=favorite]:checked').val()]
+  selections[ $(".cat").text() ] = $('input[name=winner]:checked').val()+"zzz"+$('input[name=favorite]:checked').val()
 
   //clear html
   $(".table_row").empty();
@@ -165,7 +171,7 @@ $( ".next" ).click(function() {
 
 $( ".prev" ).click(function() {
   // get current radio data
-  selections[$(".cat").text()] = [$('input[name=winner]:checked').val(), $('input[name=favorite]:checked').val()]
+  selections[ $(".cat").text() ] = $('input[name=winner]:checked').val()+"zzz"+$('input[name=favorite]:checked').val()
 
   //clear html
   $(".table_row").empty();
@@ -200,7 +206,20 @@ $( ".prev" ).click(function() {
     $("input[name=favorite][value= '"+ Object.values(selections)[current_page][1] + "']").prop('checked', true);
   }
 
+});
 
+$( ".submit" ).click(function() {
+  selections[ $(".cat").text() ] = $('input[name=winner]:checked').val()+"zzz"+$('input[name=favorite]:checked').val()
+  selections["name"] = $(".input_name").val()
+
+    url_base = "{% url 'oscar:add_to_db' %}";
+    my_url = url_base + "?" + $.param( selections );
+    $.ajax({
+        url: my_url,
+        type: 'GET',
+        success: function (msg) {
+        }
+    });
 });
 
 
