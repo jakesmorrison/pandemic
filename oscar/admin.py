@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import OscarCategories, Winners, Users
+from .models import OscarCategories
 
 # Register your models here.
 admin.site.register(
