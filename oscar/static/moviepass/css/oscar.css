@@ -1,0 +1,64 @@
+.cat{
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    color: white;
+}
+
+.title{
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    color: white;
+}
+
+.input_name{
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    box-shadow: 0 0 3px white;
+    margin: 0 auto;
+    width: 100%;
+    background: black;
+    color: white;
+    border-radius: 3px;
+}
+
+.centered{
+    text-align: center;
+}
+
+.next{
+    width: 80%;
+    font-size: 25px;
+    color: black;
+    background: white;
+    font-family: 'Lobster', cursive;
+}
+
+.prev{
+    width: 80%;
+    font-size: 25px;
+    color: black;
+    background: white;
+    font-family: 'Lobster', cursive;
+}
+
+.submit{
+    width: 80%;
+    font-size: 25px;
+    color: black;
+    background: white;
+    font-family: 'Lobster', cursive;
+}
+
+
+table, th, td {
+    color: white;
+    text-align: center;
+    padding: 2%;
+    font-family: 'Lobster', cursive;
+}
+
+.table_heading{
+    font-family: 'Lobster', cursive;
+    font-size: 20px;
+    border-bottom: 5px solid white;
+}

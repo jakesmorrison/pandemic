@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Oscar Submission</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'oscar/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lobster" rel="stylesheet">
+    <link href=" {% static 'oscar/css/oscar.css' %}" rel="stylesheet">
+
+
+</head>
+<body style="background-color: black;">
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+
+            <div class="row row1 scrollrow" style="background-color: black;">
+                <div class="col-xs-12">
+                    <h1 class="title">Oscar Picks!<h1>
+                    <input class="input_name" type="text" name="name" value="Enter Your Name"><br>
+                </div>
+            </div>
+
+            <!--<div class="row row2 scrollrow" style="background-color: red;">-->
+                <!--<div class="col-xs-12">-->
+                <!--<h2>List the order that you think </h2>-->
+                <!--</div>-->
+            <!--</div>-->
+
+            <div class="row row3 scrollrow" style="background-color: black;">
+                <div class="col-xs-12">
+                    <div class="row cat_row">
+                        <h1 class="cat"><h1>
+                    </div>
+                    <div class="row table_row">
+
+                    </div>
+                    <div class="row button_row">
+                        <div class="col-xs-6 centered">
+                               <button type="button" class="btn btn-default prev centered">Previous</button>
+                        </div>
+                        <div class="col-xs-6 centered">
+                            <button type="button" class="btn btn-default next centered">Next</button>
+                            <button type="button" class="btn btn-default submit centered">Submit</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script src=" {% static 'travel/js/jquery-3.2.1.js' %}" ></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'travel/js/jquery.scrollify.min.js' %}" ></script>
+
+
+
+<script>
+
+var current_page = 0;
+var oscar_options = {{oscar_options|safe}}
+var selections = {}
+
+
+$( document ).ready(function() {
+    $('.submit').hide();
+
+    var height = $(window).height();
+    $(".scrollrow").css("height", height);
+
+    var title_height = $(".title").height();
+    var input_name_height = $(".input_name").height();
+    $(".title").css("margin-top", height/2 - (title_height+input_name_height)/2);
+
+
+    $(".table_row").css("height", height*.80);
+    $(".button_row").css("height", height*.10);
+    $(".cat_row").css("height", height*.10);
+
+
+    $(".cat").text(Object.keys(oscar_options)[current_page])
+    table_data = create_table(Object.values(oscar_options)[current_page])
+    $(".table_row").html(table_data);
+
+    if (current_page === 0){
+        $('.prev').hide();
+    }
+
+
+    $.scrollify({
+        section : ".scrollrow",
+    });
+
+    $.scrollify.move("#1");
+
+});
+
+
+
+$('input:text').click(
+    function(){
+        $(this).val('');
+    });
+
+
+function create_table(somelist){
+    start = '<table style="width:100%"><tr class="table_heading"><th>Selection</th><th>Winner</th><th>Favorite</th></tr>'
+    middle = ''
+    end = '</table>'
+    for(x=0; x<somelist.length; x++){
+        middle = middle + '<tr><th>'+somelist[x]+'</th><th> <input type="radio" name="winner" value="'+somelist[x]+'"></th><th><input type="radio" name="favorite" value="'+somelist[x]+'"></th></tr>';
+    }
+    return start+middle+end;
+}
+
+$( ".next" ).click(function() {
+  // get current radio data
+  selections[$(".cat").text()] = [$('input[name=winner]:checked').val(), $('input[name=favorite]:checked').val()]
+
+  //clear html
+  $(".table_row").empty();
+
+  // increment counter
+  current_page = current_page + 1
+
+  //get new data
+  $(".cat").text(Object.keys(oscar_options)[current_page])
+  table_data = create_table(Object.values(oscar_options)[current_page])
+  $(".table_row").html(table_data);
+
+
+  if(Object.keys(oscar_options).length === current_page+1){
+        $('.next').hide();
+        $('.submit').show()
+  }
+  else{
+    $('.next').show();
+    $('.submit').hide()
+  }
+
+  if (current_page === 0){
+    $('.prev').hide();
+  }
+  else{
+    $('.prev').show();
+  }
+
+    if ((Object.keys(oscar_options)[current_page] in selections)) {
+        $("input[name=winner][value= '"+ Object.values(selections)[current_page][0] + "']").prop('checked', true);
+        $("input[name=favorite][value= '"+ Object.values(selections)[current_page][1] + "']").prop('checked', true);
+    }
+
+
+});
+
+$( ".prev" ).click(function() {
+  // get current radio data
+  selections[$(".cat").text()] = [$('input[name=winner]:checked').val(), $('input[name=favorite]:checked').val()]
+
+  //clear html
+  $(".table_row").empty();
+
+  // increment counter
+  current_page = current_page + - 1
+
+  //get new data
+  $(".cat").text(Object.keys(oscar_options)[current_page])
+  table_data = create_table(Object.values(oscar_options)[current_page])
+  $(".table_row").html(table_data);
+
+
+  if(Object.keys(oscar_options).length === current_page+1){
+        $('.next').hide();
+        $('.submit').show()
+  }
+  else{
+    $('.next').show();
+    $('.submit').hide()
+  }
+
+  if (current_page === 0){
+    $('.prev').hide();
+  }
+  else{
+    $('.prev').show();
+  }
+
+  if ((Object.keys(oscar_options)[current_page] in selections)) {
+    $("input[name=winner][value= '"+ Object.values(selections)[current_page][0] + "']").prop('checked', true);
+    $("input[name=favorite][value= '"+ Object.values(selections)[current_page][1] + "']").prop('checked', true);
+  }
+
+
+});
+
+
+</script>
+
+</body>
+</html>

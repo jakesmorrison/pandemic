@@ -15,11 +15,3 @@ class Movie(models.Model):
     def __str__(self):
         return "{} {} {} {} {} {} {} {}".format(self.Date,self.Start,self.Theater,self.Movie,self.Cost,
                                                 self.RottenTomatoes,self.Metacritic, self.Jake)
-
-
-class OscarCategories(models.Model):
-    Year = models.IntegerField()
-    Cat = models.CharField(max_length=1000)
-    Name = models.CharField(max_length=1000)
-    def __str__(self):
-        return "{} {} {}".format(self.Year,self.Cat,self.Name)

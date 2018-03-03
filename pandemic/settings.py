@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'creditcard.apps.CreditcardConfig',
     'moviepass.apps.MoviepassConfig',
     'sandbox.apps.SandboxConfig',
+    'oscar.apps.OscarConfig',
     'rest_framework',
 ]
 
