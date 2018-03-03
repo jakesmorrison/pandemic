@@ -6,7 +6,7 @@ from collections import OrderedDict
 
 # Create your views here.
 def moviepass(request):
-    # df = pd.read_csv('moviepass/static/moviepass/csv/moviepass.csv')
+    # df = pd.read_csv('oscar/static/oscar/csv/oscar.csv')
 
     df = pd.DataFrame.from_records(Movie.objects.all().values())
 
@@ -19,5 +19,5 @@ def moviepass(request):
     context={
         'series' : series,
     }
-    return render(request,"moviepass/moviepass.html",context)
+    return render(request,"oscar/oscar.html",context)
 

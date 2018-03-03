@@ -18,4 +18,4 @@ def oscar(request):
     context = {
         'oscar_options': my_dict
     }
-    return render(request, "moviepass/oscar.html", context)
+    return render(request, "oscar/oscar.html", context)

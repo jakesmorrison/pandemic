@@ -54,7 +54,7 @@ INSTALLED_APPS = [
     'customdesign.apps.CustomdesignConfig',
     'workout.apps.WorkoutConfig',
     'creditcard.apps.CreditcardConfig',
-    'moviepass.apps.MoviepassConfig',
+    'oscar.apps.MoviepassConfig',
     'sandbox.apps.SandboxConfig',
     'oscar.apps.OscarConfig',
     'rest_framework',
