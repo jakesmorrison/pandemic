@@ -2,7 +2,6 @@ from django.shortcuts import render
 import pandas as pd
 from .management import methods
 from .models import Movie
-from collections import OrderedDict
 
 # Create your views here.
 def moviepass(request):
@@ -19,5 +18,5 @@ def moviepass(request):
     context={
         'series' : series,
     }
-    return render(request,"oscar/oscar.html",context)
+    return render(request,"moviepass/moviepass.html",context)
 
