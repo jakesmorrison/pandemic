@@ -118,7 +118,7 @@ function create_table(somelist){
     middle = ''
     end = '</table>'
     for(x=0; x<somelist.length; x++){
-        middle = middle + '<tr><th>'+somelist[x]+'</th><th> <input type="radio" name="winner" value="'+somelist[x]+'"></th><th><input type="radio" name="favorite" value="'+somelist[x]+'"></th></tr>';
+        middle = middle + '<tr class="table_content"><th>'+somelist[x]+'</th><th> <input type="radio" name="winner" value="'+somelist[x]+'"></th><th><input type="radio" name="favorite" value="'+somelist[x]+'"></th></tr>';
     }
     return start+middle+end;
 }
