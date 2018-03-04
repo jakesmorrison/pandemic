@@ -38,6 +38,12 @@ def oscar(request):
 
     rankings = rankings.to_html(index=False, classes="rank_table")
 
+    rankings = rankings.replace("<tr>",'<tr class="table_content table-bordered">')
+    rankings = rankings.replace('border="1"', "")
+
+    rankings = rankings.replace('<tr style="text-align: right;">','<tr class="table_content">')
+
+
     my_dict = {}
     for x in cat:
         my_dict[x] = df[df["Cat"]==x]["Name"].tolist()
