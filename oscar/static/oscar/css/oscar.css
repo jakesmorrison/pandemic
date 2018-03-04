@@ -89,14 +89,16 @@ table, th, td {
     font-family: 'Lobster', cursive;
     font-size: 15px;
     border-bottom: 5px solid white;
-
+    border-collapse: collapse;
+    border-right-color: black;
+    border-left-color: black;
 }
 
     input[type='radio']:after {
         width: 15px;
         height: 15px;
         border-radius: 15px;
-        top: -2px;
+        top: -5px;
         left: -1px;
         position: relative;
         background-color: #d1d3d1;
@@ -110,7 +112,7 @@ table, th, td {
         width: 15px;
         height: 15px;
         border-radius: 15px;
-        top: -2px;
+        top: -5px;
         left: -1px;
         position: relative;
         background-color: #5fff5f;
