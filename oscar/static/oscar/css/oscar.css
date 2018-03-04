@@ -41,6 +41,14 @@
     font-family: 'Lobster', cursive;
 }
 
+.picks{
+    width: 100%;
+    font-size: 25px;
+    color: black;
+    background: white;
+    font-family: 'Lobster', cursive;
+}
+
 .submit{
     width: 80%;
     font-size: 25px;

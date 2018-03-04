@@ -22,9 +22,20 @@ def oscar(request):
     }
     return render(request, "oscar/oscar.html", context)
 
-def check_for_user_data(request):
+def get_user_picks(request):
     params = request.GET
+    user = params["user"]
+    df = pd.DataFrame.from_records(Users.objects.all().values())
+    df = df[(df["Year"]==year) & (df["User"]==user)]
+    df.columns = ['Category', 'Favorite', 'User', 'Winner', 'Year', 'id']
+    del df["Year"]
+    del df["id"]
+    df = df[['User', 'Category', 'Winner', 'Favorite']]
+
+    table = df.to_html(index=False, classes='table')
+
     context = {
+        'table': table
     }
     return JsonResponse(json.loads(json.dumps(context)))
 

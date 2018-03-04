@@ -24,7 +24,7 @@
             <div class="row row1 scrollrow" style="background-color: black;">
                 <div class="col-xs-12">
                     <h1 class="title">Oscar Picks!<h1>
-                    <input class="input_name" type="text" name="name" value="Enter Your Full Name"><br>
+                    <input class="input_name" type="text" name="name" value="Enter Your Full Name">
                 </div>
             </div>
 
@@ -45,6 +45,13 @@
                             <button type="button" class="btn btn-default submit centered">Submit</button>
                         </div>
                     </div>
+                </div>
+            </div>
+
+            <div class="row row3 scrollrow" style="background-color: black;">
+                <div class="col-xs-12 picks_data">
+                    <button type="button" class="btn btn-default picks centered">Get My Picks</button>
+
                 </div>
             </div>
 
@@ -83,6 +90,8 @@ $( document ).ready(function() {
     $(".button_row").css("height", height*.10);
     $(".cat_row").css("height", height*.10);
 
+    $(".picks").css("margin-top", height/2);
+
 
     $(".cat").text(Object.keys(oscar_options)[current_page])
     table_data = create_table(Object.values(oscar_options)[current_page])
@@ -95,6 +104,16 @@ $( document ).ready(function() {
 
     $.scrollify({
         section : ".scrollrow",
+        interstitialSection : "",
+        easing: "easeOutExpo",
+        scrollSpeed: 1100,
+        offset : 0,
+        scrollbars: true,
+        standardScrollElements: "",
+        setHeights: true,
+        overflowScroll: true,
+        updateHash: true,
+        touchScroll:true,
         before:function() {
             <!--if ("row row2 scrollrow" === $.scrollify.current().attr('class') ){-->
                 <!--if (data_loaded == false){-->
@@ -221,6 +240,20 @@ $( ".submit" ).click(function() {
         }
     });
 });
+
+$( ".picks" ).click(function() {
+    url_base = "{% url 'oscar:get_user_picks' %}";
+    my_url = url_base + "?" + $.param( {'user': $(".input_name").val()} );
+    $.ajax({
+        url: my_url,
+        type: 'GET',
+        success: function (msg) {
+            $(".picks_data").empty();
+            $(".picks_data").html("<h1 class='title'>User Picks<h1>"+msg.table);
+        }
+    });
+});
+
 
 
 </script>
