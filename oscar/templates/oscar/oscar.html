@@ -71,8 +71,6 @@
 var current_page = 0;
 var oscar_options = {{oscar_options|safe}}
 var selections = {}
-var data_loaded = false;
-var prev_data;
 
 
 $( document ).ready(function() {
@@ -181,8 +179,12 @@ $( ".next" ).click(function() {
   }
 
     if ((Object.keys(oscar_options)[current_page] in selections)) {
-        $("input[name=winner][value= '"+ Object.values(selections)[current_page][0] + "']").prop('checked', true);
-        $("input[name=favorite][value= '"+ Object.values(selections)[current_page][1] + "']").prop('checked', true);
+        myfoo = Object.values(selections)[current_page].split("zzz");
+        win = myfoo[0]
+        fav = myfoo[1]
+
+        $("input[name=winner][value= '"+ win + "']").prop('checked', true);
+        $("input[name=favorite][value= '"+ fav + "']").prop('checked', true);
     }
 
 
@@ -220,10 +222,14 @@ $( ".prev" ).click(function() {
     $('.prev').show();
   }
 
-  if ((Object.keys(oscar_options)[current_page] in selections)) {
-    $("input[name=winner][value= '"+ Object.values(selections)[current_page][0] + "']").prop('checked', true);
-    $("input[name=favorite][value= '"+ Object.values(selections)[current_page][1] + "']").prop('checked', true);
-  }
+    if ((Object.keys(oscar_options)[current_page] in selections)) {
+        myfoo = Object.values(selections)[current_page].split("zzz");
+        win = myfoo[0]
+        fav = myfoo[1]
+
+        $("input[name=winner][value= '"+ win + "']").prop('checked', true);
+        $("input[name=favorite][value= '"+ fav + "']").prop('checked', true);
+    }
 
 });
 
@@ -237,6 +243,7 @@ $( ".submit" ).click(function() {
         url: my_url,
         type: 'GET',
         success: function (msg) {
+            alert("You have submitted your Oscar picks.")
         }
     });
 });
