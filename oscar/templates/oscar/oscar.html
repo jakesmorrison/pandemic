@@ -62,6 +62,8 @@
 
 <script src=" {% static 'moviepass/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'oscar/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'books/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'books/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'oscar/js/jquery.scrollify.min.js' %}" ></script>
 
 
@@ -257,6 +259,24 @@ $( ".picks" ).click(function() {
         success: function (msg) {
             $(".picks_data").empty();
             $(".picks_data").html("<h1 class='title'>User Picks<h1>"+msg.table);
+            $('#table-custom-sort').css('width','100%')
+            var table = $('#table-custom-sort').DataTable({
+                scrollY:        $(window).height(),
+                scrollX:        true,
+                scrollCollapse: true,
+                paging:         false,
+                bFilter:        false,
+                bAutoWidth:     false,
+                bSort:          true,
+                bAutoWidth:     true,
+                bInfo:          false,
+                bJQueryUI:      true,
+                bLengthChange:  true,
+                bPaginate:      true,
+                bProcess:       true,
+                bScrollInfinite:false,
+            });
+
         }
     });
 });

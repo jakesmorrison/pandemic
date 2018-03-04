@@ -32,7 +32,7 @@ def get_user_picks(request):
     del df["id"]
     df = df[['User', 'Category', 'Winner', 'Favorite']]
 
-    table = df.to_html(index=False, classes='table')
+    table = df.to_html(index=False,classes='table table-striped table-bordered table-hover table-responsive" id="table-custom-sort')
 
     context = {
         'table': table
