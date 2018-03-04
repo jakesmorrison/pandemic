@@ -18,9 +18,9 @@ admin.site.register(
 
 admin.site.register(
     Users,
-    list_display="id.Year,User,Cat,Won,Favorite".split(","),
-    list_display_links="id.Year,User,Cat,Won,Favorite".split(","),
-    search_fields = "id.Year,User,Cat,Won,Favorite".split(","),
+    list_display="id,Year,User,Cat,Won,Favorite".split(","),
+    list_display_links="id,Year,User,Cat,Won,Favorite".split(","),
+    search_fields = "id,Year,User,Cat,Won,Favorite".split(","),
 )
 
 
