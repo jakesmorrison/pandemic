@@ -3,6 +3,7 @@ import pandas as pd
 from .models import OscarCategories, Winners, Users
 from django.http import JsonResponse
 import json
+import numpy as np
 
 # Create your views here
 
@@ -13,12 +14,37 @@ def oscar(request):
     df = df[df["Year"]==year]
     cat = df["Cat"].tolist()
 
+
+    df_winners = pd.DataFrame.from_records(Winners.objects.all().values())
+    df_users = pd.DataFrame.from_records(Users.objects.all().values())
+
+    df_merge = df_users.merge(df_winners, left_on='Cat', right_on='Cat', how='outer')
+    del df_merge["Year_x"]
+    del df_merge["Year_y"]
+    del df_merge["id_x"]
+    del df_merge["id_y"]
+    del df_merge["Favorite"]
+    df_merge = df_merge.reset_index()
+
+    df_merge["Points"] = np.where((df_merge['Won'] == df_merge['Name']), 1*df_merge["Weight"], 0)
+
+    rankings = df_merge.groupby(["User"]).sum().reset_index()
+    del rankings["index"]
+    del rankings["Weight"]
+
+    rankings = rankings.sort_values(by=['Points'], ascending=False).reset_index()
+    rankings["index"] = rankings["index"] + 1
+    rankings.columns = ['Rank', 'User', 'Points']
+
+    rankings = rankings.to_html(index=False, classes="rank_table")
+
     my_dict = {}
     for x in cat:
         my_dict[x] = df[df["Cat"]==x]["Name"].tolist()
 
     context = {
-        'oscar_options': my_dict
+        'oscar_options': my_dict,
+        'rankings': rankings
     }
     return render(request, "oscar/oscar.html", context)
 

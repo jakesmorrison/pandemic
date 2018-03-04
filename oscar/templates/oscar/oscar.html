@@ -51,9 +51,16 @@
             <div class="row row3 scrollrow" style="background-color: black;">
                 <div class="col-xs-12 picks_data">
                     <button type="button" class="btn btn-default picks centered">Get My Picks</button>
-
                 </div>
             </div>
+
+            <div class="row row4 scrollrow" style="background-color: black;">
+                <div class="col-xs-12 ranking">
+                    <h1 class="leader_board_title">Leader Board<h1>
+                    {{rankings|safe}}
+                </div>
+            </div>
+
 
 
         </div>
@@ -100,7 +107,6 @@ $( document ).ready(function() {
     if (current_page === 0){
         $('.prev').hide();
     }
-
 
     $.scrollify({
         section : ".scrollrow",

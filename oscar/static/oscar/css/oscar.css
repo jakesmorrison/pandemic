@@ -10,6 +10,12 @@
     color: white;
 }
 
+.leader_board_title{
+    text-align: center;
+    font-family: 'Lobster', cursive;
+    color: white;
+}
+
 .input_name{
     text-align: center;
     font-family: 'Lobster', cursive;
@@ -59,6 +65,15 @@
 
 
 table, th, td {
+    color: white;
+    text-align: center;
+    padding: 1%;
+    font-family: 'Lobster', cursive;
+    background: black;
+}
+
+.rank_table{
+    width: 100%;
     color: white;
     text-align: center;
     padding: 1%;
