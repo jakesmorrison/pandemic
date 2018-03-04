@@ -43,12 +43,12 @@ def oscar(request):
     # our_favs = df_users.groupby(["Cat","Favorite"]).count().reset_index()
 
 
-    # my_dict = {}
+    my_dict = {}
     # fav_table = []
     # fav_table.append(["Category","Favs Winner","Votes"])
     # cat_list = []
-    # for x in cat:
-    #     my_dict[x] = df[df["Cat"]==x]["Name"].tolist()
+    for x in cat:
+        my_dict[x] = df[df["Cat"]==x]["Name"].tolist()
     #     if x not in cat_list:
     #         foo = our_favs[our_favs["Cat"]==x]
     #         foo = foo.sort_values(by=['id', 'Favorite'], ascending=[False, True]).reset_index()
