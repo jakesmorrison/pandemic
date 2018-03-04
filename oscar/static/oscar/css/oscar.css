@@ -74,7 +74,7 @@ table, th, td {
 
 .table_content{
     font-family: 'Lobster', cursive;
-    font-size: 15px;
+    font-size: 16px;
     border-bottom: 5px solid white;
 
 }
@@ -114,8 +114,18 @@ table, th, td {
 #table-custom-sort, th, td {
     color: white;
     text-align: center;
-    padding: 1%;
+    padding: .5%;
     font-family: 'Lobster', cursive;
     background: black;
-    font-size: 12px;
+    font-size: 13px;
+}
+
+#table-custom-sort, th:nth-child(1) {
+    font-size: 20px;
+}
+#table-custom-sort, th:nth-child(2) {
+    font-size: 20px;
+}
+#table-custom-sort, th:nth-child(3) {
+    font-size: 20px;
 }

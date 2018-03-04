@@ -30,7 +30,8 @@ def get_user_picks(request):
     df.columns = ['Category', 'Favorite', 'User', 'Winner', 'Year', 'id']
     del df["Year"]
     del df["id"]
-    df = df[['User', 'Category', 'Winner', 'Favorite']]
+    del df["User"]
+    df = df[['Category', 'Winner', 'Favorite']]
 
     table = df.to_html(index=False,classes='table table-striped table-bordered table-hover table-responsive" id="table-custom-sort')
 
