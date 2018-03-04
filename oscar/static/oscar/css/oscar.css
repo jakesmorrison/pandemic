@@ -89,15 +89,15 @@ table, th, td {
 
 .table_content{
     font-family: 'Lobster', cursive;
-    font-size: 16px;
+    font-size: 15px;
     border-bottom: 5px solid white;
 
 }
 
     input[type='radio']:after {
-        width: 16px;
-        height: 16px;
-        border-radius: 16px;
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
         top: -2px;
         left: -1px;
         position: relative;
@@ -109,9 +109,9 @@ table, th, td {
     }
 
     input[type='radio']:checked:after {
-        width: 16px;
-        height: 16px;
-        border-radius: 16px;
+        width: 15px;
+        height: 15px;
+        border-radius: 15px;
         top: -2px;
         left: -1px;
         position: relative;
