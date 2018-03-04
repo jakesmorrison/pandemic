@@ -107,10 +107,7 @@ $( document ).ready(function() {
         interstitialSection : "",
         easing: "easeOutExpo",
         scrollSpeed: 1100,
-        offset : 0,
         scrollbars: true,
-        standardScrollElements: "",
-        setHeights: true,
         overflowScroll: true,
         updateHash: true,
         touchScroll:true,
@@ -259,24 +256,7 @@ $( ".picks" ).click(function() {
         success: function (msg) {
             $(".picks_data").empty();
             $(".picks_data").html("<h1 class='title'>User Picks<h1>"+msg.table);
-            $('#table-custom-sort').css('width','100%')
-            var table = $('#table-custom-sort').DataTable({
-                scrollY:        true,
-                scrollX:        true,
-                scrollCollapse: true,
-                paging:         false,
-                bFilter:        false,
-                bAutoWidth:     false,
-                bSort:          true,
-                bAutoWidth:     true,
-                bInfo:          false,
-                bJQueryUI:      true,
-                bLengthChange:  true,
-                bPaginate:      true,
-                bProcess:       true,
-                bScrollInfinite:false,
-            });
-
+            $.scrollify.update();
         }
     });
 });
