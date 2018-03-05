@@ -23,12 +23,12 @@ def oscar(request):
     del df_merge["Year_y"]
     del df_merge["id_x"]
     del df_merge["id_y"]
-    # del df_merge["Favorite"]
-    del df_merge["Won"]
+    del df_merge["Favorite"]
+    # del df_merge["Won"]
 
     df_merge = df_merge.reset_index()
 
-    df_merge["Points"] = np.where((df_merge['Favorite'] == df_merge['Name']), 1*df_merge["Weight"], 0)
+    df_merge["Points"] = np.where((df_merge['Won'] == df_merge['Name']), 1*df_merge["Weight"], 0)
 
     rankings = df_merge.groupby(["User"]).sum().reset_index()
     del rankings["index"]
@@ -37,6 +37,7 @@ def oscar(request):
     rankings = rankings.sort_values(by=['Points'], ascending=False).reset_index()
     rankings["index"] = rankings["index"] + 1
     rankings.columns = ['Rank', 'User', 'Points']
+    del rankings["Rank"]
     rankings = rankings.to_html(index=False, classes="rank_table")
     rankings = rankings.replace("<tr>",'<tr class="table_content table-bordered">')
     rankings = rankings.replace('border="1"', "")
