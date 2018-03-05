@@ -42,5 +42,4 @@ urlpatterns = [
     url(r'^sandbox/', include('sandbox.urls')),
     url(r'^oscar/', include('oscar.urls')),
     url(r'', include('homepage.urls')),
-
 ]
