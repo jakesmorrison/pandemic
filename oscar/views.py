@@ -113,10 +113,10 @@ def add_to_db(request):
             if u.Won == "undefined":
                 u.Won = win
                 u.Favorite = fav
-                u.save()
+                # u.save()
         else:
             d = Users(User=params["name"], Cat=x, Won=win, Year=year, Favorite=fav)
-            d.save()
+            # d.save()
 
     context = {
     }
