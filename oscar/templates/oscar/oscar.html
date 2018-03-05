@@ -21,6 +21,24 @@
     <div class="row">
         <div class="col-xs-12">
 
+            <div class="row row0 scrollrow" style="background-color: black;">
+                <div class="col-xs-12">
+                    <h3 class="leader_board_title">2018 Champion<h3>
+                    <h1 class="leader_board_title">Jakob Morrison<h1>
+                    <img class="my_image" src=" {% static 'oscar/images/jake.png' %} ">
+                </div>
+            </div>
+
+            <div class="row row0 scrollrow" style="background-color: black;">
+                <div class="col-xs-12">
+                    <h3 class="leader_board_title">2018 Co-Champion<h3>
+                    <h1 class="leader_board_title">Tony Kavran<h1>
+                    <img class="my_image" src=" {% static 'oscar/images/tony.png' %} ">
+                </div>
+            </div>
+
+
+
             <div class="row row1 scrollrow" style="background-color: black;">
                 <div class="col-xs-12">
                     <h1 class="title">Oscar Picks!<h1>
@@ -93,6 +111,7 @@ $( document ).ready(function() {
     $('.submit').hide();
 
     var height = $(window).height();
+    $(".my_image").css("height", height*.70);
     $(".scrollrow").css("height", height);
 
     var title_height = $(".title").height();
