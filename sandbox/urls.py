@@ -8,4 +8,7 @@ urlpatterns = [
     url(r'get_data/', views.get_data, name='get_data'),
     url(r'gary_spelling/', views.gary_spelling, name='gary_spelling'),
     url(r'career_day/', views.career_day, name='career_day'),
+    url(r'^linely_demo/$', views.linely_demo, name='linely_demo'),
+    url(r'^get_data_linely_demo/$', views.get_data_linely_demo, name='get_data_linely_demo'),
 ]
+

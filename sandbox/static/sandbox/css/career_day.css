@@ -9,5 +9,32 @@
 
 .picture{
     height: 100%;
-    text-align: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 3px;
 }
+
+.img-zoom-result {
+    border: 1px solid #d4d4d4;
+    width: 80%;
+    height: 80%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5%;
+    border-radius: 3px;
+}
+
+.img-zoom-lens {
+  position: absolute;
+  /*border: 1px solid #d4d4d4;*/
+  /*set the size of the lens:*/
+  width: 40px;
+  height: 40px;
+}
+
+.img-zoom-container {
+  position: relative;
+}
+

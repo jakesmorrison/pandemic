@@ -1,0 +1,148 @@
+.centered{
+    text-align: center;
+}
+
+.container {
+   width: 100%;
+   padding-right: 0px;
+   padding-left: 0px;
+   margin-right: 0px;
+   margin-left: 0px;
+}
+
+.myfont{
+    font-family: 'Work Sans', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  background: white;
+}
+
+#error_logging{
+    width: 100%;
+    border-top: 5px solid white;
+    border-left: 5px solid white;
+    border-radius: 4px;
+    background: white;
+}
+.log_line{
+    padding: 10px;
+    font-family: 'Work Sans', sans-serif;
+}
+.log_header{
+    color: #9ACA3C;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.errors{
+    color: #9ACA3C;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.date_time{
+    font-size: 10px;
+    color: #58595B;
+    font-family: 'Work Sans', sans-serif;
+}
+
+.rotate {
+    /* Safari */
+    -webkit-transform: rotate(-90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+
+    /* IE */
+    -ms-transform: rotate(-90deg);
+
+    /* Opera */
+    -o-transform: rotate(-90deg);
+
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+#pause{
+    position: absolute;
+    z-index: 50;
+    font-size: 13px;
+    padding: 4px;
+    border-color: transparent;
+    color: #58595B;
+    font-size: 20px;
+    background: white;
+    font-family: 'Work Sans', sans-serif;
+    margin-left: 2.5%
+}
+
+.btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
+    color: #666666;
+    background-color: white;
+    border-color: white; /*set the color you want here*/
+    outline: none;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn-default:active:focus {
+    color: #666666;
+    background-color: white;
+    border-color: white; /*set the color you want here*/
+    outline: none;
+}
+
+.line {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 2px solid #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+
+/*
+.box-outline{
+    border-top: 5px solid #58595B;
+    border-left: 5px solid #58595B;
+    border-radius: 4px;
+    background: white;
+}
+*/
+
+.row0{
+    height: 50px;
+}
+
+#bw_chart{
+    width: 100%;
+    margin-left: 0%;
+    background: white;
+    border-top: 5px solid white;
+    border-left: 5px solid white;
+    border-radius: 4px;
+
+}
+
+#bubble_chart{
+    background: white;
+    border-top: 5px solid white;
+    border-left: 5px solid white;
+    border-radius: 4px;
+
+}
+
+.para_text{
+    word-wrap: break-word;
+}
+
+.heading1{
+    margin-left: 20px;
+    background: #58595B;
+    border-top: 5px solid #808284;
+    border-left: 5px solid #808284;
+    border-radius: 4px;
+    color: white;
+}
