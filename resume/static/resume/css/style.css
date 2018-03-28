@@ -130,4 +130,8 @@ div.vertical-line{
         margin: 1em 0;
         padding: 0;
     }
+
+    .job_title{
+        text-align: left;
+    }
 }
