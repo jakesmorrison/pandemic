@@ -63,6 +63,24 @@ html, body {
     filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 
+.rotate1 {
+    /* Safari */
+    -webkit-transform: rotate(90deg);
+
+    /* Firefox */
+    -moz-transform: rotate(90deg);
+
+    /* IE */
+    -ms-transform: rotate(90deg);
+
+    /* Opera */
+    -o-transform: rotate(90deg);
+
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+}
+
+
 #pause{
     position: absolute;
     z-index: 50;
@@ -145,4 +163,11 @@ html, body {
     border-left: 5px solid #808284;
     border-radius: 4px;
     color: white;
+}
+
+.micron_icon{
+    width: 350%;
+    left: 0;
+    top: 0;
+    margin-left: -120%;
 }

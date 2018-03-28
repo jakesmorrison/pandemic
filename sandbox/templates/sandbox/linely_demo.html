@@ -14,14 +14,7 @@
 <body>
 
 <div class="container" style="">
-    <!--<div class="col-lg-1 col1" style="background: white">-->
-        <!--<div>-->
-            <!--<img class="micron_icon rotate" src="{% static 'sandbox/images/micron_icon.png' %}" alt="micron" style="width: 100%;">-->
-        <!--</div>-->
-        <!--<p class="para_text"></p>-->
-    <!--</div>-->
-    <div class="col-lg-12" style="background: #0077C8">
-
+    <div class="col-lg-11" style="background: #0077C8">
         <div class="row row1">
             <div class="col-lg-12 box-outline">
                 <button id="pause" type="button" class="btn btn-default rotate" onclick="pause_unpause()">Bandwidth (Mbps)</button>
@@ -38,10 +31,15 @@
                 <div id="error_logging">
                 </div>
             </div>
-
         </div>
-
     </div>
+    <div class="col-lg-1 col1" style="background: white">
+        <div>
+            <img class="micron_icon rotate1" src="{% static 'sandbox/images/micron_icon.png' %}" alt="micron">
+        </div>
+        <p class="para_text"></p>
+    </div>
+
 
 </div>
 
@@ -77,7 +75,7 @@ $( document ).ready(function() {
 
 
 
-    $(".micron_icon").css('margin-top',total_height*.30);
+    $(".micron_icon").css('margin-top',total_height*.35);
     $(".box-outline").css('margin-top',row_height*.05)
     $("#outline").css('height',row_height*.90)
     $("#bw_chart").css('margin-top',row_height*.03)
