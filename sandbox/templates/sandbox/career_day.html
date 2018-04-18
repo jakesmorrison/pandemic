@@ -34,8 +34,13 @@
                 <div id="myresult" class="img-zoom-result"></div>
             </div>
         </div>
+            <button type="button" class="btn btn-default" onclick="button_pressed()">Default</button>
 
-        <div class="col-lg-7 data-col" ">
+        <div class="col-lg-2 data-col" ">
+            <div id="preview">
+                <canvas id="canvas-preview"></canvas>
+                <div id="preview-textfield" style="">1,250</div>
+            </div>
 
         </div>
 
@@ -50,6 +55,7 @@
 <script src="https://code.highcharts.com/modules/boost.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src=" {% static 'sandbox/js/picture_scatter.js' %}" ></script>
+<script src=" {% static 'sandbox/js/gauge.min.js' %}" ></script>
 
 
 <script>
@@ -126,6 +132,40 @@ function imageZoom(imgID, resultID) {
     return {x : x, y : y};
   }
 }
+
+var opts = {
+  angle: 0.15, // The span of the gauge arc
+  lineWidth: 0.44, // The line thickness
+  radiusScale: 1, // Relative radius
+  pointer: {
+    length: 0.75, // // Relative to gauge radius
+    strokeWidth: 0.035, // The thickness
+    color: '#000000' // Fill color
+  },
+  limitMax: false,     // If false, max value increases automatically if value > maxValue
+  limitMin: false,     // If true, the min value of the gauge will be fixed
+  colorStart: '#0077C8',   // Colors
+  colorStop: '#0077C8',    // just experiment with them
+  strokeColor: '#E0E0E0',  // to see which ones work best for you
+  generateGradient: true,
+  highDpiSupport: true,     // High resolution support
+
+};
+var target = document.getElementById('canvas-preview'); // your canvas element
+var gauge = new Gauge(target).setOptions(opts); // create sexy gauge!
+gauge.maxValue = 3000; // set max gauge value
+gauge.setMinValue(0);  // Prefer setter over gauge.minValue = 0
+gauge.animationSpeed = 50; // set animation speed (32 is default value)
+gauge.set(1250); // set actual value
+
+
+function button_pressed(){
+    console.log("Test")
+    var randomNumberBetween0and19 = 1500+Math.floor(Math.random() * 1000);
+    $('#preview-textfield').html(randomNumberBetween0and19);
+    gauge.set(randomNumberBetween0and19);
+}
+
 
 </script>
 
