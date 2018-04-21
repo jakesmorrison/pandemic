@@ -6,7 +6,15 @@ from django.http import JsonResponse
 counter = 0
 def micron_slider_test(request):
     context={}
-    return(render(request, 'sandbox/micron_slider_test.html',context))
+    return(render(request, 'sandbox/micron_slide_show.html',context))
+
+def change_led(request):
+    params = request.GET
+    print(params["slide"])
+
+    context = {
+    }
+    return JsonResponse(json.loads(json.dumps(context)))
 
 def new_demo_front_end(request):
     global counter
