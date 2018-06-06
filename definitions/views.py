@@ -91,15 +91,17 @@ def words_current(request):
 @permission_classes((permissions.AllowAny,))
 def words_detail(request, pk1, pk2):
     try:
-        w = Words.objects.all().filter(**{pk1:pk2}).values()
+        w = Words.objects.all().filter(**{pk1:pk2})
     except Words.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
+        w = w..values()
         serializer = WordsSerializer(w, many=True)
         return Response(serializer.data)
 
     elif request.method == 'PUT':
+        w = w..values()
         serializer = WordsSerializer(w, data=request.data)
         if serializer.is_valid():
             serializer.save()

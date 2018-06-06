@@ -21,6 +21,8 @@ python manage.py book_to_db "Life of Pi" "Yann Martel" "lifeofpi" "Fiction" "Fan
 python manage.py book_to_db "Amusing Ourselves To Death" "Neil Postman" "amusingourselvestodeath" "Non-Fiction" "Education" "2018-01-22" "2018-02-03"
 python manage.py book_to_db "This Side Of Paradise" "F. Scott Fitzgerald" "thissideofparadise" "Fiction" "Classic" "2018-02-03" "2018-02-10"
 python manage.py book_to_db "Catch-22" "Joseph Heller" "catch22" "Fiction" "Classic" "2018-02-25" "2018-03-10"
+python manage.py book_to_db "The Devil in the White City" "Erik Larson" "thedevilinthewhitecity" "Non-Fiction" "Biography" "2018-04-28" "2018-05-04"
+
 
 #Softball
 python manage.py csv_to_db /root/pandemic/softball/static/softball/csv/last_game.csv
