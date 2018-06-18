@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Career Day!</title>
+    <meta name="viewport" content="initial-scale=1">
+    <title>DDR4 Speed Grade Backwards Compatibiltiy</title>
 
     {% load staticfiles %}
     <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -12,7 +13,7 @@
 </head>
 <body>
 
-<div style="width: 100%;" class="container">
+<div style="width: 98%;" class="container">
     <div class="svg-container"><svg class="mysvg"></svg></div>
 
     <div class="row rowm2" style=""><h1 class="title">DDR4 Speed Grade Backwards Compatibiltiy: Component to Component</h1></div>
@@ -41,7 +42,7 @@
 
 <script>
 var height = $( document ).height();
-var width = $( document ).width();
+var width = $( '.container' ).width();
 var margin_squares = 10;
 var margin_default = 2;
 var margin_total = margin_squares+margin_default;
@@ -64,7 +65,7 @@ $( document ).ready(function() {
     $('.mysvg').css('height', height);
     $('.mysvg').css('width', width);
 
-    $('.rowm2').css('height', height*.10);
+    $('.rowm2').css('height', height*.08);
     $('.rowm1').css('height', height*.10);
     $('.row0').css('height', height*.10);
     $('.row1').css('height', height*.60);
