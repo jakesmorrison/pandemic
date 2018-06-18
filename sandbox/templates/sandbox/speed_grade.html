@@ -114,7 +114,7 @@ function draw_line_between(id_top, id_bottom, line_color){
     var id_bottom_left = id_bottom_pos.left + square_width/2 + 2*margin_squares - line_shift;
     var id_bottom_top = id_bottom_pos.top + 2*margin_squares - line_shift ;
 
-    var mysvg= makeSVG('line', {x1: id_top_left, y1: id_top_top, x2:id_bottom_left, y2:id_bottom_top, stroke: line_color, 'stroke-width': 2, 'origin': id_top});
+    var mysvg= makeSVG('line', {x1: id_top_left, y1: id_top_top, x2:id_bottom_left, y2:id_bottom_top, stroke: line_color, 'stroke-width': 2, 'origin': id_top, 'dest': id_bottom, 'class': 'line'});
 
     $( ".mysvg" ).append(mysvg);
 }
@@ -144,6 +144,30 @@ $( "div.square_top" ).mouseover(function() {
             child_data[x].setAttribute('stroke-width', 2);
     }
 });
+
+<!--$( "div.square_bottom" ).mouseover(function() {-->
+$( "div.square_bottom" ).click(function() {
+    hovered_id = this.id;
+    <!--$( '.square' ).css('border-width', 2)-->
+    <!--$( '#' +this.id ).css('border-width', 3)-->
+    var child_data = $(".mysvg").children()
+    for(x=0; x<child_data.length; x++){
+        if (hovered_id === child_data[x].getAttribute("dest")){
+            child_data[x].setAttribute('stroke-width', 5);
+        }
+        else{
+            child_data[x].setAttribute('stroke-width', 0);
+        }
+    }
+})
+<!--.mouseout(function() {-->
+    <!--hovered_id = this.id;-->
+    <!--var child_data = $(".mysvg").children()-->
+    <!--for(x=0; x<child_data.length; x++){-->
+            <!--child_data[x].setAttribute('stroke-width', 2);-->
+    <!--}-->
+<!--});-->
+
 
 
 </script>
