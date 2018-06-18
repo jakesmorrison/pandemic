@@ -11,5 +11,7 @@ urlpatterns = [
     url(r'career_day/', views.career_day, name='career_day'),
     url(r'^linely_demo/$', views.linely_demo, name='linely_demo'),
     url(r'^get_data_linely_demo/$', views.get_data_linely_demo, name='get_data_linely_demo'),
+    url(r'^speed_grade/$', views.speed_grade, name='speed_grade'),
+
 ]
 

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Day!</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'sandbox/css/speed_grade.css' %}" rel="stylesheet">
+
+
+</head>
+<body>
+
+<div style="width: 100%;" class="container">
+    <div class="svg-container"><svg class="mysvg"></svg></div>
+
+    <div class="row rowm2" style=""><h1 class="title">DDR4 Speed Grade Backwards Compatibiltiy: Component to Component</h1></div>
+    <div class="row rowm1" style=""></div>
+    <div class="row row0" style="">
+        <div class="speed_col">
+            {% for e in top_and_bottom_row %}
+                <div class="square square_top" id="top-id{{ e|safe }}"> <p class="label-text">{{ e|safe }}</p></div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="row row1" style="background: transparency"></div>
+    <div class="row row2" style="">
+        <div class="speed_col">
+            {% for e in top_and_bottom_row %}
+                <div class="square square_bottom" id="bottom-id{{ e|safe }}"> <p class="label-text">{{ e|safe }} </p></div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+
+
+<script src=" {% static 'travel/js/jquery-3.2.1.js' %}" ></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" ></script>
+
+<script>
+var height = $( document ).height();
+var width = $( document ).width();
+var margin_squares = 10;
+var margin_default = 2;
+var margin_total = margin_squares+margin_default;
+var num_squares = {{ column_count|safe }};
+var empty_width = margin_total*2*num_squares;
+var square_width = ((width-empty_width)/num_squares);
+var square_height = 50;
+var square_margin_top = (height*.20-2*margin_squares)-square_height;
+
+var top_and_bottom_row = {{ top_and_bottom_row|safe }};
+var connections = {{ connections|safe }};
+var line_colors = {{ line_colors|safe }};
+var data_rate_keys = {{ data_rate_keys|safe }};
+var data_rate_values = {{ data_rate_values|safe }};
+
+$( document ).ready(function() {
+
+    $('.svg-container').css('height', height);
+    $('.svg-container').css('width', width);
+    $('.mysvg').css('height', height);
+    $('.mysvg').css('width', width);
+
+    $('.rowm2').css('height', height*.10);
+    $('.rowm1').css('height', height*.10);
+    $('.row0').css('height', height*.10);
+    $('.row1').css('height', height*.60);
+    $('.row2').css('height', height*.10);
+
+    $('.square').css('margin', margin_squares);
+    $('.square').css('width', square_width);
+    $('.square').css('height', square_height);
+
+
+    for(x=0; x<data_rate_values.length; x++){
+        data_values = data_rate_values[x];
+        data_keys = data_rate_keys[x];
+        $('.rowm1').append("<div id='"+data_keys+"' class='data_rate_labels'><p>"+data_rate_keys[x]+"</p><div class='test'>test</div</div>")
+        $('.data_rate_labels').css('margin', margin_squares - 5);
+        label_width = 10 + square_width*(data_values) + margin_squares*(data_values*2-1);
+        $('#'+data_keys).css('width', label_width);
+
+    }
+
+    for(x=0; x<num_squares; x++){
+        foo = connections[x].split(",")
+        line_color = line_colors[x]
+        for(y=0; y<foo.length; y++){
+            if (foo != ""){
+                draw_line_between('top-id'+top_and_bottom_row[x],'bottom-id'+foo[y], line_color);
+            }
+        }
+    }
+
+});
+
+
+function draw_line_between(id_top, id_bottom, line_color){
+    // Get square box position.
+    var p = $( '#'+id_top );
+    var id_top_pos = p.position();
+
+    var line_shift = 10;
+
+    var id_top_left = id_top_pos.left + square_width/2 + line_shift;
+    var id_top_top = id_top_pos.top + square_height + line_shift;
+
+    p = $( '#'+id_bottom );
+    var id_bottom_pos = p.position();
+    var id_bottom_left = id_bottom_pos.left + square_width/2 + 2*margin_squares - line_shift;
+    var id_bottom_top = id_bottom_pos.top + 2*margin_squares - line_shift ;
+
+    var mysvg= makeSVG('line', {x1: id_top_left, y1: id_top_top, x2:id_bottom_left, y2:id_bottom_top, stroke: line_color, 'stroke-width': 2, 'origin': id_top});
+
+    $( ".mysvg" ).append(mysvg);
+}
+
+function makeSVG(tag, attrs) {
+    var el= document.createElementNS('http://www.w3.org/2000/svg', tag);
+    for (var k in attrs)
+        el.setAttribute(k, attrs[k]);
+    return el;
+}
+
+$( "div.square_top" ).mouseover(function() {
+    hovered_id = this.id;
+    var child_data = $(".mysvg").children()
+    for(x=0; x<child_data.length; x++){
+        if (hovered_id === child_data[x].getAttribute("origin")){
+            child_data[x].setAttribute('stroke-width', 5);
+        }
+        else{
+            child_data[x].setAttribute('stroke-width', 0);
+        }
+    }
+}).mouseout(function() {
+    hovered_id = this.id;
+    var child_data = $(".mysvg").children()
+    for(x=0; x<child_data.length; x++){
+            child_data[x].setAttribute('stroke-width', 2);
+    }
+});
+
+
+</script>
+
+</body>
+</html>

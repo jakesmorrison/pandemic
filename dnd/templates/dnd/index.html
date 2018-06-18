@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>DnD</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'dnd/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'dnd/css/dnd.css' %}" rel="stylesheet">
+
+
+</head>
+<body class="mybody">
+
+<div class="container" style="width:100%">
+
+    <div class="row0" style="background: white">
+        <div class="col-sm-4" style="height: 100%">
+            <div class="row border image_border" style="height: 90%">
+                <div class="col-sm-3">
+                    <label id="strength_label" for="strength_value" class="centered skill_label">Strength</label>
+                    <input id="strength_value" type="text" class="form-control skill_value">
+                    <label id="dexterity_label" for="dexterity_value" class="centered skill_label">Dexterity</label>
+                    <input id="dexterity_value" type="text" class="form-control skill_value">
+                    <label id="constitution_label" for="constitution_value" class="centered skill_label">Constitution</label>
+                    <input id="constitution_value" type="text" class="form-control skill_value">
+                </div>
+                <div class="col-sm-6">
+                    <img class="image" src=" {% static 'dnd/images/elf.png' %} ">
+                </div>
+                <div class="col-sm-3">
+                    <label id="intelligence_label" for="intelligence_value" class="centered skill_label">Intelligence</label>
+                    <input id="intelligence_value" type="text" class="form-control skill_value">
+                    <label id="wisdom_label" for="wisdom_value" class="centered skill_label">Wisdom</label>
+                    <input id="wisdom_value" type="text" class="form-control skill_value">
+                    <label id="charisma_label" for="charisma_value" class="centered skill_label">Charisma</label>
+                    <input id="charisma_value" type="text" class="form-control skill_value">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <h2>Character Details</h2>
+            <div class="row">
+                <div class="col-lg-8">
+                    <label class="">Name</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-lg-4">
+                    <label class="">XP</label>
+                    <input type="text" class="form-control">
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <label class="">Class</label>
+                    <input type="text" class="form-control">
+                </div>
+                <div class="col-lg-6">
+                    <label class="">Level</label>
+                    <input type="text" class="form-control">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 myinput">
+                    <label class="mylabel">Email</label>
+                    <input type="text" class="form-control" id="email" maxlength="30">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 myinput">
+                    <label class="mylabel">Phone Number</label>
+                    <input type="text" class="form-control phone" id="myphone" maxlength="30">
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-4"></div>
+    </div>
+
+    <div class="row1" style="background: black"></div>
+    <div class="row2" style="background: red"></div>
+    <div class="row3" style="background: black"></div>
+
+</div>
+
+<script src=" {% static 'dnd/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/jquery.scrollify.min.js' %}" ></script>
+
+
+
+<script>
+
+var height = $( document ).height();
+var width = $( document ).width();
+var iScrollPos = 0;
+var ScrollPage = 0
+
+$( document ).ready(function() {
+
+    // Set row heights.
+    $('.row0').css("height", height*.50)
+    $('.row1').css("height", height*.50)
+    $('.row2').css("height", height*.50)
+    $('.row3').css("height", height*.50)
+
+    // Center Image and skills
+    margin_top_image = parseInt($('.image_border').css('height').replace('px','')) - parseInt($('.image').css('height').replace('px',''));
+    $('.image').css('margin-top', margin_top_image/2);
+
+    label_height = parseInt($('.skill_label').css('height').replace('px',''))*3
+    box_margin = 10;
+    $('.skill_value').css('margin', box_margin);
+    used_space = label_height + box_margin*3*2;
+    console.log(used_space)
+    unused_space = (parseInt($('.image_border').css('height').replace('px',''))-used_space)/3;
+    console.log(unused_space)
+    $('.skill_value').css('height', unused_space*.95);
+
+
+
+})
+
+
+
+</script>
+
+</body>
+</html>

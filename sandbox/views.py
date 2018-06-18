@@ -96,3 +96,83 @@ def get_data_linely_demo(request):
         'errors': errors
     }
     return JsonResponse(json.loads(json.dumps(context)))
+
+
+
+
+import pandas as pd
+import math
+from collections import Counter, OrderedDict
+
+# Get color based on letter
+def get_color(x):
+    x = x[-1]
+    if x == "Y":
+        return "#5fafff"
+    elif x == "E":
+        return "#ff5f5f"
+    elif x== "D":
+        return "#5fffaf"
+    else:
+        return "#ffff5f"
+
+def remove_f(x):
+    if "F" in x:
+        return True
+    else:
+        return False
+
+def speed_grade(request):
+    # Reading in CSV.
+    #df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+
+    # Reverseing DataFrame for display purposes.
+    df = df.iloc[::-1]
+
+    # Clean Up
+    df["SpeedGrade"] = df["SpeedGrade"].apply(lambda x: x.replace("?", ""))
+
+    # Create new DF without any of the speed colums.
+    df_new = df.loc[:, 'SpeedGrade':'tRC*']
+    # Get correct color
+    df_new["Color"] = df_new["SpeedGrade"].apply(lambda x: get_color(x))
+
+    # Iterate through main dataframe and get which speedgrades have no coflicts.
+    # If a speedgrade has no conflict save it to an array to be used later.
+    speed_grades = list(df.loc[:, "-062F":].columns)
+    no_conflicts_array = []
+    for index, row in df.iterrows():
+        no_conflicts = []
+        for y in speed_grades:
+            if (math.isnan(row[y]) == False):
+                if (int(row[y]) == 0 and "F" not in y):
+                    no_conflicts.append(y)
+        no_conflicts = ",".join(no_conflicts)
+        no_conflicts_array.append(no_conflicts)
+
+    # Add array to new df.
+    df_new["no_conflicts"] = no_conflicts_array
+    df_new["delete"] = df_new["SpeedGrade"].apply(lambda x: remove_f(x))
+    df_new = df_new[df_new["delete"] == False]
+
+    # Get data for javascript.
+    top_and_bottom_row = df_new["SpeedGrade"].tolist()
+    column_count = len(top_and_bottom_row)
+    connections = df_new["no_conflicts"].tolist()
+    line_colors = df_new["Color"].tolist()
+    data_rate = Counter(df_new["DataRate"].tolist())
+    data_rate_keys = list(OrderedDict(reversed(sorted(data_rate.items()))).keys())
+    data_rate_values = list(OrderedDict(reversed(sorted(data_rate.items()))).values())
+
+
+    context = {
+        'top_and_bottom_row':top_and_bottom_row,
+        'connections': connections,
+        'column_count':column_count,
+        'line_colors': line_colors,
+        'data_rate_keys': data_rate_keys,
+        'data_rate_values': data_rate_values,
+
+    }
+    return(render(request, 'sandbox/speed_grade.html',context))

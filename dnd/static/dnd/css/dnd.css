@@ -1,0 +1,23 @@
+.centered{
+    text-align: center;
+}
+.border{
+    margin: 15px;
+    border: 5px solid grey;
+    border-radius: 5px;
+}
+.image{
+    max-height:100%;
+    max-width:100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.skill_label{
+    margin:0;
+    text-decoration: underline;
+}
+.skill_value{
+    text-align: center;
+    font-size: 5vh;
+}
