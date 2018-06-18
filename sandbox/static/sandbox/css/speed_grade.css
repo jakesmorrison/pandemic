@@ -40,14 +40,14 @@
 }
 
 .line {
-  stroke-dasharray: 1600;
-  stroke-dashoffset: 1600;
+  stroke-dasharray: 3000;
+  stroke-dashoffset: 3000;
   animation: dash 3s linear forwards;
 }
 
 @keyframes dash {
   from {
-    stroke-dashoffset: 1600;
+    stroke-dashoffset: 3000;
   }
   to {
     stroke-dashoffset: 0;
