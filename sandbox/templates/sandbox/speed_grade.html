@@ -25,7 +25,7 @@
             {% endfor %}
         </div>
     </div>
-    <div class="row row1" style="background: transparency"></div>
+    <div class="row row1"></div>
     <div class="row row2" style="">
         <div class="speed_col">
             {% for e in top_and_bottom_row %}
@@ -126,7 +126,26 @@ function makeSVG(tag, attrs) {
     return el;
 }
 
-$( "div.square_top" ).mouseover(function() {
+<!--$( "div.square_top" ).mouseover(function() {-->
+    <!--hovered_id = this.id;-->
+    <!--var child_data = $(".mysvg").children()-->
+    <!--for(x=0; x<child_data.length; x++){-->
+        <!--if (hovered_id === child_data[x].getAttribute("origin")){-->
+            <!--child_data[x].setAttribute('stroke-width', 5);-->
+        <!--}-->
+        <!--else{-->
+            <!--child_data[x].setAttribute('stroke-width', 0);-->
+        <!--}-->
+    <!--}-->
+<!--}).mouseout(function() {-->
+    <!--hovered_id = this.id;-->
+    <!--var child_data = $(".mysvg").children()-->
+    <!--for(x=0; x<child_data.length; x++){-->
+            <!--child_data[x].setAttribute('stroke-width', 2);-->
+    <!--}-->
+<!--});-->
+
+$( "div.square_top" ).click(function() {
     hovered_id = this.id;
     var child_data = $(".mysvg").children()
     for(x=0; x<child_data.length; x++){
@@ -137,15 +156,12 @@ $( "div.square_top" ).mouseover(function() {
             child_data[x].setAttribute('stroke-width', 0);
         }
     }
-}).mouseout(function() {
-    hovered_id = this.id;
-    var child_data = $(".mysvg").children()
-    for(x=0; x<child_data.length; x++){
-            child_data[x].setAttribute('stroke-width', 2);
-    }
-});
+    var el = $(".mysvg");
+    var newone = el.clone(true);
+    el.before(newone);
+    $("." + el.attr("class") + ":last").remove()
+})
 
-<!--$( "div.square_bottom" ).mouseover(function() {-->
 $( "div.square_bottom" ).click(function() {
     hovered_id = this.id;
     <!--$( '.square' ).css('border-width', 2)-->
@@ -159,15 +175,11 @@ $( "div.square_bottom" ).click(function() {
             child_data[x].setAttribute('stroke-width', 0);
         }
     }
+    var el = $(".mysvg");
+    var newone = el.clone(true);
+    el.before(newone);
+    $("." + el.attr("class") + ":last").remove()
 })
-<!--.mouseout(function() {-->
-    <!--hovered_id = this.id;-->
-    <!--var child_data = $(".mysvg").children()-->
-    <!--for(x=0; x<child_data.length; x++){-->
-            <!--child_data[x].setAttribute('stroke-width', 2);-->
-    <!--}-->
-<!--});-->
-
 
 
 </script>

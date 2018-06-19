@@ -42,7 +42,7 @@
 .line {
   stroke-dasharray: 3000;
   stroke-dashoffset: 3000;
-  animation: dash 3s linear forwards;
+  animation: dash 2s linear forwards;
 }
 
 @keyframes dash {
