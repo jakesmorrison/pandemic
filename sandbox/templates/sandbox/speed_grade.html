@@ -21,7 +21,7 @@
     <div class="row row0" style="">
         <div class="speed_col">
             {% for e in top_and_bottom_row %}
-                <div class="square square_top" id="top-id{{ e|safe }}"> <p class="label-text">{{ e|safe }}</p></div>
+                <div class="square square_top" id="top-id-{{ e|safe }}"> <p class="label-text">{{ e|safe }}</p></div>
             {% endfor %}
         </div>
     </div>
@@ -29,9 +29,19 @@
     <div class="row row2" style="">
         <div class="speed_col">
             {% for e in top_and_bottom_row %}
-                <div class="square square_bottom" id="bottom-id{{ e|safe }}"> <p class="label-text">{{ e|safe }} </p></div>
+                <div class="square square_bottom" id="bottom-id-{{ e|safe }}"> <p class="label-text">{{ e|safe }} </p></div>
             {% endfor %}
         </div>
+    </div>
+    <div class="row row3">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #696969; ">F</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #5fafff; ">Y</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #ff5f5f; ">E</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #ffff5f; ">Null</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #5fffaf; ">D</p></div>
+        <div class="col-sm-1"></div>
+
     </div>
 
 </div>
@@ -43,7 +53,7 @@
 <script>
 var height = $( document ).height();
 var width = $( '.container' ).width();
-var margin_squares = 10;
+var margin_squares = 3;
 var margin_default = 2;
 var margin_total = margin_squares+margin_default;
 var num_squares = {{ column_count|safe }};
@@ -58,6 +68,8 @@ var line_colors = {{ line_colors|safe }};
 var data_rate_keys = {{ data_rate_keys|safe }};
 var data_rate_values = {{ data_rate_values|safe }};
 
+var clicked_id = "";
+
 $( document ).ready(function() {
 
     $('.svg-container').css('height', height);
@@ -68,22 +80,23 @@ $( document ).ready(function() {
     $('.rowm2').css('height', height*.08);
     $('.rowm1').css('height', height*.10);
     $('.row0').css('height', height*.10);
-    $('.row1').css('height', height*.60);
+    $('.row1').css('height', height*.55);
     $('.row2').css('height', height*.10);
+    $('.row3').css('height', height*.05);
 
     $('.square').css('margin', margin_squares);
     $('.square').css('width', square_width);
     $('.square').css('height', square_height);
+    $('.square').css('line-height', square_height+'px');
 
-
+    //
     for(x=0; x<data_rate_values.length; x++){
         data_values = data_rate_values[x];
         data_keys = data_rate_keys[x];
         $('.rowm1').append("<div id='"+data_keys+"' class='data_rate_labels'><p>"+data_rate_keys[x]+"</p><div class='test'>test</div</div>")
-        $('.data_rate_labels').css('margin', margin_squares - 5);
-        label_width = 10 + square_width*(data_values) + margin_squares*(data_values*2-1);
+        $('.data_rate_labels').css('margin', margin_default);
+        label_width = square_width*(data_values) + (margin_squares + margin_default)*(2*data_values-1);
         $('#'+data_keys).css('width', label_width);
-
     }
 
     for(x=0; x<num_squares; x++){
@@ -91,11 +104,10 @@ $( document ).ready(function() {
         line_color = line_colors[x]
         for(y=0; y<foo.length; y++){
             if (foo != ""){
-                draw_line_between('top-id'+top_and_bottom_row[x],'bottom-id'+foo[y], line_color);
+                draw_line_between('top-id-'+top_and_bottom_row[x],'bottom-id'+foo[y], line_color);
             }
         }
     }
-
 });
 
 
@@ -104,7 +116,7 @@ function draw_line_between(id_top, id_bottom, line_color){
     var p = $( '#'+id_top );
     var id_top_pos = p.position();
 
-    var line_shift = 10;
+    var line_shift = margin_squares - 1;
 
     var id_top_left = id_top_pos.left + square_width/2 + line_shift;
     var id_top_top = id_top_pos.top + square_height + line_shift;
@@ -126,6 +138,70 @@ function makeSVG(tag, attrs) {
     return el;
 }
 
+$( "div.square_top" ).click(function() {
+    hovered_id = this.id;
+    var child_data = $(".mysvg").children()
+    for(x=0; x<child_data.length; x++){
+        if (clicked_id === this.id){
+            child_data[x].setAttribute('stroke-width', 2);
+        }
+        else{
+            if (hovered_id === child_data[x].getAttribute("origin")){
+                child_data[x].setAttribute('stroke-width', 5);
+            }
+            else{
+                child_data[x].setAttribute('stroke-width', 0);
+            }
+        }
+    }
+    if (clicked_id === this.id){
+        clicked_id = "";
+    }
+    else{
+        clicked_id = this.id;
+    }
+
+    var el = $(".mysvg");
+    var newone = el.clone(true);
+    el.before(newone);
+    $("." + el.attr("class") + ":last").remove()
+})
+
+$( "div.square_bottom" ).click(function() {
+    hovered_id = this.id;
+    var child_data = $(".mysvg").children()
+    for(x=0; x<child_data.length; x++){
+        if (clicked_id === this.id){
+            child_data[x].setAttribute('stroke-width', 2);
+        }
+        else{
+            if (hovered_id === child_data[x].getAttribute("dest")){
+                child_data[x].setAttribute('stroke-width', 5);
+            }
+            else{
+                child_data[x].setAttribute('stroke-width', 0);
+            }
+        }
+    }
+    if (clicked_id === this.id){
+        clicked_id = "";
+    }
+    else{
+        clicked_id = this.id;
+    }
+
+    var el = $(".mysvg");
+    var newone = el.clone(true);
+    el.before(newone);
+    $("." + el.attr("class") + ":last").remove()
+})
+
+
+
+
+
+
+
 <!--$( "div.square_top" ).mouseover(function() {-->
     <!--hovered_id = this.id;-->
     <!--var child_data = $(".mysvg").children()-->
@@ -144,43 +220,6 @@ function makeSVG(tag, attrs) {
             <!--child_data[x].setAttribute('stroke-width', 2);-->
     <!--}-->
 <!--});-->
-
-$( "div.square_top" ).click(function() {
-    hovered_id = this.id;
-    var child_data = $(".mysvg").children()
-    for(x=0; x<child_data.length; x++){
-        if (hovered_id === child_data[x].getAttribute("origin")){
-            child_data[x].setAttribute('stroke-width', 5);
-        }
-        else{
-            child_data[x].setAttribute('stroke-width', 0);
-        }
-    }
-    var el = $(".mysvg");
-    var newone = el.clone(true);
-    el.before(newone);
-    $("." + el.attr("class") + ":last").remove()
-})
-
-$( "div.square_bottom" ).click(function() {
-    hovered_id = this.id;
-    <!--$( '.square' ).css('border-width', 2)-->
-    <!--$( '#' +this.id ).css('border-width', 3)-->
-    var child_data = $(".mysvg").children()
-    for(x=0; x<child_data.length; x++){
-        if (hovered_id === child_data[x].getAttribute("dest")){
-            child_data[x].setAttribute('stroke-width', 5);
-        }
-        else{
-            child_data[x].setAttribute('stroke-width', 0);
-        }
-    }
-    var el = $(".mysvg");
-    var newone = el.clone(true);
-    el.before(newone);
-    $("." + el.attr("class") + ":last").remove()
-})
-
 
 </script>
 

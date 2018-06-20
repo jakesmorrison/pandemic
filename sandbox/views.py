@@ -98,8 +98,6 @@ def get_data_linely_demo(request):
     return JsonResponse(json.loads(json.dumps(context)))
 
 
-
-
 import pandas as pd
 import math
 from collections import Counter, OrderedDict
@@ -113,6 +111,8 @@ def get_color(x):
         return "#ff5f5f"
     elif x== "D":
         return "#5fffaf"
+    elif x == "F":
+        return "#696969"
     else:
         return "#ffff5f"
 
@@ -124,18 +124,19 @@ def remove_f(x):
 
 def speed_grade(request):
     # Reading in CSV.
-    #df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
-    df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
-
+    df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    #df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
 
     # Reverseing DataFrame for display purposes.
     df = df.iloc[::-1]
 
     # Clean Up
     df["SpeedGrade"] = df["SpeedGrade"].apply(lambda x: x.replace("?", ""))
+    df["SpeedGrade"] = df["SpeedGrade"].apply(lambda x: x.replace("-", ""))
 
     # Create new DF without any of the speed colums.
     df_new = df.loc[:, 'SpeedGrade':'tRC*']
+
     # Get correct color
     df_new["Color"] = df_new["SpeedGrade"].apply(lambda x: get_color(x))
 
@@ -147,15 +148,15 @@ def speed_grade(request):
         no_conflicts = []
         for y in speed_grades:
             if (math.isnan(row[y]) == False):
-                if (int(row[y]) == 0 and "F" not in y):
+                if (int(row[y]) == 0 ): #and "F" not in y
                     no_conflicts.append(y)
         no_conflicts = ",".join(no_conflicts)
         no_conflicts_array.append(no_conflicts)
 
     # Add array to new df.
     df_new["no_conflicts"] = no_conflicts_array
-    df_new["delete"] = df_new["SpeedGrade"].apply(lambda x: remove_f(x))
-    df_new = df_new[df_new["delete"] == False]
+    # df_new["delete"] = df_new["SpeedGrade"].apply(lambda x: remove_f(x))
+    # df_new = df_new[df_new["delete"] == False]
 
     # Get data for javascript.
     top_and_bottom_row = df_new["SpeedGrade"].tolist()
