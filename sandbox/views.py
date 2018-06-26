@@ -125,6 +125,7 @@ def remove_f(x):
         return False
 
 def speed_grade(request):
+
     # Reading in CSV.
     #df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
     df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
