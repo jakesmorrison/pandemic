@@ -127,8 +127,8 @@ def remove_f(x):
 def speed_grade(request):
 
     # Reading in CSV.
-    #df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
-    df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    #df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
 
     # Reverseing DataFrame for display purposes.
     df = df.iloc[::-1]
@@ -146,7 +146,7 @@ def speed_grade(request):
     # Fix order
     df_new["num"] = df_new["SpeedGrade"].apply(lambda x: re.sub("\D", "", x))
     df_new["letter"] = df_new["SpeedGrade"].apply(lambda x: re.sub("\d", "", x))
-    df_new = df_new.sort(['num', 'letter'], ascending=[True, False])
+    df_new = df_new.sort_values(['num', 'letter'], ascending=[True, False])
 
     # Iterate through main dataframe and get which speedgrades have no coflicts.
     # If a speedgrade has no conflict save it to an array to be used later.
