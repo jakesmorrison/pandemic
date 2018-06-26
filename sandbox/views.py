@@ -116,7 +116,7 @@ def get_color(x):
     elif x == "F":
         return "#5fafff"
     else:
-        return "#673AB7"
+        return "rgb(134, 107, 181)"
 
 def remove_f(x):
     if "F" in x:
@@ -127,8 +127,8 @@ def remove_f(x):
 def speed_grade(request):
 
     # Reading in CSV.
-    #df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
-    df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    #df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
 
     # Reverseing DataFrame for display purposes.
     df = df.iloc[::-1]
