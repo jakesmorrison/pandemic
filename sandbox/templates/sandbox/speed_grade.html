@@ -7,6 +7,7 @@
 
     {% load staticfiles %}
     <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'sandbox/css/bootstrap_toggle.css' %}" rel="stylesheet">
     <link href=" {% static 'sandbox/css/speed_grade.css' %}" rel="stylesheet">
 
 
@@ -35,12 +36,14 @@
     </div>
     <div class="row row3">
         <div class="col-sm-1"></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #696969; ">F</p></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #5fafff; ">Y</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #696969; ">Y</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #5fafff; ">F</p></div>
         <div class="col-sm-2"><p class="centered legend" style="color: #ff5f5f; ">E</p></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #ffff5f; ">Null</p></div>
         <div class="col-sm-2"><p class="centered legend" style="color: #5fffaf; ">D</p></div>
-        <div class="col-sm-1"></div>
+        <div class="col-sm-2"><p class="centered legend" style="color: #ffff5f; ">Null</p></div>
+        <div class="col-sm-1">
+            <input id="hover_toggle" type="checkbox" data-toggle="toggle">
+        </div>
 
     </div>
 
@@ -49,6 +52,7 @@
 
 <script src=" {% static 'travel/js/jquery-3.2.1.js' %}" ></script>
 <script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" ></script>
+<script src=" {% static 'sandbox/js/bootstrap_toggle.js' %}" ></script>
 
 <script>
 var height = $( document ).height();
@@ -69,6 +73,8 @@ var data_rate_keys = {{ data_rate_keys|safe }};
 var data_rate_values = {{ data_rate_values|safe }};
 
 var clicked_id = "";
+
+var hover_on = false;
 
 $( document ).ready(function() {
 
@@ -196,30 +202,64 @@ $( "div.square_bottom" ).click(function() {
     $("." + el.attr("class") + ":last").remove()
 })
 
+$( "div.square_top" ).mouseover(function() {
+    if(hover_on === true){
+        hovered_id = this.id;
+        var child_data = $(".mysvg").children()
+        for(x=0; x<child_data.length; x++){
+            if (hovered_id === child_data[x].getAttribute("origin")){
+                child_data[x].setAttribute('stroke-width', 5);
+            }
+            else{
+                child_data[x].setAttribute('stroke-width', 0);
+            }
+        }
+    }
+}).mouseout(function() {
+    if(hover_on === true){
+        hovered_id = this.id;
+        var child_data = $(".mysvg").children()
+        for(x=0; x<child_data.length; x++){
+                child_data[x].setAttribute('stroke-width', 2);
+        }
+    }
+});
+
+$( "div.square_bottom" ).mouseover(function() {
+    console.log(hover_on)
+    if(hover_on === true){
+        hovered_id = this.id;
+        var child_data = $(".mysvg").children()
+        for(x=0; x<child_data.length; x++){
+            if (clicked_id === this.id){
+                child_data[x].setAttribute('stroke-width', 2);
+            }
+            else{
+                if (hovered_id === child_data[x].getAttribute("dest")){
+                    child_data[x].setAttribute('stroke-width', 5);
+                }
+                else{
+                    child_data[x].setAttribute('stroke-width', 0);
+                }
+            }
+        }
+    }
+}).mouseout(function() {
+    if(hover_on === true){
+        hovered_id = this.id;
+        var child_data = $(".mysvg").children()
+        for(x=0; x<child_data.length; x++){
+                child_data[x].setAttribute('stroke-width', 2);
+        }
+    }
+});
 
 
+$('#hover_toggle').change(function() {
+    hover_on = $(this).prop('checked');
+})
 
 
-
-
-<!--$( "div.square_top" ).mouseover(function() {-->
-    <!--hovered_id = this.id;-->
-    <!--var child_data = $(".mysvg").children()-->
-    <!--for(x=0; x<child_data.length; x++){-->
-        <!--if (hovered_id === child_data[x].getAttribute("origin")){-->
-            <!--child_data[x].setAttribute('stroke-width', 5);-->
-        <!--}-->
-        <!--else{-->
-            <!--child_data[x].setAttribute('stroke-width', 0);-->
-        <!--}-->
-    <!--}-->
-<!--}).mouseout(function() {-->
-    <!--hovered_id = this.id;-->
-    <!--var child_data = $(".mysvg").children()-->
-    <!--for(x=0; x<child_data.length; x++){-->
-            <!--child_data[x].setAttribute('stroke-width', 2);-->
-    <!--}-->
-<!--});-->
 
 </script>
 

@@ -101,18 +101,20 @@ def get_data_linely_demo(request):
 import pandas as pd
 import math
 from collections import Counter, OrderedDict
+import string
+import re
 
 # Get color based on letter
 def get_color(x):
     x = x[-1]
     if x == "Y":
-        return "#5fafff"
+        return "#696969"
     elif x == "E":
         return "#ff5f5f"
     elif x== "D":
         return "#5fffaf"
     elif x == "F":
-        return "#696969"
+        return "#5fafff"
     else:
         return "#ffff5f"
 
@@ -139,6 +141,11 @@ def speed_grade(request):
 
     # Get correct color
     df_new["Color"] = df_new["SpeedGrade"].apply(lambda x: get_color(x))
+
+    # Fix order
+    df_new["num"] = df_new["SpeedGrade"].apply(lambda x: re.sub("\D", "", x))
+    df_new["letter"] = df_new["SpeedGrade"].apply(lambda x: re.sub("\d", "", x))
+    df_new = df_new.sort(['num', 'letter'], ascending=[True, False])
 
     # Iterate through main dataframe and get which speedgrades have no coflicts.
     # If a speedgrade has no conflict save it to an array to be used later.
