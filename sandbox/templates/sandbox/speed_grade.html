@@ -21,26 +21,26 @@
     <div class="row rowm1" style=""></div>
     <div class="row row0" style="">
         <div class="speed_col">
-            {% for e in top_and_bottom_row %}
-                <div class="square square_top" id="top-id-{{ e|safe }}"> <p class="label-text">{{ e|safe }}</p></div>
+            {% for e in color_and_rows %}
+                <div class="square square_top" id="top-id-{{ e.0|safe }}" style="background: {{ e.1|safe }}"> <p class="label-text">{{ e.0|safe }}</p></div>
             {% endfor %}
         </div>
     </div>
     <div class="row row1"></div>
     <div class="row row2" style="">
         <div class="speed_col">
-            {% for e in top_and_bottom_row %}
-                <div class="square square_bottom" id="bottom-id-{{ e|safe }}"> <p class="label-text">{{ e|safe }} </p></div>
+            {% for e in color_and_rows %}
+                <div class="square square_bottom" id="bottom-id-{{ e.0|safe }}" style="background: {{ e.1|safe }}"> <p class="label-text">{{ e.0|safe }} </p></div>
             {% endfor %}
         </div>
     </div>
     <div class="row row3">
         <div class="col-sm-1"></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #696969; ">Y</p></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #5fafff; ">F</p></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #ff5f5f; ">E</p></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #5fffaf; ">D</p></div>
-        <div class="col-sm-2"><p class="centered legend" style="color: #ffff5f; ">Null</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="background: #696969; color: white;">Y</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="background: #5fafff; color: white;">F</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="background: #ff5f5f; color: white;">E</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="background: #5fffaf; color: white;">D</p></div>
+        <div class="col-sm-2"><p class="centered legend" style="background: #673AB7; color: white; ">Null</p></div>
         <div class="col-sm-1">
             <input id="hover_toggle" type="checkbox" data-toggle="toggle">
         </div>

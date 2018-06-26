@@ -116,7 +116,7 @@ def get_color(x):
     elif x == "F":
         return "#5fafff"
     else:
-        return "#ffff5f"
+        return "#673AB7"
 
 def remove_f(x):
     if "F" in x:
@@ -127,8 +127,8 @@ def remove_f(x):
 def speed_grade(request):
 
     # Reading in CSV.
-    #df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
-    df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    df = pd.read_csv("/Users/jakesmorrison/Google Drive/Pycharm/pandemic/sandbox/static/sandbox/csv/Book1.csv")
+    #df = pd.read_csv("/root/pandemic/sandbox/static/sandbox/csv/Book1.csv")
 
     # Reverseing DataFrame for display purposes.
     df = df.iloc[::-1]
@@ -175,6 +175,10 @@ def speed_grade(request):
     data_rate_keys = list(OrderedDict(reversed(sorted(data_rate.items()))).keys())
     data_rate_values = list(OrderedDict(reversed(sorted(data_rate.items()))).values())
 
+    color_and_rows = []
+    for x in range(0,len(line_colors)):
+        color_and_rows.append([top_and_bottom_row[x],line_colors[x]])
+
 
     context = {
         'top_and_bottom_row':top_and_bottom_row,
@@ -183,6 +187,7 @@ def speed_grade(request):
         'line_colors': line_colors,
         'data_rate_keys': data_rate_keys,
         'data_rate_values': data_rate_values,
+        'color_and_rows': color_and_rows,
 
     }
     return(render(request, 'sandbox/speed_grade.html',context))
