@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>DnD</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'dnd/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href=" {% static 'dnd/css/dnd.css' %}" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+
+</head>
+<body class="mybody">
+
+<div class="container" style="width:98%">
+    <div id="sortable" class="row main_row">
+        {% for x in my_character_list %}
+        <div id="character_{{forloop.counter0}}" class="col-lg-3 ui-state-default panel" style="border-left: 1px solid black; border-right: 1px solid black;">
+            <div class="row row0">
+                <h2 class="heading centered font">{{x}}</h2>
+            </div>
+            <div class="row row1">
+            </div>
+            <div class="row row2">
+                <div id="spider_web_{{forloop.counter0}}" class="spider_web"></div>
+            </div>
+            <div class="row row3">
+                hey
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+<!--<script src=" {% static 'dnd/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>-->
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src=" {% static 'dnd/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/jquery.scrollify.min.js' %}" ></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src="https://code.highcharts.com/highcharts-more.js"></script>
+<script src="https://code.highcharts.com/modules/exporting.js"></script>
+<script src="https://code.highcharts.com/modules/export-data.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src=" {% static 'dnd/js/spider_web.js' %}" ></script>
+
+
+<script>
+
+var height = $( document ).height();
+var width = $( document ).width();
+var my_character_dict = {{my_character_dict|safe}}
+var my_character_list = {{my_character_list|safe}}
+
+$( document ).ready(function() {
+    <!--$(".main_row").css('height', height);-->
+    <!--$(".row0").css('height', height*.05);-->
+    <!--$(".row1").css('height', height*.25);-->
+    <!--$(".row2").css('height', height*.35);-->
+
+    var counter=0;
+    for (var i = 0; i < my_character_list.length; i++) {
+        var key = my_character_list[i];
+        create_spider_web(key, my_character_dict[key]['stats'], 'spider_web_'+counter.toString(), my_character_dict[key]['color']);
+        $('#character_'+counter.toString()).find( ".row1" ).html("\
+            <div class='col-xs-6'><p class='mylabel font'>Race</p><p class='small_text font'>"+my_character_dict[key]['race']+"</p></div>\
+            <div class='col-xs-6'><p class='mylabel font'>Class</p><p class='small_text font'>"+my_character_dict[key]['class']+" L-"+my_character_dict[key]['level']+"</p></div>\
+            <div class='col-xs-6'><p class='mylabel font'>Background</p><p class='small_text font'>"+my_character_dict[key]['background']+"</p></div>\
+            <div class='col-xs-6'><p class='mylabel font'>Alignment</p><p class='small_text font'>"+my_character_dict[key]['alignment']+"</p></div>\
+            <div class='col-xs-3'><p class='mylabel font'>AC</p><p class='small_text font'>"+my_character_dict[key]['ac']+"</p></div>\
+            <div class='col-xs-3'><p class='mylabel font'>Speed</p><p class='small_text font'>"+my_character_dict[key]['speed']+"</p></div>\
+            <div class='col-xs-3'><p class='mylabel font'>HP</p><p class='small_text font'>"+my_character_dict[key]['hp']+"</p></div>\
+            <div class='col-xs-3'><p class='mylabel font'>Prof</p><p class='small_text font'>"+my_character_dict[key]['prof_bonus']+"</p></div>\
+        ")
+        $('#character_'+counter.toString()).find( ".row3" ).html("\
+            <div class='col-xs-12'><p class='mylabel font'>Saving Throw Proficiencies</p><p class='small_text font'>"+my_character_dict[key]['saving_throw']+"</p></div>\
+            <div class='col-xs-12'><p class='mylabel font'>Skill Proficiencies</p><p class='small_text font'>"+my_character_dict[key]['proficiencies']+"</p></div>\
+            <div class='col-xs-12'><p class='mylabel font'>Armor</p><p class='small_text font'>"+my_character_dict[key]['armor']+"</p></div>\
+            <div class='col-xs-12'><p class='mylabel font'>Weapons</p><p class='small_text font'>"+my_character_dict[key]['weapon']+"</p></div>\
+        ")
+
+
+        counter++;
+    }
+})
+
+$( function() {
+    $( "#sortable" ).sortable();
+    $( "#sortable" ).disableSelection();
+});
+
+$(".panel").click(function () {
+   $(this).toggleClass("green");
+});
+
+// Shitty bubble sort. Doesnt matter too much for my purpose, but I should optimize it.
+function sort_dictionary(mydict){
+    var temp_list_keys = Object.keys(my_character_dict);
+    for(z=0; z<temp_list_keys.length;z++){
+        for(x=0; x<temp_list_keys.length; x++){
+            word_length = temp_list_keys[x].split("").length;
+            for(y=0; y<word_length; y++){
+                if(x+1<temp_list_keys.length){
+                    // Stay.
+                    if (temp_list_keys[x][y]<temp_list_keys[x+1][y]){
+                        break;
+                    }
+                    // Switch.
+                    else if(temp_list_keys[x][y]>temp_list_keys[x+1][y]){
+                        shadow = temp_list_keys[x];
+                        temp_list_keys[x] = temp_list_keys[x+1];
+                        temp_list_keys[x+1] = shadow;
+                        break;
+                    }
+                    // If equal check next letter.
+                    else if(temp_list_keys[x][y]===temp_list_keys[x+1][y]){
+                        console.log("cont")
+                    }
+                }
+            }
+        }
+    }
+    return temp_list_keys;
+}
+
+
+</script>
+
+</body>
+</html>
