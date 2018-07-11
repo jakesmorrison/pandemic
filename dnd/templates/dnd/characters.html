@@ -24,6 +24,7 @@
         <div id="character_{{forloop.counter0}}" class="col-lg-3 ui-state-default panel" style="border-left: 1px solid black; border-right: 1px solid black;">
             <div class="row row0">
                 <h2 class="heading centered font">{{x}}</h2>
+                <div class="square"></div>
             </div>
             <div class="row row1">
             </div>
@@ -87,7 +88,6 @@ $( document ).ready(function() {
             <div class='col-xs-12'><p class='mylabel font'>Weapons</p><p class='small_text font'>"+my_character_dict[key]['weapon']+"</p></div>\
         ")
 
-
         counter++;
     }
 })
@@ -97,7 +97,7 @@ $( function() {
     $( "#sortable" ).disableSelection();
 });
 
-$(".panel").click(function () {
+$(".square").click(function () {
    $(this).toggleClass("green");
 });
 

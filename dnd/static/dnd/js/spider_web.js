@@ -30,6 +30,7 @@ function create_spider_web(name, stats, container, color){
             gridLineInterpolation: 'polygon',
             lineWidth: 0,
             min: 0,
+            max: 20,
             labels:{
                 enabled:false
             }
@@ -37,19 +38,20 @@ function create_spider_web(name, stats, container, color){
         },
 
         tooltip: {
-            shared: true,
-            formatter: function ()  {
-                ability = this.y;
-                if (ability>=10){
-                    return '<b>'+this.x+'</b><br> Modifier: +'+Math.floor((ability-10)/2).toString()+'<br> Value: '+ability;
-                }
-                else if(ability===9){
-                    return '+'+Math.ceil((ability-10)/2).toString();
-                }
-                else{
-                    return ''+Math.ceil((ability-10)/2).toString();
-                }
-            }
+            enabled: false,
+//            shared: true,
+//            formatter: function ()  {
+//                ability = this.y;
+//                if (ability>=10){
+//                    return '<b>'+this.x+'</b><br> Modifier: +'+Math.floor((ability-10)/2).toString()+'<br> Value: '+ability;
+//                }
+//                else if(ability===9){
+//                    return '+'+Math.ceil((ability-10)/2).toString();
+//                }
+//                else{
+//                    return ''+Math.ceil((ability-10)/2).toString();
+//                }
+//            }
         },
 
         legend: {
