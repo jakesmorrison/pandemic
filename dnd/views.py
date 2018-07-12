@@ -20,7 +20,7 @@ def index(request):
             'armor': "Leather Armor (11) <br> Wood Shield (+2)",
             'weapon': "Scimitar +4 1d8+2",
         },
-        'Dawson': {
+        'Tarlos Borevain': {
             'color': '#ff5fff',
             'class': 'Rogue',
             'race': 'Halfling (GW)',

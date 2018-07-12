@@ -10,9 +10,9 @@
 
     {% load staticfiles %}
     <link href=" {% static 'dnd/css/bootstrap.min.css' %}" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href=" {% static 'dnd/css/jquery-ui.css' %}" rel="stylesheet">
     <link href=" {% static 'dnd/css/dnd.css' %}" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 
 
 </head>
@@ -41,16 +41,18 @@
 </div>
 
 <!--<script src=" {% static 'dnd/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>-->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src=" {% static 'dnd/js/jquery-1.12.4.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'dnd/js/bootstrap.min.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'dnd/js/datatables.min.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'dnd/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
 <script src=" {% static 'dnd/js/jquery.scrollify.min.js' %}" ></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
+<script src=" {% static 'dnd/js/highcharts.js' %}" ></script>
+
 <script src="https://code.highcharts.com/highcharts-more.js"></script>
 <script src="https://code.highcharts.com/modules/exporting.js"></script>
 <script src="https://code.highcharts.com/modules/export-data.js"></script>
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script src=" {% static 'dnd/js/jquery-ui.js' %}" ></script>
 <script src=" {% static 'dnd/js/spider_web.js' %}" ></script>
 
 
