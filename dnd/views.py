@@ -3,7 +3,7 @@ from django.shortcuts import render
 
 def index(request):
     my_character_dict = {
-        'Joie':{
+        'Oakley':{
             'color': '#ff5f5f',
             'class':'Druid',
             'race':'Human',
@@ -19,6 +19,9 @@ def index(request):
             'proficiencies': "Athletics, Survival",
             'armor': "Leather Armor (11) <br> Wood Shield (+2)",
             'weapon': "Scimitar +4 1d8+2",
+            'spells': "Spell Save: 14, Charisma, +6",
+            'cantrip': "Poison Spray, Cont ST, 1d12 <br> Guidence",
+            'level_1': "Cure Wounds <br> Thunder Wave, Cont ST /2, 2d8",
         },
         'Tarlos Borevain': {
             'color': '#ff5fff',
@@ -36,6 +39,9 @@ def index(request):
             'proficiencies': "Acrobatics, Athletics, Insight, Sleight of Hand, Stealth, Survival",
             'armor': "Leather Armor (11)",
             'weapon': "Rapier +7 1d8+5 <br> Shortbow +7 1d6+5",
+            'spells': "None",
+            'cantrip': "None",
+            'level_1': "None",
         }
 
     }

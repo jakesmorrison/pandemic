@@ -32,7 +32,6 @@
                 <div id="spider_web_{{forloop.counter0}}" class="spider_web"></div>
             </div>
             <div class="row row3">
-                hey
             </div>
         </div>
         {% endfor %}
@@ -88,6 +87,9 @@ $( document ).ready(function() {
             <div class='col-xs-12'><p class='mylabel font'>Skill Proficiencies</p><p class='small_text font'>"+my_character_dict[key]['proficiencies']+"</p></div>\
             <div class='col-xs-12'><p class='mylabel font'>Armor</p><p class='small_text font'>"+my_character_dict[key]['armor']+"</p></div>\
             <div class='col-xs-12'><p class='mylabel font'>Weapons</p><p class='small_text font'>"+my_character_dict[key]['weapon']+"</p></div>\
+            <div class='col-xs-12'><p class='mylabel font'>Spell Casting</p><p class='small_text font'>"+my_character_dict[key]['spells']+"</p></div>\
+            <div class='col-xs-12'><p class='mylabel font'>Cantrips</p><p class='small_text font'>"+my_character_dict[key]['cantrip']+"</p></div>\
+            <div class='col-xs-12'><p class='mylabel font'>Level 1</p><p class='small_text font'>"+my_character_dict[key]['level_1']+"</p></div>\
         ")
 
         counter++;
