@@ -22,17 +22,17 @@
     <div id="sortable" class="row main_row">
         {% for x in my_character_list %}
         <div id="character_{{forloop.counter0}}" class="col-lg-3 ui-state-default panel" style="border-left: 1px solid black; border-right: 1px solid black;">
-            <div class="row row0">
-                <h2 class="heading centered font">{{x}}</h2>
-                <div class="square"></div>
-            </div>
-            <div class="row row1">
-            </div>
-            <div class="row row2">
-                <div id="spider_web_{{forloop.counter0}}" class="spider_web"></div>
-            </div>
-            <div class="row row3">
-            </div>
+                <div class="row row0">
+                    <h2 class="heading centered font">{{x}}</h2>
+                    <div class="square"></div>
+                </div>
+                <div class="row row1">
+                </div>
+                <div class="row row2">
+                    <div id="spider_web_{{forloop.counter0}}" class="spider_web"></div>
+                </div>
+                <div class="row row3">
+                </div>
         </div>
         {% endfor %}
     </div>

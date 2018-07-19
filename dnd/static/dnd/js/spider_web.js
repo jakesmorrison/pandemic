@@ -68,10 +68,10 @@ function create_spider_web(name, stats, container, color){
                             return '+'+Math.floor((ability-10)/2).toString();
                         }
                         else if(ability===9){
-                            return '+'+Math.ceil((ability-10)/2).toString();
+                            return '+'+Math.floor((ability-10)/2).toString();
                         }
                         else{
-                            return ''+Math.ceil((ability-10)/2).toString();
+                            return ''+Math.floor((ability-10)/2).toString();
                         }
                     }
                 },
