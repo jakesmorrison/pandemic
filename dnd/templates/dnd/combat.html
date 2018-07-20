@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Combat</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'dnd/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'dnd/css/jquery-ui.css' %}" rel="stylesheet">
+    <link href=" {% static 'dnd/css/combat.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+
+
+</head>
+<body class="mybody">
+<div class="container" style="width:98%">
+    <div class="row">
+        <div class="col-lg-4 col-xs-12">
+            <h3 class="centered">Characters in Battle
+            <button type="button" class="btn btn-success" onclick="sort_by_init()">Sort By Inititive</button></h3>
+            <ul id="sortable1" class="connectedSortable">
+            {% for x in my_character_list %}
+              <li id="character_{{forloop.counter0}}" class="ui-state-default li-side1">
+                  <div class="row">
+                      <div id="name_{{forloop.counter0}}" class="col-xs-4 panel-name">
+                          <p class="font panel-text">{{x}}</p>
+                      </div>
+                      <div id="init_{{forloop.counter0}}" class="col-xs-4 panel-init">
+                            <input type="init" class="form-control input-init" id="init_{{forloop.counter0}}">
+                      </div>
+                      <div id="" class="col-xs-4 panel-hp">
+                            <input type="hp" class="form-control input-hp" id="hp_{{forloop.counter0}}">
+                      </div>
+                  </div>
+              </li>
+            {% endfor %}
+            </ul>
+        </div>
+        <div class="col-lg-4 col-xs-12">
+            <h3 class="centered">
+                <button type="button" class="btn btn-success" onclick="shift()"><</button>
+                Queued
+                <button type="button" class="btn btn-success" onclick="create_new_enemy()">Create New Enemy</button>
+                <input class="form-control" id="hp-input">
+            </h3>
+            <ul id="sortable2" class="connectedSortable">
+                <li class='ui-state-default li-side1 unclickable' id="unclickable"></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<script src=" {% static 'dnd/js/jquery-1.12.4.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/jquery.scrollify.min.js' %}" ></script>
+<script src=" {% static 'dnd/js/highcharts.js' %}" ></script>
+<script src=" {% static 'dnd/js/jquery-ui.js' %}" ></script>
+<script src=" {% static 'dnd/js/spider_web.js' %}" ></script>
+
+<script>
+var enemy = 0;
+var my_character_dict = {{my_character_dict|safe}}
+var my_character_list = {{my_character_list|safe}}
+
+$( document ).ready(function() {
+    for (var i = 0; i < my_character_list.length; i++) {
+        $('#character_'+i.toString()).css("background",my_character_dict[my_character_list[i]]['color'])
+        $('#hp_'+i.toString()).val(my_character_dict[my_character_list[i]]['hp'])
+    }
+    $('.panel-name').css('margin-top',($('.li-side1').height() - $('.panel-name').height())/2)
+    $('.panel-init').css('margin-top',($('.li-side1').height() - $('.panel-init').height())/2)
+    $('.panel-hp').css('margin-top',($('.li-side1').height() - $('.panel-hp').height())/2)
+
+})
+
+
+$( function() {
+    $( "#sortable1, #sortable2" ).sortable({
+      connectWith: ".connectedSortable"
+    }).disableSelection();
+});
+
+function create_new_enemy(){
+    $('#sortable2').append("\
+            <li class='ui-state-default li-side1' id=enemy_"+enemy.toString()+"><div class='row'>\
+            <div class='col-xs-4 panel-name'><input class='form-control input-name' style='margin-top: 5px' id=ename_"+enemy.toString()+"></div>\
+            <div class='col-xs-3 panel-init'><input class='form-control input-init' style='margin-top: 5px' id=einit_"+enemy.toString()+"></div>\
+            <div class='col-xs-3 panel-hp'><input class='form-control input-hp' style='margin-top: 5px' id=ehp_"+enemy.toString()+"></div>\
+            <div class='col-xs-2 exit'><button type='button' class='btn btn-danger' onclick='exit("+enemy.toString()+")' style='margin-top: 5px'>X</button></div>\
+            </div></li>");
+
+    $('#ename_'+enemy.toString()).val("Enemy "+enemy.toString())
+    $('#einit_'+enemy.toString()).val(getRandomArbitrary(1,20))
+    $('#ehp_'+enemy.toString()).val($('#hp-input').val())
+
+    enemy+=1;
+}
+
+function sort_by_init(){
+    children = $('#sortable1').children()
+
+    for(y=0; y<children.length; y++){
+        for(x=0; x<children.length; x++){
+            if(x+1<children.length){
+                curr_val = parseInt(children[x].getElementsByClassName("input-init")[0].value);
+                next_val = parseInt(children[x+1].getElementsByClassName("input-init")[0].value);
+                // Switch.
+                if(curr_val<next_val){
+                    shadow = children[x];
+                    children[x] = children[x+1];
+                    children[x+1] = shadow;
+                }
+            }
+        }
+    }
+    $('#sortable1').html("");
+    for(x=0; x<children.length; x++){
+        $('#sortable1').append(children[x]);
+    }
+
+}
+
+function getRandomArbitrary(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function shift(){
+    children = $('#sortable2').children()
+    for(x=0; x<children.length; x++){
+        if(children[x].id === "unclickable"){
+        }
+        else{
+            $('#sortable1').append(children[x])
+        }
+    }
+
+}
+
+function exit(x){
+    console.log(x)
+    $( "#enemy_"+x.toString() ).remove();
+}
+
+
+
+</script>
+
+</body>
+</html>

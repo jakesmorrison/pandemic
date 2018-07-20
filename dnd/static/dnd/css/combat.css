@@ -1,0 +1,69 @@
+.li-side1 {
+    list-style-type: none;
+    border: 3px solid black;
+    height: 50px;
+    margin: 5px;
+    width: 100%;
+}
+
+.li-side2 {
+    list-style-type: none;
+    border: 3px solid black;
+    height: 50px;
+    margin: 5px;
+    width: 100%;
+    background: gray;
+    color: white;
+}
+
+#sortable1{
+    width: 100%;
+    margin: 0;
+}
+
+#sortable2{
+    width: 100%;
+    margin: 0;
+}
+.centered{
+    text-align: center;
+}
+
+.panel-text{
+    text-align: center;
+    font-weight: 700;
+}
+
+.input-init{
+    width: 75px;
+    text-align: center;
+}
+
+.input-hp{
+    width: 75px;
+    text-align: center;
+}
+
+.input-name{
+    margin-left: 5px;
+    width: 90%;
+    text-align: center;
+}
+
+label {
+    margin-bottom: 0px;
+}
+
+.unclickable{
+    height: 0px;
+    border: 1px solid black;
+}
+
+.ui-sortable{
+    padding: 0px;
+}
+
+#hp-input{
+    width: 50px;
+    display: inline;
+}
