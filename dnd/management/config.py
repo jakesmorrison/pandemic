@@ -1,6 +1,7 @@
 class config():
     my_character_dict = {
         'Oakley':{
+            'exp': 130,
             'color': '#ff5f5f',
             'class':'Druid',
             'race':'Human',
@@ -21,6 +22,7 @@ class config():
             'level_1': "Cure Wounds <br> Thunder Wave, Cont ST /2, 2d8",
         },
         'Tarlos Borevain': {
+            'exp': 130,
             'color': '#ff5fff',
             'class': 'Rogue',
             'race': 'Halfling (GW)',
@@ -41,6 +43,7 @@ class config():
             'level_1': "None",
         },
         'Valros': {
+            'exp': 130,
             'color': '#5fff5f',
             'class': 'Warlock',
             'race': 'Tiefling',
@@ -61,6 +64,7 @@ class config():
             'level_1': "Witch Bolt, +4, 1d12 SP",
         },
         'Dracodea': {
+            'exp': 130,
             'color': '#5fffff',
             'class': 'Paladin',
             'race': 'Dragonborn',

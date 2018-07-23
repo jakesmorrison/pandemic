@@ -20,3 +20,9 @@ def moviepass(request):
     }
     return render(request,"moviepass/moviepass.html",context)
 
+
+def cost_analysis(request):
+    context={
+
+    }
+    return render(request, "moviepass/moviepass_cost_analysis.html", context)

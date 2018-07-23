@@ -73,6 +73,7 @@ $( document ).ready(function() {
         var key = my_character_list[i];
         create_spider_web(key, my_character_dict[key]['stats'], 'spider_web_'+counter.toString(), my_character_dict[key]['color']);
         $('#character_'+counter.toString()).find( ".row1" ).html("\
+            <div class='col-xs-12'><p class='mylabel font'>Experience</p><p class='small_text font'>"+my_character_dict[key]['exp']+"</p></div>\
             <div class='col-xs-6'><p class='mylabel font'>Race</p><p class='small_text font'>"+my_character_dict[key]['race']+"</p></div>\
             <div class='col-xs-6'><p class='mylabel font'>Class</p><p class='small_text font'>"+my_character_dict[key]['class']+" L-"+my_character_dict[key]['level']+"</p></div>\
             <div class='col-xs-6'><p class='mylabel font'>Background</p><p class='small_text font'>"+my_character_dict[key]['background']+"</p></div>\

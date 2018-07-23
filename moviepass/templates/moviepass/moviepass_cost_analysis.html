@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>MoviePass Cost Analysis</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/style.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/bootstrap_slider.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row">
+        <h1 class="centered">MoviePass Cost Analysis</h1>
+        <br>
+        <div class="col-lg-10 col-lg-offset-1 col-xs-12"><div id="my_chart"></div></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-xs-12">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-xs-12 centered">
+                    <h5 id="movies_seen">Movies Per Month</h5>
+                    <input id="movies_seen_value" data-slider-id='movies_seen_value' type="text" data-slider-min="0" data-slider-max="30" data-slider-step="1" data-slider-value="5"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-xs-12">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2 col-xs-12 centered">
+                    <h5 id="surge_price">Average Surge Price</h5>
+                    <input id="surge_price_value" data-slider-id='surge_price_value' type="text" data-slider-min="0" data-slider-max="5" data-slider-step=".5" data-slider-value="3"/>
+                </div>
+                <div class="col-lg-4 col-lg-offset-0 col-xs-12 centered">
+                    <h5 id="surge_count">Number of Surge Movies Per Month</h5>
+                    <input id="surge_count_value" data-slider-id='surge_count_value' type="text" data-slider-min="0" data-slider-max="30" data-slider-step="1" data-slider-value="3"/>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-10 col-lg-offset-1 col-xs-12">
+            <div class="row">
+                <div class="col-lg-4 col-lg-offset-2 col-xs-12 centered">
+                    <h5 id="ticket_cost">Average Ticket Price</h5>
+                    <input id="ticket_cost_value" data-slider-id='ticket_cost_value' type="text" data-slider-min="5" data-slider-max="20" data-slider-step="1" data-slider-value="11"/>
+                </div>
+                <div class="col-lg-4 col-lg-offset-0 col-xs-12 centered">
+                    <h5 id="sub_cost">MoviePass Subscription Cost</h5>
+                    <input id="sub_cost_value" data-slider-id='sub_cost_value' type="text" data-slider-min="0" data-slider-max="20" data-slider-step="1" data-slider-value="10"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- jQuery -->
+{% load staticfiles %}
+<!--<script src=" {% static 'books/js/jquery.min.js' %}" rel="stylesheet"></script>-->
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap_slider.js' %}" rel="stylesheet"></script>
+<script src="{% static 'finance/js/highcharts.js' %}"></script>
+
+<script>
+
+var chart = Highcharts.chart('my_chart', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: ''
+    },
+    legend: {enabled: false},
+    exporting: { enabled: false },
+    credits: {enabled: false},
+    xAxis: {
+        allowDecimals: false,
+        title: {
+            text: 'Movie Number'
+        },
+        labels: {
+            formatter: function () {
+                return this.value; // clean, unformatted number for year
+            }
+        }
+    },
+    yAxis: {
+        title: {
+            text: 'Money Saved Per Month'
+        },
+        labels: {
+            formatter: function () {
+                val = this.value;
+                return '$'+val.toLocaleString();
+            }
+        }
+    },
+    tooltip: {
+        pointFormat: 'Money Saved After Movie {point.x:,.0f}: <b>${point.y:,.0f}</b>'
+    },
+    plotOptions: {
+        column: {
+            zones: [{
+                value: 0,
+                color: '#ff5f5f' // ... have the color blue.
+            },{
+                color: '#5fff5f'
+            }]
+        }
+    },
+    series: [{
+        name: 'moviepass',
+        data: []
+    }]
+});
+
+var movies_seen_value = 0;
+var surge_price_value = 0;
+var surge_count_value = 0;
+var ticket_cost_value = 0;
+var sub_cost_value = 0;
+
+$( document ).ready(function() {
+    setup_sliders();
+});
+
+function update_data(){
+    data = []
+    temp_surge_count_value = parseInt(surge_count_value);
+
+    for(x=0; x<movies_seen_value; x++){
+        temp_x = x + 1;
+        if(temp_surge_count_value>0){
+            console.log(ticket_cost_value)
+            cost =(ticket_cost_value*temp_x)-(sub_cost_value+(surge_price_value*temp_x));
+            temp_surge_count_value -= 1;
+            data.push([temp_x, cost])
+        }
+        else{
+            cost =ticket_cost_value*temp_x - (sub_cost_value+surge_price_value*surge_count_value);
+            data.push([temp_x, cost])
+        }
+
+    }
+    console.log(data)
+    chart.series[0].update({
+            data: data
+    });
+}
+
+function setup_sliders(){
+    $('#movies_seen_value').slider({
+        formatter: function(value) {
+            movies_seen_value = value;
+            $("#movies_seen").text("Movies Per Month: "+value.toLocaleString());
+            return '' + value.toLocaleString();
+        }
+    });
+
+    $('#surge_price_value').slider({
+        formatter: function(value) {
+            surge_price_value = value;
+            $("#surge_price").text("Average Surge Price: $"+value.toLocaleString());
+            return '$' + value.toLocaleString();
+        }
+    });
+
+    $('#surge_count_value').slider({
+        formatter: function(value) {
+            surge_count_value = value;
+            $("#surge_count").text("Number of Surge Movies Per Month: "+value.toLocaleString());
+            return '' + value.toLocaleString();
+        }
+    });
+
+    $('#ticket_cost_value').slider({
+        formatter: function(value) {
+            ticket_cost_value = value;
+            $("#ticket_cost").text("Average Ticket Price: $"+value.toLocaleString());
+            return '$' + value.toLocaleString();
+        }
+    });
+
+    $('#sub_cost_value').slider({
+        formatter: function(value) {
+            sub_cost_value = value;
+            $("#sub_cost").text("MoviePass Subscription Cost: $"+value.toLocaleString());
+            return '$' + value.toLocaleString();
+        }
+    });
+    update_data();
+}
+
+$("#movies_seen_value").on("slide", function(slideEvt) {
+	movies_seen_value = slideEvt.value;
+    update_data();
+});
+$("#surge_price_value").on("slide", function(slideEvt) {
+	surge_price_value = slideEvt.value;
+    update_data();
+});
+$("#surge_count_value").on("slide", function(slideEvt) {
+	surge_count_value = slideEvt.value;
+    update_data();
+});
+$("#ticket_cost_value").on("slide", function(slideEvt) {
+	ticket_cost_value = slideEvt.value;
+    update_data();
+});
+$("#sub_cost_value").on("slide", function(slideEvt) {
+	sub_cost_value = slideEvt.value;
+    update_data();
+});
+
+</script>
+
+
+</body>
+</html>
