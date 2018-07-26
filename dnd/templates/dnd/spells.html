@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>DnD</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'dnd/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'dnd/css/jquery-ui.css' %}" rel="stylesheet">
+    <link href=" {% static 'dnd/css/spells.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+</head>
+
+<body class="mybody">
+
+<div class="container" style="width:98%">
+    <div class="row0 row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="row">
+                <div class="col-lg-4 col-xs-12">
+                    <h3>Spell</h3>
+                    <h4 class="sub-title">Level: <span id="my_level"></span></h4>
+                    <h4 class="sub-title">Spell Type: <span id="my_spell_type"></span></h4>
+                    <h4 class="sub-title">Casting Time: <span id="my_casting"></span></h4>
+                    <h4 class="sub-title">Range: <span id="my_range"></span></h4>
+                    <h4 class="sub-title">Duration: <span id="my_duration"></span></h4>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row1 row">
+        <div class="col-lg-10 col-lg-offset-1">
+            {{ table|safe }}
+        </div>
+    </div>
+</div>
+
+<script src=" {% static 'dnd/js/jquery-1.12.4.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/jquery.scrollify.min.js' %}" ></script>
+<script src=" {% static 'dnd/js/highcharts.js' %}" ></script>
+<script src=" {% static 'dnd/js/jquery-ui.js' %}" ></script>
+
+
+<script>
+
+var height = $(window).height();
+var width = $(window).width();
+var counter = 0;
+
+$( document ).ready(function() {
+    $(".row0").css('height', height*.3);
+    $(".row1").css('height', height*.7);
+
+    $('#my_table thead tr').clone(true).appendTo( '#my_table thead' );
+    $('#my_table thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+
+
+    var table = $('#my_table').DataTable({
+        scrollY:        $(".row1").height()-150,
+        scrollX:        false,
+        scrollCollapse: true,
+        paging:         false,
+        orderCellsTop: true,
+        fixedHeader: true,
+        bInfo : false,
+        searching: false,
+        "dom": '<lf<t>ip>'
+    });
+
+    $('tr > td').each(function(index) {
+        if ($(this).text() === 'Necromancy') {
+            $($(this).children()).css('background-color','#ff5f5f');
+       }
+       if ($(this).text() === 'Abjuration') {
+            $($(this).children()).css('background-color','#ff5fff');
+       }
+       if ($(this).text() === 'Conjuration') {
+            $($(this).children()).css('background-color','#5fffff');
+       }
+       if ($(this).text() === 'Evocation') {
+            $($(this).children()).css('background-color','#ffaf5f');
+       }
+      if ($(this).text() === 'Transmutation') {
+            $($(this).children()).css('background-color','#5fffaf');
+       }
+       if ($(this).text() === 'Enchantment') {
+            $($(this).children()).css('background-color','#afff5f');
+       }
+      if ($(this).text() === 'Divination') {
+            $($(this).children()).css('background-color','#7b7a7a');
+       }
+         if ($(this).text() === 'Illusion') {
+            $($(this).children()).css('background-color','#5f5fff');
+       }
+
+    });
+
+
+});
+
+function add_card(value){
+    val = $(value).text();
+    url_base = "{% url 'dnd:get_spells' %}";
+    data = {'val': val };
+
+    $.ajax({
+        type: 'GET',
+        url: url_base,
+        data: data,
+        success: function(msg) {
+            console.log(msg.data)
+            $("#panel").html("<div class='col-lg-4'><h3>"+val+"</h3><h4>Level: "+msg.data['level']+"</h4>\
+            <h4>Spell Type: "+msg.data['spell_type']+"</h4>\
+            <h4>Casting Time: "+msg.data['casting_time']+"</h4>\
+            <h4>Range: "+msg.data['range']+"</h4>\
+            <h4>Duration: "+msg.data['duration']+"</h4></div>\
+            <div class='col-lg-8'><h4>"+msg.data['description']+"</h4></div>\
+            ")
+        }
+    });
+}
+
+
+</script>
+
+</body>
+</html>
