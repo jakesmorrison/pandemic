@@ -30,7 +30,9 @@
                     <h4 class="sub-title">Duration: <span id="my_duration"></span></h4>
                 </div>
                 <div class="col-lg-8 col-xs-12">
-                    <p id="my_des"></p>
+                    <div class="my_des_panel">
+                        <p id="my_des"></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -135,6 +137,7 @@ function add_card(value){
             $('#my_range').text(msg.data['range'])
             $('#my_duration').text(msg.data['duration'])
             $('#my_des').text(msg.data['description'])
+            $(".my_des_panel").css('margin-top', ($(".row0").height()-$(".my_des_panel").height())/2);
 
         }
     });
