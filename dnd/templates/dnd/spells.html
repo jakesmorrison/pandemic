@@ -60,6 +60,9 @@ var width = $(window).width();
 var counter = 0;
 
 $( document ).ready(function() {
+
+    $('[data-toggle="tooltip"]').tooltip();
+
     $(".row0").css('height', height*.25);
     $(".row1").css('height', height*.75);
     $(".my_des_panel").css('height', height*.20);
@@ -98,27 +101,35 @@ $( document ).ready(function() {
     $('tr > td').each(function(index) {
         if ($(this).text() === 'Necromancy') {
             $($(this).children()).css('background-color','#ff5f5f');
+            $($(this).children()).prop("title","Necromancy spells manipulate the energies of life and death.");
        }
        if ($(this).text() === 'Abjuration') {
             $($(this).children()).css('background-color','#ff5fff');
+            $($(this).children()).prop("title","Abjuration spells are protective in nature, though some of them have aggressive uses.");
        }
        if ($(this).text() === 'Conjuration') {
             $($(this).children()).css('background-color','#5fffff');
+            $($(this).children()).prop("title","Conjuration spells involve the transportation of objects and creatures from one location to another.");
        }
        if ($(this).text() === 'Evocation') {
             $($(this).children()).css('background-color','#ffaf5f');
+            $($(this).children()).prop("title","Evocation spells manipulate magical energy to produce a desired effect.");
        }
       if ($(this).text() === 'Transmutation') {
             $($(this).children()).css('background-color','#5fffaf');
+            $($(this).children()).prop("title","Transmutation spells change the properties of a creature, object, or environment.");
        }
        if ($(this).text() === 'Enchantment') {
             $($(this).children()).css('background-color','#afff5f');
+            $($(this).children()).prop("title","Enchantment spells affect the minds of others, influencing or controlling their behavior.");
        }
       if ($(this).text() === 'Divination') {
             $($(this).children()).css('background-color','#7b7a7a');
+            $($(this).children()).prop("title","Divination spells reveal information, whether in the form of secrets long forgotten, glimpses of the future, the locations of hidden things, the truth behind illusions, or visions of distant people or places.");
        }
          if ($(this).text() === 'Illusion') {
             $($(this).children()).css('background-color','#5f5fff');
+            $($(this).children()).prop("title","Illusion spells deceive the senses or minds of others.");
        }
 
     });

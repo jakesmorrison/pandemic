@@ -46,8 +46,9 @@ def spells(request):
     html_table = df.to_html(index=False, classes= 'table table-striped table-bordered table-hover table-responsive" id = "my_table')
 
     html_table = html_table.replace("<td>ZZZ","<td> <button onclick='add_card(this)' type='button' class='btn btn-success spell-name'>").replace("YYY</td>","</button></td>")
-    html_table = html_table.replace("<td>XXX","<td><button type='button' class='btn btn-default spell-type'>").replace("WWW</td>","</button></td>")
+    html_table = html_table.replace("<td>XXX","<td><button type='button' data-toggle='tooltip' data-placement='left' title='' class='btn btn-default spell-type'>").replace("WWW</td>","</button></td>")
     html_table = html_table.replace("<td>VVV","<td><button type='button' class='btn level'>").replace("UUU</td>","</button></td>")
+
 
     context={
         'table': html_table,

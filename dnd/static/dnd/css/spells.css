@@ -77,10 +77,19 @@ thead input {
 .dataTables_wrapper {
     font-family: 'Gloria Hallelujah', cursive;
 }
+
 table.dataTable tbody td {
   vertical-align: middle;
 }
 
-
+.spell-type:active {
+  color: white;
+}
+.spell-type:focus{
+    color:white;
+}
+.spell-type:active:focus {
+    color:white;
+}
 
 
