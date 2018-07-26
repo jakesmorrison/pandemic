@@ -34,12 +34,14 @@ def spells(request):
     my_spells = Spells.objects.all().values()
     temp_1 = []
     for x in range(0,len(my_spells)):
-        temp_2 = [my_spells[x]['page'],"ZZZ"+my_spells[x]['spell']+"YYY", "XXX"+my_spells[x]['spell_type']+"WWW", "VVV"+my_spells[x]['level']+"UUU", my_spells[x]['casting_time'], my_spells[x]['range'], my_spells[x]['duration'], my_spells[x]['whose_spell']]
+        temp_2 = [my_spells[x]['page'],"ZZZ"+my_spells[x]['spell']+"YYY",
+                  "XXX"+my_spells[x]['spell_type']+"WWW", "VVV"+my_spells[x]['level']+"UUU",
+                  my_spells[x]['casting_time'], my_spells[x]['range'], my_spells[x]['duration'], my_spells[x]['whose_spell']]
         temp_1.append(temp_2)
 
     df = pd.DataFrame(temp_1)
     df.columns = "Page,Spell,Spell Type,Level,Casting Time,Range,Duration,For".split(",")
-    df["Spell"] = df["Spell"].apply(lambda x: x.replace("&rsquo;", "'"))
+    df["Page"] = df["Page"].apply(lambda x: x.replace("from Sword Coast Adventure's Guide", "SCAG").replace("from EE Players Companion","EEPC").replace("from Xanathar's Guide To Everything","XGTE").replace("Players Handbook","PH"))
 
     html_table = df.to_html(index=False, classes= 'table table-striped table-bordered table-hover table-responsive" id = "my_table')
 

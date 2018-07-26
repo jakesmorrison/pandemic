@@ -58,11 +58,29 @@ thead input {
 
 .my_des_panel{
     border: 3px solid black;
+    overflow: scroll;
 }
 
 #my_des{
-    margin: 3px;
+    margin: 15px;
+    font-size: 15px;
 }
+
+#spell_name{
+    margin-top: 10px;
+}
+
+.font{
+    font-family: 'Gloria Hallelujah', cursive;
+}
+
+.dataTables_wrapper {
+    font-family: 'Gloria Hallelujah', cursive;
+}
+table.dataTable tbody td {
+  vertical-align: middle;
+}
+
 
 
 

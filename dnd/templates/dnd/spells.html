@@ -15,23 +15,23 @@
     <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
 </head>
 
-<body class="mybody">
+<body class="mybody" style="visibility: hidden;">
 
 <div class="container" style="width:98%">
     <div class="row0 row">
         <div class="col-lg-10 col-lg-offset-1">
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
-                    <h3 id="spell_name"></h3>
-                    <h4 class="sub-title">Level: <span id="my_level"></span></h4>
-                    <h4 class="sub-title">Spell Type: <span id="my_spell_type"></span></h4>
-                    <h4 class="sub-title">Casting Time: <span id="my_casting"></span></h4>
-                    <h4 class="sub-title">Range: <span id="my_range"></span></h4>
-                    <h4 class="sub-title">Duration: <span id="my_duration"></span></h4>
+                    <h3 id="spell_name" class="font"></h3>
+                    <h4 class="sub-title font">Level: <span id="my_level"></span></h4>
+                    <h4 class="sub-title font">Spell Type: <span id="my_spell_type"></span></h4>
+                    <h4 class="sub-title font">Casting Time: <span id="my_casting"></span></h4>
+                    <h4 class="sub-title font">Range: <span id="my_range"></span></h4>
+                    <h4 class="sub-title font">Duration: <span id="my_duration"></span></h4>
                 </div>
                 <div class="col-lg-8 col-xs-12">
                     <div class="my_des_panel">
-                        <p id="my_des"></p>
+                        <p id="my_des" class="font"></p>
                     </div>
                 </div>
             </div>
@@ -62,6 +62,8 @@ var counter = 0;
 $( document ).ready(function() {
     $(".row0").css('height', height*.25);
     $(".row1").css('height', height*.75);
+    $(".my_des_panel").css('height', height*.20);
+    $(".my_des_panel").css('margin-top', height*.025);
 
     $('#my_table thead tr').clone(true).appendTo( '#my_table thead' );
     $('#my_table thead tr:eq(1) th').each( function (i) {
@@ -79,7 +81,7 @@ $( document ).ready(function() {
     } );
 
     var table = $('#my_table').DataTable({
-        scrollY:        $(".row1").height()-200,
+        scrollY:        $(".row1").height()-150,
         scrollX:        false,
         scrollCollapse: true,
         paging:         false,
@@ -87,8 +89,11 @@ $( document ).ready(function() {
         fixedHeader: true,
         bInfo : false,
         searching: true,
-        "dom": '<lf<t>ip>'
+        "dom": '<lf<t>ip>',
+        "order": [[ 1, "asc" ]]
     });
+
+    $('#my_table_filter').remove();
 
     $('tr > td').each(function(index) {
         if ($(this).text() === 'Necromancy') {
@@ -118,6 +123,7 @@ $( document ).ready(function() {
 
     });
 
+    $(".mybody").css('visibility','visible')
 
 });
 
@@ -137,8 +143,7 @@ function add_card(value){
             $('#my_range').text(msg.data['range'])
             $('#my_duration').text(msg.data['duration'])
             $('#my_des').text(msg.data['description'])
-            $(".my_des_panel").css('margin-top', ($(".row0").height()-$(".my_des_panel").height())/2);
-
+            <!--$(".my_des_panel").css('margin-top', ($(".row0").height()-$(".my_des_panel").height())/2);-->
         }
     });
 }
