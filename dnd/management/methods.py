@@ -18,7 +18,7 @@ def dictionary_to_db():
             components=val["components"],
             duration=val["duration"],
             description=val["description"],
-            whose_spell=val["whose_spell"],
+            whose_spell=", ".join(val["whose_spell"]),
             page=val["page"],
         )
 dictionary_to_db()
