@@ -6,12 +6,6 @@ import pandas as pd
 from django.http import JsonResponse
 import json
 from dnd.models import Spells
-from bs4 import BeautifulSoup
-
-dir_path = os.path.dirname(os.path.realpath(__file__))
-file_name = dir_path + "/static/dnd/csv/spells.pickle"
-with open(file_name, 'rb') as handle:
-    b = pickle.load(handle)
 
 
 # Create your views here.
@@ -64,7 +58,6 @@ def spells(request):
 
 def get_spells(request):
     val = request.GET["val"]
-    val = val.replace("'", "&rsquo;")
 
     from dnd.management import methods
     methods.Spells()

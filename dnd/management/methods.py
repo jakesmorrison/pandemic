@@ -11,15 +11,17 @@ def dictionary_to_db():
 
     for key, val in b.items():
         (spell_instance, new_spell) = Spells.objects.update_or_create(
-            spell=key,
-            spell_type=val["spell_type"],
-            level=val["level"],
-            casting_time=val["casting_time"],
-            range=val["range"],
-            components=val["components"],
-            duration=val["duration"],
-            description=val["description"],
+            spell=key.replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
+            spell_type=val["spell_type"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
+            level=val["level"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
+            casting_time=val["casting_time"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
+            range=val["range"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
+            components=val["components"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
+            duration=val["duration"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
+            description=val["description"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
             whose_spell=", ".join(val["whose_spell"]),
-            page=val["page"],
+            page=val["page"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'"),
         )
+
 dictionary_to_db()
+
