@@ -30,6 +30,7 @@ class Character(models.Model):
 class Spells(models.Model):
     spell = models.CharField(max_length=100, default='x')
     spell_type = models.CharField(max_length=100, default='x')
+    level = models.CharField(max_length=100, default='x')
     casting_time = models.CharField(max_length=100, default='x')
     range = models.CharField(max_length=100, default='x')
     components = models.CharField(max_length=100, default='x')
@@ -39,6 +40,6 @@ class Spells(models.Model):
     page = models.CharField(max_length=100, default='x')
 
     def __str__(self):
-        return "{} {} {} {} {} {} {} {} {}".format(self.spell, self.spell_type, self.casting_time, self.range,
+        return "{} {} {} {} {} {} {} {} {}".format(self.spell, self.spell_type, self.level, self.casting_time, self.range,
                                                    self.components, self.duration, self.description, self.whose_spell, self.page)
 

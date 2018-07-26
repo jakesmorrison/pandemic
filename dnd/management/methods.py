@@ -13,6 +13,7 @@ def dictionary_to_db():
         (spell_instance, new_spell) = Spells.objects.update_or_create(
             spell=key,
             spell_type=val["spell_type"],
+            level=val["level"],
             casting_time=val["casting_time"],
             range=val["range"],
             components=val["components"],
