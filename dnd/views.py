@@ -59,11 +59,7 @@ def spells(request):
 def get_spells(request):
     val = request.GET["val"]
 
-    from dnd.management import methods
-    methods.Spells()
-
-
     context={
-        'data': b[val]
+        'data': Spells.objects.filter(spell=val).values()[0]
     }
     return JsonResponse(json.loads(json.dumps(context)))

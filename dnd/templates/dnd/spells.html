@@ -22,12 +22,15 @@
         <div class="col-lg-10 col-lg-offset-1">
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
-                    <h3>Spell</h3>
+                    <h3 id="spell_name"></h3>
                     <h4 class="sub-title">Level: <span id="my_level"></span></h4>
                     <h4 class="sub-title">Spell Type: <span id="my_spell_type"></span></h4>
                     <h4 class="sub-title">Casting Time: <span id="my_casting"></span></h4>
                     <h4 class="sub-title">Range: <span id="my_range"></span></h4>
                     <h4 class="sub-title">Duration: <span id="my_duration"></span></h4>
+                </div>
+                <div class="col-lg-8 col-xs-12">
+                    <p id="my_des"></p>
                 </div>
             </div>
         </div>
@@ -55,8 +58,8 @@ var width = $(window).width();
 var counter = 0;
 
 $( document ).ready(function() {
-    $(".row0").css('height', height*.3);
-    $(".row1").css('height', height*.7);
+    $(".row0").css('height', height*.25);
+    $(".row1").css('height', height*.75);
 
     $('#my_table thead tr').clone(true).appendTo( '#my_table thead' );
     $('#my_table thead tr:eq(1) th').each( function (i) {
@@ -73,17 +76,15 @@ $( document ).ready(function() {
         } );
     } );
 
-
-
     var table = $('#my_table').DataTable({
-        scrollY:        $(".row1").height()-150,
+        scrollY:        $(".row1").height()-200,
         scrollX:        false,
         scrollCollapse: true,
         paging:         false,
         orderCellsTop: true,
         fixedHeader: true,
         bInfo : false,
-        searching: false,
+        searching: true,
         "dom": '<lf<t>ip>'
     });
 
@@ -122,20 +123,19 @@ function add_card(value){
     val = $(value).text();
     url_base = "{% url 'dnd:get_spells' %}";
     data = {'val': val };
-
     $.ajax({
         type: 'GET',
         url: url_base,
         data: data,
         success: function(msg) {
-            console.log(msg.data)
-            $("#panel").html("<div class='col-lg-4'><h3>"+val+"</h3><h4>Level: "+msg.data['level']+"</h4>\
-            <h4>Spell Type: "+msg.data['spell_type']+"</h4>\
-            <h4>Casting Time: "+msg.data['casting_time']+"</h4>\
-            <h4>Range: "+msg.data['range']+"</h4>\
-            <h4>Duration: "+msg.data['duration']+"</h4></div>\
-            <div class='col-lg-8'><h4>"+msg.data['description']+"</h4></div>\
-            ")
+            $('#spell_name').text(msg.data['spell'])
+            $('#my_level').text(msg.data['level'])
+            $('#my_spell_type').text(msg.data['spell_type'])
+            $('#my_casting').text(msg.data['casting_time'])
+            $('#my_range').text(msg.data['range'])
+            $('#my_duration').text(msg.data['duration'])
+            $('#my_des').text(msg.data['description'])
+
         }
     });
 }
