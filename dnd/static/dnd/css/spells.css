@@ -63,7 +63,7 @@ thead input {
 
 #my_des{
     margin: 15px;
-    font-size: 15px;
+    font-size: 16px;
 }
 
 #spell_name{
@@ -71,11 +71,9 @@ thead input {
 }
 
 .font{
-    font-family: 'Gloria Hallelujah', cursive;
 }
 
 .dataTables_wrapper {
-    font-family: 'Gloria Hallelujah', cursive;
 }
 
 table.dataTable tbody td {
@@ -92,4 +90,14 @@ table.dataTable tbody td {
     color:white;
 }
 
+hr {
+    margin-top: 15px;
+    margin-bottom: 20px;
+    border: 0;
+    border-top: 1px solid #eee;
+}
 
+#components {
+    margin-left: 15px;
+    font-size: 16px;
+}

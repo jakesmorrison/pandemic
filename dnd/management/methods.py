@@ -27,6 +27,5 @@ def dictionary_to_db():
 dictionary_to_db()
 
 
-
 # from dnd.management import methods
 # methods.Spells()

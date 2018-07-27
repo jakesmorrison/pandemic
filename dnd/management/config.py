@@ -18,8 +18,8 @@ class config():
             'armor': "Leather Armor (11) <br> Wood Shield (+2)",
             'weapon': "Scimitar +4 1d8+2",
             'spells': "Spell Save: 14, Wisdom, +6",
-            'cantrip': "Poison Spray, Cont ST, 1d12 <br> Guidence",
-            'level_1': "Cure Wounds <br> Thunder Wave, Cont ST /2, 2d8",
+            'cantrip': "Poison Spray <br> Guidence",
+            'level_1': "Cure Wounds <br> Thunder Wave",
         },
         'Tarlos Borevain': {
             'exp': 130,
@@ -60,8 +60,8 @@ class config():
             'armor': "Leather Armor (11)",
             'weapon': "Sickle +4 1d8+2 <br> Crossbow +4 1d4+2",
             'spells': "Spell Save: 13, Charisma, +5",
-            'cantrip': "Minor Illusion <br> Eldritch Blast, +4, 1d10 ",
-            'level_1': "Witch Bolt, +4, 1d12 SP",
+            'cantrip': "Minor Illusion <br> Eldritch Blast",
+            'level_1': "Witch Bolt",
         },
         'Dracodea': {
             'exp': 130,
@@ -80,9 +80,9 @@ class config():
             'proficiencies': "Athletics, Intimidation, Medicine, Persuasion",
             'armor': "Chain Shirt (13) <br> Shield (+2)",
             'weapon': "Warhammer +5 1d8+3 <br> Javalins +2 1d6+0",
-            'spells': "",
-            'cantrip': "",
-            'level_1': "",
+            'spells': "None",
+            'cantrip': "None",
+            'level_1': "None",
         }
 
     }

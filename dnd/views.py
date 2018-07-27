@@ -35,7 +35,7 @@ def spells(request):
     temp_1 = []
     for x in range(0,len(my_spells)):
         temp_2 = [my_spells[x]['page'],"ZZZ"+my_spells[x]['spell']+"YYY",
-                  "XXX"+my_spells[x]['spell_type']+"WWW", "VVV"+my_spells[x]['level']+"UUU",
+                  "XXX"+my_spells[x]['spell_type']+"WWW", "VVV"+my_spells[x]['level'].replace(" ","")+"UUU",
                   my_spells[x]['casting_time'], my_spells[x]['range'], my_spells[x]['duration'], my_spells[x]['whose_spell']]
         temp_1.append(temp_2)
 

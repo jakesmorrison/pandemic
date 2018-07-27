@@ -23,6 +23,7 @@
             <div class="row">
                 <div class="col-lg-4 col-xs-12">
                     <h3 id="spell_name" class="font"></h3>
+                    <hr>
                     <h4 class="sub-title font">Level: <span id="my_level"></span></h4>
                     <h4 class="sub-title font">Spell Type: <span id="my_spell_type"></span></h4>
                     <h4 class="sub-title font">Casting Time: <span id="my_casting"></span></h4>
@@ -31,6 +32,7 @@
                 </div>
                 <div class="col-lg-8 col-xs-12">
                     <div class="my_des_panel">
+                        <h5 id="components" class="font"></h5>
                         <p id="my_des" class="font"></p>
                     </div>
                 </div>
@@ -63,9 +65,9 @@ $( document ).ready(function() {
 
     $('[data-toggle="tooltip"]').tooltip();
 
-    $(".row0").css('height', height*.25);
-    $(".row1").css('height', height*.75);
-    $(".my_des_panel").css('height', height*.20);
+    $(".row0").css('height', height*.30);
+    $(".row1").css('height', height*.70);
+    $(".my_des_panel").css('height', height*.25);
     $(".my_des_panel").css('margin-top', height*.025);
 
     $('#my_table thead tr').clone(true).appendTo( '#my_table thead' );
@@ -84,7 +86,7 @@ $( document ).ready(function() {
     } );
 
     var table = $('#my_table').DataTable({
-        scrollY:        $(".row1").height()-150,
+        scrollY:        $(".row1").height()-200,
         scrollX:        false,
         scrollCollapse: true,
         paging:         false,
@@ -98,40 +100,39 @@ $( document ).ready(function() {
 
     $('#my_table_filter').remove();
 
-    $('tr > td').each(function(index) {
+    $('td').each(function(index) {
         if ($(this).text() === 'Necromancy') {
             $($(this).children()).css('background-color','#ff5f5f');
             $($(this).children()).prop("title","Necromancy spells manipulate the energies of life and death.");
        }
-       if ($(this).text() === 'Abjuration') {
+       else if ($(this).text() === 'Abjuration') {
             $($(this).children()).css('background-color','#ff5fff');
             $($(this).children()).prop("title","Abjuration spells are protective in nature, though some of them have aggressive uses.");
        }
-       if ($(this).text() === 'Conjuration') {
+       else if ($(this).text() === 'Conjuration') {
             $($(this).children()).css('background-color','#5fffff');
             $($(this).children()).prop("title","Conjuration spells involve the transportation of objects and creatures from one location to another.");
        }
-       if ($(this).text() === 'Evocation') {
+       else if ($(this).text() === 'Evocation') {
             $($(this).children()).css('background-color','#ffaf5f');
             $($(this).children()).prop("title","Evocation spells manipulate magical energy to produce a desired effect.");
        }
-      if ($(this).text() === 'Transmutation') {
+      else if ($(this).text() === 'Transmutation') {
             $($(this).children()).css('background-color','#5fffaf');
             $($(this).children()).prop("title","Transmutation spells change the properties of a creature, object, or environment.");
        }
-       if ($(this).text() === 'Enchantment') {
+       else if ($(this).text() === 'Enchantment') {
             $($(this).children()).css('background-color','#afff5f');
             $($(this).children()).prop("title","Enchantment spells affect the minds of others, influencing or controlling their behavior.");
        }
-      if ($(this).text() === 'Divination') {
+      else if ($(this).text() === 'Divination') {
             $($(this).children()).css('background-color','#7b7a7a');
             $($(this).children()).prop("title","Divination spells reveal information, whether in the form of secrets long forgotten, glimpses of the future, the locations of hidden things, the truth behind illusions, or visions of distant people or places.");
        }
-         if ($(this).text() === 'Illusion') {
+       else if ($(this).text() === 'Illusion') {
             $($(this).children()).css('background-color','#5f5fff');
             $($(this).children()).prop("title","Illusion spells deceive the senses or minds of others.");
        }
-
     });
 
     $(".mybody").css('visibility','visible')
@@ -154,6 +155,7 @@ function add_card(value){
             $('#my_range').text(msg.data['range'])
             $('#my_duration').text(msg.data['duration'])
             $('#my_des').text(msg.data['description'])
+            $('#components').text('Components: '+msg.data['components'])
             <!--$(".my_des_panel").css('margin-top', ($(".row0").height()-$(".my_des_panel").height())/2);-->
         }
     });

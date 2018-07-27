@@ -22,6 +22,17 @@
         <div class="col-lg-4 col-xs-12">
             <h3 class="centered" style="margin-bottom: 18px;">Characters in Battle
             <button type="button" class="btn btn-success" onclick="sort_by_init()">Sort By Inititive</button></h3>
+            <div class="row">
+                      <div id="" class="col-xs-4 centered" style="">
+                          <p class="font">Name</p>
+                      </div>
+                      <div id="" class="col-xs-4">
+                          <p class="font" style="margin-left: 10px;">Inititive</p>
+                      </div>
+                      <div id="" class="col-xs-4" >
+                          <p class="font" style="margin-left: 10px;">HP</p>
+                      </div>
+              </div>
             <ul id="sortable1" class="connectedSortable">
             {% for x in my_character_list %}
               <li id="character_{{forloop.counter0}}" class="ui-state-default li-side1">
@@ -30,10 +41,10 @@
                           <p class="font panel-text">{{x}}</p>
                       </div>
                       <div id="init_{{forloop.counter0}}" class="col-xs-4 panel-init">
-                            <input type="init" class="form-control input-init" id="init_{{forloop.counter0}}">
+                            <input type="init" class="form-control input-init centered" id="init_{{forloop.counter0}}">
                       </div>
                       <div id="" class="col-xs-4 panel-hp">
-                            <input type="hp" class="form-control input-hp" id="hp_{{forloop.counter0}}">
+                            <input type="hp" class="form-control input-hp centered" id="hp_{{forloop.counter0}}">
                       </div>
                   </div>
               </li>
@@ -46,6 +57,20 @@
                 <button type="button" class="btn btn-success" onclick="create_new_enemy()">Create New Enemy</button>
                 <input class="form-control" id="hp-input">
             </h3>
+            <div class="row">
+              <div id="" class="col-xs-4 centered" style="">
+                  <p class="font">Name</p>
+              </div>
+              <div id="" class="col-xs-3">
+                  <p class="font" style="margin-left: 10px;">Inititive</p>
+              </div>
+              <div id="" class="col-xs-3" >
+                  <p class="font" style="margin-left: 10px;">HP</p>
+              </div>
+              <div id="" class="col-xs-2" >
+                  <p class="font" style="margin-left: 10px;"></p>
+              </div>
+            </div>
             <ul id="sortable2" class="connectedSortable">
                 <li class='ui-state-default li-side1 unclickable' id="unclickable"></li>
             </ul>
