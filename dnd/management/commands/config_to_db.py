@@ -2,7 +2,7 @@ __author__ = 'jsmorrison'
 from dnd.management.config import config
 
 from django.core.management.base import BaseCommand
-from ...models import Character
+from ...models import CharacterNew
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
@@ -13,7 +13,7 @@ class Command(BaseCommand):
 
     def config_to_db(self):
         for key, val in config.my_character_dict.items():
-            (dnd_instance, new_character) = Character.objects.update_or_create(
+            (dnd_instance, new_character) = CharacterNew.objects.update_or_create(
                 name = key,
                 color = val['color'],
                 experience=val['exp'],

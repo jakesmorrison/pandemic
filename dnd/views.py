@@ -3,7 +3,7 @@ from dnd.management.config import config
 import pandas as pd
 from django.http import JsonResponse
 import json
-from dnd.models import Spells, Character
+from dnd.models import Spells, CharacterNew
 
 
 # Create your views here.
@@ -11,7 +11,7 @@ from dnd.models import Spells, Character
 def index(request):
     my_character_dict = {}
     my_character_list = []
-    for x in Character.objects.all().values():
+    for x in CharacterNew.objects.all().values():
         x["stats"] = [int(x["str_ability"]),int(x["dex_ability"]),int(x["con_ability"]),
                       int(x["int_ability"]),int(x["wis_ability"]),int(x["char_ability"])]
         my_character_dict[x["name"]] = x

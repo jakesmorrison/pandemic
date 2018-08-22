@@ -14,7 +14,7 @@ class CharacterNewModelAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 from .models import CharacterNew
-admin.site.register(CharacterNew, CharacterModelAdmin)
+admin.site.register(CharacterNew, CharacterNewModelAdmin)
 
 
 
