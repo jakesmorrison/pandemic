@@ -43,6 +43,10 @@ def gary_spelling(request):
     context={}
     return(render(request, 'sandbox/gary_spelling.html',context))
 
+def vmworld(request):
+    context={}
+    return(render(request, 'sandbox/vmworld.html',context))
+
 def career_day(request):
     context={}
     return(render(request, 'sandbox/career_day.html',context))
