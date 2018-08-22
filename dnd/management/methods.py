@@ -8,7 +8,6 @@ def dictionary_to_db():
     with open(file_name, 'rb') as handle:
         b = pickle.load(handle)
 
-
     for key, val in b.items():
         (spell_instance, new_spell) = Spells.objects.update_or_create(
             spell=key.replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'").replace("&nbsp;", " ").replace("&mdash;", "-").replace("&ndash;", "-"),
