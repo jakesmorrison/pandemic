@@ -6,7 +6,7 @@ from django.db import models
 
 # Create your models here.
 
-class Character(models.Model):
+class CharacterNew(models.Model):
     name = models.CharField(max_length=100, default='x')
     color = models.CharField(max_length=100, default="x")
     experience = models.CharField(max_length=100, default="x")

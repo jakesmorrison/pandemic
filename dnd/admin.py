@@ -7,14 +7,14 @@ from django.contrib import admin
 # Register your models here.
 
 
-class CharacterModelAdmin(admin.ModelAdmin):
+class CharacterNewModelAdmin(admin.ModelAdmin):
     list_display="name,color,experience,char_class,race,level,background,alignment,hp,hit_die,ac,speed,prof_bonus,passive_perception,str_ability,dex_ability," \
                 "con_ability,int_ability,wis_ability,char_ability,saving_throw,proficiencies,armor,weapon,spells,cantrip,level_1,level_2,level_3,level_4,level_5," \
                 "level_6,level_7,level_8,level_9,other".split(",")
     search_fields = list_display
 
-from .models import Character
-admin.site.register(Character, CharacterModelAdmin)
+from .models import CharacterNew
+admin.site.register(CharacterNew, CharacterModelAdmin)
 
 
 
