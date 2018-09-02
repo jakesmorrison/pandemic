@@ -44,4 +44,5 @@ urlpatterns = [
     url(r'^dnd/', include('dnd.urls')),
     url(r'^celebmatch/', include('celebmatch.urls')),
     url(r'', include('homepage.urls')),
+
 ]
