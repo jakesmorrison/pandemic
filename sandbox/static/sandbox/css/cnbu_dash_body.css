@@ -1,0 +1,47 @@
+#title{
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.circle{
+    width: 65%;
+    border-radius: 50%;
+    text-align:center;
+    display: table;
+    overflow: hidden;
+}
+
+#circle_qtd_rev{
+    background: #5fafff;
+    color: white;
+    text-align: center;
+}
+#circle_through_qtr{
+    background: #ff5f5f;
+}
+#circle_to_plan{
+    background: #5fffaf;
+}
+#circle_ship_out{
+    background: #ffaf5f;
+}
+#circle_cp{
+    background: #af5fff;
+}
+
+.circle_label{
+    color: white;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.circle_value{
+    color: white;
+    text-align: center;
+    font-size: 2em;
+}
+
+.circle_child{
+    display: table-cell;
+    vertical-align: middle
+}

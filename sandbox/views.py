@@ -195,3 +195,43 @@ def speed_grade(request):
 
     }
     return(render(request, 'sandbox/speed_grade.html',context))
+
+def cnbu_dash(request):
+    context={}
+    return(render(request, 'sandbox/cnbu_dash.html', context))
+
+def get_region_data(request):
+
+
+
+    region = request.GET['region']
+    if region == "americas":
+        region_title = "Americas"
+        qtd_rev = "$"+str(963)
+        through_qtr = str(91)+"%"
+        to_plan = str(80)+"%"
+        ship_out = str(87)+"%"
+        cp = "$"+str(1206)
+    elif region == "asia":
+        region_title = "Asia"
+        qtd_rev = "$" + str(947)
+        through_qtr = str(91) + "%"
+        to_plan = str(77) + "%"
+        ship_out = str(90) + "%"
+        cp = "$" + str(1224)
+
+    d = {'col1': ["HP INC", "APPLE"], 'col2': ["80%", "70%"], 'col3': ["$115.4", "$64.7"] }
+    df = pd.DataFrame(data=d)
+    print(df)
+    html_table = df.to_html(index=False, classes='table table-striped table-bordered table-hover table-responsive" id = "my_table')
+
+    context={
+        'region_title': region_title,
+        'qtd_rev': qtd_rev,
+        'through_qtr': through_qtr,
+        'to_plan': to_plan,
+        'ship_out': ship_out,
+        'cp': cp,
+        'table': html_table
+    }
+    return JsonResponse(json.loads(json.dumps(context)))

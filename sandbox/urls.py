@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^get_data_linely_demo/$', views.get_data_linely_demo, name='get_data_linely_demo'),
     url(r'^speed_grade/$', views.speed_grade, name='speed_grade'),
     url(r'^vmworld/$', views.vmworld, name='vmworld'),
-
+    url(r'^cnbu_dash/$', views.cnbu_dash, name='cnbu_dash'),
+    url(r'^get_region_data/$', views.get_region_data, name='get_region_data'),
 ]
 

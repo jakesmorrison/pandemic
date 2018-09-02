@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>CNBU Dashboard</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'sandbox/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link href=" {% static 'sandbox/css/cnbu_dash_sidebar_and_header.css' %}" rel="stylesheet">
+    <link href=" {% static 'sandbox/css/cnbu_dash_body.css' %}" rel="stylesheet">
+
+
+</head>
+<body>
+<nav class="navbar navbar-default" style="margin-bottom: 0px;">
+      <div class="container">
+        <div class="navbar-header">
+          <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle"><i class="fas fa-bars fa-rotate-90 fa-2x"></i></a>
+          <a class="navbar-brand" href="#">CNBU Dashboard</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a>English</a></li>
+            <li><a>jmorrison</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a>
+                    Region Summary
+                </a>
+            </li>
+            <li href="#" onclick="get_region('americas')" class="sidebar-hover">
+                <a class="sidebar-text">Americas</a>
+            </li>
+            <li href="#" onclick="get_region('asia')" class="sidebar-hover">
+                <a class="sidebar-text">Asia</a>
+            </li>
+        </ul>
+    </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+
+            <div class="row row1">
+                <div class="col-lg-12">
+                    <h1 id="title"></h1>
+                </div>
+            </div>
+            <div class="row row1">
+                <div class="col-lg-1"></div>
+
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div id="circle_qtd_rev" class="circle">
+                            <div class="circle_child"><span id="value_qtd_rev" class="circle_value"></span><br><span class="circle_label">QTD Revenue</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div id="circle_through_qtr" class="circle">
+                            <div class="circle_child"><span id="value_through_qtr" class="circle_value"></span><br><span class="circle_label">Through QTR</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div id="circle_to_plan" class="circle">
+                            <div class="circle_child"><span id="value_to_plan" class="circle_value"></span><br><span class="circle_label">To Plan</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div id="circle_ship_out" class="circle">
+                            <div class="circle_child"><span id="value_ship_out" class="circle_value"></span><br><span class="circle_label">Ship Out</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="row">
+                        <div id="circle_cp" class="circle">
+                            <div class="circle_child"><span id="value_cp" class="circle_value"></span><br><span class="circle_label">CP</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row row3">
+                <div class="col-lg-10 col-lg-offset-1">
+                    <div id="table"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script src=" {% static 'sandbox/js/jquery-3.3.1.min.js' %}" ></script>
+<script src=" {% static 'sandbox/js/bootstrap.min.js' %}" ></script>
+<script src=" {% static 'dnd/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+
+<script>
+$( document ).ready(function() {
+    $(".circle").css('height', $(".circle").width());
+    get_region('americas')
+    $("#wrapper").toggleClass("toggled");
+
+    var table = $('#my_table').DataTable({
+        scrollY:        $(".row1").height()-200,
+        scrollX:        false,
+        scrollCollapse: true,
+        paging:         false,
+        orderCellsTop: true,
+        fixedHeader: true,
+        bInfo : false,
+        searching: true,
+        "dom": '<lf<t>ip>',
+        "order": [[ 1, "asc" ]]
+    });
+    $('#my_table_filter').remove();
+
+});
+
+$("#menu-toggle").click(function(e) {
+    e.preventDefault();
+    $("#wrapper").toggleClass("toggled");
+});
+
+function vert_center(type, child){
+    child_height = $(type+child).height();
+    parent_height = $(type+child).parent().height()
+    $(type+child).css('margin-top', (parent_height-child_height)/2)
+}
+
+function get_region(region_name){
+
+    url_base = "{% url 'sandbox:get_region_data' %}";
+    data = {'region': region_name };
+    $.ajax({
+        type: 'GET',
+        url: url_base,
+        data: data,
+        success: function(msg) {
+            $("#wrapper").toggleClass("toggled");
+            $("#title").text(msg.region_title)
+            $('#value_qtd_rev').text(msg.qtd_rev)
+            $('#value_through_qtr').text(msg.through_qtr)
+            $('#value_to_plan').text(msg.to_plan)
+            $('#value_ship_out').text(msg.ship_out)
+            $('#value_cp').text(msg.cp)
+            $('#table').html(msg.table)
+
+        }
+    });
+
+}
+</script>
+
+
+</body>
+</html>
