@@ -35,15 +35,17 @@ def retrieve_image(request):
     else:
         os.system('echo there is not data > /root/text.txt')
 
-
-    image_data = request.POST['data_url']
-    image_data = re.sub("^data:image/png;base64,", "", image_data)
-    image_data = base64.b64decode(image_data)
-    image_data = BytesIO(image_data)
-    im = Image.open(image_data)
-    im.save(current_folder+'/static/celebmatch/images/user_submitted.bmp')
-    predictions, closest_distances = m.get_lookalike()
-    os.remove(current_folder+'/static/celebmatch/images/user_submitted.bmp')
+    if request.POST:
+        image_data = request.POST['data_url']
+        image_data = re.sub("^data:image/png;base64,", "", image_data)
+        image_data = base64.b64decode(image_data)
+        image_data = BytesIO(image_data)
+        im = Image.open(image_data)
+        im.save(current_folder+'/static/celebmatch/images/user_submitted.bmp')
+        predictions, closest_distances = m.get_lookalike()
+        os.remove(current_folder+'/static/celebmatch/images/user_submitted.bmp')
+    else:
+        predictions = "No POST data"
 
     context = {
         'celeb': predictions,
