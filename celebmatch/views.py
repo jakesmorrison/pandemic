@@ -19,15 +19,13 @@ def home(request):
 def retrieve_image(request):
     m = methods.Methods()
     current_folder = os.path.dirname(__file__)
-    print(request.POST)
-
 
     if os.path.isfile((current_folder+"/management/trained_knn_model.clf")):
         pass
     else:
         m.train_classifier()
 
-    image_data = request.GET['data_url']
+    image_data = request.POST['data_url']
     image_data = re.sub("^data:image/png;base64,", "", image_data)
     image_data = base64.b64decode(image_data)
     image_data = BytesIO(image_data)
