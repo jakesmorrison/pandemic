@@ -134,7 +134,7 @@ function takepicture() {
 
     $.ajax({
         url: url_base,
-        type : 'POST',
+        type : 'GET',
         data : data,
         success: function(msg) {
             $('.actor_name').text(msg['celeb'])
