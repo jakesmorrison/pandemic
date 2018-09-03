@@ -15,9 +15,12 @@ class Methods():
 
         X = list(d["encode"])
         X = np.array(X)
+        X = X.reshape(-1, 1)
 
         y = list(d["name"])
         y = np.array(y)
+        y = y.reshape(-1, 1)
+
 
         # Determine how many neighbors to use for weighting in the KNN classifier
         n_neighbors = int(round(math.sqrt(len(X))))

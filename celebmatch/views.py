@@ -26,14 +26,14 @@ def retrieve_image(request):
         m.train_classifier()
 
 
-    if request.POST:
-        os.system('echo there is post data '+str(list(request.POST.keys())[0])+' > /root/text.txt')
-    elif request.GET:
-        os.system('echo there is get data > /root/text.txt')
-    elif request.FILES:
-        os.system('echo there is files data > /root/text.txt')
-    else:
-        os.system('echo there is not data > /root/text.txt')
+    # if request.POST:
+    #     os.system('echo there is post data '+str(list(request.POST.keys())[0])+' > /root/text.txt')
+    # elif request.GET:
+    #     os.system('echo there is get data > /root/text.txt')
+    # elif request.FILES:
+    #     os.system('echo there is files data > /root/text.txt')
+    # else:
+    #     os.system('echo there is not data > /root/text.txt')
 
     if request.POST:
         image_data = request.POST['data_url']
