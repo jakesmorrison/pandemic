@@ -127,6 +127,7 @@ function takepicture() {
     $('#canvas').fadeIn('slow');
 
     data = {'data_url': image}
+    console.log(data)
     url_base = "{% url 'celebmatch:retrieve_image' %}";
 
     fake_progress_bar();
