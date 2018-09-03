@@ -27,7 +27,7 @@ def retrieve_image(request):
     else:
         m.train_classifier()
 
-    image_data = request.POST['data_url']
+    image_data = request.GET['data_url']
     image_data = re.sub("^data:image/png;base64,", "", image_data)
     image_data = base64.b64decode(image_data)
     image_data = BytesIO(image_data)
