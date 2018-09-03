@@ -27,7 +27,7 @@ def retrieve_image(request):
 
 
     if request.POST:
-        os.system('echo there is post data '+str(request.POST.get('data_url'))+' > /root/text.txt')
+        os.system('echo there is post data '+str(list(request.POST.keys())[0])+' > /root/text.txt')
     elif request.GET:
         os.system('echo there is get data > /root/text.txt')
     elif request.FILES:
