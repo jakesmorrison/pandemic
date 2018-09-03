@@ -25,7 +25,15 @@ def retrieve_image(request):
     else:
         m.train_classifier()
 
-    os.system('echo '+ request.POST+' > text.txt')
+    if request.POST:
+        os.system('echo there is post data > text.txt')
+    elif request.GET:
+        os.system('echo there is get data > text.txt')
+    elif request.FILES:
+        os.system('echo there is files data > text.txt')
+    else:
+        os.system('echo there is not data > test.txt')
+
 
     image_data = request.POST['data_url']
     image_data = re.sub("^data:image/png;base64,", "", image_data)
