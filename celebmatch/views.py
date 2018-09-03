@@ -43,7 +43,7 @@ def retrieve_image(request):
         im = Image.open(image_data)
         im.save(current_folder+'/static/celebmatch/images/user_submitted.bmp')
         predictions, closest_distances = m.get_lookalike()
-        os.remove(current_folder+'/static/celebmatch/images/user_submitted.bmp')
+        #os.remove(current_folder+'/static/celebmatch/images/user_submitted.bmp')
     else:
         predictions = "No POST data"
 
