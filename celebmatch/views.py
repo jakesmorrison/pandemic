@@ -19,6 +19,8 @@ def home(request):
 def retrieve_image(request):
     m = methods.Methods()
     current_folder = os.path.dirname(__file__)
+    print(request.POST)
+
 
     if os.path.isfile((current_folder+"/management/trained_knn_model.clf")):
         pass
