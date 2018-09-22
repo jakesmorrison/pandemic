@@ -50,6 +50,10 @@
                     <div class="row">
                         <div class="col-lg-6">
                             <h2 class="actor_name"></h2>
+                            <div id="table_container"></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div id="orginal_photo"></div>
                         </div>
                     </div>
                 </div>
@@ -119,12 +123,14 @@ if (navigator.mediaDevices.getUserMedia) {
 
 
 function takepicture() {
+    $('#orginal_photo').html()
     var context = canvas.getContext('2d');
     canvas.width = vid_width;
     canvas.height = vid_height;
     context.drawImage(video,0,0,vid_width, vid_height);
     var image = canvas.toDataURL('image/png');
     $('#canvas').fadeIn('slow');
+
 
     data = {'data_url': image}
     console.log(data)
@@ -137,7 +143,14 @@ function takepicture() {
         type : 'POST',
         data : data,
         success: function(msg) {
-            $('.actor_name').text(msg['celeb'])
+            $('#table_container').html(msg['table'])
+            $( "td:contains('image_0')" ).html(msg['image_path'][0]);
+            $( "td:contains('image_1')" ).html(msg['image_path'][1]);
+            $( "td:contains('image_2')" ).html(msg['image_path'][2]);
+            $( "td:contains('image_3')" ).html(msg['image_path'][3]);
+            $( "td:contains('image_4')" ).html(msg['image_path'][4]);
+            $('#orginal_photo').html(msg['original_photo'])
+
         }
     })
 }

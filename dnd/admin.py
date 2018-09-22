@@ -26,3 +26,15 @@ class SpellsModelAdmin(admin.ModelAdmin):
 from .models import Spells
 admin.site.register(Spells, SpellsModelAdmin)
 
+
+class MonsterModelAdmin(admin.ModelAdmin):
+    list_display= "name,size,type,alignment,hp,ac,speed,str_ability,dex_ability,con_ability,int_ability,wis_ability,char_ability,"\
+                  "challenge,xp,languages,saving_throw,skills,damage_vulnerabilities,damage_immunities,condition_immunities,senses,"\
+                  "actions,weapon,spells,cantrip,level,description,other".split(",")
+    search_fields = list_display
+
+from .models import Monster
+admin.site.register(Monster, MonsterModelAdmin)
+
+
+

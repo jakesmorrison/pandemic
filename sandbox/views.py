@@ -202,8 +202,6 @@ def cnbu_dash(request):
 
 def get_region_data(request):
 
-
-
     region = request.GET['region']
     if region == "americas":
         region_title = "Americas"
@@ -222,7 +220,6 @@ def get_region_data(request):
 
     d = {'col1': ["HP INC", "APPLE"], 'col2': ["80%", "70%"], 'col3': ["$115.4", "$64.7"] }
     df = pd.DataFrame(data=d)
-    print(df)
     html_table = df.to_html(index=False, classes='table table-striped table-bordered table-hover table-responsive" id = "my_table')
 
     context={
@@ -235,3 +232,119 @@ def get_region_data(request):
         'table': html_table
     }
     return JsonResponse(json.loads(json.dumps(context)))
+
+
+# import threading
+# import inspect
+# import ctypes
+# import time
+# from neopixel import *
+#
+# def dna(request):
+#     context = {}
+#     return (render(request, 'sandbox/dna_2.html', context))
+#
+# threads = []
+# def post_led(request):
+#     global threads
+#     setting = request.GET
+#     setting = setting['setting']
+#     if len(threads)>0:
+#         for x in threads:
+#             if x.isAlive():
+#                 x.terminate()
+#         threads = []
+#
+#     t = myThread(target=change_led, args=[setting])
+#     t.setDaemon(True)
+#     threads.append(t)
+#     t.start()
+#
+#
+#     context={
+#     }
+#     return JsonResponse(json.loads(json.dumps(context)))
+#
+#
+# def change_led(args):
+#     if args == "loop":
+#         loop()
+#     elif args == "slow":
+#         slow()
+#     elif args == "med":
+#         pass
+#     elif args == "fast":
+#         pass
+#
+#
+# def loop():
+#     led = ledConfig()
+#     while True:
+#         print(led.strip1)
+#         time.sleep(1)
+#
+#
+# def slow():
+#     for x in range(0,10):
+#         time.sleep(1)
+#         print(x)
+#
+#
+# class ledConfig():
+#     def __init__(self):
+#         # LED strip configuration:
+#         self.LED_COUNT = 234  # Number of LED pixels.
+#         self.LED_PIN0 = 18  # GPIO pin connected to the pixels (18 uses PWM!).
+#         self.LED_PIN1 = 13  # GPIO pin connected to the pixels (13 uses PWM!).
+#         self.LED_FREQ_HZ = 800000  # LED signal frequency in hertz (usually 800khz)
+#         self.LED_DMA = 10  # DMA channel to use for generating signal (try 10)
+#         self.LED_BRIGHTNESS = 255  # Set to 0 for darkest and 255 for brightest
+#         self.LED_INVERT = False  # True to invert the signal (when using NPN transistor level shift)
+#         self.LED_CHANNEL0 = 0  # set to '1' for GPIOs 13, 19, 41, 45 or 53
+#         self.LED_CHANNEL1 = 1  # set to '1' for GPIOs 13, 19, 41, 45 or 53
+#
+#         self.strip1 = Adafruit_NeoPixel(LED_COUNT, LED_PIN0, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL0)
+#         self.strip2 = Adafruit_NeoPixel(LED_COUNT, LED_PIN1, LED_FREQ_HZ, LED_DMA, LED_INVERT, LED_BRIGHTNESS, LED_CHANNEL1)
+#
+#
+# class myThread(threading.Thread):
+#     def _get_my_tid(self):
+#         """determines this (self's) thread id"""
+#         if not self.isAlive():
+#             raise threading.ThreadError("the thread is not active")
+#
+#         # do we have it cached?
+#         if hasattr(self, "_thread_id"):
+#             return self._thread_id
+#
+#         # no, look for it in the _active dict
+#         for tid, tobj in threading._active.items():
+#             if tobj is self:
+#                 self._thread_id = tid
+#                 return tid
+#
+#         raise AssertionError("could not determine the thread's id")
+#
+#     def raise_exc(self, exctype):
+#         """raises the given exception type in the context of this thread"""
+#         _async_raise(self._get_my_tid(), exctype)
+#
+#     def terminate(self):
+#         """raises SystemExit in the context of the given thread, which should
+#         cause the thread to exit silently (unless caught)"""
+#         self.raise_exc(SystemExit)
+#
+#
+# def _async_raise(tid, exctype):
+#     """raises the exception, performs cleanup if needed"""
+#     if not inspect.isclass(exctype):
+#         raise TypeError("Only types can be raised (not instances)")
+#     res = ctypes.pythonapi.PyThreadState_SetAsyncExc(ctypes.c_long(tid), ctypes.py_object(exctype))
+#     if res == 0:
+#         raise ValueError("invalid thread id")
+#     elif res != 1:
+#         # """if it returns a number greater than one, you're in trouble,
+#         # and you should call it again with exc=NULL to revert the effect"""
+#         ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, 0)
+#         raise SystemError("PyThreadState_SetAsyncExc failed")
+#

@@ -15,5 +15,7 @@ urlpatterns = [
     url(r'^vmworld/$', views.vmworld, name='vmworld'),
     url(r'^cnbu_dash/$', views.cnbu_dash, name='cnbu_dash'),
     url(r'^get_region_data/$', views.get_region_data, name='get_region_data'),
+    # url(r'^dna/$', views.dna, name='dna'),
+    # url(r'^post_led/$', views.post_led, name='post_led'),
 ]
 

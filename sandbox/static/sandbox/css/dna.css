@@ -1,0 +1,162 @@
+.row1{
+    display: none;
+}
+
+.slide1{
+    display: none;
+}
+
+.slide2{
+    display: none;
+}
+
+.slide3{
+    display: none;
+}
+
+.centered{
+    text-align: center;
+}
+
+
+#buttons_col{
+    background-color: #0077C8;
+    padding: 0px;
+    background-image: url("https://www.transparenttextures.com/patterns/soft-kill.png");
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+
+}
+
+.btn-primary{
+    display: block;
+    width: 80%;
+    margin-left: 11%;
+    margin-bottom: 25px;
+    margin-top: 25px;
+    color: #2c2c2e;
+    border: 0px solid #2c2c2e;
+    font-size: 3em;
+    padding: 0px;
+    border-radius: 0px;
+    border-color: white;
+    font-weight: 700;
+}
+
+#past_btn{
+    background-color: white;
+    box-shadow: 0px 0px 15px white;
+    transition: all 500ms linear;
+    transition-delay: .25s;
+}
+
+
+#present_btn{
+    background-color: white;
+    box-shadow: 0px 0px 15px white;
+    transition: all 500ms linear;
+    transition-delay: .25s;
+}
+
+#future_btn{
+    background-color: white;
+    box-shadow: 0px 0px 15px white;
+    transition: all 500ms linear;
+    transition-delay: .25s;
+}
+
+.btn-success{
+    margin: 25px;
+    font-size: 4em;
+    width: 25%;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open>.dropdown-toggle.btn-primary {
+    color: #fff;
+    background-color: #00b3db;
+    border-color: #285e8e; /*set the color you want here*/
+}
+
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.hexagon {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  width: 200px;
+  height: 115.47px;
+  background-color: #fef5ff;
+  margin: 57.74px 0;
+  box-shadow: 0 0 20px rgba(255,255,255,0.6);
+}
+
+.hexagon:before,
+.hexagon:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 141.42px;
+  height: 141.42px;
+  -webkit-transform: scaleY(0.5774) rotate(-45deg);
+  -ms-transform: scaleY(0.5774) rotate(-45deg);
+  transform: scaleY(0.5774) rotate(-45deg);
+  background-color: inherit;
+  left: 29.2893px;
+  box-shadow: 0 0 20px rgba(255,255,255,0.6);
+}
+
+.hexagon:before {
+  top: -70.7107px;
+}
+
+.hexagon:after {
+  bottom: -70.7107px;
+}
+
+/*cover up extra shadows*/
+.hexagon span {
+  display: block;
+  position: absolute;
+  top:0px;
+  left: 0;
+  width:200px;
+  height:115.4701px;
+  z-index: 2;
+  background: inherit;
+  padding-top: 35px;
+  padding-bottom: 35px;
+  font-size: 2em;
+  text-align: center;
+}
+
+.hexagon:active {
+    background-color: yellow;
+}
+
+.intro{
+    overflow: hidden;
+}
+
+testimg{
+    position: absolute;
+    height: 750px;
+    left: 205px;
+    top: 0;
+    opacity: 0.1;
+    transform: rotate(0deg);
+    z-index: -100;
+}
+
+.image{
+    height: 100%;
+    width: 100%;
+}

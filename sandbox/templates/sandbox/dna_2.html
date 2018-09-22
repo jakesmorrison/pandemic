@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1">
+    <title>DNA 1</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'heartbeat/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'sandbox/css/dna.css' %}" rel="stylesheet">
+
+
+</head>
+<body>
+
+<div class="container" style="width: 100%;">
+    <div class="row row0">
+        <div class="slide0">
+            <img class="image" src="{% static 'sandbox/images/slide0.png' %}" onclick="start()" alt="micron">
+        </div>
+        <div class="slide1">
+            <img class="image" src="{% static 'sandbox/images/slide1.png' %}" alt="micron">
+        </div>
+        <div class="slide2">
+            <img class="image" src="{% static 'sandbox/images/slide2.png' %}" alt="micron">
+        </div>
+        <div class="slide3">
+            <img class="image" src="{% static 'sandbox/images/slide3.png' %}" alt="micron">
+        </div>
+    </div>
+</div>
+
+
+<script src=" {% static 'travel/js/jquery-3.2.1.js' %}" ></script>
+<script src=" {% static 'heartbeat/js/bootstrap.min.js' %}" ></script>
+
+<script>
+
+var height = $( document ).height();
+var width = $( '.container' ).width();
+var SLIDE_DELAY = 2000;
+
+var current_panel;
+
+$( document ).ready(function() {
+    $('.row0').css('height',height);
+    slide_0_leds();
+});
+
+function start(){
+    current_panel = 'panel0'
+    $('.slide0').fadeOut('slow', function(){
+        slide_1_leds();
+        setTimeout(function () {
+            $('.slide1').fadeOut('slow', function(){
+                slide_2_leds();
+                setTimeout(function () {
+                    $('.slide2').fadeOut('slow', function(){
+                        slide_3_leds();
+                        setTimeout(function () {
+                            $('.slide3').fadeOut('slow', function(){
+                                slide_0_leds();
+                            })
+                        }, SLIDE_DELAY);
+                    })
+                }, SLIDE_DELAY);
+            })
+        }, SLIDE_DELAY);
+    });
+}
+
+function slide_0_leds(){
+    $('.slide0').fadeIn('slow');
+    led_post("loop")
+}
+
+function slide_1_leds(){
+    $('.slide1').fadeIn('slow');
+    led_post("slow")
+}
+
+function slide_2_leds(){
+    $('.slide2').fadeIn('slow');
+    led_post("med")
+}
+
+function slide_3_leds(){
+    $('.slide3').fadeIn('slow');
+    led_post("fast")
+}
+
+function led_post(speed){
+    data = {'setting': speed};
+    url_base = "{% url 'sandbox:post_led' %}";
+    $.ajax({
+        type: 'GET',
+        url: url_base,
+        data: data,
+        success: function(msg) {
+        }
+    });
+}
+
+
+
+</script>
+
+</body>
+</html>
