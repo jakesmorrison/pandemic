@@ -67,3 +67,26 @@ label {
     width: 50px;
     display: inline;
 }
+
+
+#popup{
+    position: absolute;
+    padding: 50px;
+    background: white;
+    top: 2%;
+    left: 66%;
+    border: black 1px solid;
+}
+
+.close{
+    float: right;
+}
+
+.monster{
+    width: 100%;
+    margin-left: 10px;
+}
+
+.radio{
+    margin-top: 10px;
+}

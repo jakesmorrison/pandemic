@@ -3,7 +3,8 @@ from dnd.management.config import config
 import pandas as pd
 from django.http import JsonResponse
 import json
-from dnd.models import Spells, CharacterNew
+from dnd.models import Spells, CharacterNew, Monster
+import math
 
 
 # Create your views here.
@@ -29,9 +30,27 @@ def combat(request):
     my_character_dict = config.my_character_dict
     my_character_list = sorted(config.my_character_dict.keys())
 
+    my_monsters = Monster.objects.all().values()
+    temp_1 = []
+    for x in range(0, len(my_monsters)):
+        inititive = my_monsters[x]['dex_ability']
+
+        if (int(inititive) >= 10):
+            inititive = "+"+str(math.floor((int(inititive) - 10) / 2))
+        elif (int(inititive) ==9):
+            inititive = str(math.floor((int(inititive) - 10) / 2))
+        else:
+            inititive = str(math.floor((int(inititive) - 10) / 2))
+
+        temp_2 = [my_monsters[x]['name'], inititive ,my_monsters[x]['hp']]
+        temp_1.append(temp_2)
+
+
     context={
         'my_character_list': my_character_list,
         'my_character_dict': my_character_dict,
+        'my_monsters': temp_1,
+
     }
     return render(request, "dnd/combat.html", context)
 
@@ -65,5 +84,40 @@ def get_spells(request):
 
     context={
         'data': Spells.objects.filter(spell=val).values()[0]
+    }
+    return JsonResponse(json.loads(json.dumps(context)))
+
+
+def monsters(request):
+    my_monsters = Monster.objects.all().values()
+
+    temp_1 = []
+    for x in range(0, len(my_monsters)):
+        temp_2 = ["ZZZ" + my_monsters[x]['name'] + "YYY", my_monsters[x]['size'],
+                  my_monsters[x]['type'], my_monsters[x]['alignment'],
+                  my_monsters[x]['challenge'], my_monsters[x]['xp']]
+        temp_1.append(temp_2)
+
+    df = pd.DataFrame(temp_1)
+
+    df.columns = "Name,Size,Type,Alignment,Challenge,XP".split(",")
+    html_table = df.to_html(index=False,
+                            classes='table table-striped table-bordered table-hover table-responsive" id = "my_table')
+
+    html_table = html_table.replace("<td>ZZZ", "<td> <button onclick='add_card(this)' type='button' class='btn btn-success spell-name'>").replace(
+        "YYY</td>", "</button></td>")
+
+    context={
+        'table': html_table,
+    }
+    return render(request, "dnd/monsters.html", context)
+
+def get_monsters(request):
+    val = request.GET["val"]
+    print(val)
+    print(Monster.objects.filter(name=val).values()[0])
+
+    context={
+        'data': Monster.objects.filter(name=val).values()[0]
     }
     return JsonResponse(json.loads(json.dumps(context)))

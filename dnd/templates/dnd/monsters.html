@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>DnD</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'dnd/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'dnd/css/jquery-ui.css' %}" rel="stylesheet">
+    <link href=" {% static 'dnd/css/spells.css' %}" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+</head>
+
+<body class="mybody" style="visibility: hidden;">
+
+<div class="container" style="width:98%">
+    <div class="row0 row">
+        <div class="col-lg-10 col-lg-offset-1">
+            <div class="row">
+                <div class="col-lg-4 col-xs-12">
+                    <h3 id="monster_name" class="font"></h3>
+                    <hr>
+                    <h4 class="sub-title font">HP: <span id="my_hp"></span></h4>
+                    <h4 class="sub-title font">AC: <span id="my_ac"></span></h4>
+                    <h4 class="sub-title font">Speed: <span id="my_speed"></span></h4>
+                    <h4 class="sub-title font">Skills: <span id="my_skills"></span></h4>
+                    <h4 class="sub-title font">Languages: <span id="my_language"></span></h4>
+                </div>
+                <div class="col-lg-8 col-xs-12">
+                    <div class="my_des_panel">
+                        <h5 id="components" class="font"></h5>
+                        <p id="my_des" class="font"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row1 row">
+        <div class="col-lg-10 col-lg-offset-1">
+            {{ table|safe }}
+        </div>
+    </div>
+</div>
+
+<script src=" {% static 'dnd/js/jquery-1.12.4.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/datatables.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/dataTables.fixedColumns.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'dnd/js/jquery.scrollify.min.js' %}" ></script>
+<script src=" {% static 'dnd/js/highcharts.js' %}" ></script>
+<script src=" {% static 'dnd/js/jquery-ui.js' %}" ></script>
+
+
+<script>
+
+var height = $(window).height();
+var width = $(window).width();
+var counter = 0;
+
+$( document ).ready(function() {
+
+    $('[data-toggle="tooltip"]').tooltip();
+
+    $(".row0").css('height', height*.30);
+    $(".row1").css('height', height*.70);
+    $(".my_des_panel").css('height', height*.25);
+    $(".my_des_panel").css('margin-top', height*.025);
+
+    $('#my_table thead tr').clone(true).appendTo( '#my_table thead' );
+    $('#my_table thead tr:eq(1) th').each( function (i) {
+        var title = $(this).text();
+        $(this).html( '<input type="text" placeholder="Search '+title+'" />' );
+
+        $( 'input', this ).on( 'keyup change', function () {
+            if ( table.column(i).search() !== this.value ) {
+                table
+                    .column(i)
+                    .search( this.value )
+                    .draw();
+            }
+        } );
+    } );
+
+    var table = $('#my_table').DataTable({
+        scrollY:        $(".row1").height()-200,
+        scrollX:        false,
+        scrollCollapse: true,
+        paging:         false,
+        orderCellsTop: true,
+        fixedHeader: true,
+        bInfo : false,
+        searching: true,
+        "dom": '<lf<t>ip>',
+        "order": [[ 0, "asc" ]]
+    });
+    $('#my_table_filter').remove();
+
+    $(".mybody").css('visibility','visible')
+
+});
+
+function add_card(value){
+    val = $(value).text();
+    url_base = "{% url 'dnd:get_monsters' %}";
+    data = {'val': val };
+    $.ajax({
+        type: 'GET',
+        url: url_base,
+        data: data,
+        success: function(msg) {
+            $('#monster_name').text(msg.data['name'])
+            $('#my_hp').text(msg.data['hp'])
+            $('#my_ac').text(msg.data['ac'])
+            $('#my_speed').text(msg.data['speed'])
+            $('#my_skills').text(msg.data['skills'])
+            $('#my_language').text(msg.data['languages'])
+            <!--$('#my_des').text(msg.data['description'])-->
+            <!--$('#components').text('Components: '+msg.data['components'])-->
+            <!--$(".my_des_panel").css('margin-top', ($(".row0").height()-$(".my_des_panel").height())/2);-->
+        }
+    });
+}
+
+
+</script>
+
+</body>
+</html>

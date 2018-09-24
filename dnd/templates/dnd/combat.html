@@ -18,7 +18,7 @@
 </head>
 <body class="mybody">
 <div class="container" style="width:98%">
-    <div class="row">
+    <div class="row" >
         <div class="col-lg-4 col-xs-12">
             <h3 class="centered" style="margin-bottom: 18px;">Characters in Battle
             <button type="button" class="btn btn-success" onclick="sort_by_init()">Sort By Inititive</button></h3>
@@ -55,7 +55,7 @@
             <h3 class="centered">
                 <button type="button" class="btn btn-success" onclick="shift()"><</button>
                 <button type="button" class="btn btn-success" onclick="create_new_enemy()">Create New Enemy</button>
-                <input class="form-control" id="hp-input">
+                <!--<input class="form-control" id="hp-input">-->
             </h3>
             <div class="row">
               <div id="" class="col-xs-4 centered" style="">
@@ -76,11 +76,52 @@
             </ul>
         </div>
         <div class="col-lg-4 col-xs-12">
-            <h3 class="centered">Enemy Stats</h3>
-            <textarea style="width: 100%; height: 600px;">
-            </textarea>
+            <h3 class="centered" style="margin-bottom: 18px;">Monsters</h3>
+            <div class="row">
+              <div id="" class="col-xs-4 centered" style="">
+                  <p class="font">Name</p>
+              </div>
+              <div id="" class="col-xs-3">
+                  <p class="font" style="margin-left: 10px;">Inititive</p>
+              </div>
+              <div id="" class="col-xs-3" >
+                  <p class="font" style="margin-left: 10px;">HP</p>
+              </div>
+              <div id="" class="col-xs-2" >
+                  <p class="font" style="margin-left: 10px;"></p>
+              </div>
+            </div>
+            <ul id="sortable3" class="connectedSortable">
+                {% for x in my_monsters %}
+                  <li id="character_{{forloop.counter0}}" class="ui-state-default li-side1">
+                      <div class="row">
+                          <div id="name_{{x.0}}" class="col-xs-4 panel-name" style="margin-top: 5px;">
+                              <button onclick='get_monster_info(this)' type='button' class='btn btn-success monster'>{{x.0}}</button>
+                          </div>
+                          <div id="" class="col-xs-3 panel-init">
+                                <input type="init" class="form-control input-init centered" id="init_{{x.0}}" value="{{x.1}}">
+                          </div>
+                          <div id="" class="col-xs-3 panel-hp">
+                                <input type="hp" class="form-control input-hp centered" id="hp_{{x.0}}" value="{{x.2}}"">
+                          </div>
+                           <div id="" class="col-xs-2 panel-hp">
+                                <input class="radio" type="radio" name="optradio">
+                          </div>
+                      </div>
+                  </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
+
+    <div class="row">
+        <div id="popup" class="col-lg-4 col-xs-12 hide">
+            <button onclick="close_popup()" type='button' class='btn btn-success close'>X</button>
+            <h3 id="monster_name"></h3>
+            <hr>
+        </div>
+    </div>
+
 </div>
 
 
@@ -97,6 +138,8 @@
 var enemy = 0;
 var my_character_dict = {{my_character_dict|safe}}
 var my_character_list = {{my_character_list|safe}}
+var my_monsters = {{my_monsters|safe}}
+
 
 $( document ).ready(function() {
     for (var i = 0; i < my_character_list.length; i++) {
@@ -109,6 +152,25 @@ $( document ).ready(function() {
 
 })
 
+function get_monster_info(data){
+
+    url_base = "{% url 'dnd:get_monsters' %}";
+    data = {'val': $(data).text() };
+    $.ajax({
+        type: 'GET',
+        url: url_base,
+        data: data,
+        success: function(msg) {
+            $('#monster_name').text(msg.data['name'])
+            $( "#popup" ).removeClass("hide")
+        }
+    });
+}
+
+function close_popup(){
+    console.log("test")
+    $( "#popup" ).addClass("hide")
+}
 
 $( function() {
     $( "#sortable1, #sortable2" ).sortable({
@@ -117,6 +179,13 @@ $( function() {
 });
 
 function create_new_enemy(){
+
+    monster = $('input[name=optradio]:checked').parent().parent().children();
+    monster_name = $(monster[0]).children().text();
+    monster_init = parseInt($(monster[1]).children().val());
+    monster_hp = parseInt($(monster[2]).children().val());
+
+
     $('#sortable2').append("\
             <li class='ui-state-default li-side1' id=enemy_"+enemy.toString()+"><div class='row'>\
             <div class='col-xs-4 panel-name'><input class='form-control input-name' style='margin-top: 5px' id=ename_"+enemy.toString()+"></div>\
@@ -124,10 +193,9 @@ function create_new_enemy(){
             <div class='col-xs-3 panel-hp'><input class='form-control input-hp' style='margin-top: 5px' id=ehp_"+enemy.toString()+"></div>\
             <div class='col-xs-2 exit'><button type='button' class='btn btn-danger' onclick='exit("+enemy.toString()+")' style='margin-top: 5px'>X</button></div>\
             </div></li>");
-
-    $('#ename_'+enemy.toString()).val("Enemy "+enemy.toString())
-    $('#einit_'+enemy.toString()).val(getRandomArbitrary(1,20))
-    $('#ehp_'+enemy.toString()).val($('#hp-input').val())
+    $('#ename_'+enemy.toString()).val(monster_name+"_"+enemy.toString())
+    $('#einit_'+enemy.toString()).val(getRandomArbitrary(1,20)+monster_init)
+    $('#ehp_'+enemy.toString()).val(monster_hp)
 
     enemy+=1;
 }
@@ -173,7 +241,6 @@ function shift(){
 }
 
 function exit(x){
-    console.log(x)
     $( "#enemy_"+x.toString() ).remove();
 }
 
