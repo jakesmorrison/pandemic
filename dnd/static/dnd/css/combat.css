@@ -71,11 +71,13 @@ label {
 
 #popup{
     position: absolute;
-    padding: 50px;
+    padding: 5px;
     background: white;
     top: 2%;
     left: 66%;
     border: black 1px solid;
+    height: 95%;
+    overflow-y: scroll;
 }
 
 .close{
@@ -90,3 +92,101 @@ label {
 .radio{
     margin-top: 10px;
 }
+
+#sortable3{
+    padding: 0px;
+}
+
+#monster_name{
+    margin-left: 10px;
+}
+
+
+
+.centered{
+    text-align: center;
+}
+.border{
+    margin: 15px;
+    border: 5px solid grey;
+    border-radius: 5px;
+}
+.skill_label{
+    margin:0;
+    text-decoration: underline;
+}
+.skill_value{
+    text-align: center;
+    font-size: 5vh;
+}
+
+.small_text{
+    margin-top: 0px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    margin-left: 2px;
+    border-bottom: 3px solid black;
+    border-left: 8px solid black;
+    font-weight: 700;
+    text-align: center;
+    font-size: 1.3em;
+}
+
+.close{
+    margin: 10px;
+}
+
+.heading{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.mylabel{
+    margin-top: 5px;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    margin-left: 0px;
+    font-size: 0.8em;
+}
+
+.attack_number{
+    font-size: 2em;
+    font-weight: 700;
+    animation-name: color_change;
+	animation-duration: 1s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+
+}
+
+.desc_header{
+    margin-left: 10px;
+}
+
+.desc_text{
+    font-weight: 400;
+    margin-left: 20px;
+}
+
+
+@-webkit-keyframes color_change {
+	from { color: white; }
+	to { color: #ff5f5f; }
+}
+@-moz-keyframes color_change {
+	from { color: white; }
+	to { color: #ff5f5f; }
+}
+@-ms-keyframes color_change {
+	from { color: white; }
+	to { color: #ff5f5f; }
+}
+@-o-keyframes color_change {
+	from { color: white; }
+	to { color: #ff5f5f; }
+}
+@keyframes color_change {
+	from { color: white; }
+	to { color: #ff5f5f; }
+}
+

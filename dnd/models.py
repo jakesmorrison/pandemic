@@ -91,7 +91,7 @@ class Monster(models.Model):
     spells = models.CharField(max_length=10000, default="x")
     cantrip = models.CharField(max_length=100000, default="x")
     level= models.CharField(max_length=100000, default="x")
-    description = models.CharField(max_length=1000000, default="x")
+    description = models.TextField(max_length=1000000, default="x")
     other = models.CharField(max_length=1000000, default="x")
     def __str__(self):
         return "{}"

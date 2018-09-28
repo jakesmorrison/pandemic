@@ -119,6 +119,7 @@
             <button onclick="close_popup()" type='button' class='btn btn-success close'>X</button>
             <h3 id="monster_name"></h3>
             <hr>
+            <div class="data"></div>
         </div>
     </div>
 
@@ -149,7 +150,6 @@ $( document ).ready(function() {
     $('.panel-name').css('margin-top',($('.li-side1').height() - $('.panel-name').height())/2)
     $('.panel-init').css('margin-top',($('.li-side1').height() - $('.panel-init').height())/2)
     $('.panel-hp').css('margin-top',($('.li-side1').height() - $('.panel-hp').height())/2)
-
 })
 
 function get_monster_info(data){
@@ -163,12 +163,68 @@ function get_monster_info(data){
         success: function(msg) {
             $('#monster_name').text(msg.data['name'])
             $( "#popup" ).removeClass("hide")
+
+            $('.data').html("\
+                <div class='col-xs-6'><p class='mylabel font'>Challenge Rating</p><p class='small_text font'>"+msg.data['challenge']+"</p></div>\
+                <div class='col-xs-6'><p class='mylabel font'>Experience</p><p class='small_text font'>"+msg.data['xp']+"</p></div>\
+                <div class='col-xs-4'><p class='mylabel font'>Size</p><p class='small_text font'>"+msg.data['size']+"</p></div>\
+                <div class='col-xs-4'><p class='mylabel font'>Type</p><p class='small_text font'>"+msg.data['type']+"</p></div>\
+                <div class='col-xs-4'><p class='mylabel font'>Alignment</p><p class='small_text font'>"+msg.data['alignment']+"</p></div>\
+                <div class='col-xs-3'><p class='mylabel font'>HP</p><p class='small_text font'>"+msg.data['hp']+"</p></div>\
+                <div class='col-xs-3'><p class='mylabel font'>AC</p><p class='small_text font'>"+msg.data['ac']+"</p></div>\
+                <div class='col-xs-6'><p class='mylabel font'>Speed</p><p class='small_text font'>"+msg.data['speed']+"</p></div>\
+                <div class='col-xs-2'><p class='mylabel font'>Strength</p><p class='small_text font'>"+ability_converter(msg.data['str_ability'])+"</p></div>\
+                <div class='col-xs-2'><p class='mylabel font'>Dexterity</p><p class='small_text font'>"+ability_converter(msg.data['dex_ability'])+"</p></div>\
+                <div class='col-xs-2'><p class='mylabel font'>Constitution</p><p class='small_text font'>"+ability_converter(msg.data['con_ability'])+"</p></div>\
+                <div class='col-xs-2'><p class='mylabel font'>Intelligence</p><p class='small_text font'>"+ability_converter(msg.data['int_ability'])+"</p></div>\
+                <div class='col-xs-2'><p class='mylabel font'>Wisdom</p><p class='small_text font'>"+ability_converter(msg.data['wis_ability'])+"</p></div>\
+                <div class='col-xs-2'><p class='mylabel font'>Charisma</p><p class='small_text font'>"+ability_converter(msg.data['char_ability'])+"</p></div>\
+                <div class='col-xs-6'><p class='mylabel font'>Skills</p><p class='small_text font'>"+msg.data['skills']+"</p></div>\
+                <div class='col-xs-6'><p class='mylabel font'>Languages</p><p class='small_text font'>"+msg.data['languages']+"</p></div>\
+            ")
+
+            if (msg.data['weapon'] != "x"){
+                $('.data').append("<div class='col-xs-12'><p class='mylabel font'><span class='attack_number'>"+msg.data['actions']+"</span> Attacks Per Round</p><p class='small_text font'>"+msg.data['weapon']+"</p></div>");
+            }
+
+            if (msg.data['cantrip'] != "x"){
+                $('.data').append("<div class='col-xs-12'><p class='mylabel font'>Cantrips</p><p class='small_text font'>"+msg.data['cantrip']+"</p></div>");
+            }
+
+            if (msg.data['spells'] != "x"){
+                $('.data').append("<div class='col-xs-12'><p class='mylabel font'>Spells</p><p class='small_text font'>"+msg.data['spells']+"</p></div>");
+            }
+
+            if (msg.data['damage_vulnerabilities'] != "x" & msg.data['damage_immunities'] != "x" & msg.data['condition_immunities'] != "x"){
+                $('.data').append("<div class='col-xs-4'><p class='mylabel font'>Damage Vulnerablilties</p><p class='small_text font'>"+msg.data['damage_vulnerabilities']+"</p></div>");
+                $('.data').append("<div class='col-xs-4'><p class='mylabel font'>Damage Immunities</p><p class='small_text font'>"+msg.data['damage_immunities']+"</p></div>");
+                $('.data').append("<div class='col-xs-4'><p class='mylabel font'>Condition Immunities</p><p class='small_text font'>"+msg.data['condition_immunities']+"</p></div>");
+            }
+
+            if (msg.data['description'] != "x"){
+                $('.data').append("<div class='col-xs-12'><p class='mylabel font'>Description</p><p class='small_text font'>"+msg.data['description']+"</p></div>");
+            }
+
         }
     });
 }
 
+
+function ability_converter(ability){
+    if (ability>=10){
+        return "+"+Math.floor((ability-10)/2).toString();
+    }
+    else if(ability===9){
+        return Math.ceil((ability-10)/2).toString();
+    }
+    else{
+        return Math.ceil((ability-10)/2).toString();
+    }
+}
+
+
+
 function close_popup(){
-    console.log("test")
     $( "#popup" ).addClass("hide")
 }
 
@@ -184,7 +240,7 @@ function create_new_enemy(){
     monster_name = $(monster[0]).children().text();
     monster_init = parseInt($(monster[1]).children().val());
     monster_hp = parseInt($(monster[2]).children().val());
-
+    //monster_hp = monster_hp.split(" ")[0];
 
     $('#sortable2').append("\
             <li class='ui-state-default li-side1' id=enemy_"+enemy.toString()+"><div class='row'>\
