@@ -54,7 +54,7 @@ class Spells(models.Model):
     range = models.CharField(max_length=10000, default='x')
     components = models.CharField(max_length=10000, default='x')
     duration = models.CharField(max_length=10000, default='x')
-    description = models.CharField(max_length=100000, default='x')
+    description = models.TextField(max_length=100000, default='x')
     whose_spell = models.CharField(max_length=10000, default='x')
     page = models.CharField(max_length=10000, default='x')
 
@@ -85,13 +85,13 @@ class Monster(models.Model):
     damage_vulnerabilities = models.CharField(max_length=10000, default="x")
     damage_immunities = models.CharField(max_length=10000, default="x")
     condition_immunities = models.CharField(max_length=10000, default="x")
-    senses = models.CharField(max_length=10000, default="x")
+    senses = models.TextField(max_length=10000, default="x")
     actions = models.CharField(max_length=10000, default="x")
-    weapon = models.CharField(max_length=10000, default="x")
-    spells = models.CharField(max_length=10000, default="x")
-    cantrip = models.CharField(max_length=100000, default="x")
-    level= models.CharField(max_length=100000, default="x")
+    weapon = models.TextField(max_length=10000, default="x")
+    spells = models.TextField(max_length=10000, default="x")
+    cantrip = models.TextField(max_length=100000, default="x")
+    level= models.TextField(max_length=100000, default="x")
     description = models.TextField(max_length=1000000, default="x")
-    other = models.CharField(max_length=1000000, default="x")
+    other = models.TextField(max_length=1000000, default="x")
     def __str__(self):
         return "{}"
