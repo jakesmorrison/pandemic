@@ -42,7 +42,7 @@ def combat(request):
         else:
             inititive = str(math.floor((int(inititive) - 10) / 2))
 
-        temp_2 = [my_monsters[x]['name'], inititive ,my_monsters[x]['hp']]
+        temp_2 = [my_monsters[x]['name'], inititive ,my_monsters[x]['hp'].split(" ")[0]]
         temp_1.append(temp_2)
 
 
@@ -114,8 +114,6 @@ def monsters(request):
 
 def get_monsters(request):
     val = request.GET["val"]
-    print(val)
-    print(Monster.objects.filter(name=val).values()[0])
 
     context={
         'data': Monster.objects.filter(name=val).values()[0]
