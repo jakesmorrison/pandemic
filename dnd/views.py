@@ -27,8 +27,16 @@ def index(request):
     return render(request, "dnd/characters.html", context)
 
 def combat(request):
-    my_character_dict = config.my_character_dict
-    my_character_list = sorted(config.my_character_dict.keys())
+    my_character_dict = {}
+    my_character_list = []
+    for x in CharacterNew.objects.all().values():
+        x["stats"] = [int(x["str_ability"]),int(x["dex_ability"]),int(x["con_ability"]),
+                      int(x["int_ability"]),int(x["wis_ability"]),int(x["char_ability"])]
+        my_character_dict[x["name"]] = x
+        my_character_list.append(x["name"])
+
+    my_character_list = sorted(my_character_list)
+
 
     my_monsters = Monster.objects.all().values()
     temp_1 = []
