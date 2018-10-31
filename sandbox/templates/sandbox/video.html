@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Career Day!</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+    <div class="row row0">
+        <div class="col-lg-12">
+            <video id="vid">
+              <source src=" {% static 'sandbox/Hot.Tub.Time.Machine.2010.720p.BrRip.x264.BOKUTOX.YIFY.mp4' %}" rel="stylesheet" type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+
+{% load staticfiles %}
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+
+
+<script>
+var width = $(window).width();
+var height = $(window).height();
+
+
+$( document ).ready(function() {
+    document.getElementById("vid").load();
+    $(".row0").css("height", height);
+    $(".col-lg-12").css("height", height);
+    $("#vid").css("height", height);
+});
+
+$( ".container" ).click(function() {
+    play()
+});
+
+function play(){
+    var vid = document.getElementById("vid");
+
+    vid.currentTime = 0;
+
+    vid.muted = false;
+    vid.volume = 1.0;
+
+    vid.play()
+}
+
+
+</script>
+
+</body>
+</html>

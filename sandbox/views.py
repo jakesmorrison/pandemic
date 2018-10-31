@@ -348,3 +348,28 @@ def get_region_data(request):
 #         ctypes.pythonapi.PyThreadState_SetAsyncExc(tid, 0)
 #         raise SystemError("PyThreadState_SetAsyncExc failed")
 #
+
+from django.shortcuts import render
+import json
+from django.http import JsonResponse
+
+from os import listdir
+from os.path import isfile, join
+
+
+def led_slider(request):
+    mypath = "/Users/jakesmorrison/Documents/Movie/"
+    onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
+
+    context={
+        'video_file': onlyfiles[0]
+    }
+    return(render(request, 'sandbox/video.html',context))
+
+def led_slider_change(request):
+    # kill_all()
+
+    # Use colors to set LEDs.
+    print(request.GET)
+    context={}
+    return JsonResponse(json.loads(json.dumps(context)))

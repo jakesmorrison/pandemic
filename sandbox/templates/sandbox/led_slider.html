@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>LED Slider</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/bootstrap_slider.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/round_slider.css' %}" rel="stylesheet">
+
+</head>
+<body>
+
+<div class="container">
+    <h1>Color Matching</h1>
+
+    <div class="row">
+        <div class="col-lg-4">
+            <h5 class="" id="red_name_1"></h5>
+            <input class="hidden-sm" id="red_in_1" data-slider-id='red_in_1' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="255"/>
+        </div>
+
+        <div class="col-lg-4 centered">
+            <h5 class="" id="green_name_1"></h5>
+            <input class="hidden-sm" id="green_in_1" data-slider-id='green_in_1' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="255"/>
+        </div>
+
+        <div class="col-lg-4 centered">
+            <h5 class="" id="blue_name_1"></h5>
+            <input class="hidden-sm" id="blue_in_1" data-slider-id='blue_in_1' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="255"/>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-lg-4">
+            <h5 class="" id="red_name_2"></h5>
+            <input class="hidden-sm" id="red_in_2" data-slider-id='red_in_2' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="255"/>
+        </div>
+
+        <div class="col-lg-4 centered">
+            <h5 class="" id="green_name_2"></h5>
+            <input class="hidden-sm" id="green_in_2" data-slider-id='green_in_2' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="255"/>
+        </div>
+
+        <div class="col-lg-4 centered">
+            <h5 class="" id="blue_name_2"></h5>
+            <input class="hidden-sm" id="blue_in_2" data-slider-id='blue_in_2' type="text" data-slider-min="0" data-slider-max="255" data-slider-step="1" data-slider-value="255"/>
+        </div>
+    </div>
+
+</div>
+
+<!-- jQuery -->
+{% load staticfiles %}
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap_slider.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/round_slider.js' %}" rel="stylesheet"></script>
+
+<script>
+var red_name_1;
+var blue_name_1;
+var green_name_1;
+
+var red_name_2;
+var blue_name_2;
+var green_name_2;
+
+
+$( document ).ready(function() {
+    setup_sliders();
+});
+
+function update_data(){
+
+    console.log(red_name_1)
+
+    data = {'red_1': red_name_1, 'blue_1': blue_name_1, 'green_1': green_name_1,
+            'red_2': red_name_2, 'blue_2': blue_name_2, 'green_2': green_name_2}
+    url_base = "{% url 'sandbox:led_slider_change' %}";
+
+    $.ajax({
+        url: url_base,
+        type : 'GET',
+        data : data,
+        success: function(msg) {
+
+        }
+    })
+
+
+}
+
+function setup_sliders(){
+    //Other
+    $('#red_in_1').slider({
+        formatter: function(value) {
+            red_name_1 = value;
+            $("#red_name_1").text("Red 1 = "+value.toLocaleString()+"");
+            return '' + value.toLocaleString() +'';
+        }
+    });
+
+    $('#green_in_1').slider({
+        formatter: function(value) {
+            green_name_1 = value;
+            $("#green_name_1").text("Green 1 = "+value.toLocaleString()+"");
+            return '' + value.toLocaleString() +'';
+        }
+    });
+
+    $('#blue_in_1').slider({
+        formatter: function(value) {
+            blue_name_1 = value;
+            $("#blue_name_1").text("Blue 1 = "+value.toLocaleString()+"");
+            return '' + value.toLocaleString() +'';
+        }
+    });
+    
+    $('#red_in_2').slider({
+        formatter: function(value) {
+            red_name_2 = value;
+            $("#red_name_2").text("Red 2 = "+value.toLocaleString()+"");
+            return '' + value.toLocaleString() +'';
+        }
+    });
+
+    $('#green_in_2').slider({
+        formatter: function(value) {
+            green_name_2 = value;
+            $("#green_name_2").text("Green 2 = "+value.toLocaleString()+"");
+            return '' + value.toLocaleString() +'';
+        }
+    });
+
+    $('#blue_in_2').slider({
+        formatter: function(value) {
+            blue_name_2 = value;
+            $("#blue_name_2").text("Blue 2 = "+value.toLocaleString()+"");
+            return '' + value.toLocaleString() +'';
+        }
+    });
+
+    update_data();
+}
+
+///Other
+$("#red_in_1").on("slide", function(slideEvt) {
+	red_name_1 = slideEvt.value;
+    update_data();
+});
+
+$("#blue_in_1").on("slide", function(slideEvt) {
+	blue_name_1 = slideEvt.value;
+    update_data();
+});
+
+$("#green_in_1").on("slide", function(slideEvt) {
+	green_name_1 = slideEvt.value;
+    update_data();
+});
+
+$("#red_in_2").on("slide", function(slideEvt) {
+	red_name_2 = slideEvt.value;
+    update_data();
+});
+
+$("#blue_in_2").on("slide", function(slideEvt) {
+	blue_name_2 = slideEvt.value;
+    update_data();
+});
+
+$("#green_in_2").on("slide", function(slideEvt) {
+	green_name_2 = slideEvt.value;
+    update_data();
+});
+
+
+
+</script>
+
+
+</body>
+</html>
