@@ -58,7 +58,6 @@ INSTALLED_APPS = [
     'sandbox.apps.SandboxConfig',
     'oscar.apps.OscarConfig',
     'dnd.apps.DndConfig',
-    'celebmatch.apps.CelebmatchConfig',
     'rest_framework',
 ]
 
