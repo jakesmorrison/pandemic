@@ -6,6 +6,7 @@ import time
 from .management import config as cfg
 from .management import stock_tracker_methods
 
+
 # Create your views here.
 # Create your views here.
 def index(request):

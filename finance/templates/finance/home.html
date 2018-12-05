@@ -3,8 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+
+    {% load staticfiles %}
+    <link href=" {% static 'finance/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href=" {% static 'finance/css/home.css' %}" rel="stylesheet">
+
 </head>
 <body>
+
+  <div id="container">
+      <div class="header">
+          <h1 class="header-text">2018 Finacials</h1>
+      </div>
+      <div class="story">
+          <h1 class="title centered">2018 Finacials</h1>
+      </div>
+      <div class="story">
+          <h1 class="story title centered">Test</h1>
+      </div>
+  </div>
+
+
+
+{% load staticfiles %}
+<script src=" {% static 'finance/js/jquery-2.1.1.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/scrollstory.js' %}" rel="stylesheet"></script>
+<script src=" {% static 'finance/js/bootstrap.min.js' %}" rel="stylesheet"></script>
+<script src="{% static 'finance/js/highcharts.js' %}"></script>
+
+<script>
+var height = $( document ).height();
+var width = $( document ).width();
+var item_in_focus;
+
+$( document ).ready(function() {
+
+    $("#container").scrollStory({
+        debug: true,
+        triggerOffset: '50%',
+        scrollOffset: '50%'
+    });
+
+    $('#story0-0').css('height', height);
+    $('#story0-0').css('margin-top', ( height )/2);
+    $('#story0-1').css('height', height);
+
+})
+
+// Set the item that is in focus.
+$('#container').on('itemfocus', function(ev, item){
+    item_in_focus = item
+});
+
+$('#container').on('containerscroll', function(ev, item){
+    if (item_in_focus == null){
+    }
+    else{
+        percent = item_in_focus.percentScrollComplete;
+        id = item_in_focus.id;
+        if (id === "story0-0"){
+            if (percent > .5){
+                $('.header').addClass('header-show');
+            }
+        }
+    }
+
+});
+
+
+
+
+
+
+
+</script>
+
+
 
 </body>
 </html>
