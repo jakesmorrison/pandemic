@@ -383,7 +383,6 @@ class Pandemic(object):
         all_lines = []
         for x in cityCards:
             for y in x["connectionCities"]:
-                print(y)
                 y = CityCards.objects.get(city=y)
                 if( (x["city"] == "San Francisco" and (y.city == "Tokyo" or y.city == "Manila")) or (x["city"] == "Los Angeles" and y.city == "Sydney")):
                     pass

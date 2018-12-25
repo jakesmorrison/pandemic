@@ -16,7 +16,6 @@ class CityCards(models.Model):
         return "{} {} {} {} {} {} {} {}".format(self.city,self.country,self.population,self.color,self.type,self.connectionCities,
                                                 self.lat,self.long)
 
-
 class SpecialEventCards(models.Model):
     name = models.CharField(max_length=1000)
     rules = models.CharField(max_length=1000)

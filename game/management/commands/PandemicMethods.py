@@ -5,14 +5,13 @@ from geopy.geocoders import Nominatim
 import csv
 from django.templatetags.static import static
 
-
 cfg = cfg.Config
 class Command(BaseCommand):
     def handle(self, **options):
-        # self.add_cities()
-        # self.infection_cities()
-        # self.add_roles()
-        # self.add_map_coords()
+        self.add_cities()
+        self.infection_cities()
+        self.add_roles()
+        self.add_map_coords()
         self.quick_fix()
 
     def add_cities(self):

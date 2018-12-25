@@ -9,8 +9,8 @@ import json
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
 
-
 # Create your views here.
+
 
 @login_required
 def index(request):
@@ -66,7 +66,8 @@ def gameboard(request,rId):
                     numberOfPandemicCards = params["numpandemiccards"],numberOfRoleCards = params["numrolecards"])
         room_id = params["roomId"]
     else:
-        room_id = str(request).split("/")[2]
+        # room_id = str(request).split("/")[2]
+        room_id = rId
 
     mapData = pd.get_lat_long()
     connectionData = pd.connect_cities()
@@ -232,6 +233,5 @@ def setlocation(request):
     pd.set_location(roomId = params["roomId"], user = params["user"], city=params["city"])
     context = {}
     return JsonResponse(json.loads(json.dumps(context)))
-
 
 
