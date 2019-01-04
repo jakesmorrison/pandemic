@@ -3,6 +3,7 @@ from dnd.management.config import config
 
 from django.core.management.base import BaseCommand
 from ...models import CharacterNew
+from ...models import Spells
 import os
 import pickle
 
