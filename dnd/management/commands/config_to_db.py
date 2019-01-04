@@ -3,6 +3,8 @@ from dnd.management.config import config
 
 from django.core.management.base import BaseCommand
 from ...models import CharacterNew
+import os
+import pickle
 
 class Command(BaseCommand):
     def add_arguments(self, parser):
