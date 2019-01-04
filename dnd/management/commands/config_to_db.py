@@ -70,4 +70,4 @@ class Command(BaseCommand):
                 description=val["description"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'").replace("&nbsp;", " ").replace("&mdash;", "-").replace("&ndash;", "-"),
                 whose_spell=", ".join(val["whose_spell"]),
                 page=val["page"].replace("&rsquo;","'").replace("&#8217;","'").replace("&#039;", "'").replace("&nbsp;", " ").replace("&mdash;", "-").replace("&ndash;", "-"),
-
+            )
