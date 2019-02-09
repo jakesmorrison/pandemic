@@ -18,10 +18,10 @@ def oscar(request):
     df_winners = pd.DataFrame.from_records(Winners.objects.all().values())
     df_users = pd.DataFrame.from_records(Users.objects.all().values())
 
-    if df_users.empty == False:
-        df_users = df_users[df_users["Year"]==year]
-        df_winners = df_winners[df_winners["Year"]==year]
+    df_users = df_users[df_users["Year"] == year]
+    df_winners = df_winners[df_winners["Year"] == year]
 
+    if df_users.empty == False:
 
         df_merge = df_users.merge(df_winners, left_on='Cat', right_on='Cat', how='outer')
         del df_merge["Year_x"]
