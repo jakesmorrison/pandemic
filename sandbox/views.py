@@ -373,3 +373,8 @@ def led_slider_change(request):
     print(request.GET)
     context={}
     return JsonResponse(json.loads(json.dumps(context)))
+
+
+def gtc_update(request):
+    context={}
+    return(render(request, 'sandbox/gtc_update.html',context))
