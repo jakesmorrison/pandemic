@@ -8,7 +8,7 @@ from collections import OrderedDict
 
 # Create your views here
 
-year = 2019
+year = 2020
 
 def oscar(request):
     df = pd.DataFrame.from_records(OscarCategories.objects.all().values())
