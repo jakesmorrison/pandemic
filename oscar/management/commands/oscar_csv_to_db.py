@@ -39,11 +39,11 @@ class Command(BaseCommand):
         now = datetime.datetime.now()
         y = str(now.year)
 
-        catarr = {"Best Picture": 3, "Lead Actor": 3, "Lead Actress": 3, "Supporting Actor": 3, "Supporting Actress": 3,
-                  "Director": 3, "Animated Feature": 3, "Animated Short": 1 , "Adapted Screenplay": 3, "Original Screenplay": 3,
-                  "Cinematography": 2, "Best Documentary Feature": 2, "Best Live Action Short Film": 1, "Best Foreign Language Film": 2,
-                  "Film Editing": 2, "Sound Editing": 2, "Sound Mixing": 2, "Production Design": 2,
-                  "Original Score": 2, "Original Song": 2, "Makeup and Hair": 2, "Costume Design": 2, "Visual Effects": 2,
+        catarr = {"Best Picture": 3, "Best Actor": 3, "Best Actress": 3, "Best Supporting Actor": 3, "Best Supporting Actress": 3,
+                  "Best Director": 3, "Best Animated Feature": 3, "Best Animated Short": 1 , "Best Adapted Screenplay": 3, "Best Original Screenplay": 3,
+                  "Best Cinematography": 2, "Best Documentary Feature": 2, "Best Live-Action Short Film": 1, "Best International Feature": 2,
+                  "Best Film Editing": 2, "Best Sound": 2, "Best Production Design": 2,
+                  "Best Original Score": 2, "Best Original Song": 2, "Best Hair and Makeup": 2, "Best Costume Design": 2, "Best Visual Effects": 2,
                   "Best Documentary Short Subject": 1}
 
         for key,val in catarr.items():
